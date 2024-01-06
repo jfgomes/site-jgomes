@@ -7,58 +7,132 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About this CV project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This website is just a digital and simple project to show my CV to the world.
+It was build with:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Laravel 10](https://laravel.com/docs/10.x/)
+- [PHP 8.1](https://www.php.net/)
+- [PHPUnit 10 tests](https://phpunit.de/)
+- [PSR-2 guide lines](https://www.php-fig.org/psr/psr-2/)
+- [Apache2](https://httpd.apache.org/)
+- [MYSQL 8.2](https://www.mysql.com/)
+- [PHPMyAdmin 5.2.1](https://www.phpmyadmin.net/)
+- [SSL ( Namecheap certificate )](https://www.namecheap.com/)
+- [RabbitMQ 3.12.9](https://www.rabbitmq.com/)
+- [APCu](https://www.php.net/manual/en/book.apcu.php)
+- [HTML + CSS + JS ( Jquery ) - ( Credits to www.themezy.com ) ](https://www.themezy.com/free-website-templates/151-ceevee-free-responsive-website-template)
+- [Docker ( with docker-compose - See 'Infra configs' next )](https://docs.docker.com/compose/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Infra configs
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+docker-composer:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+version: "3.9"
+services:
+  php-apache:
+    restart: always
+    ports:
+      - "8090:80"
+    build: './build/php'
+    volumes:
+      - ./site:/var/www/html  
+  mysql:
+    ports:
+      - "3406:3306"
+    restart: always    
+    build: './build/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: "jgomes"
+    volumes:
+      - dbData:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8091:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: "" 
+      MYSQL_USER: "root" 
+volumes:
+  app:
+  dbData:
+```
 
-## Laravel Sponsors
+./build/php
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+FROM php:8.1-apache
 
-### Premium Partners
+RUN apt-get update && \
+    docker-php-ext-install mysqli pdo pdo_mysql
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+./build/mysql
 
-## Contributing
+```
+FROM mysql:latest
+USER root
+RUN chmod 755 /var/lib/mysql
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+structure ( project inside the dir "site" and ths ssl cert file are inside the dir "cert" )
 
-## Code of Conduct
+![Logo do GitHub](https://jgomes.site/images/project_structure.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+vhost to proxy the site to the world (with ssl)
 
-## Security Vulnerabilities
+```
+LoadModule headers_module modules/mod_headers.so
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<IfModule mod_ssl.c>
+        LoadModule proxy_module modules/mod_proxy.so
+        LoadModule proxy_http_module modules/mod_proxy_http.so
 
-## License
+        <VirtualHost *:443>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+                ServerAdmin zx.gomes@gmail.com
+                ServerName jgomes.site
+                ErrorLog /var/log/apache2/jgomes_error.log
+                CustomLog ${APACHE_LOG_DIR}/jgomes_access.log combined
+                SSLEngine on
+                SSLCertificateFile /home/jgomes/my/jgomes/cert/jgomes_site.crt
+                SSLCertificateKeyFile /home/jgomes/my/jgomes/cert/jgomes_site.key
+                SSLCertificateChainFile /home/jgomes/my/jgomes/cert/jgomes_site.ca-bundle
+
+                ProxyRequests Off
+
+                ProxyPass / http://localhost:8090/public/
+                ProxyPassReverse / http://localhost:8090/public/
+
+                Header set Access-Control-Allow-Origin "*"
+                Header set Access-Control-Allow-Headers "*"
+                Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE"
+                Header set Access-Control-Expose-Headers "*"
+                Header set Access-Control-Max-Age "900"
+
+             <Location />
+                Order allow,deny
+                Allow from all
+                AllowOverride all
+            </Location>
+        
+        </VirtualHost>
+</IfModule>
+```
+
+vhost just to redirect request that came to port 80 to 443
+
+```
+ <VirtualHost *:80>
+    ServerName jgomes.site
+    ServerAlias www.jgomes.site
+    Redirect permanent / https://jgomes.site/
+ </VirtualHost>
+
+```
