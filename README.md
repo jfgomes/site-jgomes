@@ -84,8 +84,7 @@ RUN chmod 755 /var/lib/mysql
 structure ( project inside the dir "site" and ths ssl cert file are inside the dir "cert" )
 
 ![Logo do GitHub](https://jgomes.site/images/project_structure.png)
-
-vhost to proxy the site to the world (with ssl)
+Vhost to proxy the site to the world (with ssl)
 
 ```
 LoadModule headers_module modules/mod_headers.so
@@ -125,14 +124,34 @@ LoadModule headers_module modules/mod_headers.so
         </VirtualHost>
 </IfModule>
 ```
-
-vhost just to redirect request that came to port 80 to 443
-
+Another vhost just to redirect requests that came to port 80 to 443
 ```
- <VirtualHost *:80>
+<VirtualHost *:80>
     ServerName jgomes.site
     ServerAlias www.jgomes.site
     Redirect permanent / https://jgomes.site/
- </VirtualHost>
+</VirtualHost>
+```
+Case I need to open phpMyAdmin to would, just update the vhost with:
+```
+######################## START PROXY FOR PHPMYADMIN
 
+# Set proxy
+ProxyPass /phpmyadmin http://localhost:8091/
+ProxyPassReverse /phpmyadmin http://localhost:8091/
+
+# Set PMA_ABSOLUTE_URI to allow the loading off scripts
+SetEnv PMA_ABSOLUTE_URI "/phpmyadmin"
+
+# Force to set https as this vhost is 443
+RequestHeader set X-Forwarded-Proto "https"
+
+# Remove any method restriction for phpMyAdmin
+<Location /phpmyadmin>
+    <LimitExcept OPTIONS>
+        Require all granted
+    </LimitExcept>
+</Location>
+
+######################## END PROXY REVERSE FOR PHPMYADMIN
 ```
