@@ -9,7 +9,8 @@
 
 ## About this CV project
 
-This website is just a digital and simple project to show my CV to the world.
+This website is just a digital and simple project to show my CV to the world. 
+This is storage in a home made server, with multiple container that work as servives.
 It was build with:
 
 - [Laravel 10](https://laravel.com/docs/10.x/)
