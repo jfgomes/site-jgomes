@@ -9,8 +9,9 @@
 
 ## About this CV project
 
-This website is just a digital and simple project to show my CV to the world. 
-This is storage in a home made server, with multiple container that work as servives.
+This website is just a digital and simple project to show my CV and my WOW to the world. 
+The storage of this project was home made, so this is a private server in my personal network, with multiple containers that work as services where is only mandatory to have the web server accessible outside of my internal network. The rest of the services are internal.
+
 It was build with:
 
 - [Laravel 10](https://laravel.com/docs/10.x/)
