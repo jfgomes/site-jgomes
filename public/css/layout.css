@@ -324,7 +324,194 @@ ul#nav li.current a { color: #F06000; }
    line-height: 42px;
    border-radius: 3px 0 0 3px;
 }
+/* ####################### */
+.php {
+    width: 90%;
+    -moz-animation: php 2s ease;
+    -webkit-animation: php 2s ease;
+}
 
+.apcu {
+    width: 60%;
+    -moz-animation: apcu 2s ease;
+    -webkit-animation: apcu 2s ease;
+}
+
+.psr2 {
+    width: 70%;
+    -moz-animation: psr2 2s ease;
+    -webkit-animation: psr2 2s ease;
+}
+
+.phpunit {
+    width: 50%;
+    -moz-animation: phpunit 2s ease;
+    -webkit-animation: phpunit 2s ease;
+}
+
+.tdd {
+    width: 40%;
+    -moz-animation: tdd 2s ease;
+    -webkit-animation: tdd 2s ease;
+}
+
+.mvc {
+    width: 90%;
+    -moz-animation: mvc 2s ease;
+    -webkit-animation: mvc 2s ease;
+}
+
+.laravel {
+    width: 70%;
+    -moz-animation: mvc 2s ease;
+    -webkit-animation: mvc 2s ease;
+}
+
+.microservices {
+    width: 20%;
+    -moz-animation: microservices 2s ease;
+    -webkit-animation: microservices 2s ease;
+}
+
+.soap {
+    width: 10%;
+    -moz-animation: soap 2s ease;
+    -webkit-animation: soap 2s ease;
+}
+
+.rest {
+    width: 75%;
+    -moz-animation: rest 2s ease;
+    -webkit-animation: rest 2s ease;
+}
+
+.restfull {
+    width: 70%;
+    -moz-animation: restfull 2s ease;
+    -webkit-animation: restfull 2s ease;
+}
+
+.mysql {
+    width: 70%;
+    -moz-animation: mysql 2s ease;
+    -webkit-animation: mysql 2s ease;
+}
+
+.postgres {
+    width: 10%;
+    -moz-animation: postgres 2s ease;
+    -webkit-animation: postgres 2s ease;
+}
+
+.docker {
+    width: 70%;
+    -moz-animation: docker 2s ease;
+    -webkit-animation: docker 2s ease;
+}
+
+.scrum {
+    width: 75%;
+    -moz-animation: scrum 2s ease;
+    -webkit-animation: scrum 2s ease;
+}
+
+.html {
+    width: 70%;
+    -moz-animation: html 2s ease;
+    -webkit-animation: html 2s ease;
+}
+
+.css {
+    width: 70%;
+    -moz-animation: css 2s ease;
+    -webkit-animation: css 2s ease;
+}
+
+.jquery {
+    width: 70%;
+    -moz-animation: jquery 2s ease;
+    -webkit-animation: jquery 2s ease;
+}
+
+.jira {
+    width: 50%;
+    -moz-animation: jira 2s ease;
+    -webkit-animation: jira 2s ease;
+}
+
+.trello {
+    width: 80%;
+    -moz-animation: trello 2s ease;
+    -webkit-animation: trello 2s ease;
+}
+
+.svn {
+    width: 20%;
+    -moz-animation: svn 2s ease;
+    -webkit-animation: svn 2s ease;
+}
+
+.git {
+    width: 80%;
+    -moz-animation: git 2s ease;
+    -webkit-animation: git 2s ease;
+}
+
+.gitflow {
+    width: 70%;
+    -moz-animation: gitflow 2s ease;
+    -webkit-animation: gitflow 2s ease;
+}
+
+.gitlab{
+    width: 70%;
+    -moz-animation: gitlab 2s ease;
+    -webkit-animation: gitlab 2s ease;
+}
+
+.github {
+    width: 45%;
+    -moz-animation: github 2s ease;
+    -webkit-animation: github 2s ease;
+}
+
+.rabbit {
+    width: 60%;
+    -moz-animation: git 2s ease;
+    -webkit-animation: git 2s ease;
+}
+
+.jenkins {
+    width: 30%;
+    -moz-animation: jenkins 2s ease;
+    -webkit-animation: jenkins 2s ease;
+}
+
+.gitlabcicd {
+    width: 65%;
+    -moz-animation: gitlabcicd 2s ease;
+    -webkit-animation: gitlabcicd 2s ease;
+}
+
+.elastic {
+    width: 40%;
+    -moz-animation: elastic 2s ease;
+    -webkit-animation: elastic 2s ease;
+}
+
+.redis {
+    width: 60%;
+    -moz-animation: redis 2s ease;
+    -webkit-animation: redis 2s ease;
+}
+
+.swagger {
+    width: 35%;
+    -moz-animation: swagger 2s ease;
+    -webkit-animation: swagger 2s ease;
+}
+
+/* ####################### */
 .photoshop {
   	width: 60%;
   	-moz-animation: photoshop 2s ease;
@@ -341,7 +528,7 @@ ul#nav li.current a { color: #F06000; }
   	-webkit-animation: wordpress 2s ease;
 }
 .css {
-  	width: 90%;
+  	width: 80%;
   	-moz-animation: css 2s ease;
   	-webkit-animation: css 2s ease;
 }
@@ -354,6 +541,16 @@ ul#nav li.current a { color: #F06000; }
   	width: 50%;
   	-moz-animation: jquery 2s ease;
   	-webkit-animation: jquery 2s ease;
+}
+.aws {
+    width: 40%;
+    -moz-animation: aws 2s ease;
+    -webkit-animation: aws 2s ease;
+}
+.gcp {
+    width: 30%;
+    -moz-animation: gcp 2s ease;
+    -webkit-animation: gcp 2s ease;
 }
 
 @-moz-keyframes photoshop {
@@ -595,7 +792,7 @@ ul#nav li.current a { color: #F06000; }
 #call-to-action h1 span { display: none; }
 #call-to-action .header-col h1:before {
    font-family: 'FontAwesome';
-   content: "\f0ac";
+   content: "\f109";
 	padding-right: 10px;
 	font-size: 72px;
    line-height: 72px;
@@ -630,7 +827,7 @@ call-to-action .button {
    color: #0D0D0D;
 }
 #call-to-action p span {
-	font-family: 'opensans-semibold', sans-serif; 
+	font-family: 'opensans-semibold', sans-serif;
 	color: #D8D8D8;
 }
 
@@ -639,7 +836,7 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 #testimonials {
-   background: #1F1F1F url(../images/testimonials-bg.jpg) no-repeat center center;
+   background: #1F1F1F url(../images/header-background.jpg) no-repeat center center;
    background-size: cover !important;
 	-webkit-background-size: cover !important;
    background-attachment: fixed;
@@ -654,7 +851,7 @@ call-to-action .button {
    padding-bottom: 66px;
 }
 #testimonials h1 {
-   font: 18px/24px 'opensans-bold', sans-serif;   
+   font: 18px/24px 'opensans-bold', sans-serif;
    text-transform: uppercase;
    letter-spacing: 3px;
    color: #fff;

@@ -7,7 +7,8 @@
     <!--- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>xxx - Free Responsive HTML5/CSS3 Template</title>
+    <title>José Gomes</title>
+
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -47,8 +48,8 @@
             <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
             <li><a class="smoothscroll" href="#about">About</a></li>
             <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#portfolio">Works</a></li>
-            <li><a class="smoothscroll" href="#testimonials">Testimonials</a></li>
+            <li><a class="smoothscroll" href="#portfolio">Projects</a></li>
+            <li><a class="smoothscroll" href="#testimonials">Case studies</a></li>
             <li><a class="smoothscroll" href="#contact">Contact</a></li>
         </ul> <!-- end #nav -->
 
@@ -56,19 +57,23 @@
 
     <div class="row banner">
         <div class="banner-text">
-            <h1 class="responsive-headline">I'm Jonathan Doe.</h1>
-            <h3>I'm a Manila based <span>graphic designer</span>, <span>illustrator</span> and <span>webdesigner</span> creating awesome and
-                effective visual identities for companies of all sizes around the globe. Let's <a class="smoothscroll" href="#about">start scrolling</a>
-                and learn more <a class="smoothscroll" href="#about">about me</a>.</h3>
+            <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
+            <h1 class="responsive-headline">José Gomes</h1>
+            <script type="text/javascript"> //<![CDATA[
+                var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+                document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+                //]]></script>
+            <script language="JavaScript" type="text/javascript">
+                TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_md_167x42.png", "POSDV", "none");
+            </script> <br/>
+            <h3>I'm a Lisbon based <span>software developer</span>.<br/><span> Let's <a class="smoothscroll" href="#about">start scrolling</a> and know more <a class="smoothscroll" href="#about">about me</a>.</span>
+            </h3>
             <hr />
+
             <ul class="social">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                <li><a href="https://twitter.com/routineris" target="_blank"><i style="color: #aaaaaa" class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i style="color: #aaaaaa" class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i style="color: #aaaaaa" class="fa fa-github"></i></a></li>
             </ul>
         </div>
     </div>
@@ -88,7 +93,7 @@
 
         <div class="three columns">
 
-            <img class="profile-pic"  src="images/profilepic.jpg" alt="" />
+            <img class="profile-pic"  src="images/personal/logo.png" alt="" />
 
         </div>
 
@@ -96,12 +101,11 @@
 
             <h2>About Me</h2>
 
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.
+            <p> I'm a software developer passionate about open source technologies, agile methodologies and helping the product achieve its proposed objectives.
+                I don't consider myself as a technology CR7 or a guru, I'm always learning. Is mandatory to me deliver code without errors,
+                well tested and developed, always offering the best possible quality in my work. Over the years, I have become more customer-focused,
+                in the performance offered to them and in the best possible planning to delivery the tasks,
+                contributing to product quality. Legacy code doesn't scare me, in fact I see everything as a challenge and opportunity for improvement.
             </p>
 
             <div class="row">
@@ -110,19 +114,20 @@
 
                     <h2>Contact Details</h2>
                     <p class="address">
-                        <span>Jonathan Doe</span><br>
-                        <span>1600 Amphitheatre Parkway<br>
-						         Mountain View, CA 94043 US
-                     </span><br>
-                        <span>(123)456-7890</span><br>
-                        <span>anyone@website.com</span>
+                        <span>José Gomes</span><br>
+                        <span>Lisbon</span><br>
+                        <span>+351937503892</span><br>
+                        <span>zx.gomes@gmail.com</span>
                     </p>
 
                 </div>
 
                 <div class="columns download">
                     <p>
-                        <a href="#" class="button"><i class="fa fa-download"></i>Download Resume</a>
+                    <!--    <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (EN)</a> -->
+                    </p>
+                    <p>
+                    <!--     <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (PT)</a> -->
                     </p>
                 </div>
 
@@ -152,17 +157,32 @@
             <div class="row item">
 
                 <div class="twelve columns">
+                    <img width="65" height="65" src="images/personal/olx_group_logo.jpeg">
+                    <h3>Training in company, Lisbon</h3>
+                    <p class="info">PHPUnit with Sebastian Bergmann<span>&bull;</span> <em class="date">2017</em></p>
+                </div>
 
-                    <h3>University of Life</h3>
-                    <p class="info">Master in Graphic Design <span>&bull;</span> <em class="date">April 2007</em></p>
+            </div> <!-- item end -->
+            <br/>
+            <div class="row item">
 
+                <div class="twelve columns">
+                    <img width="50" height="50" src="images/personal/edit.png">
+                    <h3><i>EDIT School</i>, Lisbon</h3>
+                    <p class="info">Workshop / UX - User Experience<span>&bull;</span> <em class="date">2015</em></p>
+                </div>
+
+            </div> <!-- item end -->
+            <br/>
+            <div class="row item">
+
+                <div class="twelve columns">
+                    <img width="50" height="50" src="images/personal/doitbetter.jpeg">
+                    <h3><i>Do It Better - Training center</i>, Amadora</h3>
+                    <p class="info">IEFP Training of Trainers Certification - CCP (formerly CAP)<span>&bull;</span> <em class="date">2014</em></p>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                        Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Nullam dictum felis eu pede mollis pretium.
+                        - CCP no. F629584/2014
                     </p>
-
                 </div>
 
             </div> <!-- item end -->
@@ -170,17 +190,9 @@
             <div class="row item">
 
                 <div class="twelve columns">
-
-                    <h3>School of Cool Designers</h3>
-                    <p class="info">B.A. Degree in Graphic Design <span>&bull;</span> <em class="date">March 2003</em></p>
-
-                    <p>
-                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                        nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan
-                        ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat
-                    </p>
-
+                    <img width="60" height="60" src="images/personal/ipt.png" />
+                    <h3><i>Higher School of Technology</i>, Tomar</h3>
+                    <p class="info">Degree in computer engineering<span>&bull;</span> <em class="date">2006 - 2010</em></p>
                 </div>
 
             </div> <!-- item end -->
@@ -203,15 +215,17 @@
             <div class="row item">
 
                 <div class="twelve columns">
-
-                    <h3>Awesome Design Studio</h3>
-                    <p class="info">Senior UX Designer <span>&bull;</span> <em class="date">March 2010 - Present</em></p>
+                    <img width="65" height="65" src="images/personal/olx_group_logo.jpeg" />
+                    <h3>OLX</h3>
+                    <p class="info">Software Developer <span>&bull;</span> <em class="date">2016 - Present</em></p>
 
                     <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                        Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Nullam dictum felis eu pede mollis pretium.
+                        During my initial tenure (one year and a half) at the company, I worked on business tools for real estate consultants.
+                        With the company's acquisition by OLX, I shifted my focus to managing public real estate portals, working and adapting within the industry.
+                        In this role, I ensured the effective implementation of Scrum principles and ceremonies in our iterations, guaranteed proper task planning,
+                        and contributed as a developer in implementing new features. I handled bug corrections, hot fixes, and maintained the portals continuously.
+                        I belonged to the team responsible for all location-related information across real estate portals such as Imovirtual, Storia and Otodom.pl.
+                        When necessary, I conduct demonstrations of new features and improvements for other teams and managers.
                     </p>
 
                 </div>
@@ -221,15 +235,35 @@
             <div class="row item">
 
                 <div class="twelve columns">
-
-                    <h3>Super Cool Studio</h3>
-                    <p class="info">UX Designer <span>&bull;</span> <em class="date">March 2007 - February 2010</em></p>
+                    <img width="50" height="50" src="images/personal/bk_group_logo.jpeg" />
+                    <h3>BLKO</h3>
+                    <p class="info">Software Developer<span>&bull;</span> <em class="date">2014 - 2016</em></p>
 
                     <p>
-                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                        nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan
-                        ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat
+                        Worked as a developer in a startup-minded company, primarily focused on developing projects to generate funding
+                        for the company's main project named THO (Trojan Worse was an Unicorn).
+                        Engaged in full-stack development.
+                        Created turnkey portals operating in an offshore engineering mode for external companies like "Great Western Railway" and others.
+                        Developed projects for internal companies such as "Yellowpages" and "Caminho.
+                    </p>
+
+                </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+                <div class="twelve columns">
+                    <img width="50" height="50" src="images/personal/gw.jpeg" />
+                    <h3>Gatewit</h3>
+                    <p class="info">Software Developer<span>&bull;</span> <em class="date">2010 - 2014</em></p>
+
+                    <p>
+                        Worked as developer at compraspublicas.com, a government-selected portal for state public procurement,
+                        enabling supplier competition and proposal submissions. ( site deprecated due to company closure )
+                        and warehouse.procurement.com developing for "Nextrans" to streamline transportation registrations,
+                        logistics, supply chain, and warehousing. ( site deprecated due to company closure )
+                        My Responsibilities here was guarantee full-stack development, implementing, new features, satellite portals and bug fixing.
                     </p>
 
                 </div>
@@ -251,21 +285,46 @@
 
         <div class="nine columns main-col">
 
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                voluptatem sequi nesciunt.
+            <p>
+                The following skills and respective quotation ( bar width ) are based on the technologies used in the projects I am/was involved plus the training I had in the projects context.
+                It reflects my experience in real projects and not in what quotation I should have in each tech.
+                Indicative values and in some technologies may be based on my professional experience and not on total technical knowledge.
             </p>
 
             <div class="bars">
 
                 <ul class="skills">
-                    <li><span class="bar-expand photoshop"></span><em>Photoshop</em></li>
-                    <li><span class="bar-expand illustrator"></span><em>Illustrator</em></li>
-                    <li><span class="bar-expand wordpress"></span><em>Wordpress</em></li>
+                    <li><span class="bar-expand php"></span><em>PHP</em></li>
+                    <li><span class="bar-expand apcu"></span><em>APCu</em></li>
+                    <li><span class="bar-expand psr2"></span><em>PSR-2</em></li>
+                    <li><span class="bar-expand phpunit"></span><em>Phpunit</em></li>
+                    <li><span class="bar-expand tdd"></span><em>TDD</em></li>
+                    <li><span class="bar-expand mvc"></span><em>MVC</em></li>
+                    <li><span class="bar-expand laravel"></span><em>Laravel</em></li>
+                    <li><span class="bar-expand microservices"></span><em>Microservices</em></li>
+                    <li><span class="bar-expand soap"></span><em>Soap</em></li>
+                    <li><span class="bar-expand rest"></span><em>Rest</em></li>
+                    <li><span class="bar-expand restfull"></span><em>Restfull</em></li>
+                    <li><span class="bar-expand mysql"></span><em>MySQL</em></li>
+                    <li><span class="bar-expand postgres"></span><em>Postgres</em></li>
+                    <li><span class="bar-expand docker"></span><em>Docker ( docker-composer )</em></li>
+                    <li><span class="bar-expand scrum"></span><em>Agile ( Scrum )</em></li>
+                    <li><span class="bar-expand jira"></span><em>Jira</em></li>
+                    <li><span class="bar-expand trello"></span><em>Trello</em></li>
+                    <li><span class="bar-expand rabbit"></span><em>RabbitMQ</em></li>
+                    <li><span class="bar-expand jenkins"></span><em>Jenkins</em></li>
+                    <li><span class="bar-expand git"></span><em>Git</em></li>
+                    <li><span class="bar-expand gitflow"></span><em>Git flow</em></li>
+                    <li><span class="bar-expand github"></span><em>GitHub Repo</em></li>
+                    <li><span class="bar-expand gitlab"></span><em>GitLab Repo</em></li>
+                    <li><span class="bar-expand gitlabcicd"></span><em>GitLab CI/CD</em></li>
+                    <li><span class="bar-expand redis"></span><em>Redis</em></li>
+                    <li><span class="bar-expand swagger"></span><em>Swagger</em></li>
                     <li><span class="bar-expand css"></span><em>CSS</em></li>
-                    <li><span class="bar-expand html5"></span><em>HTML5</em></li>
+                    <li><span class="bar-expand html"></span><em>HTML</em></li>
                     <li><span class="bar-expand jquery"></span><em>jQuery</em></li>
+                    <li><span class="bar-expand aws"></span><em>Amazon Web Services (AWS)</em></li>
+                    <li><span class="bar-expand gcp"></span><em> Google Cloud Platform (GCP)</em></li>
                 </ul>
 
             </div><!-- end skill-bars -->
@@ -276,6 +335,46 @@
 
 </section> <!-- Resume Section End-->
 
+<!-- Call-To-Action Section
+================================================== -->
+<section id="call-to-action">
+
+    <div class="row">
+
+        <div class="two columns header-col">
+
+            <h1><span></span></h1>
+
+        </div>
+
+        <div class="seven columns">
+
+            <h2><span class="lead">Dev stack / tools to work:</span></h2>
+            <p style="text-align: left">
+                <span class="lead">
+                - linux (ubuntu) <br>
+                - phpstorm<br>
+                - mysql workbench<br>
+                - phpmyadmin<br>
+                - docker desktop<br>
+                - postman<br>
+                - zoom<br>
+                - apache2<br>
+                - gcp buckets<br>
+                - gimp <br>
+                - etc...<br>
+                </span>
+            </p>
+
+        </div>
+
+        <div class="three columns action">
+
+        </div>
+
+    </div>
+
+</section> <!-- Call-To-Action Section End-->
 
 <!-- Portfolio Section
 ================================================== -->
@@ -285,20 +384,50 @@
 
         <div class="twelve columns collapsed">
 
-            <h1>Check Out Some of My Works.</h1>
+            <h1 style="font-size: 25px">Projects</h1>
 
             <!-- portfolio-wrapper -->
             <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
 
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
-                        <a href="#modal-01" title="">
-                            <img alt="" src="images/portfolio/coffee.jpg">
+                        <a href="#modal-12" title="">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/logo3.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Coffee</h5>
-                                    <p>Illustrration</p>
+                                    <h5>José Gomes Site</h5>
+                                    <p>Web Development</p>
+                                </div>
+                            </div>
+                            <div class="link-icon"><i class="icon-plus"></i></div>
+                        </a>
+                    </div>
+                </div>  <!-- item end -->
+
+                <div class="columns portfolio-item">
+                    <div class="item-wrap">
+                        <a href="#modal-11" title="">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/routineris2.png">
+                            <div class="overlay">
+                                <div class="portfolio-item-meta">
+                                    <h5>Routineris</h5>
+                                    <p>Web Development</p>
+                                </div>
+                            </div>
+                            <div class="link-icon"><i class="icon-plus"></i></div>
+                        </a>
+                    </div>
+                </div>  <!-- item end -->
+
+                <div class="columns portfolio-item">
+                    <div class="item-wrap">
+
+                        <a href="#modal-01" title="">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/imo2.png">
+                            <div class="overlay">
+                                <div class="portfolio-item-meta">
+                                    <h5>Imovirtual</h5>
+                                    <p>Web Development</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
@@ -311,10 +440,10 @@
                     <div class="item-wrap">
 
                         <a href="#modal-02" title="">
-                            <img alt="" src="images/portfolio/console.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/otodom.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Console</h5>
+                                    <h5>Otodom</h5>
                                     <p>Web Development</p>
                                 </div>
                             </div>
@@ -328,11 +457,11 @@
                     <div class="item-wrap">
 
                         <a href="#modal-03" title="">
-                            <img alt="" src="images/portfolio/judah.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/storia2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Judah</h5>
-                                    <p>Webdesign</p>
+                                    <h5>Storia</h5>
+                                    <p>Web Development</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
@@ -345,11 +474,11 @@
                     <div class="item-wrap">
 
                         <a href="#modal-04" title="">
-                            <img alt="" src="images/portfolio/into-the-light.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/as2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Into The Light</h5>
-                                    <p>Photography</p>
+                                    <h5>Atlastock</h5>
+                                    <p>Web Development</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
@@ -362,11 +491,11 @@
                     <div class="item-wrap">
 
                         <a href="#modal-05" title="">
-                            <img alt="" src="images/portfolio/farmerboy.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.6" src="images/personal/gwr2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Farmer Boy</h5>
-                                    <p>Branding</p>
+                                    <h5>Young Great Westerners!</h5>
+                                    <p>Web Development</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
@@ -379,11 +508,11 @@
                     <div class="item-wrap">
 
                         <a href="#modal-06" title="">
-                            <img alt="" src="images/portfolio/girl.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/paginas-amarelas-sa-lisboa_big2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Girl</h5>
-                                    <p>Photography</p>
+                                    <h5>MySite PA</h5>
+                                    <p>Web Development</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
@@ -396,11 +525,11 @@
                     <div class="item-wrap">
 
                         <a href="#modal-07" title="">
-                            <img alt="" src="images/portfolio/origami.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/trojan.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Origami</h5>
-                                    <p>Illustrration</p>
+                                    <h5>THU</h5>
+                                    <p>Web Development</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
@@ -413,10 +542,10 @@
                     <div class="item-wrap">
 
                         <a href="#modal-08" title="">
-                            <img alt="" src="images/portfolio/retrocam.jpg">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/logo_wh.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Retrocam</h5>
+                                    <h5>Gatewit - Warehouse</h5>
                                     <p>Web Development</p>
                                 </div>
                             </div>
@@ -425,6 +554,41 @@
 
                     </div>
                 </div>  <!-- item end -->
+
+                <div class="columns portfolio-item">
+                    <div class="item-wrap">
+
+                        <a href="#modal-09" title="">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/logo_req.png">
+                            <div class="overlay">
+                                <div class="portfolio-item-meta">
+                                    <h5>Gatewit - Requisition</h5>
+                                    <p>Web Development</p>
+                                </div>
+                            </div>
+                            <div class="link-icon"><i class="icon-plus"></i></div>
+                        </a>
+
+                    </div>
+                </div>  <!-- item end -->
+
+                <div class="columns portfolio-item">
+                    <div class="item-wrap">
+
+                        <a href="#modal-10" title="">
+                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/compras2.png">
+                            <div class="overlay">
+                                <div class="portfolio-item-meta">
+                                    <h5>Gatewit - Compras Públicas</h5>
+                                    <p>Web Development</p>
+                                </div>
+                            </div>
+                            <div class="link-icon"><i class="icon-plus"></i></div>
+                        </a>
+
+                    </div>
+                </div>  <!-- item end -->
+
 
             </div> <!-- portfolio-wrapper end -->
 
@@ -436,16 +600,20 @@
 
         <div id="modal-01" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-coffee.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/imo-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Coffee Cup</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Branding, Webdesign</span>
+                <h4>Imovirtual</h4>
+                <p>
+                    This application is an online portal specialized in real estate classifieds,
+                    where we can find advertisements for the sale and rental of properties, such as houses, apartments,
+                    land, among others, for the Portuguese market.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <a href="https://www.imovirtual.com" target="_blank">Site</a>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -453,16 +621,20 @@
 
         <div id="modal-02" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-console.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/otodom-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Console</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Branding, Web Development</span>
+                <h4>Otodom</h4>
+                <p>
+                    This application is an online portal specialized in real estate classifieds,
+                    where we can find advertisements for the sale and rental of properties, such as houses, apartments,
+                    land, among others, for the Polish market.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <a href="https://www.otodom.pl" target="_blank">Site</a>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -470,16 +642,20 @@
 
         <div id="modal-03" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-judah.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/storia-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Judah</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Branding</span>
+                <h4>Storia</h4>
+                <p>
+                    This application is an online portal specialized in real estate classifieds,
+                    where we can find advertisements for the sale and rental of properties, such as houses, apartments,
+                    land, among others, for the Romanian market.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <a href="https://www.storia.ro" target="_blank">Details</a>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -487,16 +663,18 @@
 
         <div id="modal-04" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-intothelight.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/as-det2.png" alt="" style="width: 100%; height: 400px;opacity: 0.7"/>
 
             <div class="description-box">
-                <h4>Into the Light</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Photography</span>
+                <h4>Atlastock</h4>
+                <p> Application that was a business tool for real estate, which allowed consultants to manage their
+                    properties in their portfolio. One of the main features was the exportation of properties to Imovirtual
+                    and/or OLX, transforming this content into advertisements visible to the public user.</p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -504,16 +682,19 @@
 
         <div id="modal-05" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-farmerboy.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/gwr-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Farmer Boy</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Branding, Webdesign</span>
+                <h4>Young Great Westerners!</h4>
+                <p> Application for a British railway company for a project associated with
+                    public education where the goal is to publicize the company and at the same time giving
+                    the possibility to students from various schools to be aware about the points of interest in Great Britain that are
+                    accessible by traveling on the British train network. </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <a href="https://www.younggreatwesterners.com/" target="_blank">Site</a>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -521,16 +702,19 @@
 
         <div id="modal-06" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-girl.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/pa-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Girl</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Photography</span>
+                <h4>PA Mysite</h4>
+                <p>
+                    Portal for company information and contacts. Custom web page generator for PA customers through the
+                    mysite-page solution instantly.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -538,16 +722,20 @@
 
         <div id="modal-07" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-origami.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/trojan-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Origami</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Branding, Illustration</span>
+                <h4>THU</h4>
+                <p>
+                    Application that serves as a communication platform of articles, initiatives and announces
+                    the main event ( THU ) that combines conferences, festival and meeting for professionals in digital media,
+                    animation, visual effects, design and related areas that aims to bring together talented and inspiring artists.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <a href="https://www.trojan-unicorn.com/" target="_blank">Site</a>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -555,57 +743,113 @@
 
         <div id="modal-08" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/portfolio/modals/m-retrocam.jpg" alt="" />
+            <img class="scale-with-grid" src="images/personal/logo_wh-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
 
             <div class="description-box">
-                <h4>Retrocam</h4>
-                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Webdesign, Photography</span>
+                <h4>Gatewit - Warehouse</h4>
+                <p>
+                    Application to manage inventory controlling prices and costs of various items, creating alerts for stock outages, creating
+                    orders and preparation of purchase orders. Allows management and control of movements.
+                    Customized usage profiles per user. History of all actions performed and their respective users.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
             </div>
 
             <div class="link-box">
-                <a href="http://www.behance.net" target="_blank">Details</a>
+                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
-        </div><!-- modal-01 End -->
+        </div><!-- modal-08 End -->
 
+        <div id="modal-09" class="popup-modal mfp-hide">
+
+            <img class="scale-with-grid" src="images/personal/logo_req-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+
+            <div class="description-box">
+                <h4>Gatewit - Requesition</h4>
+                <p>
+                    Application for product management, orders, purchase orders, stocks
+                    and requests.
+                    It allows different degrees of access and permissions per user depending on their profile.
+                    Integration with Public Sourcing to launch procedures and treatment of awards.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+            </div>
+
+            <div class="link-box">
+                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <a class="popup-modal-dismiss">Close</a>
+            </div>
+
+        </div><!-- modal-09 End -->
+
+        <div id="modal-10" class="popup-modal mfp-hide">
+
+            <img class="scale-with-grid" src="images/personal/compras-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7"  />
+
+            <div class="description-box">
+                <h4>Gatewit - Compras Publicas</h4>
+                <p>
+                    Management platform and procedures for contracting goods and services. Through this application, suppliers could consult
+                    public advertisements and present their offers and associated value. Also through this application,
+                    all offers were analyzed to obtain the award of the good or service.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+            </div>
+
+            <div class="link-box">
+                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <a class="popup-modal-dismiss">Close</a>
+            </div>
+
+        </div><!-- modal-10 End -->
+
+        <div id="modal-11" class="popup-modal mfp-hide">
+
+            <img class="scale-with-grid" src="images/personal/routineris-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7"    />
+
+            <div class="description-box">
+                <h4>Routineris</h4>
+                <p>
+                    Website to save photos in the cloud.
+                    Allows the user to create maps ( which we can call it albums ) where you can invite other people
+                    to contribute with their photos to the map. At the end, this application works as a family social network.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://routineris.xyz/" target="_blank">Site</a>
+                <a class="popup-modal-dismiss">Close</a>
+            </div>
+
+        </div><!-- modal-11 End -->
+
+        <div id="modal-12" class="popup-modal mfp-hide">
+
+            <img class="scale-with-grid" src="images/personal/logo-det2.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+
+            <div class="description-box">
+                <h4>José Gomes site</h4>
+                <p>
+                    Personal website where I show my CV, the technologies I like most,
+                    the ones I had the opportunity to work on and also some case studies of some features that
+                    I can't demonstrate on sites where I don't have rights to show the code.
+                </p>
+                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://jgomes.site" target="_blank">Site</a>
+                <a class="popup-modal-dismiss">Close</a>
+            </div>
+
+        </div><!-- modal-12 End -->
 
     </div> <!-- row End -->
 
 </section> <!-- Portfolio Section End-->
-
-
-<!-- Call-To-Action Section
-================================================== -->
-<section id="call-to-action">
-
-    <div class="row">
-
-        <div class="two columns header-col">
-
-            <h1><span>Get Hosting.</span></h1>
-
-        </div>
-
-        <div class="seven columns">
-
-            <h2><span class="lead">Unde Omnis Iste</span></h2>
-            <p><span class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae. </span></p>
-
-        </div>
-
-        <div class="three columns action">
-
-
-
-        </div>
-
-    </div>
-
-</section> <!-- Call-To-Action Section End-->
-
 
 <!-- Testimonials Section
 ================================================== -->
@@ -617,7 +861,7 @@
 
             <div class="two columns header-col">
 
-                <h1><span>Client Testimonials</span></h1>
+                <!-- <h1><span>Client Testimonials</span></h1> -->
 
             </div>
 
@@ -625,19 +869,21 @@
 
                 <div class="flexslider">
 
+                    <p style="font-size: 20px; color: white;line-height: 30px; text-align: left">
+                        I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted. So you have read access to : <br/><br/>
+                        - The repo: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>Repository here</u></a> <br/>
+                        - The board: <a target="_blank" href="https://trello.com/c/M8hb7tpf/1-wms"><u>Board here</u></a> <br />
+                    </p>
                     <ul class="slides">
 
                         <li>
-                            <blockquote>
-                                <p>Your work is going to fill a large part of your life, and the only way to be truly satisfied is
-                                    to do what you believe is great work. And the only way to do great work is to love what you do.
-                                    If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it.
-                                </p>
-                                <cite>Steve Jobs</cite>
-                            </blockquote>
+
+
+                                <!--<cite>Steve Jobs</cite>-->
+
                         </li> <!-- slide ends -->
 
-                        <li>
+<!--                        <li>
                             <blockquote>
                                 <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
                                     Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
@@ -645,7 +891,7 @@
                                 </p>
                                 <cite>Mr. Adobe</cite>
                             </blockquote>
-                        </li> <!-- slide ends -->
+                        </li> --> <!-- slide ends -->
 
                     </ul>
 
@@ -668,15 +914,13 @@
 
         <div class="two columns header-col">
 
-            <h1><span>Get In Touch.</span></h1>
+            <h1><span>Get In Touch</span></h1>
 
         </div>
 
         <div class="ten columns">
 
-            <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+            <p class="lead" style="text-align: left">If you want to contact me, please leave your message using this form. I will respond as soon as possible! Thank you.
             </p>
 
         </div>
@@ -712,9 +956,11 @@
                     </div>
 
                     <div>
-                        <button class="submit">Submit</button>
+                        <button class="submit" onclick="alert('In dev.. ')">Submit</button>
+
+                       <!-- <button class="submit">Submit</button>
                         <span id="image-loader">
-                        <img alt="" src="images/loader.gif">
+                        <img alt="" src="images/loader.gif"> -->
                      </span>
                     </div>
 
@@ -735,38 +981,12 @@
 
             <div class="widget widget_contact">
 
-                <h4>Address and Phone</h4>
+                <h4>Contact</h4>
                 <p class="address">
-                    Jonathan Doe<br>
-                    1600 Amphitheatre Parkway <br>
-                    Mountain View, CA 94043 US<br>
-                    <span>(123) 456-7890</span>
+                    José Gomes<br>
+                    Lisbon<br>
+                    <span>+351 937523892</span>
                 </p>
-
-            </div>
-
-            <div class="widget widget_tweets">
-
-                <h4 class="widget-title">Latest Tweets</h4>
-
-                <ul id="twitter">
-                    <li>
-                        <span>
-                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
-                        <a href="#">http://t.co/CGIrdxIlI3</a>
-                        </span>
-                        <b><a href="#">2 Days Ago</a></b>
-                    </li>
-                    <li>
-                        <span>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                        eaque ipsa quae ab illo inventore veritatis et quasi
-                        <a href="#">http://t.co/CGIrdxIlI3</a>
-                        </span>
-                        <b><a href="#">3 Days Ago</a></b>
-                    </li>
-                </ul>
 
             </div>
 
@@ -786,20 +1006,12 @@
         <div class="twelve columns">
 
             <ul class="social-links">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
 
-            <ul class="copyright">
-                <li>&copy; Copyright 2014 CeeVee</li>
-                <li>Design by <a href="http://www.styleshout.com/" title="Styleshout" target="_blank">Styleshout</a></li>
-            </ul>
-
+            <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
         </div>
 
         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
