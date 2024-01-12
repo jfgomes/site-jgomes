@@ -24,7 +24,7 @@ Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {
     return view('case-studies.index', ['foldersWithFiles' => $foldersWithFiles]);
 });
 
-Route::get('/example/{file}', function (CaseStudiesService $caseStudiesService, $file) {
+Route::get('/case-studies/file/{file}', function (CaseStudiesService $caseStudiesService, $file) {
     $htmlContent = $caseStudiesService->getFileContent($file);
     if ($htmlContent !== null) {
         return view('case-studies.example', ['htmlContent' => $htmlContent]);
