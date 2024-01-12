@@ -44,6 +44,8 @@ class CaseStudiesService
                 return "Cache implementation";
             case "test2":
                 return "Elasticsearch implementation";
+            case "basic-setup":
+                return "Project basic setup";
             case "setup":
                 return "Project complete infra setup";
             default:
