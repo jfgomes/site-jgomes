@@ -27,6 +27,12 @@ It was build with:
 - [HTML + CSS + JS ( Jquery ) - ( Credits to www.themezy.com ) ](https://www.themezy.com/free-website-templates/151-ceevee-free-responsive-website-template)
 - [Docker ( with docker-compose - See 'Infra configs' next )](https://docs.docker.com/compose/)
 
+## TR/DR setup
+- git clone git@github.com:jfgomes/site-jgomes.git
+- composer update
+- cp .env.example .env ( Need to add the configs to .env )
+- php artisan key:generate
+- php artisan serve --port=90 ( The port is not mandatory. By default is 80 )
 
 ## Infra configs
 
@@ -86,6 +92,7 @@ RUN chmod 755 /var/lib/mysql
 structure ( project inside the dir "site" and ths ssl cert file are inside the dir "cert" )
 
 ![Logo do GitHub](https://jgomes.site/images/project_structure.png)
+
 Vhost to proxy the site to the world (with ssl)
 
 ```
