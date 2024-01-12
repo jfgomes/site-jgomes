@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/case-studies.css">
 </head>
 <body>
-<h1>Case study list:</h1>
+<h1>jgomes.site project case study list:</h1>
 @if(count($foldersWithFiles) > 0)
     <ul>
         @foreach($foldersWithFiles as $folder)
