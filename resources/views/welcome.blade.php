@@ -31,6 +31,44 @@
      ================================================== -->
     <link rel="shortcut icon" href="favicon.png" >
 
+    <style>
+
+        .social_extra{
+            color: #aaaaaa;
+        }
+
+        .portfolio-text-size{
+            font-size: 25px;
+        }
+
+        .portfolio-image{
+            width: 100%;
+            opacity: 0.7;
+        }
+
+        .portfolio-image-modal
+        {
+            width: 100%;
+            height: 400px;
+            opacity: 0.7
+        }
+
+        .portfolio-modal-deprecated-site
+        {
+            font-weight: bold;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        .case-studies
+        {
+            font-size: 20px;
+            color: white;
+            line-height: 30px;
+            text-align: left;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -71,9 +109,9 @@
             <hr />
 
             <ul class="social">
-                <li><a href="https://twitter.com/routineris" target="_blank"><i style="color: #aaaaaa" class="fa fa-twitter"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i style="color: #aaaaaa" class="fa fa-linkedin"></i></a></li>
-                <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i style="color: #aaaaaa" class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter social_extra"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin social_extra"></i></a></li>
+                <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github social_extra"></i></a></li>
             </ul>
         </div>
     </div>
@@ -350,7 +388,7 @@
         <div class="seven columns">
 
             <h2><span class="lead">Dev stack / tools to work:</span></h2>
-            <p style="text-align: left">
+            <p class="text-left">
                 <span class="lead">
                 - linux (ubuntu) <br>
                 - phpstorm<br>
@@ -384,15 +422,15 @@
 
         <div class="twelve columns collapsed">
 
-            <h1 style="font-size: 25px">Projects</h1>
+            <h1 class="portfolio-text-size">Projects</h1>
 
             <!-- portfolio-wrapper -->
             <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
 
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-                        <a href="#modal-12" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/logo3.png">
+                        <a href="#modal-12">
+                            <img alt="José Gomes Site" class="portfolio-image" src="images/personal/logo3.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>José Gomes Site</h5>
@@ -406,8 +444,8 @@
 
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-                        <a href="#modal-11" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/routineris2.png">
+                        <a href="#modal-11">
+                            <img alt="Routineris" class="portfolio-image" src="images/personal/routineris2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Routineris</h5>
@@ -422,8 +460,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-01" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/imo2.png">
+                        <a href="#modal-01">
+                            <img alt="Imovirtual" class="portfolio-image" src="images/personal/imo2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Imovirtual</h5>
@@ -439,8 +477,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-02" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/otodom.png">
+                        <a href="#modal-02">
+                            <img alt="Otodom" class="portfolio-image" src="images/personal/otodom.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Otodom</h5>
@@ -456,8 +494,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-03" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/storia2.jpg">
+                        <a href="#modal-03">
+                            <img alt="Storia" class="portfolio-image" src="images/personal/storia2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Storia</h5>
@@ -473,8 +511,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-04" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/as2.png">
+                        <a href="#modal-04">
+                            <img alt="Atlastock" class="portfolio-image" src="images/personal/as2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Atlastock</h5>
@@ -490,8 +528,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-05" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.6" src="images/personal/gwr2.jpg">
+                        <a href="#modal-05">
+                            <img alt="Young Great Westerners!" class="portfolio-image" src="images/personal/gwr2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Young Great Westerners!</h5>
@@ -507,11 +545,11 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-06" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/paginas-amarelas-sa-lisboa_big2.jpg">
+                        <a href="#modal-06">
+                            <img alt="PA MySite" class="portfolio-image" src="images/personal/paginas-amarelas-sa-lisboa_big2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>MySite PA</h5>
+                                    <h5>PA MySite</h5>
                                     <p>Web Development</p>
                                 </div>
                             </div>
@@ -524,8 +562,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-07" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/trojan.jpg">
+                        <a href="#modal-07">
+                            <img alt="THU" class="portfolio-image" src="images/personal/trojan.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>THU</h5>
@@ -541,8 +579,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-08" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/logo_wh.png">
+                        <a href="#modal-08">
+                            <img alt="Gatewit - Warehouse" class="portfolio-image" src="images/personal/logo_wh.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Gatewit - Warehouse</h5>
@@ -558,8 +596,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-09" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/logo_req.png">
+                        <a href="#modal-09">
+                            <img alt="Gatewit - Requisition" class="portfolio-image" src="images/personal/logo_req.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Gatewit - Requisition</h5>
@@ -575,8 +613,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
 
-                        <a href="#modal-10" title="">
-                            <img alt="" style="width: 100%;  opacity: 0.7" src="images/personal/compras2.png">
+                        <a href="#modal-10">
+                            <img alt="Gatewit - Compras Públicas" class="portfolio-image" src="images/personal/compras2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
                                     <h5>Gatewit - Compras Públicas</h5>
@@ -600,7 +638,7 @@
 
         <div id="modal-01" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/imo-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/imo-det.png" alt="Imovirtual modal" />
 
             <div class="description-box">
                 <h4>Imovirtual</h4>
@@ -621,7 +659,7 @@
 
         <div id="modal-02" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/otodom-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/otodom-det.png" alt="Otodom modal" />
 
             <div class="description-box">
                 <h4>Otodom</h4>
@@ -642,7 +680,7 @@
 
         <div id="modal-03" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/storia-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/storia-det.jpg" alt="Storia modal" />
 
             <div class="description-box">
                 <h4>Storia</h4>
@@ -663,7 +701,7 @@
 
         <div id="modal-04" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/as-det2.png" alt="" style="width: 100%; height: 400px;opacity: 0.7"/>
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/as-det2.png" alt="Atlastock modal" />
 
             <div class="description-box">
                 <h4>Atlastock</h4>
@@ -674,7 +712,7 @@
             </div>
 
             <div class="link-box">
-                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <span class="portfolio-modal-deprecated-site">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -682,7 +720,7 @@
 
         <div id="modal-05" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/gwr-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/gwr-det.jpg" alt="Young Great Westerners! modal" />
 
             <div class="description-box">
                 <h4>Young Great Westerners!</h4>
@@ -702,7 +740,7 @@
 
         <div id="modal-06" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/pa-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/pa-det.jpg" alt="PA Mysite modal" />
 
             <div class="description-box">
                 <h4>PA Mysite</h4>
@@ -714,7 +752,7 @@
             </div>
 
             <div class="link-box">
-                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <span class="portfolio-modal-deprecated-site">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -722,7 +760,7 @@
 
         <div id="modal-07" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/trojan-det.jpg" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/trojan-det.jpg" alt="THU modal" />
 
             <div class="description-box">
                 <h4>THU</h4>
@@ -743,7 +781,7 @@
 
         <div id="modal-08" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/logo_wh-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo_wh-det.png" alt="Gatewit - Warehouse modal" />
 
             <div class="description-box">
                 <h4>Gatewit - Warehouse</h4>
@@ -756,7 +794,7 @@
             </div>
 
             <div class="link-box">
-                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <span class="portfolio-modal-deprecated-site">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -764,7 +802,7 @@
 
         <div id="modal-09" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/logo_req-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo_req-det.png" alt="Gatewit - Requesition modal" />
 
             <div class="description-box">
                 <h4>Gatewit - Requesition</h4>
@@ -778,7 +816,7 @@
             </div>
 
             <div class="link-box">
-                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <span class="portfolio-modal-deprecated-site">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -786,7 +824,7 @@
 
         <div id="modal-10" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/compras-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7"  />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/compras-det.png" alt="Gatewit - Compras Publicas modal" />
 
             <div class="description-box">
                 <h4>Gatewit - Compras Publicas</h4>
@@ -799,7 +837,7 @@
             </div>
 
             <div class="link-box">
-                <span style="font-weight: bold;font-size: 14px;opacity: 0.5;">Deprecated</span>
+                <span class="portfolio-modal-deprecated-site">Deprecated</span>
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -807,7 +845,7 @@
 
         <div id="modal-11" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/routineris-det.png" alt="" style="width: 100%; height: 400px;opacity: 0.7"    />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/routineris-det.png" alt="Routineris modal" />
 
             <div class="description-box">
                 <h4>Routineris</h4>
@@ -828,7 +866,7 @@
 
         <div id="modal-12" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid" src="images/personal/logo-det2.png" alt="" style="width: 100%; height: 400px;opacity: 0.7" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo-det2.png" alt="José Gomes site modal" />
 
             <div class="description-box">
                 <h4>José Gomes site</h4>
@@ -861,7 +899,7 @@
 
             <div class="two columns header-col">
 
-                <!-- <h1><span>Client Testimonials</span></h1> -->
+                <!-- <h1><span>Case studies</span></h1> -->
 
             </div>
 
@@ -869,21 +907,13 @@
 
                 <div class="flexslider">
 
-                    <p style="font-size: 20px; color: white;line-height: 30px; text-align: left">
+                    <p class="case-studies">
                         I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted. So you have read access to : <br/><br/>
                         - The repo: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>Repository here</u></a> <br/>
                         - The board: <a target="_blank" href="https://trello.com/c/M8hb7tpf/1-wms"><u>Board here</u></a> <br />
                     </p>
                     <ul class="slides">
-
-                        <li>
-
-
-                                <!--<cite>Steve Jobs</cite>-->
-
-                        </li> <!-- slide ends -->
-
-<!--                        <li>
+                    <!-- <li>
                             <blockquote>
                                 <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
                                     Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
@@ -891,8 +921,8 @@
                                 </p>
                                 <cite>Mr. Adobe</cite>
                             </blockquote>
-                        </li> --> <!-- slide ends -->
-
+                        </li> -->
+                        <!-- slide ends -->
                     </ul>
 
                 </div> <!-- div.flexslider ends -->
@@ -920,7 +950,8 @@
 
         <div class="ten columns">
 
-            <p class="lead" style="text-align: left">If you want to contact me, please leave your message using this form. I will respond as soon as possible! Thank you.
+            <p class="lead text-left">
+                If you want to contact me, please leave your message using this form. I will respond as soon as possible! Thank you.
             </p>
 
         </div>
