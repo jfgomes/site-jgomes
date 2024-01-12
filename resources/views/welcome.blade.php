@@ -349,7 +349,7 @@
 
         <div class="seven columns">
 
-            <h2><span class="lead">Dev stack / tools to work:</span></h2>
+            <h2><span class="lead">Work dev stack / tools:</span></h2>
             <p class="text-left">
                 <span class="lead">
                 - linux (ubuntu) <br>
@@ -870,9 +870,11 @@
                 <div class="flexslider">
 
                     <p class="case-studies">
-                        I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted. So you have read access to : <br/><br/>
+                        I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted.
+                        So you can have read access to: <br/><br/>
                         - The repo: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>Repository here</u></a> <br/>
                         - The board: <a target="_blank" href="https://trello.com/c/M8hb7tpf/1-wms"><u>Board here</u></a> <br />
+                        - Case studies: <a href="/case-studies" target="_blank"><u>Case studies here</u></a> <br />
                     </p>
                     <ul class="slides">
                     <!-- <li>
