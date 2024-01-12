@@ -1,4 +1,4 @@
-## Infra configs
+## Advanced Setup ( Infra configs )
 
 docker-composer:
 
