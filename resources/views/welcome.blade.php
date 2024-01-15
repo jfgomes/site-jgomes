@@ -31,6 +31,16 @@
      ================================================== -->
     <link rel="shortcut icon" href="favicon.png" >
 
+    <script>
+        function downloadCV()
+        {
+            let urlDocument = 'jgomes-cv.pdf';
+            let link = document.createElement('a');
+            link.href = urlDocument;
+            link.download = 'jgomes-cv.pdf';
+            link.click();
+        }
+    </script>
 </head>
 
 <body>
@@ -124,16 +134,18 @@
 
                 <div class="columns download">
                     <p>
-                    <!--    <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (EN)</a> -->
+                        <a onclick="" class="button"><i class="fa fa-download"></i>Download C.V. (EN - PDF)</a>
+                        <a target="_blank" href="#" class="button">
+                            <i class="fa fa-download"></i>
+                            Online C.V. (EN)
+                        </a>
                     </p>
                     <p>
-                        <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (PT - PDF)</a>
-                        <a href="https://europa.eu/europass/eportfolio/api/eprofile/shared-profile/jos%C3%A9+francisco-rosa+gomes/b38cab71-5cfd-495d-8c69-4da3115fc975?view=html" class="button">
+                        <a onclick="downloadCV()" class="button"><i class="fa fa-download"></i>Download C.V. (PT - PDF)</a>
+                        <a target="_blank" href="https://europa.eu/europass/eportfolio/api/eprofile/shared-profile/jos%C3%A9+francisco-rosa+gomes/b38cab71-5cfd-495d-8c69-4da3115fc975?view=html" class="button">
                             <i class="fa fa-download"></i>
-                            Digital C.V. (PT)
+                            Online C.V. (PT)
                         </a>
-
-                    <!--     <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (PT)</a> -->
                     </p>
                 </div>
 
