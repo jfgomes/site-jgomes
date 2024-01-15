@@ -127,6 +127,12 @@
                     <!--    <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (EN)</a> -->
                     </p>
                     <p>
+                        <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (PT - PDF)</a>
+                        <a href="https://europa.eu/europass/eportfolio/api/eprofile/shared-profile/jos%C3%A9+francisco-rosa+gomes/b38cab71-5cfd-495d-8c69-4da3115fc975?view=html" class="button">
+                            <i class="fa fa-download"></i>
+                            Digital C.V. (PT)
+                        </a>
+
                     <!--     <a href="#" class="button"><i class="fa fa-download"></i>Download C.V. (PT)</a> -->
                     </p>
                 </div>
@@ -764,10 +770,10 @@
 
         <div id="modal-09" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo_req-det.png" alt="Gatewit - Requesition modal" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo_req-det.png" alt="Gatewit - Requisition modal" />
 
             <div class="description-box">
-                <h4>Gatewit - Requesition</h4>
+                <h4>Gatewit - Requisition</h4>
                 <p>
                     Application for product management, orders, purchase orders, stocks
                     and requests.
