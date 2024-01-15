@@ -9,7 +9,7 @@
 
 ## About this CV project
 
-This website is just a digital and simple project to show my CV and my WOW to the world. 
+This website is just a digital and simple project to show my CV and my WOW to the world.
 The storage of this project was home made, so this is a private server in my personal network, with multiple containers that work as services where is only mandatory to have the web server accessible outside of my internal network. The rest of the services are internal.
 
 It was build with:
@@ -44,10 +44,12 @@ services:
   php-apache:
     restart: always
     ports:
-      - "8090:80"
+      - "8888:81"
     build: './build/php'
     volumes:
-      - ./site:/var/www/html  
+      - ./site:/var/www/html
+    depends_on:
+      - mysql
   mysql:
     ports:
       - "3406:3306"
@@ -66,7 +68,8 @@ services:
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: "" 
-      MYSQL_USER: "root" 
+      MYSQL_USER: ""
+
 volumes:
   app:
   dbData:
@@ -77,8 +80,111 @@ volumes:
 ```
 FROM php:8.1-apache
 
-RUN apt-get update && \
-    docker-php-ext-install mysqli pdo pdo_mysql
+# Copy entrypoint to container and make it our door to enter on
+COPY entrypoint.sh /sbin/entrypoint.sh
+RUN chmod +x /sbin/entrypoint.sh
+
+# Update package lists and install dependencies
+RUN apt-get update \
+    && apt-get install -y \
+        libzip-dev \
+        unzip \
+        git \
+        libonig-dev
+
+# Install required PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Configure Apache to use the 'public' directory as DocumentRoot
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Create the working directory and copy the Dockerfile and necessary files
+WORKDIR /var/www/html
+
+# Activate rewrie
+RUN a2enmod rewrite
+
+# Copy vhost to container nad activate it
+COPY app.conf /etc/apache2/sites-available/
+RUN a2dissite 000-default
+RUN a2ensite app.conf
+
+# Expose port 81
+EXPOSE 81
+
+CMD ["/sbin/entrypoint.sh"]
+```
+app.conf
+```
+Listen 81
+<VirtualHost *:81>
+  ServerAdmin admin@localhost
+  ServerName localhost
+  DocumentRoot /var/www/html/public
+  ErrorLog /var/log/apache2/error.log
+  CustomLog /var/log/apache2/access.log combined
+ <Directory /var/www/html/public>
+    Options FollowSymLinks
+    AllowOverride None
+    AddDefaultCharset utf-8
+    DirectoryIndex index.php
+    Require all granted
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+
+        # Handle Authorization Header
+        RewriteCond %{HTTP:Authorization} .
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+        # Redirect Trailing Slashes If Not A Folder...
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_URI} (.+)/$
+        RewriteRule ^ %1 [L,R=301]
+
+        # Send Requests To Front Controller...
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [L]
+    </IfModule>
+  </Directory>
+</VirtualHost>
+```
+entrypoint.sh
+```
+#!/bin/bash
+
+# Init cron tab
+#cron
+
+# Load env vars
+source /etc/apache2/envvars
+
+# Run composer
+#cd /var/www/html && composer update --no-scripts
+
+# Set 777 to logs files
+cd /var/www/html/ && chmod 777 storage -Rf
+
+# Just give some more seconds to allow mysql to be up and running
+#sleep 30
+
+# Run migrations and seeds
+#cd /var/www/html && php artisan migrate --force --env=local && php artisan db:seed --force --env=local
+
+FILE=/var/www/html/storage/database/db_backup.sql
+if [[ -f "$FILE" ]]; then
+    echo "$FILE exists. Lets restore the db...."
+    cd /var/www/html && php artisan db:backups --env=local
+    echo "Restore done...."
+fi
+
+# Start apache and keep it running
+exec apache2 -D FOREGROUND
 ```
 
 ./build/mysql
@@ -101,7 +207,6 @@ LoadModule headers_module modules/mod_headers.so
 <IfModule mod_ssl.c>
         LoadModule proxy_module modules/mod_proxy.so
         LoadModule proxy_http_module modules/mod_proxy_http.so
-
         <VirtualHost *:443>
 
                 ServerAdmin zx.gomes@gmail.com
@@ -114,22 +219,20 @@ LoadModule headers_module modules/mod_headers.so
                 SSLCertificateChainFile /home/jgomes/my/jgomes/cert/jgomes_site.ca-bundle
 
                 ProxyRequests Off
-
-                ProxyPass / http://localhost:8090/public/
-                ProxyPassReverse / http://localhost:8090/public/
-
+                ProxyPass / http://localhost:8888/
+                ProxyPassReverse / http://localhost:8888/
+        
                 Header set Access-Control-Allow-Origin "*"
                 Header set Access-Control-Allow-Headers "*"
                 Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE"
                 Header set Access-Control-Expose-Headers "*"
                 Header set Access-Control-Max-Age "900"
 
-             <Location />
-                Order allow,deny
-                Allow from all
-                AllowOverride all
-            </Location>
-        
+                <Location />
+                   Order allow,deny
+                   Allow from all
+                   AllowOverride all
+                </Location>
         </VirtualHost>
 </IfModule>
 ```
@@ -145,22 +248,22 @@ Case I need to open phpMyAdmin to would, just update the vhost with:
 ```
 ######################## START PROXY FOR PHPMYADMIN
 
-# Set proxy
-ProxyPass /phpmyadmin http://localhost:8091/
-ProxyPassReverse /phpmyadmin http://localhost:8091/
+    <Location "/phpmyadmin/">
+        ProxyPass "http://localhost:8091/"
+        ProxyPassReverse "http://localhost:8091/"
 
-# Set PMA_ABSOLUTE_URI to allow the loading off scripts
-SetEnv PMA_ABSOLUTE_URI "/phpmyadmin"
+        # Set PMA_ABSOLUTE_URI to allow the loading off scripts
+        SetEnv PMA_ABSOLUTE_URI "/phpmyadmin"
 
-# Force to set https as this vhost is 443
-RequestHeader set X-Forwarded-Proto "https"
+        # Force to set https as this vhost is 443
+        RequestHeader set X-Forwarded-Proto "https"
 
-# Remove any method restriction for phpMyAdmin
-<Location /phpmyadmin>
-    <LimitExcept OPTIONS>
-        Require all granted
-    </LimitExcept>
-</Location>
+        # Remove any method restriction for phpMyAdmin
+        <LimitExcept OPTIONS>
+            Require all granted
+        </LimitExcept>
+
+    </Location>
 
 ######################## END PROXY REVERSE FOR PHPMYADMIN
 ```
