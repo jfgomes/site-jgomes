@@ -32,12 +32,11 @@
     <link rel="shortcut icon" href="favicon.png" >
 
     <script>
-        function downloadCV()
+        function downloadCV(urlDocument)
         {
-            let urlDocument = 'jgomes-cv.pdf';
-            let link = document.createElement('a');
+            let link  = document.createElement('a');
             link.href = urlDocument;
-            link.download = 'jgomes-cv.pdf';
+            link.download = urlDocument;
             link.click();
         }
     </script>
@@ -134,15 +133,15 @@
 
                 <div class="columns download">
                     <p>
-                        <a onclick="" class="button"><i class="fa fa-download"></i>Download C.V. (EN - PDF)</a>
-                        <a target="_blank" href="#" class="button">
+                        <a onclick="downloadCV('jgomes-cv-en.pdf')" class="button"><i class="fa fa-download"></i>Download C.V. (EN - PDF)</a>
+                        <a target="_blank" href="https://europa.eu/europass/eportfolio/api/eprofile/shared-profile/jos%C3%A9+francisco-rosa+gomes/b3fbb889-38e7-4acc-968e-fe906b3839f6?view=html" class="button">
                             <i class="fa fa-download"></i>
                             Online C.V. (EN)
                         </a>
                     </p>
                     <p>
-                        <a onclick="downloadCV()" class="button"><i class="fa fa-download"></i>Download C.V. (PT - PDF)</a>
-                        <a target="_blank" href="https://europa.eu/europass/eportfolio/api/eprofile/shared-profile/jos%C3%A9+francisco-rosa+gomes/b38cab71-5cfd-495d-8c69-4da3115fc975?view=html" class="button">
+                        <a onclick="downloadCV('jgomes-cv-pt.pdf')" class="button"><i class="fa fa-download"></i>Download C.V. (PT - PDF)</a>
+                        <a target="_blank" href="https://europa.eu/europass/eportfolio/api/eprofile/shared-profile/jos%C3%A9+francisco-rosa+gomes/dd9dd07f-1796-47cb-abd6-8a6196c87cd8?view=html" class="button">
                             <i class="fa fa-download"></i>
                             Online C.V. (PT)
                         </a>
