@@ -370,16 +370,17 @@
             <h2><span class="lead">Work dev stack / tools:</span></h2>
             <p class="text-left">
                 <span class="lead">
-                - linux (ubuntu) <br>
-                - phpstorm<br>
-                - mysql workbench<br>
-                - phpmyadmin<br>
-                - docker desktop<br>
-                - postman<br>
-                - zoom<br>
-                - apache2<br>
-                - gcp buckets<br>
-                - gimp <br>
+                <img src="/images/personal/logos/ubuntu.png" /> linux (ubuntu) <br>
+                <img src="/images/personal/logos/phpstorm.png" width="32px" height="32px" /> phpstorm<br>
+                <img src="/images/personal/logos/workb.png" /> mysql workbench<br>
+                <img src="/images/personal/logos/phpmyadmin.png" width="32px" height="40px" /> phpmyadmin<br>
+                <img src="/images/personal/logos/docker.png" width="32px" height="32px" /> docker desktop<br>
+                <img src="/images/personal/logos/postman.png" /> postman<br>
+                <img src="/images/personal/logos/zoom.png" /> zoom<br>
+                <img src="/images/personal/logos/apache.png" /> apache2<br>
+                <img src="/images/personal/logos/gc.png" width="32px" height="32px" /> gcp buckets<br>
+                <img src="/images/personal/logos/gimp.png" /> gimp <br>
+                <img src="/images/personal/logos/slack.png" /> slack <br>
                 - etc...<br>
                 </span>
             </p>
