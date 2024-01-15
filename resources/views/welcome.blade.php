@@ -367,7 +367,7 @@
 
         <div class="seven columns">
 
-            <h2><span class="lead">Work dev stack / tools:</span></h2>
+            <h2><span class="lead">Preferred stack / tools:</span></h2>
             <p class="text-left">
                 <span class="lead">
                 <img src="/images/personal/logos/ubuntu.png" /> linux (ubuntu) <br>
