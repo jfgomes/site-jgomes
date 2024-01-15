@@ -890,9 +890,9 @@
 
                     <p class="case-studies">
                         I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted.
-                        So you can have read access to: <br/><br/>
+                        So you can have more details about this site with read access to: <br/><br/>
                         - The repo: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>Repository here</u></a> <br/>
-                        - The board: <a target="_blank" href="https://trello.com/c/M8hb7tpf/1-wms"><u>Board here</u></a> <br />
+                        - The board: <a target="_blank" href="https://trello.com/b/zOuG1loa/j-gomes-site"><u>Board here</u></a> <br />
                         - Case studies: <a href="/case-studies" target="_blank"><u>Case studies here</u></a> <br />
                     </p>
                     <ul class="slides">
