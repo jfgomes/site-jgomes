@@ -804,10 +804,10 @@
 
         <div id="modal-10" class="popup-modal mfp-hide">
 
-            <img class="scale-with-grid portfolio-image-modal" src="images/personal/compras-det.png" alt="Gatewit - Compras Publicas modal" />
+            <img class="scale-with-grid portfolio-image-modal" src="images/personal/compras-det.png" alt="Gatewit - Compras Públicas modal" />
 
             <div class="description-box">
-                <h4>Gatewit - Compras Publicas</h4>
+                <h4>Gatewit - Compras Públicas</h4>
                 <p>
                     Management platform and procedures for contracting goods and services. Through this application, suppliers could consult
                     public advertisements and present their offers and associated value. Also through this application,

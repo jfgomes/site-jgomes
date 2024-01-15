@@ -1,40 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About this CV project
-
-This website is just a digital and simple project to show my CV and my WOW to the world.
-The storage of this project was home made, so this is a private server in my personal network, with multiple containers that work as services where is only mandatory to have the web server accessible outside of my internal network. The rest of the services are internal.
-
-It was build with:
-
-- [Laravel 10](https://laravel.com/docs/10.x/)
-- [PHP 8.1](https://www.php.net/)
-- [PHPUnit 10 tests](https://phpunit.de/)
-- [PSR-2 guide lines](https://www.php-fig.org/psr/psr-2/)
-- [Apache2](https://httpd.apache.org/)
-- [MYSQL 8.2](https://www.mysql.com/)
-- [PHPMyAdmin 5.2.1](https://www.phpmyadmin.net/)
-- [SSL ( Namecheap certificate )](https://www.namecheap.com/)
-- [RabbitMQ 3.12.9](https://www.rabbitmq.com/)
-- [APCu](https://www.php.net/manual/en/book.apcu.php)
-- [HTML + CSS + JS ( Jquery ) - ( Credits to www.themezy.com ) ](https://www.themezy.com/free-website-templates/151-ceevee-free-responsive-website-template)
-- [Docker ( with docker-compose - See 'Infra configs' next )](https://docs.docker.com/compose/)
-
-## TR/DR setup
-- git clone git@github.com:jfgomes/site-jgomes.git
-- composer update
-- cp .env.example .env ( Need to add the configs to .env )
-- php artisan key:generate
-- php artisan serve --port=90 ( The port is not mandatory. By default is 80 )
-
-## Infra configs
+## Complete infra setup
 
 docker-composer:
 
