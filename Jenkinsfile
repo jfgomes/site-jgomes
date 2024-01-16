@@ -36,11 +36,11 @@ pipeline {
                     
                     // Copia o projeto para o servidor remoto usando SCP
                     sshCommand remote: [
-                        host: env.SERVER_HOST,
-                        port: env.SERVER_PORT,
-                        user: env.SERVER_USER,
-                        password: env.SERVER_PASSWORD
-                    ], command: "scp -o StrictHostKeyChecking=no -P ${env.SERVER_PORT} -r ./ ${env.SERVER_USER}@${env.SERVER_HOST}:${env.REMOTE_PATH}"
+                        host: 'routineris.xyz',
+                        port: '443',
+                        user: 'jgomes',
+                        password: 'jgomes'
+                    ], command: "scp -o StrictHostKeyChecking=no -P 443 -r ./ jgomes@routineris.xyz:/home/jgomes/my/jgomes/site"
                 }
             }
         }
