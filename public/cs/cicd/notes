@@ -1,0 +1,10 @@
+<br><br>
+Created the domain<br>
+created the certificate<br>
+Solved the error related with proxy<br>
+Make Jenkins running <br>
+Installed on Jenkins the github pluggin <br>
+Instale o Plugin GitHub:
+
+Acesse o Jenkins e vá para "Manage Jenkins" > "Manage Plugins".
+Na guia "Available", pesquise por "GitHub" e instale o plugin "GitHub Integration" ou similar.
