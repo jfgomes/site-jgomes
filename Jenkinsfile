@@ -27,20 +27,22 @@ pipeline {
             }
         }
 
-        stage('Build and Deploy') {
-            steps {
-                script {
-                    // Executa migrações, otimizações e outras tarefas de construçã
-                    
-                    // Copia o projeto para o servidor remoto usando SCP
-                    sshCommand remote: [
-                        host: 'routineris.xyz',
-                        port: '443',
-                        user: 'jgomes',
-                        password: 'jgomes'
-                    ], command: "scp -o StrictHostKeyChecking=no -P 443 -r ./ jgomes@routineris.xyz:/home/jgomes/my/jgomes/site"
-                }
-            }
+stage('Build and Deploy') {
+    steps {
+        script {
+            // Executa migrações, otimizações e outras tarefas de construção
+
+            // Use sshCommand para copiar o projeto para o servidor remoto usando SCP
+            sshCommand remote: [
+                host: 'routineris.xyz',
+                port: '443',
+                user: 'jgomes',
+                password: 'jgomes'
+            ], command: """
+                scp -o StrictHostKeyChecking=no -P 443 -r ./ jgomes@routineris.xyz:/home/jgomes/my/jgomes/site
+            """
         }
+    }
+}
     }
 }
