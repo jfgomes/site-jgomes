@@ -26,7 +26,7 @@ stage('Build and Deploy') {
 
             // Use sh para copiar o projeto para o servidor remoto usando SCP
             sh """
-                scp -o StrictHostKeyChecking=no -P 22 -r ./ jgomes@routineris.xyz:/home/jgomes/my/jgomes/site
+                scp -o StrictHostKeyChecking=no -r ./ jgomes@routineris.xyz:/home/jgomes/my/jgomes/site
             """
         }
     }
