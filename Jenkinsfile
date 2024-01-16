@@ -30,9 +30,7 @@ pipeline {
         stage('Build and Deploy') {
             steps {
                 script {
-                    // Executa migrações, otimizações e outras tarefas de construção
-                    sh 'php artisan migrate --force'
-                    sh 'php artisan optimize'
+                    // Executa migrações, otimizações e outras tarefas de construçã
                     
                     // Copia o projeto para o servidor remoto usando SCP
                     sshCommand remote: [
