@@ -19,17 +19,19 @@ pipeline {
                 echo 'Execute os comandos de teste, se aplicável'
             }
         }
-stage('Build and Deploy') {
-    steps {
-        script {
-            // Executa migrações, otimizações e outras tarefas de construção
-
-            // Use sh para copiar o projeto para o servidor remoto usando SCP
-            sh """
-                scp -o StrictHostKeyChecking=no -r ./ jgomes@routineris.xyz:/home/jgomes/my/jgomes/site
-            """
+        stage('Deploy') {
+            steps {
+                script {
+                    // Configuração das credenciais de SSH no Jenkins
+                    sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
+                        // Comandos de deploy
+                        sh '''
+                            ssh jgomes@94.63.32.148 'cd /home/jgomes/my/jgomes/site && git pull origin master && composer install --no-interaction --prefer-dist'
+                            # Outras tarefas de deploy podem ser adicionadas conforme necessário
+                        '''
+                    }
+                }
+            }
         }
-    }
-}
     }
 }
