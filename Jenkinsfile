@@ -22,7 +22,7 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && git stash && git pull origin master\''
 
                         // Do composer update, migration, and clean the cache - php artisan migrate
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && composer update --no-update && php artisan config:clear\''
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && composer update && git checkout HEAD^ -- composer.lock && php artisan config:clear\''
 
                     }
                 }
