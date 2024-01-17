@@ -48,6 +48,8 @@ class CaseStudiesService
                 return "Project basic setup";
             case "setup":
                 return "Project complete infra setup";
+            case "cicd":
+                return "Project ci/cd with jenkins";
             default:
                 return $name;
         }
