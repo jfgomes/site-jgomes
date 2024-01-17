@@ -7,15 +7,20 @@ pipeline {
                checkout scm
             }
         }
-
-        stage('Tests') {
+        stage('Build') {
             steps {
-                echo 'Run composer to have phpunit'
+                echo 'Run composer'
                 sh 'composer update'
-                        echo 'Copy .env file'
-                        sh 'cp .env.example .env'
+
+                echo 'Copy .env file'
+                sh 'cp .env.example .env'
+
                 echo 'Generate application key'
                 sh 'php artisan key:generate'
+            }
+        }
+        stage('Tests') {
+            steps {
                 echo 'Run tests'
                 sh 'vendor/bin/phpunit'
             }
