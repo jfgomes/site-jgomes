@@ -12,6 +12,8 @@ pipeline {
             steps {
                 echo 'Run composer to have phpunit'
                 sh 'composer update'
+                echo 'Generate application key'
+                sh 'php artisan key:generate'
                 echo 'Run tests'
                 sh 'vendor/bin/phpunit'
             }
