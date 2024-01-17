@@ -26,7 +26,7 @@ pipeline {
                     sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
                         // Comandos de deploy   cd /home/jgomes/my/jgomes/site && git pull origin master && composer install --no-interaction --prefer-dist
                         sh '''
-                            ssh jgomes@94.63.32.148 'cd /home/jgomes/my/jgomes/site && ls -l'
+                            ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 'cd /home/jgomes/my/jgomes/site && git pull origin master && composer install --no-interaction --prefer-dist'
                             # Outras tarefas de deploy podem ser adicionadas conforme necessário
                         '''
                     }
