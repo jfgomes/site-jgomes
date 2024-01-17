@@ -12,6 +12,8 @@ pipeline {
             steps {
                 echo 'Run composer to have phpunit'
                 sh 'composer update'
+                        echo 'Copy .env file'
+                        sh 'cp .env.example .env'
                 echo 'Generate application key'
                 sh 'php artisan key:generate'
                 echo 'Run tests'
