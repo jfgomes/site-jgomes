@@ -10,12 +10,10 @@ pipeline {
 
         stage('Tests') {
             steps {
-                echo 'Execute tests'
-                sh 'composer install'
-                sh 'ls -l'
-                //sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
-                 //   sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && composer update && git checkout HEAD^ -- composer.lock && vendor/bin/phpunit tests \''
-                // }
+                echo 'Run composer to have phpunit'
+                sh 'composer update'
+                echo 'Run tests'
+                sh 'vendor/bin/phpunit'
             }
         }
         stage('Deploy') {
