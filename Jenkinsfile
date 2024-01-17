@@ -37,7 +37,7 @@ pipeline {
                 script {
                     sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
 
-                        // do deploy
+                        // do deployx
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && git checkout HEAD^ -- composer.lock && git pull origin master\''
 
                         // Do composer update (ignore the composer.lock in prod), migration, and clean the cache
