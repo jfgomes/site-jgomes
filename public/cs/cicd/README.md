@@ -101,9 +101,9 @@ LoadModule headers_module modules/mod_headers.so
         </VirtualHost>
 </IfModule>
 ```
-structure update: 
+structure update with ci/cd Dockerfile: 
 
-![Logo do GitHub](https://jgomes.site/images/project_structure.png)
+![Logo do GitHub](https://jgomes.site/images/project_structure_cicd.png)
 
 Another vhost just to redirect requests that came to port 80 to 443
 ```
