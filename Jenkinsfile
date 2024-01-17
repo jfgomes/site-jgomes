@@ -11,6 +11,9 @@ pipeline {
         stage('Tests') {
             steps {
                 echo 'Execute tests'
+                            // Adicione o diretório do Composer ao PATH
+                            def composerHome = tool 'Composer'
+                            env.PATH = "${composerHome}/bin:${env.PATH}"
                 sh 'composer install'
                 sh 'ls -l'
                 //sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
