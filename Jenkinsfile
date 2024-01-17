@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Configuração das credenciais de SSH no Jenkins && composer install --no-interaction --prefer-dist
                     sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
-                        // Comandos de deploy   cd /home/jgomes/my/jgomes/site && git pull origin master 
+                        // Comandos de deploy 
                         sh '''
                             ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 'cd /home/jgomes/my/jgomes/site && git pull origin master'
                             # Outras tarefas de deploy podem ser adicionadas conforme necessário
