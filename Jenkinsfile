@@ -1,16 +1,10 @@
 pipeline {
-    agent any  
+    agent any
     stages {
         stage('Checkout') {
             steps {
-               echo 'Faz o checkout do código do repositório'
-               checkout scm    
-            }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Execute os comandos de construção necessários'
+               echo 'Do the checkout from the repo, and put the code im this context.'
+               checkout scm
             }
         }
 
@@ -22,12 +16,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Configuração das credenciais de SSH no Jenkins && composer install --no-interaction --prefer-dist
                     sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
-                        // Comandos de deploy 
                         sh '''
+                            # Do the deploy
                             ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 'cd /home/jgomes/my/jgomes/site && git pull origin master'
-                            # Outras tarefas de deploy podem ser adicionadas conforme necessário
+
+                            # Do composer update, migration and clean the cache - php artisan migrate
+                            ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 'cd /home/jgomes/my/jgomes/site && composer update && php artisan config:clear'
                         '''
                     }
                 }
