@@ -14,14 +14,19 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when {
+                expression {
+                    return (env.BRANCH_NAME == 'master')
+                }
+            }
             steps {
                 script {
                     sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
 
-                        // Do the deploy
+                        // Do the deploy - || env.BRANCH_NAME.startsWith('feature/')
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && git stash && git pull origin master\''
 
-                        // Do composer update, migration, and clean the cache - php artisan migrate
+                        // Do composer update (ignore the composer.lock in prod), migration, and clean the cache - php artisan migrate
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && composer update && git checkout HEAD^ -- composer.lock && php artisan config:clear\''
 
                     }
