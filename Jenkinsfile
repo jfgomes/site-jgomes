@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 script {
-                    sshagent(credentials: ['c44a8a0c-8686-470d-b0de-fbbb19ba86ad']) {
+                    sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
 
                         // do deploy
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site && git pull origin master \''
