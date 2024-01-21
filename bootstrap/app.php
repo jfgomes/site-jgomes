@@ -41,10 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-
-//dd($app->runningInConsole() );
-if ($app->runningInConsole()) { 
-    $app->loadEnvironmentFrom('.env.dev');
+// For dev configs to avoid prod configs
+// Note: everytime you change something in this clean caches ans reboot the env
+if ($app->runningInConsole()) {
+   $app->loadEnvironmentFrom('.env.dev');
 }
 
 /*

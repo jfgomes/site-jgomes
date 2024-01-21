@@ -14,10 +14,27 @@ use App\Services\CaseStudiesService;
 |
 */
 
+Route::get('/cc', function () {
+    // Clear route cache
+    Artisan::call('route:clear');
+
+    // Clear configuration cache
+    Artisan::call('config:clear');
+
+    // Clear application cache
+    Artisan::call('cache:clear');
+
+    return 'Caches cleared successfully!';
+});
+
+Route::get('/env', function () {
+    // Get the env
+    return env('APP_ENV');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {
     $foldersWithFiles = $caseStudiesService->getCaseStudies();
