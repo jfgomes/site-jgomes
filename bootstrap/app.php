@@ -41,6 +41,12 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+//dd($app->runningInConsole() );
+if ($app->runningInConsole()) { 
+    $app->loadEnvironmentFrom('.env.dev');
+}
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
