@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+    mysql:
+        container_name: jgomes_site_dev_mysql
+        build: './mysql'
+        ports:
+            - "3406:3306"
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        volumes:
+            - dbData:/var/lib/mysql
+
+    phpmyadmin:
+        container_name: jgomes_site_dev_phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8091:80"
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+    rabbitmq:
+        container_name: jgomes_site_dev_rabbit
+        build:
+            context: './rabbitmq'
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+volumes:
+    dbData:

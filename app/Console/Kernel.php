@@ -20,9 +20,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('queue:messages')->everyMinute()->environments(
-            [app()->env]
-        );
+        $schedule->command('queue:messages')->everyMinute();
     }
 
     /**

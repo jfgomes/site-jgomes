@@ -14,23 +14,41 @@ use App\Services\CaseStudiesService;
 |
 */
 
-Route::get('/cc', function () {
-    // Clear route cache
-    Artisan::call('route:clear');
+########################################### START LOCAL ROUTES
+## THIS ROUTES ARE ONLY REGISTERED LOCALLY FOR DEV PORPOISES
 
-    // Clear configuration cache
-    Artisan::call('config:clear');
+if (app()->environment('local')) {
 
-    // Clear application cache
-    Artisan::call('cache:clear');
+    Route::get('/db', function () {
+        try {
+            DB::connection()->getPdo();
+            return "Success.";
+        } catch (\Exception $e) {
+            return "Error: " . $e->getMessage();
+        }
+    });
 
-    return 'Caches cleared successfully!';
-});
+    Route::get('/cc', function () {
+        // Clear route cache
+        Artisan::call('route:clear');
 
-Route::get('/env', function () {
-    // Get the env
-    return env('APP_ENV');
-});
+        // Clear configuration cache
+        Artisan::call('config:clear');
+
+        // Clear application cache
+        Artisan::call('cache:clear');
+
+        return 'Caches cleared successfully!';
+    });
+
+    Route::get('/env', function () {
+        // Get the env
+        return env('APP_ENV');
+    });
+
+}
+
+########################################### END LOCAL ROUTES
 
 Route::get('/', function () {
     return view('welcome');

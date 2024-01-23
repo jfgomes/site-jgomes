@@ -7,131 +7,80 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class MessagesFromRabbit extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+    protected $signature   = 'queue:messages';
+    protected $description = 'Messages read from RabbitMQ queue and stored at DB';
 
-    protected $signature = 'queue:messages';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Messages read from rabbitmq queue and stored at db';
-
-    /**
-     * @var string
-     */
-    private $_user;
-
-    /**
-     * @var string
-     */
-    private $_pass;
-
-    /**
-     * @var string
-     */
-    private $_queue;
-
-    /**
-     * @var string
-     */
-    private $_host;
-
-    /**
-     * @var string
-     */
-    private $_api_port;
-
-    /**
-     * @var string
-     */
-    private $_port;
-
-    /**
-     * @var string
-     */
-    private $_queue_list_url;
-
-    /**
-     * @var string
-     */
-    private $_connection;
-
-    /**
-     * @var string
-     */
-    private $_channel;
-
-    /**
-     * @var string
-     */
-    private $_num_of_consumers;
+    private $user;
+    private $pass;
+    private $host;
+    private $port;
+    private $apiHost;
+    private $queue;
+    private $connection;
+    private $consumers;
+    private $channel;
+    private $queueListUrl;
 
     public function __construct()
     {
         parent::__construct();
 
-        // User credentials:
-        $this->_user  = 'user';
-        $this->_pass  = 'user';
+        // Get settings according the env
+        $this->user      = env('RABBIT_USER');
+        $this->pass      = env('RABBIT_PASS');
+        $this->host      = env('RABBIT_HOST');
+        $this->port      = env('RABBIT_PORT');
+        $this->apiHost   = env('RABBIT_API_HOST');
+        $this->queue     = env('RABBIT_MESSAGE_QUEUE');
+        $this->consumers = env('RABBIT_CONSUMERS_LIMIT');
 
-        // Connection data:
-        $this->_host      = 'localhost';
-        $this->_port      = '5674';
-        $this->_api_port  = '15674';
-        $this->_queue     = 'messages_prod';
-
-        // Rabbit MQ api endpoint to get queue info:
-       //$this->_queue_list_url = "$this->_host:$this->_api_port/api/queues/%2F/$this->_queue";
-
-        $this->_queue_list_url = "https://jgomes.site/rabbit2/api/queues/%2F/messages_prod"   ;
-
-        $this->_num_of_consumers = 4;
+        // Build the API host
+        $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
     }
 
     /**
-     * Execute the console command.
-     *
+     * Job starts here.
      * @return bool
+     * @throws \Exception
      */
     public function handle(): bool
     {
-        if ($this->getConsumers() > $this->_num_of_consumers)
-        {
-            echo "All total consumers are running\n";
-            exit;
+        // Check the number of consumers up. If it reach the limit, don't need to create more. Abort here.
+        if ($this->getConsumers() >= $this->consumers) {
+            $this->info("All total $this->consumers consumers are running. No more consumers needed.");
+            return false;
         }
 
+        // Init new connection
         $this->initConnection();
-        $callback = function ($msg) use (&$receivedChunks, &$totalChunks) {
+
+        // Init new consumer
+        $this->consumeQueue(function ($msg) {
             $this->saveMessage($msg->body);
             $msg->ack();
-        };
+        });
 
-        $this->consumeQueue($callback);
+        // Close connections and consumers
         $this->closeConnection();
 
         return true;
     }
 
     /**
-     * @return mixed
+     * Get the number of current connections of this queue via API.
+     * @return int
      */
-    private function getConsumers()
+    private function getConsumers(): int
     {
-        $ch = curl_init($this->_queue_list_url);
+        $ch = curl_init($this->queueListUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERPWD, "$this->_user:$this->_pass");
+        curl_setopt($ch, CURLOPT_USERPWD, "$this->user:$this->pass");
         $response = curl_exec($ch);
         curl_close($ch);
 
         if ($response === false) {
-            dd('Error checking information about the queues.');
+            $this->error('Error checking information about the queues.');
+            return 0;
         }
 
         $queueInfo = json_decode($response, true);
@@ -139,96 +88,64 @@ class MessagesFromRabbit extends Command
     }
 
     /**
+     * Start a new connection.
      * @return void
      */
-    private function initConnection()
+    private function initConnection(): void
     {
         try {
-            /*
-                       $sslContext = [
-                           'local_cert' => '/home/jgomes/my/jgomes/cert/jgomes_site.crt', // certificado
-                           'local_pk' => '/home/jgomes/my/jgomes/cert/jgomes_site.key', // chave privada
-                           'cafile' => '/home/jgomes/my/jgomes/cert/jgomes_site.ca-bundle', // bundle de CA
-                       ];
 
-                       $this->_connection = new AMQPStreamConnection(
-                           'jgomes.site',
-                           5674,
-                           $this->_user,
-                           $this->_pass,
-                           '/',
-                           false,
-                           'AMQPLAIN',
-                           null,
-                           'en_US',
-                           160,
-                           null, // read_write_timeout
-                           null, //stream_context_create(['ssl' => $sslContext]), // context
-                           false, // keepalive
-                           0, // heartbeat
-                           null // channel_rpc_timeout
-                       );
+            $this->info("Start connection..");
+            $this->connection = new AMQPStreamConnection(
+                $this->host,
+                $this->port,
+                $this->user,
+                $this->pass,
+                '/',
+                false,
+                'AMQPLAIN',
+                null,
+                'en_US',
+                160,
+            );
 
-                       echo "Set_close_on_destruct..\n";
-                       $this->_connection->set_close_on_destruct(false);
+            $this->info("Set close_on_destruct..");
+            $this->connection->set_close_on_destruct(false);
 
-                       echo "Start channel..\n";
-                       $this->_channel = $this->_connection->channel();
+            $this->info("Start channel..");
+            $this->channel = $this->connection->channel();
 
-                       echo "Start queue_declare..\n";
-                       $this->_channel->queue_declare(
-                           $this->_queue,
-                           false,
-                           true,
-                           false,
-                           false
-                       );
+            $this->info("Start queue_declare..");
+            $this->channel->queue_declare(
+                $this->queue,
+                false,
+                true,
+                false,
+                false
+            );
 
-                       echo "InitConnection done..\n";
-           */
-             echo "Start connection..\n";
-                       $this->_connection = new AMQPStreamConnection(
-                         'jgomes.site',
-                           5674,
-                           $this->_user,
-                           $this->_pass,
-                           '/',
-                           false,
-                           'AMQPLAIN',
-                           null,
-                           'en_US',
-                           160,
-                       );
-
-                       echo "Set_close_on_destruct..\n";
-                       $this->_connection->set_close_on_destruct(false);
-
-                       echo "Start channel..\n";
-                       $this->_channel = $this->_connection->channel();
-
-                       echo "Start queue_declare..\n";
-                       $this->_channel->queue_declare(
-                           $this->_queue,
-                           false,
-                           true,
-                           false,
-                           false
-                       );
-
-                       echo "InitConnection done..\n";
-        }catch (\Exception $ex){
-            dd($ex->getMessage());
+            $this->info("InitConnection done..");
+        } catch (\Exception $ex) {
+            $this->error($ex->getMessage());
+            return;
         }
     }
 
     /**
+     * Start a new consumer.
      * @param $callback
      * @return void
      */
-    private function consumeQueue($callback)
+    private function consumeQueue($callback): void
     {
-        $this->_channel->basic_consume(
-            $this->_queue,
+        // Ensure $this->channel is not null before using it
+        if (!$this->channel) {
+            $this->error('Channel not initialized.');
+            return;
+        }
+
+        $this->channel->basic_consume(
+            $this->queue,
             '',
             false,
             false,
@@ -237,20 +154,43 @@ class MessagesFromRabbit extends Command
             $callback
         );
 
-        while ($this->_channel->is_consuming()) $this->_channel->wait();
-    }
-
-    private function saveMessage($data)
-    {
-        var_dump($data);
+        while ($this->channel->is_consuming()) {
+            $this->channel->wait();
+        }
     }
 
     /**
+     * Read message from the queue and store it in DB.
+     * @param $data
      * @return void
      */
-    private function closeConnection()
+    private function saveMessage($data): void
     {
-        $this->_channel->close();
-        $this->_connection->close();
+        // Assuming you have a 'messages' table with a 'content' column
+        /* Message::create([
+            'content' => $data,
+        ]); */
+
+        $this->info("Message send from queue:messages and saved in database: $data");
+    }
+
+    /**
+     * End connection and consumer.
+     * @return void
+     * @throws \Exception
+     */
+    private function closeConnection(): void
+    {
+        // Check if the channel ($this->channel) is not null before attempting to close
+        if ($this->channel) {
+            // Close the channel only if it is open
+            $this->channel->close();
+        }
+
+        // Check if the connection ($this->connection) is not null or already closed
+        if ($this->connection && $this->connection->isConnected()) {
+            // Close the connection only if it is connected
+            $this->connection->close();
+        }
     }
 }
