@@ -13,6 +13,7 @@ services:
     phpmyadmin:
         container_name: jgomes_site_dev_phpmyadmin
         image: phpmyadmin/phpmyadmin
+        platform: linux/amd64  # Forces the platform to amd64
         ports:
             - "8091:80"
         environment:

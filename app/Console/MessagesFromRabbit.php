@@ -75,14 +75,16 @@ class MessagesFromRabbit extends Command
         $ch = curl_init($this->queueListUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERPWD, "$this->user:$this->pass");
+
         $response = curl_exec($ch);
-        curl_close($ch);
 
         if ($response === false) {
-            $this->error('Error checking information about the queues.');
+            $error = curl_error($ch);
+            $this->error('Error checking information about the queues: ' . $error);
             return 0;
         }
 
+        curl_close($ch);
         $queueInfo = json_decode($response, true);
         return $queueInfo['consumers'];
     }

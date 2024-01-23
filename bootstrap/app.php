@@ -47,6 +47,14 @@ if ($app->runningInConsole()) {
    $app->loadEnvironmentFrom('.env.dev');
 }
 
+// To run jobs in prod manually using APP_ENV var like:
+// APP_ENV=prod php artisan env
+// This will avoid to set the env as local, as we  are run it throw command line
+$environment = getenv('APP_ENV');
+if ($environment === 'prod') {
+    $app->loadEnvironmentFrom('.env');
+}
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
