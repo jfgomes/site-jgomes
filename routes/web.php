@@ -54,6 +54,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/ports', function () {
+    return view('ports');
+});
+
 Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {
     $foldersWithFiles = $caseStudiesService->getCaseStudies();
     return view('case-studies.index', ['foldersWithFiles' => $foldersWithFiles]);
