@@ -54,8 +54,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ports', function () {
-    return view('ports');
+Route::get('/details', function () {
+    return view('details');
 });
 
 Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {

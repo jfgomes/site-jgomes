@@ -39,11 +39,11 @@
         div.sub-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px; /* Adiciona um espaçamento entre as divs dentro de sub-section */
+            gap: 10px;
         }
 
         div.sub-section > div {
-            flex: 1 1 calc(48% - 10px); /* Calcula 48% da largura, subtraindo o espaçamento entre as divs */
+            flex: 1 1 calc(48% - 10px);
             margin: 0;
             padding: 15px;
             background-color: #fff;
@@ -107,7 +107,8 @@
 <div class="container">
     <h1 style="text-align: center">Services</h1>
     <div class="section">
-        <p class="category">Development</p>
+        <p class="category">Development
+            <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the development links will not work ) <span> </p>
         <div class="sub-section">
             <div>
                 <p class="service-name">Webpage</p>
