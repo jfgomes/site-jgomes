@@ -41,10 +41,10 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git pull origin master \''
 
                         // do composer update, migration, and clean all caches
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/jgomes && composer update && php artisan route:clear && php artisan config:clear && php artisan cache:clear \''
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && composer update && php artisan route:clear && php artisan config:clear && php artisan cache:clear \''
 
                         // restore composer.lock from repo as the composer update done before generates the same file as is on repo, creating also a modified file that will block the next pull on the next pipeline
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/jgomes && git restore composer.lock \''
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git restore composer.lock \''
                     }
                 }
             }
