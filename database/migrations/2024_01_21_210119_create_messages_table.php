@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('subject')->nullable();
             $table->text('content');
             $table->timestamps();
+            $table->dropColumn('updated_at');
         });
     }
 

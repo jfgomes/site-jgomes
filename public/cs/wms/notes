@@ -1,0 +1,28 @@
+["name" => "to" , "email" => "to@to.to", "subject" => "test subject" , "content" => "test message"]
+
+
+{
+    "name": "to",
+    "email": "to@to.to",
+    "subject": "test subject",
+    "content": "test message"
+}
+
+
+
+php artisan migrate --path=database/migrations/2024_01_21_210119_create_messages_table.php
+
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Messages extends Model
+{
+    protected $table = 'messages';
+
+    protected $fillable = ['campo1', 'campo2'];
+}
+

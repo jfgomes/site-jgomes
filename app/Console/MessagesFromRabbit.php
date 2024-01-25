@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
+use App\Models\Messages;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Validator;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class MessagesFromRabbit extends Command
@@ -56,8 +58,9 @@ class MessagesFromRabbit extends Command
 
         // Init new consumer
         $this->consumeQueue(function ($msg) {
-            $this->saveMessage($msg->body);
-            $msg->ack();
+            $result = $this->saveMessage($msg->body);
+            if($result)
+                $msg->ack();
         });
 
         // Close connections and consumers
@@ -163,17 +166,62 @@ class MessagesFromRabbit extends Command
 
     /**
      * Read message from the queue and store it in DB.
-     * @param $data
-     * @return void
+     *
+     * @param $originalData - Message in this format:
+     *                  {
+     *                     "name"    : "name",
+     *                     "email"   : "to@to.to",
+     *                     "subject" : "subject",
+     *                     "content" : "message"
+     *                   }
+     * @return bool - true if the message is well delivered.
+     *                false if there's some problem with the message.
      */
-    private function saveMessage($data): void
+    private function saveMessage($originalData): bool
     {
-        // Assuming you have a 'messages' table with a 'content' column
-        /* Message::create([
-            'content' => $data,
-        ]); */
+        // Extract data
+        $data = json_decode($originalData, true);
 
-        $this->info("Message send from queue:messages and saved in database: $data");
+        // Define validation rules
+        $rules = [
+            'name'    => 'required|string|max:50',
+            'email'   => 'required|email|max:50',
+            'subject' => 'nullable|string|max:100',
+            'content' => 'required|string|max:255',
+        ];
+
+        // Create a Validator object
+        $validator = Validator::make($data, $rules);
+
+        // Check if validation fails
+        if ($validator->fails())
+        {
+            $errors = $validator->errors()->toArray();
+            $this->error(
+                " \n #################################### "
+                . " \n\n Validation failed: " . json_encode($errors)
+                . " \n\n Original message: " . $originalData
+                . " \n\n ################################### \n"
+            );
+
+            return false;
+        }
+
+        // If validation passes, save data to the database
+        $message = Messages::create([
+            'name'       => $data['name'],
+            'email'      => $data['email'],
+            'subject'    => $data['subject'] ?? null,
+            'content'    => $data['content'],
+            'created_at' => now()
+        ]);
+
+        $this->info(
+            "\n Message {$originalData} \n- Sent from queue:messages."
+            . "\n- Saved in the database with ID: {$message->id}."
+        );
+
+        return true;
     }
 
     /**
