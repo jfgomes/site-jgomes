@@ -30,14 +30,15 @@
 <body>
 <div id="swagger-ui"></div>
 
-<script src="{!! $swaggeruibundle !!}"></script>
-<script src="{!! $swaggeruistandalonepreset !!}"></script>
+<script src="{!! app('swaggeruibundle') !!}"></script>
+<script src="{!! app('swaggeruistandalonepreset') !!}"></script>
+
 <script>
     window.onload = function() {
         // Build a system
         const ui = SwaggerUIBundle({
             dom_id: '#swagger-ui',
-            url: "{!! $urlToDocs !!}",
+            url: "{!! app('urlToDocs') !!}",
             operationsSorter: {!! isset($operationsSorter) ? '"' . $operationsSorter . '"' : 'null' !!},
             configUrl: {!! isset($configUrl) ? '"' . $configUrl . '"' : 'null' !!},
             validatorUrl: {!! isset($validatorUrl) ? '"' . $validatorUrl . '"' : 'null' !!},

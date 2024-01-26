@@ -18,11 +18,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         app()->singleton('swaggeruibundle', function () {
-            return env('APP_URL') . '/swagger-ui-bundle.js';
+            return env('APP_URL') . '/docs/asset/swagger-ui-bundle.js';
         });
 
         app()->singleton('swaggeruistandalonepreset', function () {
-            return env('APP_URL') . '/swagger-ui-standalone-preset.js';
+            return env('APP_URL') . '/docs/asset/swagger-ui-standalone-preset.js';
         });
     }
 
