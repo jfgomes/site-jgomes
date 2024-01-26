@@ -18,14 +18,16 @@ class MessagesController extends Controller
     }
 
     /**
-     * Process and send a message to the RabbitMQ queue.
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @OA\Get(
+     *     path="/api/send",
+     *     summary="Send message API",
+     *     @OA\Response(response="200", description="Successful operation")
+     * )
      */
     public function send(Request $request): JsonResponse
     {
         try {
+
             // Validate received data
             $this->validateData($request->all());
 
@@ -41,7 +43,13 @@ class MessagesController extends Controller
         }
 
         // If flow reaches here, everything worked fine!
-        return response()->json(['success']);
+        // Check if it comes from API
+        $isApiRequest = $request->is('api/*');
+        if ($isApiRequest) {
+            return response()->json(['success-api']);
+        }
+
+        return response()->json(['success-site']);
     }
 
     /**
