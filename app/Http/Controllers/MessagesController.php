@@ -18,10 +18,40 @@ class MessagesController extends Controller
     }
 
     /**
-     * @OA\Get(
+     * @OA\Post(
      *     path="/api/send",
-     *     summary="Send message API",
-     *     @OA\Response(response="200", description="Successful operation")
+     *     summary="Send a message",
+     *     tags={"Message"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="User's name",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="User's email",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="subject",
+     *         in="query",
+     *         description="User's subject",
+     *         required=false,
+     *         @OA\Schema(type="string")
+            ),
+     *      @OA\Parameter(
+     *          name="content",
+     *          in="query",
+     *          description="User's content",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *      ),
+     *     @OA\Response(response="201", description="Message sent successfully"),
+     *     @OA\Response(response="422", description="Validation errors")
      * )
      */
     public function send(Request $request): JsonResponse
@@ -43,7 +73,7 @@ class MessagesController extends Controller
         }
 
         // If flow reaches here, everything worked fine!
-        // Check if it comes from API
+        // Confirm if it is an API
         $isApiRequest = $request->is('api/*');
         if ($isApiRequest) {
             return response()->json(['success-api']);

@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "darkaonline/l5-swagger": "^8.5",
         "fruitcake/laravel-cors": "^2.0",
         "graham-campbell/markdown": "^15.1",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -13,8 +16,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "php-amqplib/php-amqplib": "^3.6",
-        "ext-curl": "*",
-        "ext-json": "*"
+        "tymon/jwt-auth": "^1.0@dev",
+        "zircote/swagger-php": "^4.8"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
