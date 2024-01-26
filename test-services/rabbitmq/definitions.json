@@ -1,0 +1,53 @@
+{
+  "exchanges": [
+    {
+      "name": "messages_test",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "users": [
+    {
+      "name": "user_test",
+      "password": "pass_test",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "user_test",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "messages_test",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "messages_test",
+      "vhost": "/",
+      "destination": "messages_test",
+      "destination_type": "queue",
+      "routing_key": "messages_test",
+      "arguments": {}
+    }
+  ]
+}

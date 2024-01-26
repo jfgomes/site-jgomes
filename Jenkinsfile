@@ -7,14 +7,20 @@ pipeline {
                checkout scm
             }
         }
+        stage('Build services') {
+            steps {
+               echo 'DB, rabbit, etc...'
+               sh 'cd test-services && sudo docker-compose down -v && sudo docker-compose build && sudo docker-compose up -d'
+            }
+        }
         stage('Build') {
             steps {
                 // mandatory as I want to run unit tests using the phpunit from vendor
                 echo 'Run composer'
                 sh 'composer update'
                 // .env file is mandatory to generate app key
-                echo 'Copy .env file'
-                sh 'cp .env.example .env'
+                echo 'Copy dev .env file'
+                sh 'cp .testß.dev .env'
                 // app key is mandatory to run tests
                 echo 'Generate application key'
                 sh 'php artisan key:generate'
