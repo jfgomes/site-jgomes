@@ -49,17 +49,15 @@ class RabbitMQService
                     'en_US',
                     160
                 );
+
+                // Create channel
+                $this->channel      = $this->connection->channel();
+
+                // API url
+                $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
             } else {
                 $this->connection = null;
             }
-
-
-
-            // Create channel
-            $this->channel      = $this->connection->channel();
-
-            // API url
-            $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
 
         } catch (\Exception $e) {
             // Log the exception message
