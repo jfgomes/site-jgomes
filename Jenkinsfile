@@ -41,7 +41,7 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git pull origin master \''
 
                         // do composer update, migration, and clean all caches
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod composer update && APP_ENV=prod php artisan migrate && APP_ENV=prod php artisan route:clear && APP_ENV=prod php artisan config:clear && APP_ENV=prod php artisan cache:clear \''
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod RABBIT_HOST=0.0.0.0 composer update && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan migrate && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan route:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan config:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan cache:clear \''
 
                         // restore composer.lock from repo as the composer update done before generates the same file as is on repo, creating also a modified file that will block the next pull on the next pipeline
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git restore composer.lock \''

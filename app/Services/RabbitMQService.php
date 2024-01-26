@@ -36,6 +36,7 @@ class RabbitMQService
             $this->apiHost = env('RABBIT_API_HOST');
             $this->queue   = env('RABBIT_MESSAGE_QUEUE');
 
+            // Avoid special user jenkins to create any connection of the service rabbitmq
             $currentUser = get_current_user();
             if ($currentUser !== 'jenkins') {
 
@@ -60,6 +61,7 @@ class RabbitMQService
             }
 
         } catch (\Exception $e) {
+
             // Log the exception message
             Log::channel('messages')
                 ->error('Error in RabbitMQService constructor: ' . $e->getMessage());
