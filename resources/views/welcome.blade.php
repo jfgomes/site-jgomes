@@ -946,38 +946,35 @@
         <div class="eight columns">
 
             <!-- form -->
-            <form action="" method="post" id="contactForm" name="contactForm">
+            <form action="{{ route('send') }}" method="post" id="contactForm" name="contactForm">
+                @csrf
                 <fieldset>
-
                     <div>
-                        <label for="contactName">Name <span class="required">*</span></label>
-                        <input type="text" value="" size="35" id="contactName" name="contactName">
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input type="text" value="" size="35" id="name" name="contactName">
                     </div>
 
                     <div>
-                        <label for="contactEmail">Email <span class="required">*</span></label>
-                        <input type="text" value="" size="35" id="contactEmail" name="contactEmail">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="text" value="" size="35" id="email" name="contactEmail">
                     </div>
 
                     <div>
-                        <label for="contactSubject">Subject</label>
-                        <input type="text" value="" size="35" id="contactSubject" name="contactSubject">
+                        <label for="subject">Subject</label>
+                        <input type="text" value="" size="35" id="subject" name="contactSubject">
                     </div>
 
                     <div>
-                        <label for="contactMessage">Message <span class="required">*</span></label>
-                        <textarea cols="50" rows="15" id="contactMessage" name="contactMessage"></textarea>
+                        <label for="content">Message <span class="required">*</span></label>
+                        <textarea cols="50" rows="15" id="content" name="contactMessage"></textarea>
                     </div>
 
                     <div>
-                        <button class="submit" onclick="alert('In dev.. ')">Submit</button>
-
-                       <!-- <button class="submit">Submit</button>
+                        <button type="submit" class="submit">Submit</button>
                         <span id="image-loader">
-                        <img alt="" src="images/loader.gif"> -->
-                     </span>
+                            <img alt="" src="images/loader.gif">
+                        </span>
                     </div>
-
                 </fieldset>
             </form> <!-- Form End -->
 

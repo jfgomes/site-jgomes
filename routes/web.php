@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessagesController;
 use App\Services\CaseStudiesService;
 
 /*
@@ -46,17 +47,15 @@ if (app()->environment('local')) {
         return env('APP_ENV');
     });
 
+    // GET CSRF TOKEN
+    Route::get('/csrf', function () {
+        $token = csrf_token();
+        return response()->json(['_token' => $token]);
+    });
 }
 
 ########################################### END LOCAL ROUTES
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/details', function () {
-    return view('details');
-});
+########################################### START CASE STUDIES ROUTES
 
 Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {
     $foldersWithFiles = $caseStudiesService->getCaseStudies();
@@ -71,3 +70,23 @@ Route::get('/case-studies/file/{file}', function (CaseStudiesService $caseStudie
         abort(404);
     }
 });
+
+########################################### END CASE STUDIES ROUTES
+
+########################################### START PUBLIC ROUTES
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/details', function () {
+    return view('details');
+});
+
+Route::post('/send',
+    [
+        MessagesController::class, 'send'
+    ]
+)->name('send');
+
+########################################### END PUBLIC ROUTES
