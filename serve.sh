@@ -16,7 +16,7 @@ cd ..
 sleep 10
 
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT one consumer more that .env.dev ( 4 there ) by purpose to test the limit
-RABBIT_CONSUMERS_LIMIT=1
+RABBIT_CONSUMERS_LIMIT=3
 
 # Remove cron logs directory if it exists
 rm -rf cronlogs
