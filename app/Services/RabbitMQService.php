@@ -38,7 +38,7 @@ class RabbitMQService
 
             // Avoid any special user jenkins access to create any connection of the service rabbitmq
             $currentUser = get_current_user();
-         //   if ($currentUser !== 'jenkins') {
+            if ($currentUser !== 'jenkins') {
 
                 // Create connection
                 $this->connection = new AMQPStreamConnection(
@@ -56,9 +56,9 @@ class RabbitMQService
 
                 // API url
                 $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
-           /* } else {
+            } else {
                 $this->connection = null;
-            } */
+            }
 
         } catch (\Exception $e) {
 

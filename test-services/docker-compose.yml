@@ -9,6 +9,8 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
         volumes:
             - dbData:/var/lib/mysql
+        networks:
+            - jgomes-site_test-docker
 
     phpmyadmin:
         container_name: jgomes_site_test_phpmyadmin
@@ -19,6 +21,8 @@ services:
         environment:
             PMA_HOST: mysql
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        networks:
+            - jgomes-site_test-docker
 
     rabbitmq:
         container_name: jgomes_site_test_rabbit
@@ -27,5 +31,10 @@ services:
         ports:
             - "5675:5672"
             - "15675:15672"
+        networks:
+            - jgomes-site_test-docker
 volumes:
     dbData:
+
+networks:
+    jgomes-site_test-docker:
