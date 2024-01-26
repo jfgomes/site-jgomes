@@ -16,6 +16,14 @@ class AppServiceProvider extends ServiceProvider
         app()->singleton('urlToDocs', function () {
             return env('APP_URL') . '/docs/api-docs.json';
         });
+
+        app()->singleton('swaggeruibundle', function () {
+            return env('APP_URL') . '/swagger-ui-bundle.js';
+        });
+
+        app()->singleton('swaggeruistandalonepreset', function () {
+            return env('APP_URL') . '/swagger-ui-standalone-preset.js';
+        });
     }
 
     /**
