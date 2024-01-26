@@ -31,7 +31,7 @@ class RabbitMQService
             // Get configs
             $this->user    = env('RABBIT_USER');
             $this->pass    = env('RABBIT_PASS');
-            $this->host    = exec("docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' " . env('RABBIT_HOST'));
+            $this->host    = env('RABBIT_HOST');
             $this->port    = env('RABBIT_PORT');
             $this->apiHost = env('RABBIT_API_HOST');
             $this->queue   = env('RABBIT_MESSAGE_QUEUE');
