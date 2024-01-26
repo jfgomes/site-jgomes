@@ -36,16 +36,24 @@ class RabbitMQService
             $this->apiHost = env('RABBIT_API_HOST');
             $this->queue   = env('RABBIT_MESSAGE_QUEUE');
 
-            // Create connection
-            $this->connection = new AMQPStreamConnection(
-                $this->host, $this->port, $this->user, $this->pass,
-                '/',
-                false,
-                'AMQPLAIN',
-                null,
-                'en_US',
-                160
-            );
+            $currentUser = get_current_user();
+            if ($currentUser !== 'jenkins') {
+
+                // Create connection
+                $this->connection = new AMQPStreamConnection(
+                    $this->host, $this->port, $this->user, $this->pass,
+                    '/',
+                    false,
+                    'AMQPLAIN',
+                    null,
+                    'en_US',
+                    160
+                );
+            } else {
+                $this->connection = null;
+            }
+
+
 
             // Create channel
             $this->channel      = $this->connection->channel();
