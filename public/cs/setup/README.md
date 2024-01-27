@@ -150,7 +150,6 @@ fi
 # Start apache and keep it running
 exec apache2 -D FOREGROUND
 ```
-
 ./build/mysql
 
 ```
@@ -230,4 +229,9 @@ Case I need to open phpMyAdmin to would, just update the vhost with:
     </Location>
 
 ######################## END PROXY REVERSE FOR PHPMYADMIN
+```
+/etc/hosts
+```
+127.0.0.1 rabbitmq
+127.0.0.1 mysql
 ```
