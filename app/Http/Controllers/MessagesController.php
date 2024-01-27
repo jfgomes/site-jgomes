@@ -59,7 +59,14 @@ class MessagesController extends Controller
         try {
 
             // Validate received data
-            $this->validateData($request->all());
+            $validationResult = $this->validateData($request->all());
+            if ($validationResult !== 'true')
+            {
+                return response()->json(
+                    ['error' => $validationResult],
+                    422
+                );
+            }
 
             // Prepare message
             $message = $this->prepareMessage($request);
@@ -69,7 +76,10 @@ class MessagesController extends Controller
             dispatch(new MessagesJob(json_encode($message), $queue));
 
         } catch (\Exception $e) {
-            return response()->json(['error']);
+            return response()->json(
+                ['error' => $e->getMessage()],
+                500
+            );
         }
 
         // If flow reaches here, everything worked fine!
@@ -88,15 +98,19 @@ class MessagesController extends Controller
      * @param array $data
      * @return void
      */
-    private function validateData(array $data): void
+    public function validateData(array $data) : string
     {
         $validator = $this->messagesModel->validateData($data);
         if ($validator->fails()) {
-            // Log validation errors and return a 422 Unprocessable Entity response
+
+            // Log validation errors
             $errors = $validator->errors()->toArray();
             $this->logError('Validation failed: ' . json_encode($errors));
-            abort(response()->json(['error' => 'Validation failed'], 422));
+
+            // Return errors
+            return json_encode($errors);
         }
+        return 'true';
     }
 
     /**

@@ -34,5 +34,4 @@ class Messages extends Model
 
         return Validatior2::make($data, $rules);
     }
-
 }

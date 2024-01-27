@@ -135,7 +135,7 @@
                         </span>
                     </div>
                     <div style="float: right">
-                        <span style="margin-right: 10px">Port: 3406</span>
+                        <span style="margin-right: 10px">Port: 3306</span>
                         <button class="more-info-btn" onclick="togglePopup('MySQLInfo')">More</button>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                         DATABASE: <strong>jgomes_site_dev</strong> <br><br>
 
                         HOST: <strong> 127.0.0.1 </strong>
-                        PORT: <strong>3406</strong> <br><br>
+                        PORT: <strong>3306</strong> <br><br>
 
                         USERNAME: <strong>user_dev</strong>
                         PASSWORD: <strong>pass_dev</strong>
@@ -285,7 +285,7 @@
                         </span>
                     </div>
                     <div style="float: right">
-                        <span style="margin-right: 10px">Port: 5674</span>
+                        <span style="margin-right: 10px">Port: 5672</span>
                     </div>
                 </div>
             </div>
@@ -296,7 +296,7 @@
                         <a class="link" target="_blank" href="https://jgomes.site/rabbitmq/">Link</a>
                     </div>
                     <div style="float: right">
-                        <span style="margin-right: 10px">Port: 15674</span>
+                        <span style="margin-right: 10px">Port: 15672</span>
                     </div>
                 </div>
             </div>
@@ -307,7 +307,7 @@
                         <a class="link" target="_blank" href="https://jgomes.site/rabbitmq/api/queues/%2F/messages_prod">Link</a>
                     </div>
                     <div style="float: right">
-                        <span style="margin-right: 10px">Port: 15674</span>
+                        <span style="margin-right: 10px">Port: 15672</span>
                     </div>
                 </div>
             </div>

@@ -134,49 +134,167 @@
    });
 
 /*----------------------------------------------------*/
-/*	contact form
+/*	contact form and validations
 ------------------------------------------------------*/
+     $('form#contactForm button.submit').click(function()
+     {
+         const loader = $('#image-loader');
+         const form   = $('#contactForm');
 
-   $('form#contactForm button.submit').click(function() {
+         loader.fadeIn();
 
-      $('#image-loader').fadeIn();
+         const name    = getValue('#name');
+         const email   = getValue('#email');
+         const subject = getValue('#subject');
+         const content = getValue('#content');
 
-      var contactName = $('#contactForm #contactName').val();
-      var contactEmail = $('#contactForm #contactEmail').val();
-      var contactSubject = $('#contactForm #contactSubject').val();
-      var contactMessage = $('#contactForm #contactMessage').val();
+         if (validateClientSide(name, email, subject, content))
+         {
+             let data = $.param(
+                     {
+                         name    : name,
+                         email   : email,
+                         subject : subject,
+                         content : content
+                     }
+                 );
 
-      var data = 'contactName=' + contactName + '&contactEmail=' + contactEmail +
-               '&contactSubject=' + contactSubject + '&contactMessage=' + contactMessage;
+             $.ajax({
+                 type: 'POST',
+                 url: form.attr('action'),
+                 data: data,
+                 success: function(msg, textStatus, xhr)
+                 {
+                     if (xhr.status === 200)
+                     {
+                         handleSuccess();
 
-      $.ajax({
+                     } else {
 
-	      type: "POST",
-	      url: "inc/sendEmail.php",
-	      data: data,
-	      success: function(msg) {
+                         handleFailure(
+                             xhr.status,
+                             msg
+                         );
+                     }
+                 },
+                 error: function(xhr, textStatus, errorThrown)
+                 {
+                     handleFailure(
+                         xhr.status,
+                         errorThrown
+                     );
+                 }
+             });
 
-            // Message was sent
-            if (msg == 'OK') {
-               $('#image-loader').fadeOut();
-               $('#message-warning').hide();
-               $('#contactForm').fadeOut();
-               $('#message-success').fadeIn();   
-            }
-            // There was an error
-            else {
-               $('#image-loader').fadeOut();
-               $('#message-warning').html(msg);
-	            $('#message-warning').fadeIn();
-            }
+         } else {
+             loader.fadeOut();
+             $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+         }
+         return false;
 
-	      }
+     });
 
-      });
-      return false;
-   });
+     function getValue(selector)
+     {
+         return $(`#contactForm ${selector}`).val();
+     }
 
+     function handleSuccess()
+     {
+         $('#image-loader').fadeOut();
+         $('#message-warning').hide();
+         $('#contactForm').fadeOut();
+         $('#message-success').fadeIn();
 
+         // Clean fields
+         $('#contactForm #name').val('');
+         $('#contactForm #email').val('');
+         $('#contactForm #subject').val('');
+         $('#contactForm #content').val('');
+     }
+
+     function handleFailure(statusCode, msg)
+     {
+         $('#image-loader').fadeOut();
+
+         if (statusCode === 422)
+         {
+             // Handle Unprocessable Entity (422) errors
+             $('#message-warning').html('Validation failed: ' + msg)
+                 .fadeIn();
+
+         } else if (statusCode === 500) {
+             // Handle Internal Server Error (500) errors
+             $('#message-warning').html('Internal Server Error: ' + msg)
+                 .fadeIn();
+
+         } else {
+             // Handle other errors
+             $('#message-warning').html('Error (' + statusCode + '): ' + msg)
+                 .fadeIn();
+         }
+
+         $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+     }
+
+     function validateClientSide(name, email, subject, content)
+     {
+         // Clear previous errors and reset styles
+         resetValidationStyles();
+
+         let isValid = true;
+
+         // Check if the 'name' field is filled and does not exceed 50 characters
+         if (!name || name.length > 50)
+         {
+             handleValidationError('name',
+                 'Name is required and must not exceed 50 characters.');
+             isValid = false;
+         }
+
+         // Check if the 'email' field is filled, is a valid email, and does not exceed 50 characters
+         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!email || !emailRegex.test(email) || email.length > 50)
+         {
+             handleValidationError('email',
+                 'Enter a valid email address (up to 50 characters).');
+             isValid = false;
+         }
+
+         // Check if the 'subject' field does not exceed 100 characters (can be null)
+         if (subject && subject.length > 100)
+         {
+             handleValidationError('subject',
+                 'Subject must not exceed 100 characters.');
+             isValid = false;
+         }
+
+         // Check if the 'content' field is filled and does not exceed 255 characters
+         if (!content || content.length > 255)
+         {
+             handleValidationError('content',
+                 'Content is required and must not exceed 255 characters.');
+             isValid = false;
+         }
+
+         return isValid;
+     }
+
+     function resetValidationStyles()
+     {
+         // Clear previous errors and reset styles
+         $('#message-warning').empty().hide();
+         $('#contactForm input, #contactForm textarea').css('border', '1px solid #ccc');
+     }
+
+     function handleValidationError(fieldName, errorMessage)
+     {
+         // Show error message to the client
+         $('#message-warning').append(errorMessage + '<br><br>').fadeIn();
+
+         // Add red border to the corresponding field
+         $(`#contactForm #${fieldName}`).css('border', '1px solid #ff0000');
+     }
 });
 
 
