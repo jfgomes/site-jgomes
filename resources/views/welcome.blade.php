@@ -1042,7 +1042,7 @@
 <script src="js/waypoints.js"></script>
 <script src="js/jquery.fittext.js"></script>
 <script src="js/magnific-popup.js"></script>
-<script src="js/init.js"></script>
+<script src="{{ (app()->environment() === 'prod') ? mix('js/prod/init.js') : 'js/local/init.js' }}"></script>
 
 </body>
 
