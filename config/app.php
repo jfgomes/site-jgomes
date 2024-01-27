@@ -233,4 +233,7 @@ return [
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
     ],
 
+    'exceptions' => [
+        'handler' => App\Exceptions\Handler::class,
+    ],
 ];

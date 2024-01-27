@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -27,7 +28,7 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
+    /**s
      * Register the exception handling callbacks for the application.
      *
      * @return void
@@ -37,5 +38,32 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * @param $request
+     * @param Throwable $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     * @throws Throwable
+     */
+    public function render($request, Throwable $exception)
+    {
+        if ($this->isHttpException($exception))
+        {
+            if ($exception->getStatusCode() == 404)
+            {
+                return response()->view('errors.404', [], 404);
+            }
+            if ($exception->getStatusCode() == 500)
+            {
+                return response()->view('errors.500', [], 500);
+            }
+            if ($exception->getStatusCode() == 429)
+            {
+                return response()->view('errors.429', [], 429);
+            }
+        }
+
+        return parent::render($request, $exception);
     }
 }

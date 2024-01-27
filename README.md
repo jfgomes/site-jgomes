@@ -27,6 +27,12 @@ It was build with:
 - [HTML + CSS + JS ( Jquery ) - ( Credits to www.themezy.com ) ](https://www.themezy.com/free-website-templates/151-ceevee-free-responsive-website-template)
 - [Docker ( with docker-compose - See 'Infra configs' next )](https://docs.docker.com/compose/)
 
+## Need to ensure
+- docker
+- docker-compose
+- sudo apt install nodejs
+- sudo apt install npm
+
 ## TR/DR setup
 - git clone git@github.com:jfgomes/site-jgomes.git
 - composer update

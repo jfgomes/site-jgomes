@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MessagesController;
 use App\Services\CaseStudiesService;
 
 /*
@@ -57,36 +56,37 @@ if (app()->environment('local')) {
 ########################################### END LOCAL ROUTES
 ########################################### START CASE STUDIES ROUTES
 
-Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {
-    $foldersWithFiles = $caseStudiesService->getCaseStudies();
-    return view('case-studies.index', ['foldersWithFiles' => $foldersWithFiles]);
-});
+// Rate limit on ( 60/2 requests per min )
+Route::middleware('throttle:60,1')->group(function () {
 
-Route::get('/case-studies/file/{file}', function (CaseStudiesService $caseStudiesService, $file) {
-    $htmlContent = $caseStudiesService->getFileContent($file);
-    if ($htmlContent !== null) {
-        return view('case-studies.example', ['htmlContent' => $htmlContent]);
-    } else {
-        abort(404);
-    }
-});
+    Route::get('/case-studies', function (CaseStudiesService $caseStudiesService) {
+        $foldersWithFiles = $caseStudiesService->getCaseStudies();
+        return view('case-studies.index', ['foldersWithFiles' => $foldersWithFiles]);
+    });
 
+    Route::get('/case-studies/file/{file}', function (CaseStudiesService $caseStudiesService, $file) {
+        $htmlContent = $caseStudiesService->getFileContent($file);
+        if ($htmlContent !== null) {
+            return view('case-studies.example', ['htmlContent' => $htmlContent]);
+        } else {
+            abort(404);
+        }
+    });
+});
 ########################################### END CASE STUDIES ROUTES
 
 ########################################### START PUBLIC ROUTES
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Rate limit on ( 20/2 requests per min )
+Route::middleware('throttle:20,1')->group(function () {
 
-Route::get('/details', function () {
-    return view('details');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-Route::post('/send',
-    [
-        MessagesController::class, 'send'
-    ]
-)->name('send');
+    Route::get('/details', function () {
+        return view('details');
+    });
+});
 
 ########################################### END PUBLIC ROUTES

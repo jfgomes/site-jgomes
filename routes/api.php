@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/send',
-    [
-        \App\Http\Controllers\MessagesController::class, 'send'
-    ]
-)->name('send');
+// Rate limit on ( 5 post requests per min )
+Route::middleware('throttle:5,1')->group(function () {
+    Route::post('/send',
+        [
+            MessagesController::class, 'send'
+        ]
+    )->name('send');
+});
