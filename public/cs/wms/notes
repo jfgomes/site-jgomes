@@ -78,3 +78,70 @@ Em resumo, App\Jobs é usado para armazenar classes relacionadas a trabalhos em 
 
 
 https://medium.com/@lpjfilho/filas-e-mensageria-com-rabbitmq-e-laravel-parte-2-a9a052b8d603
+
+
+
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class DbBackups extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'db:backups';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command to do db backups';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $ip   = env('DB_HOST'); //exec("docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my_routineris_mysql");
+        $db   = env('DB_DATABASE');
+
+        $path     = base_path() . "/storage/database/";
+        if (!file_exists($path)) {
+            mkdir($path, 0600, true);
+        }
+        $file     = "$path/db_backup.sql";
+        $file_bak = "$path/db_backup_" . date("Y_m_d_H_s_i") . ".sql";
+
+        $config = base_path() . "/app/Console/Commands/config.cnf";
+        if (true === file_exists($file)) {
+            unlink($file);
+        }
+
+        exec("mysqldump --defaults-extra-file=$config --host=$ip $db > $file");
+        exec("mysqldump --defaults-extra-file=$config --host=$ip $db > $file_bak");
+
+        // limit the number of backups to 30 files
+        exec( "cd $path && ls -t | tail -n +31 | xargs -I {} rm {}");
+
+        return 0;
+    }
+}
+

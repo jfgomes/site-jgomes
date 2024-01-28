@@ -12,11 +12,14 @@ export APP_ENV=local
 # Back to root
 cd ..
 
-# Give some time to dev services be up and running
-sleep 10
-
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT one consumer more that .env.dev ( 4 there ) by purpose to test the limit
 RABBIT_CONSUMERS_LIMIT=3
+
+# Remove storage/db-backups directory if it exists
+rm -rf storage/db-backups
+
+# Create new storage/db-backups directory
+mkdir -p storage/db-backups
 
 # Remove cron logs directory if it exists
 rm -rf cronlogs

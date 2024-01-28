@@ -119,6 +119,11 @@ return [
             'path' => storage_path('logs/messages.log'),
             'level' => 'debug',
         ],
+        'messages-backups' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/messages-backups.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

@@ -18,3 +18,4 @@ yarn-error.log
 /public/js/prod
 /coverage-report
 /public/coverage-report
+storage/db-backups

@@ -223,7 +223,8 @@ class MessagesFromRabbit extends Command
 
         // Log the error
         $this->error($composedError);
-        Log::channel('messages')->error('Error processing a message from rabbit: ' . $composedError);
+        Log::channel('messages')
+            ->error('Error processing a message from rabbit: ' . $composedError);
     }
 
     /**
