@@ -1,9 +1,10 @@
-sudo pecl install xdebug
- 1029  php -m
- 1030  vendor/bin/phpunit --coverage-html reports/
- 1031  vendor/bin/phpunit --coverage-html reports/
- 1032  php --ini | grep "Loaded Configuration File"
- 1033  sudo nano /opt/homebrew/etc/php/8.3/php.ini
+checkar xdebug  php -m
+from mac: sudo pecl install xdebug
+for ubuntu: sudo apt-get -y install php-xdebug
+checkar  xdebug  php -m
+
+saber onde esta o file:  php --ini | grep "Loaded Configuration File"
+editar sudo nano /opt/homebrew/etc/php/8.3/php.ini
 
  zend_extension="xdebug.so"
  xdebug.mode=coverage
@@ -11,5 +12,14 @@ sudo pecl install xdebug
 correr test:
 php artisan test
 
-gerar relatorio:vendor/bin/phpunit --coverage-html reports/
+gerar relatorio:
+vendor/bin/phpunit --coverage-html reports/
 
+ver report em prod:
+instalar xdebug em prod para o jenkins correr:
+
+
+cd home/jgomes/my/jgomes/site-jgomes/public
+ln -s ../reports/ unit-report
+
+https://jgomes.site/unit-report/index.html

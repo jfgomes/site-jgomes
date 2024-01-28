@@ -32,6 +32,7 @@ It was build with:
 - docker-compose
 - sudo apt install nodejs
 - sudo apt install npm
+- xdebug
 
 ## TR/DR setup
 - git clone git@github.com:jfgomes/site-jgomes.git
