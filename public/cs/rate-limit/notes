@@ -1,0 +1,13 @@
+        'web' => [
+
+            \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        ],
+
+        // Rate limit on ( 5 post requests per 5 min )
+        Route::middleware('throttle:5,5')->group(function () {
+            Route::post('/send',
+                [
+                    MessagesController::class, 'send'
+                ]
+            )->name('send');
+        });

@@ -1,0 +1,9 @@
+https://laravel.com/docs/10.x/mix
+
+ex:
+
+add ao webpack.mix.js
+mix.js('public/js/init.js', 'public/js/prod').version();
+
+no template:
+<script src="{{ (app()->environment() === 'prod') ? mix('js/prod/init.js') : 'js/init.js' }}"></script>

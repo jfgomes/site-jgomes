@@ -1,0 +1,15 @@
+sudo pecl install xdebug
+ 1029  php -m
+ 1030  vendor/bin/phpunit --coverage-html reports/
+ 1031  vendor/bin/phpunit --coverage-html reports/
+ 1032  php --ini | grep "Loaded Configuration File"
+ 1033  sudo nano /opt/homebrew/etc/php/8.3/php.ini
+
+ zend_extension="xdebug.so"
+ xdebug.mode=coverage
+
+correr test:
+php artisan test
+
+gerar relatorio:vendor/bin/phpunit --coverage-html reports/
+
