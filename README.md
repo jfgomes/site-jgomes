@@ -33,6 +33,7 @@ It was build with:
 - sudo apt install nodejs
 - sudo apt install npm
 - xdebug
+- cd public && ln -s ../coverage-report/ coverage-report
 
 ## TR/DR setup
 - git clone git@github.com:jfgomes/site-jgomes.git
