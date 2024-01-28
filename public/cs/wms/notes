@@ -75,3 +75,6 @@ class ExampleCommand extends Command
     }
 }
 Em resumo, App\Jobs é usado para armazenar classes relacionadas a trabalhos em segundo plano e filas, enquanto App\Console é usado para classes relacionadas à CLI, como comandos personalizados. Ambos são usados para organizar o código de maneira mais coesa e fácil de entender.
+
+
+https://medium.com/@lpjfilho/filas-e-mensageria-com-rabbitmq-e-laravel-parte-2-a9a052b8d603
