@@ -23,3 +23,8 @@ cd home/jgomes/my/jgomes/site-jgomes/public
 ln -s ../reports/ unit-report
 
 https://jgomes.site/unit-report/index.html
+
+add ao jenkins file para mudar o title do report em prod:
+
+mac: sed -i '' 's|<head>|<head><title>teste</title>|' reports/index.html
+linux: sed -i "s|<head>|<head><title>teste</title>|" "reports/index.html"

@@ -50,7 +50,7 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && npm cache clean --force && npm install && npm run production \''
 
                         // do phpunit report
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && vendor/bin/phpunit --coverage-html reports/ \''
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && vendor/bin/phpunit --coverage-html reports/ && sed -i "s|<head>|<head><title>Code coverage report</title>|" "reports/index.html" \''
 
                         // ( do after ) restore composer.lock en package-lock.json from repo as this are the same files in the repo, creating also a modified file that will block the next pull on the next pipeline
                         sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git restore composer.lock && git restore package-lock.json && git restore public/mix-manifest.json \''

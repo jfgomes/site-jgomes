@@ -38,6 +38,9 @@ done
 # Init server in the background
 php artisan serve &
 
+# Code coverage
+cd public && ln -s ../reports/ unit-report && cd ..
+
 echo "
                                                                    dddddddd
 RRRRRRRRRRRRRRRRR                                                  d::::::d                                      tttt
