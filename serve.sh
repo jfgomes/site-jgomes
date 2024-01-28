@@ -39,7 +39,7 @@ done
 php artisan serve &
 
 # Code coverage
-cd public && ln -s ../reports/ unit-report && cd ..
+cd public && ln -s ../coverage-report/ coverage-report && cd ..
 
 echo "
                                                                    dddddddd

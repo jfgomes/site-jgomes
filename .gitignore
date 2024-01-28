@@ -16,5 +16,5 @@ yarn-error.log
 /cronlogs
 .env
 /public/js/prod
-/reports
-/public/unit-report
+/coverage-report
+/public/coverage-report

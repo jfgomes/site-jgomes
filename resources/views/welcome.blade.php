@@ -893,7 +893,7 @@
                         - The repo: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>Repository here</u></a> <br/>
                         - The board: <a target="_blank" href="https://trello.com/b/zOuG1loa/j-gomes-site"><u>Board here</u></a> <br />
                         - The swagger: <a href="/api/documentation#/Message" target="_blank"><u>Swagger here</u></a> <br />
-                        - The phpunit: <a href="/unit-report/index.html" target="_blank"><u>Code coverage here</u></a> <br />
+                        - The phpunit: <a href="/coverage-report/index.html" target="_blank"><u>Code coverage here</u></a> <br />
                         - Case studies: <a href="/case-studies" target="_blank"><u>Case studies here</u></a> <br />
                         - More info: <a href="/details" target="_blank"><u>Details about this website here</u></a> <br />
                     </p>
