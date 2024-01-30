@@ -13,12 +13,11 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/cronlogs
 .env
 /public/js/prod
 /public/coverage-report
-storage/coverage-report
-storage/cronlogs
-storage/db-backups
+/storage/coverage-report
+/storage/cronlogs
+/storage/db-backups
 gc-local.json
 gc-prod.json
