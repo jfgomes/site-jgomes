@@ -171,7 +171,7 @@ SERVER_PID=$!
 while kill -0 $SERVER_PID 2>/dev/null; do
     echo -e "\n \xF0\x9F\x9A\x80 Running messages-backups to cloud bucket..\n"
     nohup php artisan db:messages-backup-to-cloud >> storage/cronlogs/messages-backups.log 2>&1
-    sleep 3600
+    sleep 7200
 done
 
 # Terminate the script when the loop in background is over

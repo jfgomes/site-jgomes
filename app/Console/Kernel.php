@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
 
         // Run command to do the messages backups to cloud
         $schedule->command('db:messages-backup-to-cloud')
-            ->everyTwoMinutes();
+            ->everyTwoHours();
     }
 
     /**
