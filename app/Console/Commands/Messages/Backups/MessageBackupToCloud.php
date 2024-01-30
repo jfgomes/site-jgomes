@@ -83,7 +83,7 @@ class MessageBackupToCloud extends Command
         // Delete log > 2 days older
         $this->deleteOlderBackups($bucket);
 
-        $this->info("Messages backup to cloud started with success..");
+        $this->info("Messages backup to cloud done with success..");
         return 0;
 
     }

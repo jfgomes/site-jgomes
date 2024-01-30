@@ -16,8 +16,9 @@ yarn-error.log
 /cronlogs
 .env
 /public/js/prod
-/coverage-report
 /public/coverage-report
+storage/coverage-report
+storage/cronlogs
 storage/db-backups
 gc-local.json
 gc-prod.json

@@ -3,7 +3,7 @@
 CURRENT_DIRECTORY=$(pwd)
 
 # shellcheck disable=SC2059
-printf "\n \xF0\x9F\xA7\xAD My work dir is: $CURRENT_DIRECTORY \n"
+printf "\n \xF0\x9F\xA7\xAD My workdir: $CURRENT_DIRECTORY \n"
 
 # Create new storage/db-backups directory if it not exists and change the permissions
 chmod 755 storage/db-backups
@@ -15,13 +15,12 @@ cleanup_and_exit() {
 
     # Clean up:
     # 1 - Clean logs
-    echo -n > "$CURRENT_DIRECTORY/storage/logs/laravel.log"
     echo -n > "$CURRENT_DIRECTORY/storage/logs/messages.log"
     echo -n > "$CURRENT_DIRECTORY/storage/logs/messages-backups.log"
 
     # 2 - Remove and create new cron logs directory if exists
-    rm -rf cronlogs
-    mkdir -p cronlogs
+    rm -rf storage/cronlogs
+    mkdir -p storage/cronlogs
 
     # End the script
     exit
@@ -75,8 +74,11 @@ done
 # Wait a bit
 sleep 10
 
-# Kill existing processes
+# Kill existing rabbit processes
 lsof -ti :5672 | xargs -r kill -9
+
+# Need to have this cleaning ( laravel.log ) here as eliminated consumers in the last command, it generates messages on the log
+echo -n > "$CURRENT_DIRECTORY/storage/logs/laravel.log"
 
 # Run docker services
 echo -e " \n \xE2\xAC\x86 Up docker images.."
@@ -86,18 +88,23 @@ docker-compose up -d
 export APP_ENV=local
 
 # Back to root
+# shellcheck disable=SC2103
 cd ..
 
 # Code coverage
-rm public/coverage-report
-cd public && ln -s ../coverage-report/ coverage-report && cd ..
+rm -Rf storage/coverage-report
+rm -Rf public/coverage-report
+
+# Generate code coverage report
+echo -e " \n \xE2\xAC\x86 Generate code coverage.."
+vendor/bin/phpunit --coverage-html storage/coverage-report
+cd public && ln -s ../storage/coverage-report/ coverage-report && cd ..
 
 # Refresh all the consumer log files
-rm -f cronlogs/output_consumer_*.log
+rm -f storage/cronlogs/output_consumer_*.log
 
 # Wait a bit
 sleep 15
-
 echo "
                                                                    dddddddd
 RRRRRRRRRRRRRRRRR                                                  d::::::d                                      tttt
@@ -149,21 +156,21 @@ RABBIT_CONSUMERS_LIMIT=2
 
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
-    echo -e " \xF0\x9F\x9A\x80 Running messages consumer $i.."
-    nohup php artisan queue:messages > cronlogs/output_consumer_$i.log 2>&1 &
+    echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
+    nohup php artisan queue:messages >> storage/cronlogs/output_consumer_$i.log 2>&1 &
     sleep 5
     disown
 done &
 
 # Init the server and get the PID
-echo -e " \xF0\x9F\x91\x8D All services are up and running.. ( 'ctrl + c' to exit )\n"
+echo -e " \xF0\x9F\x91\x8D All services are up and running.. ( 'ctrl + c' to exit ) \n"
 php artisan serve &
 SERVER_PID=$!
 
 # Monitor the server PID and terminate the backup loop when the server is no longer running
 while kill -0 $SERVER_PID 2>/dev/null; do
-    echo -e " \xF0\x9F\x9A\x80 Running messages-backups to cloud bucket..\n"
-    nohup php artisan db:messages-backup-to-cloud >> cronlogs/messages-backups.log 2>&1
+    echo -e "\n \xF0\x9F\x9A\x80 Running messages-backups to cloud bucket..\n"
+    nohup php artisan db:messages-backup-to-cloud >> storage/cronlogs/messages-backups.log 2>&1
     sleep 3600
 done
 

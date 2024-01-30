@@ -13,7 +13,7 @@ correr test:
 php artisan test
 
 gerar relatorio:
-vendor/bin/phpunit --coverage-html reports/
+vendor/bin/phpunit --coverage-html storage/coverage-report/
 
 ver report em prod:
 instalar xdebug em prod para o jenkins correr:
@@ -21,7 +21,7 @@ instalar xdebug em prod para o jenkins correr:
 
 cd home/jgomes/my/jgomes/site-jgomes/public
 
-ln -s ../coverage-report/ coverage-report
+ln -s ..storage/coverage-report/ coverage-report
 
 https://jgomes.site/coverage-report/index.html
 

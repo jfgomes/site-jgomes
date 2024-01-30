@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console;
+namespace App\Console\Commands\Messages;
 
 use App\Models\Messages;
 use App\Services\RabbitMQService;
