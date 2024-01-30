@@ -96,7 +96,7 @@ rm -Rf storage/coverage-report
 rm -Rf public/coverage-report
 
 # Generate code coverage report
-echo -e " \n \xE2\xAC\x86 Generate code coverage.."
+echo -e " \n \xF0\x9F\x93\x8A Generate code coverage.."
 vendor/bin/phpunit --coverage-html storage/coverage-report
 cd public && ln -s ../storage/coverage-report/ coverage-report && cd ..
 
@@ -157,7 +157,7 @@ RABBIT_CONSUMERS_LIMIT=2
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
     echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
-    nohup php artisan queue:messages >> storage/cronlogs/output_consumer_$i.log 2>&1 &
+    nohup php artisan queue:messages >> storage/cronlogs/output_consumer_"$i".log 2>&1 &
     sleep 5
     disown
 done &
