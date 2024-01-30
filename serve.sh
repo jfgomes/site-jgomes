@@ -6,8 +6,8 @@ CURRENT_DIRECTORY=$(pwd)
 printf "\n \xF0\x9F\xA7\xAD My workdir: $CURRENT_DIRECTORY \n"
 
 # Create new storage/db-backups directory if it not exists and change the permissions
-chmod 755 storage/db-backups
 mkdir -p storage/db-backups
+chmod 755 storage/db-backups
 
 # exit func
 cleanup_and_exit() {
