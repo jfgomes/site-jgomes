@@ -1,0 +1,7 @@
+
+config fila on root
+
+go tm IAM -> create account -> get key
+create bucket
+add new account to the permission
+add rule

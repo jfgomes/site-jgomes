@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Messages\Backups;
 
+use Google\Cloud\Storage\StorageClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -40,16 +41,26 @@ class MessageRestoreFromCloud extends Command
      */
     public function handle()
     {
-        $backupFilePath = base_path() . "/storage/db-backups/messages-latest-backup.back";
+        // Create cloud connection:
+        $storage = new StorageClient([
+            'keyFilePath' => base_path() . "/gc-" . env('APP_ENV') . ".json"
+        ]);
+
+        // Create bucket instance
+        $bucket = $storage->bucket(env('APP_ENV') . "-backups-bd");
+
+        // Get backup from cloud
+        $object = $bucket->object(env('GC_CLOUD_PATH') . env('GC_CLOUD_FILE'));
+        $object->downloadToFile($backupFilePath = base_path() . env('GC_HOST_PATH') . "cloud-backup.json");
 
         // Load the content of the SQL file
         $jsonContent = file_get_contents($backupFilePath);
 
         // Decode the JSON into an associative array
-        $dataArray = json_decode($jsonContent, true);
+        $dataJson = json_decode($jsonContent, true);
 
         // Check if we have data
-        if (empty($dataArray)) {
+        if (empty($dataJson)) {
             Log::channel('messages-backups')
                 ->error('No data to rollback! About!');
             return 0;
@@ -72,7 +83,7 @@ class MessageRestoreFromCloud extends Command
 
             // Insert in bulk
             DB::table('messages')
-                ->insert($dataArray);
+                ->insert($dataJson);
 
             // Commit if everything is successful
             DB::commit();

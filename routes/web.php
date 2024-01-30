@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Services\CaseStudiesService;
+use Illuminate\Support\Facades\Route;
+use Google\Cloud\Storage\StorageClient;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,9 +52,92 @@ if (app()->environment('local')) {
         $token = csrf_token();
         return response()->json(['_token' => $token]);
     });
+
+    // Test connection to GC
+    Route::get('/bucket', function () {
+
+        try {
+
+            $localPath = env('GC_HOST_PATH');
+            $localFile = env('GC_HOST_FILE');
+            $cloudPath = env('GC_CLOUD_PATH');
+            $cloudFile = env('GC_CLOUD_FILE');
+
+            // TEST CONNECTION
+            $storage   = new StorageClient([
+                'keyFilePath' => base_path() . "/gc-" . env('APP_ENV') . ".json"
+            ]);
+
+            echo '<pre> - Connection done with success!';
+
+            // TEST BUCKET
+            $bucketName = env('APP_ENV') . "-backups-bd";
+            $bucket = $storage->bucket($bucketName);
+
+            echo '<pre> - Bucket test done with success!';
+
+            // Filepath
+            $filepath = base_path() . $localPath . $localFile;
+            if (!is_file($filepath))
+            {
+                // If file not exist, create a dummy one
+                $contentArray = ['test' => 'Test content'];
+                file_put_contents($filepath, json_encode($contentArray, JSON_PRETTY_PRINT));
+            }
+
+            $object = $bucket->object($cloudPath . $cloudFile);
+
+            // TEST FILTER - Calculate the name prefix for the previous day's backups but change according the needs
+            $previousDayBackupPrefix = 'messages-backup-'; // . Carbon::yesterday()->format('Y_m_d');
+
+            echo "<pre> - Filter test start: ( filter by '$previousDayBackupPrefix' ) ";
+
+            // List all objects in the bucket
+            $objects = $bucket->objects();
+
+            // Extract objects from the iterator
+            $objectsArray = iterator_to_array($objects);
+
+            // Filter objects based on the name prefix of the previous day's backups
+            $oldBackups = array_filter($objectsArray, function ($object) use ($previousDayBackupPrefix) {
+                return strpos($object->name(), $previousDayBackupPrefix) !== false;
+            });
+
+            foreach ($oldBackups as $oldBackup) {
+                echo "<pre> ------ " . $oldBackup->name();
+                //$oldBackup->delete();
+            }
+
+            echo "<pre> - Filter test done with success!";
+
+            // TEST UPLOAD
+            $bucket->upload(fopen($filepath, 'r'),
+                ["name" => $cloudPath . $cloudFile]
+            );
+
+            echo '<pre> - Upload test done with success!';
+
+            // TEST DOWNLOAD
+            $object->downloadToFile(base_path() . $localPath . $localFile . "-from-gc");
+
+            echo '<pre> - Download test done with success!';
+
+            // TEST DELETE
+            $object->delete();
+            unlink(base_path() . $localPath . $localFile . "-from-gc");
+
+            echo '<pre> - Delete done with success!';
+            return '<pre> - Tests ended!';
+
+        } catch(Exception $e) {
+           dd($e->getMessage());
+        }
+
+    });
 }
 
 ########################################### END LOCAL ROUTES
+
 ########################################### START CASE STUDIES ROUTES
 
 // Rate limit on ( 60/2 requests per min )

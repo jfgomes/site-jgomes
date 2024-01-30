@@ -35,7 +35,7 @@ class MessagesFromRabbit extends Command
      */
     public function handle(): bool
     {
-        // Check the number of consumers up. If it reach the limit, don't need to create more. Abort here.
+        // Check the number of consumers up. If it reaches the limit, don't need to create more. Abort here.
         if ($this->rabbitMQService->getConsumers() >= $this->consumers) {
             $this->info("All total $this->consumers consumers are running. No more consumers needed.");
             return false;
@@ -245,11 +245,15 @@ class MessagesFromRabbit extends Command
             'created_at' => now()
         ]);
 
-        // Log the success message
+        // Log the success message in I/O
         $this->info(
             "\nMessage {$originalData} \n- Sent from queue:messages."
             . "\n- Saved in the database with ID: {$message->id}."
         );
+
+        // Log the success message in file
+        Log::channel('messages')
+            ->info("Message {$originalData} sent and saved in the database with ID: {$message->id}");
     }
 
     /**

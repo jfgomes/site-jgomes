@@ -20,7 +20,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Run command to parse the messages
-        $schedule->command('queue:messages')->everyMinute();
+        $schedule->command('queue:messages')
+            ->everyMinute();
+
+        // Run command to do the messages backups to cloud
+        $schedule->command('db:messages-backup-to-cloud')
+            ->everyTwoMinutes();
     }
 
     /**
@@ -31,7 +36,6 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }

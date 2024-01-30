@@ -19,3 +19,5 @@ yarn-error.log
 /coverage-report
 /public/coverage-report
 storage/db-backups
+gc-local.json
+gc-prod.json
