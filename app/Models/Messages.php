@@ -31,7 +31,7 @@ class Messages extends Model
             'subject' => 'nullable|string|max:100',
             'content' => 'required|string|max:2000',
         ];
-        
+
         return Validatior2::make($data, $rules);
     }
 }
