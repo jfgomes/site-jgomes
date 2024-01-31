@@ -270,7 +270,7 @@ jQuery(document).ready(function($) {
         }
 
         // Check if the 'content' field is filled and does not exceed 2000 characters
-        if (!content || content.length > 2000)
+        if (!content || content.length > 2001)
         {
             handleValidationError('content',
                 'Content is required and must not exceed 2000 characters.');
