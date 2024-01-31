@@ -269,11 +269,11 @@ jQuery(document).ready(function($) {
             isValid = false;
         }
 
-        // Check if the 'content' field is filled and does not exceed 2000 characters
-        if (!content || content.length > 2000)
+        // Check if the 'content' field is filled and does not exceed 2100 characters
+        if (!content || content.length > 2100)
         {
             handleValidationError('content',
-                'Content is required and must not exceed 2000 characters.');
+                'Content is required and must not exceed 2100 characters.');
             isValid = false;
         }
 
