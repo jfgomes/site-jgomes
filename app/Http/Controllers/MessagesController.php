@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class MessagesController extends Controller
 {
-    private $messagesModel;
+    private Messages $messagesModel;
 
     public function __construct(Messages $messagesModel)
     {
@@ -96,7 +96,7 @@ class MessagesController extends Controller
      * Validate the received data using the Messages model.
      *
      * @param array $data
-     * @return void
+     * @return string
      */
     public function validateData(array $data) : string
     {

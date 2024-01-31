@@ -51,25 +51,50 @@ class MessageRestoreFromCloud extends Command
 
         // Get backup from cloud
         $object = $bucket->object(env('GC_CLOUD_PATH') . env('GC_CLOUD_FILE'));
+
+        // Check if exists in the cloud
+        if (!$object->exists())
+        {
+            // Log
+            Log::channel('messages-backups')
+                ->error(env('GC_CLOUD_FILE') . ' file does not exist in the cloud!');
+
+            // I/O
+            $this->error(env('GC_CLOUD_FILE') . ' file does not exist in the cloud..');
+
+            // Abort
+            return 0;
+        }
         $object->downloadToFile($backupFilePath = base_path() . env('GC_HOST_PATH') . "cloud-backup.json");
 
         // Load the content of the SQL file
         $jsonContent = file_get_contents($backupFilePath);
 
+        // Delete tmp backup
+        unlink($backupFilePath);
+
         // Decode the JSON into an associative array
         $dataJson = json_decode($jsonContent, true);
 
         // Check if we have data
-        if (empty($dataJson)) {
+        if (empty($dataJson))
+        {
             Log::channel('messages-backups')
                 ->error('No data to rollback! About!');
+
+            // I/O
+            $this->info("No data to rollback! About..");
             return 0;
         }
 
         // Check if the 'messages' table exists before truncating
-        if (!Schema::hasTable('messages')) {
+        if (!Schema::hasTable('messages'))
+        {
             Log::channel('messages-backups')
                 ->error('Table messages not exist! About!');
+
+            // I/O
+            $this->info("Table messages not exist! About..");
             return 0;
         }
 
@@ -92,14 +117,23 @@ class MessageRestoreFromCloud extends Command
             Log::channel('messages-backups')
                 ->info('Backup restored successfully!');
 
+            // I/O
+            $this->info("Backup restored successfully..");
+
         } catch (\Exception $e) {
 
             // Rollback only if something wrong
             DB::rollback();
+
+            // Log
             Log::channel('messages-backups')
                 ->error($e->getMessage());
+
+            // I/O
+            $this->error($e->getMessage());
         }
 
+        // Exit
         return 0;
     }
 }
