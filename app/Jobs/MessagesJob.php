@@ -13,7 +13,7 @@ class MessagesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
+    protected mixed $data;
     public $queue;
 
     /**
@@ -22,7 +22,7 @@ class MessagesJob implements ShouldQueue
      * @param mixed $data The message data to be published to RabbitMQ.
      * @param string $queue The RabbitMQ queue name.
      */
-    public function __construct($data, $queue)
+    public function __construct(mixed $data, string $queue)
     {
         $this->data  = $data;
         $this->queue = $queue;
@@ -34,7 +34,7 @@ class MessagesJob implements ShouldQueue
      * @return void
      * @throws \Exception
      */
-    public function handle()
+    public function handle(): void
     {
         // Create a new instance of RabbitMQService
         $rabbitMQService = new RabbitMQService();
