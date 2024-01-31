@@ -21,3 +21,4 @@ yarn-error.log
 /storage/db-backups
 gc-local.json
 gc-prod.json
+/public/mix-manifest.json
