@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\MessageEmail;
 use App\Services\CaseStudiesService;
 use Illuminate\Support\Facades\Route;
 use Google\Cloud\Storage\StorageClient;
@@ -137,11 +138,26 @@ if (app()->environment('local')) {
 
     });
 
-    // Test mail send
+    // Test mail send basic
     Route::get('/mail-test', function () {
 
         // Testing if the email sending is done
         Mail::to(env('MAIL_USERNAME'))->send(new TestEmail());
+
+        return 'Success!';
+    });
+
+    // Test mail send messages
+    Route::get('/mail-test-message', function () {
+        $data =[
+            'name'     => 'test',
+            'email'    => 'test@test.test',
+            'subject'  => 'test',
+            'content'  => 'test'
+        ];
+
+        Mail::to(env('MAIL_USERNAME'))
+            ->send(new MessageEmail($data));
 
         return 'Success!';
     });
