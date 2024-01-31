@@ -17,6 +17,7 @@ cleanup_and_exit() {
     # 1 - Clean logs
     echo -n > "$CURRENT_DIRECTORY/storage/logs/messages.log"
     echo -n > "$CURRENT_DIRECTORY/storage/logs/messages-backups.log"
+    echo -n > "$CURRENT_DIRECTORY/storage/logs/emails.log"
 
     # 2 - Remove and create new cron logs directory if exists
     rm -rf storage/cronlogs
@@ -36,7 +37,7 @@ SCRIPT_PID=$$
 SERVE_PIDS=($(pgrep -f "serve.sh"))
 
 if [ ${#SERVE_PIDS[@]} -gt 0 ]; then
-    echo -e " \n \xF0\x9F\xA4\xA6\xE2\x80\x8D\xE2\x99\x82\xEF\xB8\x8F Ups.. found old './serve.sh' processes already running: ( ${SERVE_PIDS[@]} ). \xF0\x9F\x9A\xA7 Let's eliminate each one.."
+    echo -e " \n \xF0\x9F\xA4\xA6\xE2\x80\x8D\xE2\x99\x82\xEF\xB8\x8F Ups.. found old './serve.sh' processes already running: ( ${SERVE_PIDS[@]} ). \xF0\x9F\x9A\xA7 Let's eliminate it.."
 
     for PID in "${SERVE_PIDS[@]}"; do
         echo -e " \n    \xF0\x9F\xA5\x8A Killing './serve.sh' process with PID: $PID"
@@ -96,7 +97,7 @@ rm -Rf storage/coverage-report
 rm -Rf public/coverage-report
 
 # Generate code coverage report
-echo -e " \n \xF0\x9F\x93\x8A Generate code coverage.."
+echo -e " \n \xF0\x9F\x93\x8A Run tests and generate code coverage.."
 vendor/bin/phpunit --coverage-html storage/coverage-report
 cd public && ln -s ../storage/coverage-report/ coverage-report && cd ..
 

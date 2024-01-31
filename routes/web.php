@@ -4,6 +4,8 @@ use App\Services\CaseStudiesService;
 use Illuminate\Support\Facades\Route;
 use Google\Cloud\Storage\StorageClient;
 
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,8 +55,8 @@ if (app()->environment('local')) {
         return response()->json(['_token' => $token]);
     });
 
-    // Test connection to GC
-    Route::get('/bucket', function () {
+    // Test bucket connection to GC
+    Route::get('/bucket-test', function () {
 
         try {
 
@@ -100,7 +102,7 @@ if (app()->environment('local')) {
 
             // Filter objects based on the name prefix of the previous day's backups
             $oldBackups = array_filter($objectsArray, function ($object) use ($previousDayBackupPrefix) {
-                return strpos($object->name(), $previousDayBackupPrefix) !== false;
+                return str_contains($object->name(), $previousDayBackupPrefix);
             });
 
             foreach ($oldBackups as $oldBackup) {
@@ -133,6 +135,15 @@ if (app()->environment('local')) {
            dd($e->getMessage());
         }
 
+    });
+
+    // Test mail send
+    Route::get('/mail-test', function () {
+
+        // Testing if the email sending is done
+        Mail::to(env('MAIL_USERNAME'))->send(new TestEmail());
+
+        return 'Success!';
     });
 }
 

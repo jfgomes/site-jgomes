@@ -2,21 +2,23 @@
 
 namespace App\Console\Commands\Messages;
 
+use App\Mail\MessageEmail;
 use App\Models\Messages;
 use App\Services\RabbitMQService;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class MessagesFromRabbit extends Command
 {
     protected $signature   = 'queue:messages';
     protected $description = 'Messages from RabbitMQ queue and stored at DB';
 
-    private $queue;
-    private $consumers;
-    private $channel;
-    private $rabbitMQService;
+    private mixed $queue;
+    private mixed $consumers;
+    private mixed $channel;
+    private RabbitMQService $rabbitMQService;
 
     public function __construct(RabbitMQService $rabbitMQService)
     {
@@ -254,6 +256,14 @@ class MessagesFromRabbit extends Command
         // Log the success message in file
         Log::channel('messages')
             ->info("Message {$originalData} sent and saved in the database with ID: {$message->id}");
+
+        // Send email
+        Mail::to(env('MAIL_USERNAME'))
+            ->send(new MessageEmail($data));
+
+        // Log email sent in file
+        Log::channel('emails')
+            ->info("Email sent with {$originalData} to " . env('MAIL_USERNAME') . " | DB ID: {$message->id}");
     }
 
     /**
