@@ -29,7 +29,7 @@ class Messages extends Model
             'name'    => 'required|string|max:50',
             'email'   => 'required|email|max:50',
             'subject' => 'nullable|string|max:100',
-            'content' => 'required|string|max:2000',
+            'content' => 'required|string|max:3000',
         ];
 
         return Validatior2::make($data, $rules);
