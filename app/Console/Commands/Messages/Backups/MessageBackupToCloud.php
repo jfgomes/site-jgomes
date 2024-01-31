@@ -39,7 +39,7 @@ class MessageBackupToCloud extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $path = base_path() . env('GC_HOST_PATH');
         if (!file_exists($path)) {
@@ -91,7 +91,7 @@ class MessageBackupToCloud extends Command
     /**
      * @return void
      */
-    private function deleteOlderBackups($bucket)
+    private function deleteOlderBackups($bucket): void
     {
         $dayBeforeYesterday             = Carbon::now()->subDays(2);
         $dayBeforeYesterdayBackupPrefix = 'messages-backup-' . $dayBeforeYesterday->format('Y_m_d_H');
@@ -104,7 +104,7 @@ class MessageBackupToCloud extends Command
 
         // Filter objects based on the name prefix of the previous day's backups
         $oldBackups = array_filter($objectsArray, function ($object) use ($dayBeforeYesterdayBackupPrefix) {
-            return strpos($object->name(), $dayBeforeYesterdayBackupPrefix) !== false;
+            return str_contains($object->name(), $dayBeforeYesterdayBackupPrefix);
         });
 
         // Delete all older backups

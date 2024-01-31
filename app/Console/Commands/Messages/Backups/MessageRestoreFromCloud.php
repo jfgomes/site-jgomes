@@ -39,7 +39,7 @@ class MessageRestoreFromCloud extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         // Create cloud connection:
         $storage = new StorageClient([
