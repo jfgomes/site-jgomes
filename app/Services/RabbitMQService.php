@@ -11,13 +11,13 @@ class RabbitMQService
 {
     protected $connection;
     protected $channel;
-    private $user;
-    private $pass;
-    private $host;
-    private $port;
-    private $queueListUrl;
-    private $apiHost;
-    private $queue;
+    private mixed $user;
+    private mixed $pass;
+    private mixed $host;
+    private mixed $port;
+    private string $queueListUrl;
+    private mixed $apiHost;
+    private mixed $queue;
 
     /**
      * RabbitMQService constructor.
@@ -98,7 +98,7 @@ class RabbitMQService
      * @param mixed $message
      * @return void
      */
-    public function publishMessage(string $queue, $message): void
+    public function publishMessage(string $queue, mixed $message): void
     {
         $this->channel->basic_publish(new AMQPMessage($message), '', $queue);
     }

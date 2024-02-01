@@ -60,7 +60,7 @@ class MessagesController extends Controller
 
             // Validate received data
             $validationResult = $this->validateData($request->all());
-            if ($validationResult !== 'true')
+            if ($validationResult !== true)
             {
                 return response()->json(
                     ['error' => $validationResult],
@@ -96,11 +96,12 @@ class MessagesController extends Controller
      * Validate the received data using the Messages model.
      *
      * @param array $data
-     * @return string
+     * @return string|bool
      */
-    public function validateData(array $data) : string
+    public function validateData(array $data) : string | bool
     {
         $validator = $this->messagesModel->validateData($data);
+
         if ($validator->fails()) {
 
             // Log validation errors
@@ -110,7 +111,8 @@ class MessagesController extends Controller
             // Return errors
             return json_encode($errors);
         }
-        return 'true';
+
+        return true;
     }
 
     /**

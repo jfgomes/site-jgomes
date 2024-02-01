@@ -135,7 +135,7 @@ class MessagesFromRabbit extends Command
      * @param $callback
      * @return void
      */
-    private function consumeQueue($callback): void
+    private function  consumeQueue($callback): void
     {
         // Ensure that the channel is initialized
         if (!$this->channel) {
@@ -188,7 +188,7 @@ class MessagesFromRabbit extends Command
      * @return bool - true if the message is well delivered.
      *                false if there's some problem with the message.
      */
-    private function saveMessage($originalData): bool
+    private function  saveMessage($originalData): bool
     {
         // Decode the JSON data
         $data = json_decode($originalData, true);

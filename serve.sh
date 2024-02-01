@@ -31,6 +31,7 @@ cleanup_and_exit() {
 trap cleanup_and_exit SIGINT
 
 # Get the PID of this script
+# shellcheck disable=SC2034
 SCRIPT_PID=$$
 
 # Find and kill all the serve.sh processes that can be running

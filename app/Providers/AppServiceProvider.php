@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         app()->singleton('urlToDocs', function () {
             return env('APP_URL') . '/docs/api-docs.json';

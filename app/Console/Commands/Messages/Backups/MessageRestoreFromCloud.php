@@ -65,6 +65,7 @@ class MessageRestoreFromCloud extends Command
             // Abort
             return 0;
         }
+
         $object->downloadToFile($backupFilePath = base_path() . env('GC_HOST_PATH') . "cloud-backup.json");
 
         // Load the content of the SQL file

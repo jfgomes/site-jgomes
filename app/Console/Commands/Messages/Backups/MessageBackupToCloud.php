@@ -224,7 +224,8 @@ class MessageBackupToCloud extends Command
         // Delete all older backups
         foreach ($oldBackups as $oldBackup) {
             $oldBackup->delete();
-            Log::channel('messages-backups')->info('Deleted old backup ' . $oldBackup->name());
+            Log::channel('messages-backups')
+                ->info('Deleted old backup ' . $oldBackup->name());
         }
     }
 }
