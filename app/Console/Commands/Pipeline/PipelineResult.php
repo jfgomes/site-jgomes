@@ -14,7 +14,7 @@ class PipelineResult extends Command
      *
      * @var string
      */
-    protected $signature = 'pipeline:result {--result=}';
+    protected $signature = 'pipeline:result {--result=} {--url=}';
 
     /**
      * The console command description.
