@@ -41,6 +41,7 @@ class PipelineResult extends Command
     public function handle(): int
     {
         $result = $this->option('result');
+        $url    = $this->option('url');
 
         if ($result === 'ok') {
             $this->info('Pipeline result is OK!');
@@ -50,7 +51,7 @@ class PipelineResult extends Command
 
         // Send email
         Mail::to(env('MAIL_USERNAME'))
-            ->send(new PipelineEmail($result));
+            ->send(new PipelineEmail($result, $url));
 
         return 0;
     }

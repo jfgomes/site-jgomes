@@ -11,15 +11,17 @@ class PipelineEmail extends Mailable
     use Queueable, SerializesModels;
 
     private string $result;
+    private string $url;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($result)
+    public function __construct($result, $url)
     {
         $this->result = $result;
+        $this->url    = $url;
     }
 
     /**
@@ -33,7 +35,8 @@ class PipelineEmail extends Mailable
             ->subject('Pipeline result')
             ->view('mail.pipeline')
             ->with([
-                'result' => $this->result
+                'result' => $this->result,
+                'url'    => $this->url
             ]);
     }
 
