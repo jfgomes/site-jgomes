@@ -36,7 +36,7 @@ class PipelineEmail extends Mailable
             ->view('mail.pipeline')
             ->with([
                 'result' => $this->result,
-                'url'    => $this->msg
+                'msg'    => $this->msg
             ]);
     }
 
