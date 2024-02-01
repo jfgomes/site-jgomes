@@ -14,7 +14,7 @@ class PipelineResult extends Command
      *
      * @var string
      */
-    protected $signature = 'pipeline:result {--result=} {--url=}';
+    protected $signature = 'pipeline:result {--result=} {--msg=}';
 
     /**
      * The console command description.
@@ -40,18 +40,22 @@ class PipelineResult extends Command
      */
     public function handle(): int
     {
-        $result = $this->option('result');
-        $url    = $this->option('url');
+        $result  = $this->option('result');
+        $message = $this->option('msg');
 
-        if ($result === 'ok') {
-            $this->info('Pipeline result is OK!');
-        } else {
-            $this->error('Unknown pipeline result!');
+        if ($result === 'ok')
+        {
+            $this->info($result = "Pipeline completed with success!");
+            $message = "Everything is in place.. up and running in production!";
+        }
+        else
+        {
+            $this->error($result = "Pipeline failed!");
         }
 
-        // Send email
+        // Send Jenkins notification
         Mail::to(env('MAIL_USERNAME'))
-            ->send(new PipelineEmail($result, $url));
+            ->send(new PipelineEmail($result, $message));
 
         return 0;
     }

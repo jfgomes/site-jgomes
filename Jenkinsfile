@@ -1,88 +1,161 @@
-pipeline {
+import groovy.json.JsonBuilder
+
+def sshCredentials         = '5f9bd247-5605-4b42-9bb9-c8da86395696'
+def remoteUser             = 'jgomes'
+def remoteHost             = '94.63.32.148'
+def remoteProjectDir       = '/home/jgomes/my/jgomes/site-jgomes'
+def lastRemoteCommandError = null
+def remoteCommandPrefix    = "ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'cd ${remoteProjectDir} &&"
+
+def executeRemoteCommand(command, remoteCommandPrefix)
+{
+    // Prepare full cmd
+    def remoteCommandComplete = "${remoteCommandPrefix} ${command}'"
+
+    // Tmp Jenkins to save thr logs
+    def outputFile = "/tmp/${command.hashCode()}_output.txt"
+
+    // Execute the remote command and redirect standard output and error to the file
+    def result = sh(script: "${remoteCommandComplete} > ${outputFile} 2>&1", returnStatus: true)
+
+    // Read standard output and error from the file
+    def outputContent = readFile(file: outputFile).trim()
+
+    // Return both output and exit code
+    return [output: outputContent, exitCode: result]
+}
+
+pipeline
+{
     agent any
-    stages {
-        stage('Checkout') {
-            steps {
+    stages
+    {
+        stage('Checkout')
+        {
+            steps
+            {
                echo 'Do the checkout from the repo and put the code i this context.'
                checkout scm
             }
         }
-        stage('Build') {
-            steps {
-                // mandatory as I want to run unit tests using the phpunit from vendor
+        stage('Build')
+        {
+            steps
+            {
+                // Mandatory as I want to run unit tests using the phpunit from vendor
                 echo 'Run composer'
                 sh 'composer update'
+
                 // .env file is mandatory to generate app key
                 echo 'Copy dev .env file'
                 sh 'cp .env.dev .env'
-                // app key is mandatory to run tests
+
+                // App key is mandatory to run tests
                 echo 'Generate application key'
                 sh 'php artisan key:generate'
             }
         }
-        stage('Tests') {
-            steps {
+        stage('Tests')
+        {
+            steps
+            {
                 echo 'Run tests'
                 sh 'vendor/bin/phpunit'
             }
         }
-        stage('Deploy') {
-            when {
-                // only deploy to prod if master - || env.BRANCH_NAME.startsWith('feature/')
-                expression {
+        stage('Deploy')
+        {
+            when
+            {
+                // Only deploy to prod if master
+                expression
+                {
                     return (env.BRANCH_NAME == 'master')
                 }
             }
-            steps {
-                script {
-                    sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
+            steps
+            {
+                script
+                {
+                    sshagent(credentials: [sshCredentials])
+                    {
+                        def commands = [
 
-                        // ( do before ) restore composer.lock en package-lock.json from repo as this are the same files in the repo, creating also a modified file that will block the next pull on the next pipeline
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git restore composer.lock && git restore package-lock.json  \''
+                             // Do deploy
+                            'git reset --hard HEAD && git pull origin master',
 
-                        // do deploy
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git pull origin master \''
+                             // Do composer update, migration, and clean all backend caches
+                            'APP_ENV=prod RABBIT_HOST=0.0.0.0 composer update && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan migrate && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan route:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan config:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan cache:clear',
 
-                        // do composer update, migration, and clean all caches
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod RABBIT_HOST=0.0.0.0 composer update && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan migrate && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan route:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan config:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan cache:clear \''
+                             // Do client files versioning
+                            'npm cache clean --force && npm install && npm run production',
 
-                        // do public files versioning
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && npm cache clean --force && npm install && npm run production \''
+                             // Do phpunit report
+                            'vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html" && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/home/jgomes/my/jgomes/site-jgomes/app#(Coverage)#g" {} +'
+                        ]
 
-                        // do phpunit report
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html"  && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/home/jgomes/my/jgomes/site-jgomes/app#(Coverage)#g" {} + \''
-
-                        // ( do after ) restore composer.lock en package-lock.json from repo as this are the same files in the repo, creating also a modified file that will block the next pull on the next pipeline
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && git restore composer.lock && git restore package-lock.json  \''
+                        for (command in commands)
+                        {
+                            def commandResult = executeRemoteCommand(command, remoteCommandPrefix)
+                            if (commandResult.exitCode != 0)
+                            {
+                                lastRemoteCommandError = commandResult.output
+                                currentBuild.result    = 'FAILURE'
+                                echo commandResult.output
+                                error("The pipeline was interrupted during deployment while executing the command: ${command}")
+                                return
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    post {
-        failure {
-            script {
+    post
+    {
+        failure
+        {
+            script
+            {
                 // Verifica se a branch é master
-                if (env.BRANCH_NAME == 'master') {
-                    sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
-                        def buildUrl = env.BUILD_URL
-                        echo "Send pipeline failure notification"
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="nok" --url="test" \''
+                if (env.BRANCH_NAME == 'master')
+                {
+                    sshagent(credentials: [sshCredentials])
+                    {
+                        echo "Send pipeline failure notification with the error.."
+
+                        // Prepare error message
+                        def jsonError = new JsonBuilder(lastRemoteCommandError).toPrettyString().replaceAll('"', '\\"')
+
+                        // Prepare command
+                        command = "APP_ENV=prod php artisan pipeline:result --result=nok --msg=${jsonError}"
+
+                        // Execute command
+                        executeRemoteCommand(command, remoteCommandPrefix)
                     }
                 }
             }
         }
-        success {
-            script {
+        success
+        {
+            script
+            {
                 // Verifica se a branch é master
-                if (env.BRANCH_NAME == 'master') {
-                    sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
-                        def buildUrl = env.BUILD_URL
-                        echo "Send pipeline success notification"
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="ok" --url="$buildUrl" \''
+                if (env.BRANCH_NAME == 'master')
+                {
+                    sshagent(credentials: [sshCredentials])
+                    {
+                        echo "Send pipeline success notification.."
+
+                        // Prepare command
+                        command = 'APP_ENV=prod php artisan pipeline:result --result=ok --msg=ok'
+
+                        // Execute command
+                        executeRemoteCommand(command, remoteCommandPrefix)
                     }
                 }
             }
         }
     }
 }
+

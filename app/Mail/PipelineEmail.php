@@ -11,17 +11,17 @@ class PipelineEmail extends Mailable
     use Queueable, SerializesModels;
 
     private string $result;
-    private string $url;
+    private string $msg;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($result, $url)
+    public function __construct($result, $msg)
     {
         $this->result = $result;
-        $this->url    = $url;
+        $this->msg    = $msg;
     }
 
     /**
@@ -32,11 +32,11 @@ class PipelineEmail extends Mailable
     public function build(): PipelineEmail
     {
         return $this->from(env('MAIL_USERNAME'), env('MAIL_FROM_NAME'))
-            ->subject('Pipeline result')
+            ->subject($this->result)
             ->view('mail.pipeline')
             ->with([
                 'result' => $this->result,
-                'url'    => $this->url
+                'url'    => $this->msg
             ]);
     }
 
