@@ -41,7 +41,7 @@ class PipelineResult extends Command
     public function handle(): int
     {
         $result = $this->option('result');
-        $url    = 'dasssssssss'; //$this->option('url');
+        $url    = $this->option('url');
 
         if ($result === 'ok') {
             $this->info('Pipeline result is OK!');
