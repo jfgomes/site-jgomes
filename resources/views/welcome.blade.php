@@ -968,7 +968,10 @@
 
                     <div>
                         <label for="content">Message <span class="required">*</span></label>
-                        <textarea cols="50" rows="15" id="content" name="contactMessage"></textarea>
+                        <div class="chatCount">
+                            <span id="chatCount"></span>
+                        </div>
+                        <textarea class="contactMessageExtra" cols="50" rows="15" id="content" name="contactMessage"></textarea>
                     </div>
 
                     <div>
