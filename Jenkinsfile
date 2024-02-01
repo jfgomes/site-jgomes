@@ -66,7 +66,7 @@ pipeline {
                 if (env.BRANCH_NAME == 'master') {
                     sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
                         echo "Send pipeline failure notification"
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="nok" \''
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="nok" --url="test" \''
                     }
                 }
             }
@@ -76,38 +76,11 @@ pipeline {
                 // Verifica se a branch é master
                 if (env.BRANCH_NAME == 'master') {
                     sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
-                        echo "Send pipeline succes notification"
-                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="ok" \''
+                        echo "Send pipeline success notification"
+                        sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="ok" --url="test" \''
                     }
                 }
             }
         }
     }
-       post {
-
-            failure {
-                script {
-
-                    // Verifica se a branch é master
-                    if (env.BRANCH_NAME == 'master') {
-                        sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
-                            echo "Send pipeline failure notification"
-                            sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="nok" --url="test" \''
-                        }
-                    }
-                }
-            }
-            success {
-                script {
-
-                    // Verifica se a branch é master
-                    if (env.BRANCH_NAME == 'master') {
-                        sshagent(credentials: ['5f9bd247-5605-4b42-9bb9-c8da86395696']) {
-                            echo "Send pipeline succes notification"
-                            sh 'ssh -o StrictHostKeyChecking=no jgomes@94.63.32.148 \'cd /home/jgomes/my/jgomes/site-jgomes && APP_ENV=prod php artisan pipeline:result --result="ok" --url="test" \''
-                        }
-                    }
-                }
-            }
-        }
 }
