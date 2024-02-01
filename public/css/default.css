@@ -548,6 +548,28 @@ select {
 
 }
 
+.contactMessageExtra {
+    resize: none;
+    margin-top: -25px;
+}
+
+.chatCount {
+    padding: 0 9%;
+    text-align: right;
+    position: relative;
+    top: -27px;
+}
+
+/* < 768 pixels */
+@media (max-width: 767px) {
+    .chatCount {
+        padding: 0;
+        text-align: right;
+        position: relative;
+        top: -27px;
+    }
+}
+
 /* select { padding: 0;
    width: 220px;
    } */

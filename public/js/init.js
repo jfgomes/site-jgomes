@@ -211,6 +211,10 @@ jQuery(document).ready(function($) {
         $('#contactForm #email').val('');
         $('#contactForm #subject').val('');
         $('#contactForm #content').val('');
+
+        // Clean message storage
+        localStorage.setItem('messageLength', '0');
+        sessionStorage.setItem('enteredText', '');
     }
 
     function handleFailure(statusCode, msg)
@@ -257,7 +261,7 @@ jQuery(document).ready(function($) {
         if (!email || !emailRegex.test(email) || email.length > 50)
         {
             handleValidationError('email',
-                'Enter a valid email address (up to 50 characters).');
+                'Enter a valid email address.');
             isValid = false;
         }
 
@@ -295,4 +299,54 @@ jQuery(document).ready(function($) {
         // Add red border to the corresponding field
         $(`#contactForm #${fieldName}`).css('border', '1px solid #ff0000');
     }
+
+    function addCharCountForMessage()
+    {
+        // Selector for the message field
+        let messageField = $('#content');
+
+        // Selector for the character count
+        let charCount = $('#chatCount');
+
+        // Retrieve the character count from localStorage or default to 0
+        let messageLength = parseInt(localStorage.getItem('messageLength')) || 0;
+
+        // Retrieve the entered text from sessionStorage
+        let enteredText = sessionStorage.getItem('enteredText') || '';
+
+        // Set the initial value of the message field
+        messageField.val(enteredText);
+
+        // Apply styles to the character count
+        charCount.html(messageLength + ' / 3000').css({
+            'color': messageLength >= 3000 ? 'red' : 'green',
+            'text-align': 'right'
+        });
+
+        // Monitor input in the message field
+        messageField.on('input', function () {
+            let message = $(this).val();
+            messageLength = message.length;
+
+            // Update the character count
+            charCount.html(messageLength + ' / 3000');
+
+            // Set the color of the character count to red if it exceeds the limit, otherwise green
+            charCount.css('color', messageLength >= 3000 ? 'red' : 'green');
+
+            // Limit input to a maximum of 3000 characters
+            if (messageLength >= 3000) {
+                charCount.html('3000 / 3000');
+                $(this).val(message.substr(0, 2999));
+            }
+
+            // Store the character count in localStorage
+            localStorage.setItem('messageLength', messageLength.toString());
+
+            // Store the entered text in sessionStorage
+            sessionStorage.setItem('enteredText', message);
+        });
+    }
+
+    addCharCountForMessage();
 });
