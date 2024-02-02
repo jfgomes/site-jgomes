@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // Run command to parse the messages
-        $schedule->command('queue:messages')
+        $schedule->command('queue:messages', ['--is-scheduled' => true])
             ->everyMinute();
 
         // Run command to do the messages backups to cloud

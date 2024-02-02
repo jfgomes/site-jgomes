@@ -39,30 +39,34 @@ class RabbitMQService
         // API url
         $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
 
-        // Init connection
-        $this->connection = null;
     }
 
     /**
      * @throws \Exception
      */
-    public function createConnection(): void
+    public function createConnection($isScheduled): void
     {
         try {
 
-            // Create connection
-            $this->connection = new AMQPStreamConnection(
-                $this->host, $this->port, $this->user, $this->pass,
-                '/',
-                false,
-                'AMQPLAIN',
-                null,
-                'en_US',
-                160
-            );
+            if ($isScheduled) {
 
-            // Create channel
-            $this->channel = $this->connection->channel();
+                // Create connection
+                $this->connection = new AMQPStreamConnection(
+                    $this->host, $this->port, $this->user, $this->pass,
+                    '/',
+                    false,
+                    'AMQPLAIN',
+                    null,
+                    'en_US',
+                    160
+                );
+
+                // Create channel
+                $this->channel = $this->connection->channel();
+
+            } else {
+                $this->connection = null;
+            }
 
         } catch (\Exception $e) {
 

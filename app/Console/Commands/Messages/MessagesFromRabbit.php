@@ -20,16 +20,18 @@ class MessagesFromRabbit extends Command
     private mixed $consumers;
     private mixed $channel;
     private RabbitMQService $rabbitMQService;
+    protected bool $isScheduled = false;
 
     /**
      * @throws \Exception
      */
-    public function __construct(RabbitMQService $rabbitMQService)
+    public function __construct(RabbitMQService $rabbitMQService, bool $isScheduled = false)
     {
         parent::__construct();
 
         $this->rabbitMQService = $rabbitMQService;
-        $this->rabbitMQService->createConnection();
+        $this->isScheduled     = $isScheduled;
+        $this->rabbitMQService->createConnection($this->isScheduled);
 
         // Get missing settings according the env
         $this->queue     = env('RABBIT_MESSAGE_QUEUE');
