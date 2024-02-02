@@ -159,13 +159,15 @@ php artisan serve &
 SERVER_PID=$!
 
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT
-RABBIT_CONSUMERS_LIMIT=2
+RABBIT_CONSUMERS_LIMIT=3
+
+sleep 10
 
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
     echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
     nohup php artisan queue:messages --is-scheduled=true >> storage/cronlogs/output_consumer_"$i".log 2>&1 &
-    sleep 5
+    sleep 60 # Never less than 10 seconds
     disown
 done &
 
