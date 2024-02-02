@@ -13,25 +13,22 @@ use Illuminate\Support\Facades\Mail;
 
 class MessagesFromRabbit extends Command
 {
-    protected $signature   = 'queue:messages';
+    protected $signature   = 'queue:messages {--is-scheduled=}';
     protected $description = 'Messages from RabbitMQ queue and stored at DB';
 
     private mixed $queue;
     private mixed $consumers;
     private mixed $channel;
     private RabbitMQService $rabbitMQService;
-    protected bool $isScheduled = false;
 
     /**
      * @throws \Exception
      */
-    public function __construct(RabbitMQService $rabbitMQService, bool $isScheduled = false)
+    public function __construct(RabbitMQService $rabbitMQService)
     {
         parent::__construct();
 
         $this->rabbitMQService = $rabbitMQService;
-        $this->isScheduled     = $isScheduled;
-        $this->rabbitMQService->createConnection($this->isScheduled);
 
         // Get missing settings according the env
         $this->queue     = env('RABBIT_MESSAGE_QUEUE');
@@ -45,6 +42,8 @@ class MessagesFromRabbit extends Command
      */
     public function handle(): bool
     {
+        $this->rabbitMQService->createConnection($this->option('is-scheduled'));
+
         // Check the number of consumers up. If it reaches the limit, don't need to create more. Abort here.
         if ($this->rabbitMQService->getConsumers() >= $this->consumers) {
             $this->info("All total $this->consumers consumers are running. No more consumers needed.");
