@@ -36,7 +36,7 @@ class PipelineEmail extends Mailable
             ->view('mail.pipeline')
             ->with([
                 'result' => $this->result,
-                'msg'    => str_replace("\n", '<br>', "npm WARN using --force Recommended protections disabled.\nbash: line 1: npmx: command not found")
+                'msg'    => str_replace("\n", '<br>', $this->msg)
             ]);
     }
 
