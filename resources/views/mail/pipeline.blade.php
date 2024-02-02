@@ -41,12 +41,6 @@
     <body>
         <h1>Jenkins notification</h1>
         <p><span class="result">{{ $result }}</span></p>
-        <pre id="message"></pre>
-
-        <script>
-            let msg = `{!! $msg !!}`;
-            msg = msg.replace(/\n/g, '<br>');
-            document.getElementById('message').innerHTML = msg;
-        </script>
+        <pre id="message">{{ $msg }}</pre>
     </body>
 </html>
