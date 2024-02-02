@@ -41,6 +41,6 @@
     <body>
         <h1>Jenkins notification</h1>
         <p><span class="result">{{ $result }}</span></p>
-        <pre>{!! nl2br($msg) !!}</pre>
+        <pre>{!! str_replace("\n", '<br>', $msg) !!}</pre>
     </body>
 </html>
