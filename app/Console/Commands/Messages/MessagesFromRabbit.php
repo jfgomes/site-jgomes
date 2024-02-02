@@ -42,13 +42,13 @@ class MessagesFromRabbit extends Command
      */
     public function handle(): bool
     {
-        $this->rabbitMQService->createConnection((bool)$this->option('is-scheduled'));
-
         // Check the number of consumers up. If it reaches the limit, don't need to create more. Abort here.
         if ($this->rabbitMQService->getConsumers() >= $this->consumers) {
             $this->info("All total $this->consumers consumers are running. No more consumers needed.");
             return false;
         }
+
+        $this->rabbitMQService->createConnection((bool)$this->option('is-scheduled'));
 
         // Init the new listener
         $this->init();
