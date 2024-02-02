@@ -38,6 +38,9 @@ class RabbitMQService
 
         // API url
         $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
+
+        // Init connection
+        $this->connection = null;
     }
 
     /**
