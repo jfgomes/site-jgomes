@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Messages;
 
 use App\Mail\MessageEmail;
+use App\Mail\RabbitEmail;
 use App\Models\Messages;
 use App\Services\RabbitMQService;
 use Illuminate\Console\Command;
@@ -38,7 +39,7 @@ class MessagesFromRabbit extends Command
     public function handle(): bool
     {
         // Check the number of consumers up. If it reaches the limit, don't need to create more. Abort here.
-        if ($this->rabbitMQService->getConsumers() >= $this->consumers) {
+        if ($this->rabbitMQService->getConsumers() > $this->consumers) {
             $this->info("All total $this->consumers consumers are running. No more consumers needed.");
             return false;
         }
@@ -187,28 +188,41 @@ class MessagesFromRabbit extends Command
      *                   }
      * @return bool - true if the message is well delivered.
      *                false if there's some problem with the message.
+     * @throws \Throwable
      */
     private function  saveMessage($originalData): bool
     {
         // Decode the JSON data
         $data = json_decode($originalData, true);
 
-        // Validate the data using the Messages model
-        $validator = Messages::validateData($data);
+        try {
 
-        // Check if validation fails
-        if ($validator->fails()) {
+            // Validate the data using the Messages model
+            $validator = Messages::validateData($data);
 
-            // Handle validation failure
-            $this->handleValidationFailure($validator, $originalData);
-            return false;
+            // Check if validation fails
+            if ($validator->fails()) {
+
+                // Handle validation failure
+                $this->handleValidationFailure($validator, $originalData);
+                return false;
+            }
+
+        } catch (\Throwable $e) {
+
+            // Send mail notification with the the exception
+            Log::channel('messages')
+                ->error($e->getMessage());
+
+            // Send email with the fail msg
+            Mail::to(env('MAIL_USERNAME'))
+                ->send(new RabbitEmail($data, $e->getMessage()));
+
         }
-
-        // Save the validated data to the database
-        $this->saveMessageToDatabase($data, $originalData);
 
         return true;
     }
+
 
     /**
      * Handle validation failure by logging the error.
@@ -225,6 +239,7 @@ class MessagesFromRabbit extends Command
 
         // Log the error
         $this->error($composedError);
+
         Log::channel('messages')
             ->error('Error processing a message from rabbit: ' . $composedError);
     }
