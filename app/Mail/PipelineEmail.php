@@ -36,7 +36,7 @@ class PipelineEmail extends Mailable
             ->view('mail.pipeline')
             ->with([
                 'result' => $this->result,
-                'msg'    => $this->msg
+                'msg'    => str_replace("\n", '<br>', $this->msg)
             ]);
     }
 
