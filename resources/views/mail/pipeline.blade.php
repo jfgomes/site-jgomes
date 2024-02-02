@@ -24,7 +24,7 @@
             }
 
             .result {
-                color: #28a745;
+                color: black;
                 font-weight: bold;
             }
         </style>
@@ -32,6 +32,6 @@
     <body>
         <h1>Jenkins notification</h1>
         <p><span class="result">{{ $result }}</span></p>
-        <p>{{ $msg }}</p>
+        <p><strong>{{ $msg }}</strong></p>
     </body>
 </html>
