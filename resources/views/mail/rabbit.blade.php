@@ -41,7 +41,7 @@
         <p>You have received a new rabbit notification with the following details:</p>
 
         <div class="details">
-            <strong>Queue data:</strong>
+            <strong>Queue original date::</strong>
             <p>{{ $email_data }}</p>
 
             @if ($email_error)

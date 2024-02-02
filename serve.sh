@@ -153,21 +153,21 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 
 "
 
+# Init the server and get the PID
+echo -e " \xF0\x9F\x91\x8D All services are up and running.. ( 'ctrl + c' to exit ) \n"
+php artisan serve &
+SERVER_PID=$!
+
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT
-RABBIT_CONSUMERS_LIMIT=5
+RABBIT_CONSUMERS_LIMIT=2
 
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
     echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
     nohup php artisan queue:messages >> storage/cronlogs/output_consumer_"$i".log 2>&1 &
-    sleep 60
+    sleep 5
     disown
 done &
-
-# Init the server and get the PID
-echo -e " \xF0\x9F\x91\x8D All services are up and running.. ( 'ctrl + c' to exit ) \n"
-php artisan serve &
-SERVER_PID=$!
 
 # Monitor the server PID and terminate the backup loop when the server is no longer running
 while kill -0 $SERVER_PID 2>/dev/null; do

@@ -18,6 +18,7 @@ class RabbitMQService
     private string $queueListUrl;
     private mixed $apiHost;
     private mixed $queue;
+    private string $consumers;
 
     /**
      * RabbitMQService constructor.
@@ -26,39 +27,39 @@ class RabbitMQService
      */
     public function __construct()
     {
+        // Get configs
+        $this->user      = env('RABBIT_USER');
+        $this->pass      = env('RABBIT_PASS');
+        $this->host      = env('RABBIT_HOST');
+        $this->port      = env('RABBIT_PORT');
+        $this->apiHost   = env('RABBIT_API_HOST');
+        $this->queue     = env('RABBIT_MESSAGE_QUEUE');
+        $this->consumers = env('RABBIT_CONSUMERS_LIMIT');
+
+        // API url
+        $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function createConnection(): void
+    {
         try {
 
-            // Get configs
-            $this->user    = env('RABBIT_USER');
-            $this->pass    = env('RABBIT_PASS');
-            $this->host    = env('RABBIT_HOST');
-            $this->port    = env('RABBIT_PORT');
-            $this->apiHost = env('RABBIT_API_HOST');
-            $this->queue   = env('RABBIT_MESSAGE_QUEUE');
+            // Create connection
+            $this->connection = new AMQPStreamConnection(
+                $this->host, $this->port, $this->user, $this->pass,
+                '/',
+                false,
+                'AMQPLAIN',
+                null,
+                'en_US',
+                160
+            );
 
-            // Avoid any special user jenkins access to create any connection of the service rabbitmq
-            $currentUser = get_current_user();
-            if ($currentUser !== 'jenkins') {
-
-                // Create connection
-                $this->connection = new AMQPStreamConnection(
-                    $this->host, $this->port, $this->user, $this->pass,
-                    '/',
-                    false,
-                    'AMQPLAIN',
-                    null,
-                    'en_US',
-                    160
-                );
-
-                // Create channel
-                $this->channel = $this->connection->channel();
-
-                // API url
-                $this->queueListUrl = "{$this->apiHost}/queues/%2F/{$this->queue}";
-            } else {
-                $this->connection = null;
-            }
+            // Create channel
+            $this->channel = $this->connection->channel();
 
         } catch (\Exception $e) {
 
@@ -153,6 +154,4 @@ class RabbitMQService
             throw new \Exception('Error: Unable to retrieve the number of consumers. No consumers up now.');
         }
     }
-
-
 }

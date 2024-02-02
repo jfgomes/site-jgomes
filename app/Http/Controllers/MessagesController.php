@@ -62,7 +62,7 @@ class MessagesController extends Controller
             $validationResult = $this->validateData($request->all());
             if ($validationResult !== true)
             {
-                return response()->json(
+               return response()->json(
                     ['error' => $validationResult],
                     422
                 );
