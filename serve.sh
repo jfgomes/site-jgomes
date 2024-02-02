@@ -35,9 +35,11 @@ trap cleanup_and_exit SIGINT
 SCRIPT_PID=$$
 
 # Find and kill all the serve.sh processes that can be running
+# shellcheck disable=SC2207
 SERVE_PIDS=($(pgrep -f "serve.sh"))
 
 if [ ${#SERVE_PIDS[@]} -gt 0 ]; then
+    # shellcheck disable=SC2145
     echo -e " \n \xF0\x9F\xA4\xA6\xE2\x80\x8D\xE2\x99\x82\xEF\xB8\x8F Ups.. found old './serve.sh' processes already running: ( ${SERVE_PIDS[@]} ). \xF0\x9F\x9A\xA7 Let's eliminate it.."
 
     for PID in "${SERVE_PIDS[@]}"; do
