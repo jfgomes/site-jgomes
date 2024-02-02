@@ -32,6 +32,6 @@
     <body>
         <h1>Jenkins notification</h1>
         <p><span class="result">{{ $result }}</span></p>
-        <p><strong>{{ $msg }}</strong></p>
+        <p>{{ $msg }}</p>
     </body>
 </html>

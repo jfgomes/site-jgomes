@@ -46,7 +46,7 @@ class PipelineResult extends Command
         if ($result === 'ok')
         {
             $this->info($result = "Pipeline completed with success! ✅ 🏆");
-            $message = "Everything is in place.. up and running in production!";
+            $message = "Congrats.. everything is in production.. up and running!";
         }
         else
         {
