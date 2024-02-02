@@ -57,8 +57,8 @@
             <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
             <li><a class="smoothscroll" href="#about">About</a></li>
             <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#portfolio">Projects</a></li>
-            <li><a class="smoothscroll" href="#testimonials">Case studies</a></li>
+            <li><a class="smoothscroll" href="#projects">Projects</a></li>
+            <li><a class="smoothscroll" href="#studies">Case studies</a></li>
             <li><a class="smoothscroll" href="#contact">Contact</a></li>
         </ul> <!-- end #nav -->
 
@@ -396,7 +396,7 @@
 
 <!-- Portfolio Section
 ================================================== -->
-<section id="portfolio">
+<section id="projects">
 
     <div class="row">
 
@@ -871,7 +871,7 @@
 
 <!-- Testimonials Section
 ================================================== -->
-<section id="testimonials">
+<section id="studies">
 
     <div class="text-container">
 
