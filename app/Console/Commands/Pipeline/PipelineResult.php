@@ -51,6 +51,7 @@ class PipelineResult extends Command
         else
         {
             $this->error($result = "Pipeline failed! ❌");
+            $message = "$message\nCheck Jenkins for more details.";
         }
 
         // Send Jenkins notification

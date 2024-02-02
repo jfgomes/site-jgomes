@@ -6,7 +6,7 @@
         <title>{{ $result }}</title>
         <style>
             body {
-                font-family: 'Arial', sans-serif;
+                font-family: 'Courier New', Courier, monospace;
                 background-color: #f4f4f4;
                 color: #333;
                 margin: 0;
@@ -27,11 +27,20 @@
                 color: black;
                 font-weight: bold;
             }
+            pre {
+                white-space: pre-wrap;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 14px;
+                background-color: #eee;
+                padding: 10px;
+                border-radius: 5px;
+                overflow-x: auto;
+            }
         </style>
     </head>
     <body>
         <h1>Jenkins notification</h1>
         <p><span class="result">{{ $result }}</span></p>
-        <p>{{ $msg }}</p>
+        <pre>{!! $msg !!}</pre>
     </body>
 </html>
