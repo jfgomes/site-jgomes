@@ -38,6 +38,7 @@ class MessagesJob implements ShouldQueue
     {
         // Create a new instance of RabbitMQService
         $rabbitMQService = new RabbitMQService();
+        $rabbitMQService->createConnection(true);
 
         // Publish the message to the specified RabbitMQ queue
         $rabbitMQService->publishMessage($this->queue, $this->data);
