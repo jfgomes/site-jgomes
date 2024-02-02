@@ -45,13 +45,13 @@ class PipelineResult extends Command
 
         if ($result === 'ok')
         {
-            $this->info($result = "Pipeline completed with success! ✅ 🏆");
+            $this->info($result = "Pipeline success! ✅ 🏆");
             $message = "Congrats.. everything is in production.. up and running!";
         }
         else
         {
             $this->error($result = "Pipeline failed! ❌");
-            $message = "$message\nCheck Jenkins for more details.";
+            $message = "$message\nCheck Jenkins logs for more details.";
         }
 
         // Send Jenkins notification
