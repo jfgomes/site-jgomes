@@ -154,13 +154,13 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 "
 
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT
-RABBIT_CONSUMERS_LIMIT=2
+RABBIT_CONSUMERS_LIMIT=5
 
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
     echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
     nohup php artisan queue:messages >> storage/cronlogs/output_consumer_"$i".log 2>&1 &
-    sleep 5
+    sleep 60
     disown
 done &
 
