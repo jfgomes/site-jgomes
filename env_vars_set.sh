@@ -190,10 +190,3 @@ else
 fi
 
 echo "Environment variables loaded successfully."
-
-# Tests:
-# DB
-php artisan tinker --execute="DB::select('SELECT 1') ? print('Successful connection!') : print('Connection failed.');"
-
-# RabbitMQ
-php artisan rabbitmq:ping

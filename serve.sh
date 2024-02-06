@@ -225,14 +225,36 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 
 "
 
+###### Service test connections start
+# DB
+php artisan tinker --execute="DB::select('SELECT 1')" > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo -e "\n ✅ Successfully pinged Mysql \n"
+else
+    echo -e "\n ❌ Connection to Mysql failed. \n"
+    exit 1
+fi
+
+# RabbitMQ
+php artisan rabbitmq:ping > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    # Success
+    echo -e " ✅ Successfully pinged RabbitMQ \n"
+else
+    # Failure
+    echo -e " ❌ Connection to RabbitMQ failed. \n"
+    exit 1
+fi
+###### Service test connections end
+
 # Init the server and get the PID
-echo -e " \xF0\x9F\x91\x8D All services are up and running.. ( 'ctrl + c' to exit ) \n"
 php artisan serve &
 SERVER_PID=$!
 
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT
 RABBIT_CONSUMERS_LIMIT=3
 
+echo -e " ✅ All services are up and running.. ( 'ctrl + c' to exit ) \n"
 sleep 10
 
 # Turn on the rabbitmq listeners to run the queues
