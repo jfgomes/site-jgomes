@@ -65,8 +65,8 @@ pipeline
                 sh 'cp .env.test .env'
 
                 // App key is mandatory to run tests
-                echo 'Generate application key'
-                sh 'php artisan key:generate'
+                // echo 'Generate application key'
+                // sh 'php artisan key:generate'
             }
         }
         stage('Tests')
