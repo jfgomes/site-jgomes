@@ -131,7 +131,7 @@ pipeline
         {
             script
             {
-                // Verifica se a branch é master
+                // Check of the branch is master
                 if (env.BRANCH_NAME == 'master')
                 {
                     sshagent(credentials: [sshCredentials])
@@ -154,7 +154,7 @@ pipeline
         {
             script
             {
-                // Verifica se a branch é master
+                // Check of the branch is master
                 if (env.BRANCH_NAME == 'master')
                 {
                     sshagent(credentials: [sshCredentials])
@@ -172,4 +172,3 @@ pipeline
         }
     }
 }
-

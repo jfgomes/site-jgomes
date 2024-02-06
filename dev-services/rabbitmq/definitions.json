@@ -1,53 +1,53 @@
 {
-  "exchanges": [
-    {
-      "name": "messages_dev",
-      "vhost": "/",
-      "type": "direct",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    }
-  ],
-  "users": [
-    {
-      "name": "user_dev",
-      "password": "pass_dev",
-      "tags": "administrator"
-    }
-  ],
-  "vhosts": [
-    {
-      "name": "/"
-    }
-  ],
-  "permissions": [
-    {
-      "user": "user_dev",
-      "vhost": "/",
-      "configure": ".*",
-      "write": ".*",
-      "read": ".*"
-    }
-  ],
-  "queues": [
-    {
-      "name": "messages_dev",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
-    }
-  ],
-  "bindings": [
-    {
-      "source": "messages_dev",
-      "vhost": "/",
-      "destination": "messages_dev",
-      "destination_type": "queue",
-      "routing_key": "messages_dev",
-      "arguments": {}
-    }
-  ]
+    "exchanges": [
+        {
+            "name": "${RABBIT_MESSAGE_QUEUE}",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "users": [
+        {
+            "name": "${RABBIT_USER}",
+            "password": "${RABBIT_PASS}",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "${RABBIT_USER}",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "queues": [
+        {
+            "name": "${RABBIT_MESSAGE_QUEUE}",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "${RABBIT_MESSAGE_QUEUE}",
+            "vhost": "/",
+            "destination": "${RABBIT_MESSAGE_QUEUE}",
+            "destination_type": "queue",
+            "routing_key": "${RABBIT_MESSAGE_QUEUE}",
+            "arguments": {}
+        }
+    ]
 }

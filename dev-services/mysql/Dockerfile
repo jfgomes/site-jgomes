@@ -2,9 +2,9 @@
 FROM mysql:latest
 
 # Set environment variables
-ENV MYSQL_DATABASE_DEV jgomes_site_dev
-ENV MYSQL_USER_DEV user_dev
-ENV MYSQL_PASSWORD_DEV pass_dev
+ENV MYSQL_DATABASE_DEV=${DB_DATABASE}
+ENV MYSQL_USER_DEV=${DB_USERNAME}
+ENV MYSQL_PASSWORD_DEV=${DB_PASSWORD}
 
 # Copy the database initialization script to the docker-entrypoint-initdb.d directory
 COPY ./init.sql /docker-entrypoint-initdb.d/

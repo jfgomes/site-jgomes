@@ -2,6 +2,10 @@
 
 CURRENT_DIRECTORY=$(pwd)
 
+# Run script to add env vars to the project
+chmod +x set_env_vars.sh
+./set_env_vars.sh
+
 # shellcheck disable=SC2059
 printf "\n \xF0\x9F\xA7\xAD My workdir: $CURRENT_DIRECTORY \n"
 
@@ -58,6 +62,32 @@ lsof -ti :8000 | xargs -r kill -9
 
 # shellcheck disable=SC2164
 cd dev-services
+
+# Prepare env vars to create the services
+rm .env
+ln -s ../.env.dev .env
+source .env
+
+############## rabbitmq/definitions env vars set START
+
+# For JSON files it seems it cannot read env vars. Let's doing using other approach:
+if [ -e rabbitmq/definitions.json ]; then
+    cp rabbitmq/definitions.json rabbitmq/definitions-dev.json
+else
+    echo "Error: rabbitmq/definition.json not found."
+    exit 1
+fi
+
+# Read the content of rabbitmq/definitions-dev JSON file
+json_content=$(<rabbitmq/definitions-dev.json)
+
+# Replace the env vars to "real" vars
+formatted_json=$(echo "$json_content" | sed -e "s/\${RABBIT_MESSAGE_QUEUE}/$RABBIT_MESSAGE_QUEUE/g" -e "s/\${RABBIT_PASS}/$RABBIT_PASS/g" -e "s/\${RABBIT_USER}/$RABBIT_USER/g")
+
+# Save the JSON well formatted with the real env vars
+echo "$formatted_json" > rabbitmq/definitions-dev.json
+
+############## rabbitmq/definitions env vars set END
 
 # Check if one of this services is up
 SERVICES=("mysql" "phpmyadmin" "rabbitmq")
