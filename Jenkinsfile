@@ -1,11 +1,11 @@
 import groovy.json.JsonBuilder
 
-def sshCredentials         = '5f9bd247-5605-4b42-9bb9-c8da86395696'
-def remoteUser             = 'jgomes'
-def remoteHost             = '94.63.32.148'
-def remoteProjectDir       = '/home/jgomes/my/jgomes/site-jgomes'
+def sshCredentials         = null
+def remoteUser             = null
+def remoteHost             = null
+def remoteProjectDir       = null
 def lastRemoteCommandError = null
-def remoteCommandPrefix    = "ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'cd ${remoteProjectDir} &&"
+def remoteCommandPrefix    = null
 
 def executeRemoteCommand(command, remoteCommandPrefix)
 {
@@ -30,6 +30,20 @@ pipeline
     agent any
     stages
     {
+        stage('Get ENV vars')
+        {
+            steps
+            {
+                script
+                {
+                    sshCredentials      = env.SSH_CREDENTIALS
+                    remoteUser          = env.REMOTE_USER
+                    remoteHost          = env.REMOTE_HOST
+                    remoteProjectDir    = env.REMOTE_PROJECT_DIR
+                    remoteCommandPrefix = "ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'cd ${remoteProjectDir} &&"
+                }
+            }
+        }
         stage('Checkout')
         {
             steps
