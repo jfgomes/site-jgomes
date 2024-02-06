@@ -2,7 +2,7 @@
 
 echo "Updating environment variables..."
 
-source ../load_env_vars_local.sh
+source env_vars_list_local.sh
 
 # Create global project env vars file
 rm "$ENV_FILE"

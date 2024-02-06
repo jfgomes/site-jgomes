@@ -24,3 +24,4 @@ gc-local.json
 gc-prod.json
 /public/mix-manifest.json
 /dev-services/rabbitmq/definitions-dev.json
+env_vars_list_local.sh

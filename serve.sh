@@ -2,9 +2,56 @@
 
 CURRENT_DIRECTORY=$(pwd)
 
-# Run script to add env vars to the project
-chmod +x set_env_vars.sh
-./set_env_vars.sh
+ENV_FILE=".env.dev"
+
+# Verificar se o script foi chamado com o argumento 'load-env-vars'
+if [ "$1" == "load-env-vars" ]; then
+
+    rm "$ENV_FILE"
+    touch "$ENV_FILE"
+
+    ZIP_FILE=env_vars_list_local.zip
+    DESTINATION_FILE=env_vars_list_local.sh
+
+    # Prompt the user for the password to unzip
+    # shellcheck disable=SC2162
+    read -s -p "Enter the password to unzip the env vars file: " PASSWORD
+    echo
+
+    echo "Unzipping with password: $PASSWORD"
+
+    # Unzip the file using the provided password
+    unzip -P "$PASSWORD" "$ZIP_FILE" -d "$(dirname "$DESTINATION_FILE")"
+
+    # Check the return code of the unzip command
+    # shellcheck disable=SC2181
+    if [ $? -ne 0 ]; then
+      echo "Error: The provided password may be incorrect. Aborting the script..."
+      exit 1
+    fi
+
+    echo "File $ZIP_FILE successfully uncompressed to $DESTINATION_FILE."
+
+    # Run script to add env vars to the project
+    chmod +x set_env_vars.sh
+    ./env_vars_set.sh
+
+    # Delete unzipped env vars
+    rm "$DESTINATION_FILE"
+
+else
+    # Check if file .env.dev exists
+    if [ -f "$ENV_FILE" ]; then
+
+        # Run script to add env vars to the project
+        chmod +x set_env_vars.sh
+        ./set_env_vars.sh
+
+    else
+        echo "The file $ENV_FILE does not exist. Run './serve.sh load-env-vars' to create it with a password."
+        exit 1
+    fi
+fi
 
 # shellcheck disable=SC2059
 printf "\n \xF0\x9F\xA7\xAD My workdir: $CURRENT_DIRECTORY \n"
