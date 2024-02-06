@@ -1,10 +1,9 @@
 #!/bin/bash
 
 CURRENT_DIRECTORY=$(pwd)
-
 ENV_FILE=".env.dev"
 
-# Verificar se o script foi chamado com o argumento 'load-env-vars'
+# Verify if we have the param 'load-env-vars'
 if [ "$1" == "load-env-vars" ]; then
 
     rm "$ENV_FILE"
@@ -41,13 +40,7 @@ if [ "$1" == "load-env-vars" ]; then
 
 else
     # Check if file .env.dev exists
-    if [ -f "$ENV_FILE" ]; then
-
-        # Run script to add env vars to the project
-        chmod +x set_env_vars.sh
-        ./set_env_vars.sh
-
-    else
+    if [ ! -f "$ENV_FILE" ]; then
         echo "The file $ENV_FILE does not exist. Run './serve.sh load-env-vars' to create it with a password."
         exit 1
     fi
