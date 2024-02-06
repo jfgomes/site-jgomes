@@ -3,6 +3,8 @@ services:
     mysql:
         container_name: jgomes_site_dev_mysql
         build: './mysql'
+        env_file:
+            - .env
         ports:
             - "3406:3306"
         environment:
@@ -14,6 +16,8 @@ services:
         container_name: jgomes_site_dev_phpmyadmin
         image: phpmyadmin/phpmyadmin
         platform: linux/amd64  # Forces the platform to amd64
+        env_file:
+            - .env
         ports:
             - "8090:80"
         environment:
@@ -24,6 +28,8 @@ services:
         container_name: jgomes_site_dev_rabbit
         build:
             context: './rabbitmq'
+        env_file:
+            - .env
         ports:
             - "5672:5672"
             - "15672:15672"

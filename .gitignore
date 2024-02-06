@@ -22,3 +22,4 @@ yarn-error.log
 gc-local.json
 gc-prod.json
 /public/mix-manifest.json
+/dev-services/rabbitmq/definitions-dev.json

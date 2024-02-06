@@ -33,6 +33,7 @@ if (app()->environment('local')) {
     });
 
     Route::get('/cc', function () {
+
         // Clear route cache
         Artisan::call('route:clear');
 
@@ -46,6 +47,7 @@ if (app()->environment('local')) {
     });
 
     Route::get('/env', function () {
+
         // Get the env
         return env('APP_ENV');
     });

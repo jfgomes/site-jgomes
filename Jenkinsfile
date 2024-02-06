@@ -1,9 +1,42 @@
 import groovy.json.JsonBuilder
 
-def sshCredentials         = '5f9bd247-5605-4b42-9bb9-c8da86395696'
-def remoteUser             = 'jgomes'
-def remoteHost             = '94.63.32.148'
-def remoteProjectDir       = '/home/jgomes/my/jgomes/site-jgomes'
+//def sshCredentials         = '5f9bd247-5605-4b42-9bb9-c8da86395696'
+//def remoteUser             = 'jgomes'
+//def remoteHost             = '94.63.32.148'
+//def remoteProjectDir       = '/home/jgomes/my/jgomes/site-jgomes'
+
+
+
+
+
+// Ler o conteúdo do arquivo .env.dev
+def envContent = readFile(".env.dev")
+
+// Procurar e extrair o valor de uma variável específica
+def extractEnvVar = { envVar ->
+    def match = envContent =~ /${envVar}=(.*)/
+    return match ? match[0][1].trim() : null
+}
+
+// Extrair variáveis específicas
+def sshCredentials = extractEnvVar('SSH_CREDENTIALS')
+def remoteUser = extractEnvVar('REMOTE_USER')
+def remoteHost = extractEnvVar('REMOTE_HOST')
+def remoteProjectDir = extractEnvVar('REMOTE_PROJECT_DIR')
+
+// Imprimir as variáveis para verificação
+echo "SSH_CREDENTIALS: ${sshCredentials}"
+echo "REMOTE_USER: ${remoteUser}"
+echo "REMOTE_HOST: ${remoteHost}"
+echo "REMOTE_PROJECT_DIR: ${remoteProjectDir}"
+
+
+
+
+
+
+
+
 def lastRemoteCommandError = null
 def remoteCommandPrefix    = "ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'cd ${remoteProjectDir} &&"
 
