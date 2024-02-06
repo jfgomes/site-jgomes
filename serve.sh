@@ -32,7 +32,7 @@ if [ "$1" == "load-env-vars" ]; then
     echo "File $ZIP_FILE successfully uncompressed to $DESTINATION_FILE."
 
     # Run script to add env vars to the project
-    chmod +x set_env_vars.sh
+    chmod +x env_vars_set.sh
     ./env_vars_set.sh
 
     # Delete unzipped env vars

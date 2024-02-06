@@ -163,6 +163,28 @@ if [ -f "$ENV_FILE" ]; then
         fi
     done
 
+    echo -e "\n" >> "$ENV_FILE"
+
+    ########################################################################
+    # Jenkins:
+    ########################################################################
+
+    declare -a env_variables_jenkins=($(set | grep "^JENKINS_" | cut -d= -f1))
+
+    # Loop to update the GC variables in the configuration file
+    for var in "${env_variables_jenkins[@]}"; do
+        value="${!var}"
+
+        # Check if the variable already exists in the .env file
+        if grep -q "^$var=" "$ENV_FILE"; then
+            # If it exists, update the value
+            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+        else
+            # If it doesn't exist, add the variable to the end of the file
+            echo "$var=$value" >> "$ENV_FILE"
+        fi
+    done
+
 else
     echo "File not found."
 fi
