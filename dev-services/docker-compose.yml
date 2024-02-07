@@ -33,5 +33,29 @@ services:
         ports:
             - "5672:5672"
             - "15672:15672"
+
+    redis:
+        container_name: jgomes_site_dev_redis
+        restart: always
+        image: redis:latest
+        ports:
+            - "6379:6379"
+        command: [ "redis-server", "--appendonly", "yes" ]
+        volumes:
+            - redisData:/data
+
+    redis-commander:
+        build:
+            context: './redis-commander'
+        env_file:
+            - .env
+        platform: linux/amd64  # Forces the platform to amd64
+        container_name: jgomes_site_dev_redis_commander
+        restart: always
+        ports:
+            - "8085:8081"
+        depends_on:
+            - redis
 volumes:
     dbData:
+    redisData:

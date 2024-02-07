@@ -130,7 +130,7 @@ echo "$formatted_json" > rabbitmq/definitions-dev.json
 ############## rabbitmq/definitions env vars set END
 
 # Check if one of this services is up
-SERVICES=("mysql" "phpmyadmin" "rabbitmq")
+SERVICES=("mysql" "phpmyadmin" "rabbitmq" "redis" "redis-commander")
 
 # shellcheck disable=SC2034
 for service in "${SERVICES[@]}"; do
@@ -243,6 +243,16 @@ if [ $? -eq 0 ]; then
 else
     # Failure
     echo -e " ❌ Connection to RabbitMQ failed. \n"
+    exit 1
+fi
+# Redis
+redis-cli ping  > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    # Success
+    echo -e " ✅ Successfully pinged Redis \n"
+else
+    # Failure
+    echo -e " ❌ Connection to Redis failed. \n"
     exit 1
 fi
 ###### Service test connections end

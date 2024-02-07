@@ -34,6 +34,14 @@ It was build with:
 - sudo apt install npm
 - xdebug
 - cd public && ln -s ../coverage-report/ coverage-report
+- Ubuntu / Debian:
+
+  sudo apt-get update &&
+  sudo apt-get install redis-tools
+
+- macOS (com Homebrew):
+
+  brew install redis
 
 ## TR/DR setup
 - git clone git@github.com:jfgomes/site-jgomes.git

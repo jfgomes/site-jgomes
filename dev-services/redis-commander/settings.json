@@ -1,0 +1,12 @@
+{
+    "connections": [
+        {
+            "host": "redis",
+            "port": 6379,
+            "db": 0,
+            "password": "",
+            "label": "Local Redis"
+        }
+    ],
+    "skipKeyModePage": true
+}
