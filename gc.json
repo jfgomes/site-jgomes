@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "resolute-world-392017",
+    "private_key_id": "bed27175876f7741af55665e31d3df716f7d461e",
+    "private_key": "${GC_PRIVATE_KEY}",
+    "client_email": "db-backups-local@resolute-world-392017.iam.gserviceaccount.com",
+    "client_id": "100008630709907137502",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/db-backups-local%40resolute-world-392017.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
