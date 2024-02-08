@@ -112,20 +112,20 @@ source .env
 
 # For JSON files it seems it cannot read env vars. Let's doing using other approach:
 if [ -e rabbitmq/definitions.json ]; then
-    cp rabbitmq/definitions.json rabbitmq/definitions-dev.json
+    cp rabbitmq/definitions.json rabbitmq/definitions-local.json
 else
     echo "Error: rabbitmq/definition.json not found."
     exit 1
 fi
 
-# Read the content of rabbitmq/definitions-dev JSON file
-json_content=$(<rabbitmq/definitions-dev.json)
+# Read the content of rabbitmq/definitions-local JSON file
+json_content=$(<rabbitmq/definitions-local.json)
 
 # Replace the env vars to "real" vars
 formatted_json=$(echo "$json_content" | sed -e "s/\${RABBIT_MESSAGE_QUEUE}/$RABBIT_MESSAGE_QUEUE/g" -e "s/\${RABBIT_PASS}/$RABBIT_PASS/g" -e "s/\${RABBIT_USER}/$RABBIT_USER/g")
 
 # Save the JSON well formatted with the real env vars
-echo "$formatted_json" > rabbitmq/definitions-dev.json
+echo "$formatted_json" > rabbitmq/definitions-local.json
 
 ############## rabbitmq/definitions env vars set END
 
@@ -164,6 +164,40 @@ export APP_ENV=local
 # Back to root
 # shellcheck disable=SC2103
 cd ..
+
+############## google credentials env var set START
+
+# For JSON files it seems it cannot read env vars. Let's doing using other approach:
+if [ -e gc.json ]; then
+    cp gc.json gc-local.json
+else
+    echo "Error: gc-local.json not found."
+    exit 1
+fi
+
+# Read the content of gc-local.json JSON file
+json_content_gc=$(<gc-local.json)
+
+# Replace the env vars to "real" vars
+# shellcheck disable=SC2001
+#escaped_private_key=$(echo "$GC_PRIVATE_KEY" | sed 's/\\n/\'$'\n''/g')
+#formatted_json_gc=$(echo "$json_content_gc" | sed "s/{GC_PRIVATE_KEY}/$escaped_private_key/g")
+
+#escaped_private_key=$(echo "$GC_PRIVATE_KEY" | awk '{gsub(/\\n/, "\n")}1')
+#formatted_json_gc=$(echo "$json_content_gc" | sed "s/{GC_PRIVATE_KEY}/$escaped_private_key/g")
+
+escaped_private_key=$(echo "$GC_PRIVATE_KEY" | awk '{gsub(/\\n/, "\\\\n")}1')
+formatted_json_gc=$(echo "$json_content_gc" | awk -v private_key="$escaped_private_key" '{gsub(/{GC_PRIVATE_KEY}/, private_key)}1')
+
+# Remove $ from the beginning of private_key
+formatted_json_gc="${formatted_json_gc/\$}"
+
+
+
+# Save the JSON well formatted with the real env vars
+echo "$formatted_json_gc" > gc-local.json
+
+############## google credentials env var set END
 
 # Code coverage
 rm -Rf storage/coverage-report
@@ -229,9 +263,9 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 # DB
 php artisan tinker --execute="DB::select('SELECT 1')" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo -e "\n ✅ Successfully pinged Mysql \n"
+    echo -e "\n ✅  Successfully pinged Mysql \n"
 else
-    echo -e "\n ❌ Connection to Mysql failed. \n"
+    echo -e "\n ❌  Connection to Mysql failed. \n"
     exit 1
 fi
 
@@ -239,20 +273,21 @@ fi
 php artisan rabbitmq:ping > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     # Success
-    echo -e " ✅ Successfully pinged RabbitMQ \n"
+    echo -e " ✅  Successfully pinged RabbitMQ \n"
 else
     # Failure
-    echo -e " ❌ Connection to RabbitMQ failed. \n"
+    echo -e " ❌  Connection to RabbitMQ failed. \n"
     exit 1
 fi
+
 # Redis
 redis-cli ping  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     # Success
-    echo -e " ✅ Successfully pinged Redis \n"
+    echo -e " ✅  Successfully pinged Redis \n"
 else
     # Failure
-    echo -e " ❌ Connection to Redis failed. \n"
+    echo -e " ❌  Connection to Redis failed. \n"
     exit 1
 fi
 ###### Service test connections end
@@ -264,7 +299,7 @@ SERVER_PID=$!
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT
 RABBIT_CONSUMERS_LIMIT=3
 
-echo -e " ✅ All services are up and running.. ( 'ctrl + c' to exit ) \n"
+echo -e " ✅  All services are up and running.. ( 'ctrl + c' to exit ) \n"
 sleep 10
 
 # Turn on the rabbitmq listeners to run the queues

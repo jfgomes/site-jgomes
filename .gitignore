@@ -20,8 +20,8 @@ yarn-error.log
 /storage/coverage-report
 /storage/cronlogs
 /storage/db-backups
-gc-local.json
 gc-prod.json
+gc-local.json
 /public/mix-manifest.json
-/dev-services/rabbitmq/definitions-dev.json
+/dev-services/rabbitmq/definitions-local.json
 env_vars_list_local.sh
