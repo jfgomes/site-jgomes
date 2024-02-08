@@ -1,12 +1,10 @@
-# Use a imagem base do redis-commander
+# redis-commander base image
 FROM rediscommander/redis-commander:latest
 
-# Defina as variáveis de ambiente
-#ENV REDIS_HOSTS local:redis:6379
-ENV HTTP_USER ${REDIS_USER}
-ENV HTTP_PASSWORD ${REDIS_PASS}
+# Defined here the env vars
+ENV REDIS_HOSTS app:redis:6379:0,messages:redis:6379:1
+ENV HTTP_USER user_dev
+ENV HTTP_PASSWORD pass_dev
 
-COPY settings.json /usr/src/app/settings.json
-
-# Expõe a porta desejada (8081 no seu caso)
+# Port expose
 EXPOSE 8081
