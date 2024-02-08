@@ -159,7 +159,7 @@ if [ -f "$ENV_FILE" ]; then
             awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=$value" >> "$ENV_FILE"
+            echo "$var=\"$value\"" >> "$ENV_FILE"
         fi
     done
 
