@@ -171,30 +171,21 @@ cd ..
 if [ -e gc.json ]; then
     cp gc.json gc-local.json
 else
-    echo "Error: gc-local.json not found."
+    echo "Error: gc.json not found."
     exit 1
 fi
 
 # Read the content of gc-local.json JSON file
 json_content_gc=$(<gc-local.json)
 
-# Replace the env vars to "real" vars
-# shellcheck disable=SC2001
-#escaped_private_key=$(echo "$GC_PRIVATE_KEY" | sed 's/\\n/\'$'\n''/g')
-#formatted_json_gc=$(echo "$json_content_gc" | sed "s/{GC_PRIVATE_KEY}/$escaped_private_key/g")
-
-#escaped_private_key=$(echo "$GC_PRIVATE_KEY" | awk '{gsub(/\\n/, "\n")}1')
-#formatted_json_gc=$(echo "$json_content_gc" | sed "s/{GC_PRIVATE_KEY}/$escaped_private_key/g")
-
+# Replace the env var to "real" private kwy in file
 escaped_private_key=$(echo "$GC_PRIVATE_KEY" | awk '{gsub(/\\n/, "\\\\n")}1')
 formatted_json_gc=$(echo "$json_content_gc" | awk -v private_key="$escaped_private_key" '{gsub(/{GC_PRIVATE_KEY}/, private_key)}1')
 
 # Remove $ from the beginning of private_key
 formatted_json_gc="${formatted_json_gc/\$}"
 
-
-
-# Save the JSON well formatted with the real env vars
+# Save the JSON well formatted with the real env var
 echo "$formatted_json_gc" > gc-local.json
 
 ############## google credentials env var set END
