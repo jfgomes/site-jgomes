@@ -7,10 +7,10 @@ ENV MYSQL_USER_DEV=${DB_USERNAME}
 ENV MYSQL_PASSWORD_DEV=${DB_PASSWORD}
 
 # Copy the database initialization script to the docker-entrypoint-initdb.d directory
-COPY ./init.sql /docker-entrypoint-initdb.d/
+COPY init-local.sql /tmp/init.sql
 
 # Expose the MySQL port
 EXPOSE 3306
 
 # Start MySQL service
-CMD ["mysqld"]
+CMD ["mysqld", "--init-file=/tmp/init.sql"]

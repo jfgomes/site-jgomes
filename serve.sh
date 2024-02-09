@@ -129,6 +129,26 @@ echo "$formatted_json" > rabbitmq/definitions-dev.json
 
 ############## rabbitmq/definitions env vars set END
 
+############## mysql/init.sql env vars set START
+# For sql files it seems it cannot read env vars. Let's doing using other approach:
+if [ -e mysql/init.sql ]; then
+    cp mysql/init.sql mysql/init-local.sql
+else
+    echo "Error: rmysql/init.sql not found."
+    exit 1
+fi
+
+# Read the content of rmysql/init.sql sql file
+content_mysql=$(<mysql/init.sql)
+
+# Replace the env vars to "real" vars
+formatted_sql=$(echo "$content_mysql" | sed -e "s/\${DB_USERNAME}/$DB_USERNAME/g" -e "s/\${DB_DATABASE}/$DB_DATABASE/g" -e "s/\${DB_PASSWORD}/$DB_PASSWORD/g")
+
+# Save the sql well formatted with the real env vars
+echo "$formatted_sql" > mysql/init-local.sql
+
+############## rabbitmq/definitions env vars set END
+
 # Check if one of this services is up
 SERVICES=("mysql" "phpmyadmin" "rabbitmq")
 
@@ -229,9 +249,9 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 # DB
 php artisan tinker --execute="DB::select('SELECT 1')" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo -e "\n ✅ Successfully pinged Mysql \n"
+    echo -e "\n ✅  Successfully pinged Mysql \n"
 else
-    echo -e "\n ❌ Connection to Mysql failed. \n"
+    echo -e "\n ❌  Connection to Mysql failed. \n"
     exit 1
 fi
 
@@ -239,10 +259,10 @@ fi
 php artisan rabbitmq:ping > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     # Success
-    echo -e " ✅ Successfully pinged RabbitMQ \n"
+    echo -e " ✅  Successfully pinged RabbitMQ \n"
 else
     # Failure
-    echo -e " ❌ Connection to RabbitMQ failed. \n"
+    echo -e " ❌  Connection to RabbitMQ failed. \n"
     exit 1
 fi
 ###### Service test connections end
@@ -254,7 +274,7 @@ SERVER_PID=$!
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT
 RABBIT_CONSUMERS_LIMIT=3
 
-echo -e " ✅ All services are up and running.. ( 'ctrl + c' to exit ) \n"
+echo -e " ✅  All services are up and running.. ( 'ctrl + c' to exit ) \n"
 sleep 10
 
 # Turn on the rabbitmq listeners to run the queues

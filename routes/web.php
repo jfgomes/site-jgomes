@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use Google\Cloud\Storage\StorageClient;
 
 use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +20,15 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-########################################### START LOCAL ROUTES
-## THIS ROUTES ARE ONLY REGISTERED LOCALLY FOR DEV PORPOISES
+########################################### START COOKIE ROUTES
+## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
 
-if (app()->environment('local')) {
+$conditionalFlag = env('APP_ROUTE_COOKIE_FLAG', false);
+if (($conditionalFlag && Cookie::get($conditionalFlag))
+    || app()->environment('local')
+) {
 
+    // CHECK DB CONNECTION
     Route::get('/db', function () {
         try {
             DB::connection()->getPdo();
@@ -32,6 +38,7 @@ if (app()->environment('local')) {
         }
     });
 
+    // CLEAN CACHES
     Route::get('/cc', function () {
 
         // Clear route cache
@@ -46,6 +53,7 @@ if (app()->environment('local')) {
         return 'Caches cleared successfully!';
     });
 
+    // GET ENV
     Route::get('/env', function () {
 
         // Get the env
@@ -165,7 +173,7 @@ if (app()->environment('local')) {
     });
 }
 
-########################################### END LOCAL ROUTES
+########################################### END COOKIE ROUTES
 
 ########################################### START CASE STUDIES ROUTES
 
