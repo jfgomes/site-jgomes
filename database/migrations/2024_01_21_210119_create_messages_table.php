@@ -11,7 +11,7 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();

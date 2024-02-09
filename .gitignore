@@ -25,4 +25,4 @@ gc-local.json
 /public/mix-manifest.json
 /dev-services/rabbitmq/definitions-local.json
 env_vars_list_local.sh
-/dev-services/mysql/init.local.sql
+/dev-services/mysql/init-local.sql

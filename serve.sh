@@ -129,6 +129,26 @@ echo "$formatted_json" > rabbitmq/definitions-local.json
 
 ############## rabbitmq/definitions env vars set END
 
+############## mysql/init.sql env vars set START
+# For sql files it seems it cannot read env vars. Let's doing using other approach:
+if [ -e mysql/init.sql ]; then
+    cp mysql/init.sql mysql/init-local.sql
+else
+    echo "Error: rmysql/init.sql not found."
+    exit 1
+fi
+
+# Read the content of rmysql/init.sql sql file
+content_mysql=$(<mysql/init.sql)
+
+# Replace the env vars to "real" vars
+formatted_sql=$(echo "$content_mysql" | sed -e "s/\${DB_USERNAME}/$DB_USERNAME/g" -e "s/\${DB_DATABASE}/$DB_DATABASE/g" -e "s/\${DB_PASSWORD}/$DB_PASSWORD/g")
+
+# Save the sql well formatted with the real env vars
+echo "$formatted_sql" > mysql/init-local.sql
+
+############## mysql/init.sql env vars set END
+
 # Check if one of this services is up
 SERVICES=("mysql" "phpmyadmin" "rabbitmq" "redis" "redis-commander")
 
