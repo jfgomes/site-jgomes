@@ -1,10 +1,10 @@
 # redis-commander base image
 FROM rediscommander/redis-commander:latest
 
-# Defined here the env vars
-ENV REDIS_HOSTS app:redis:6379:0,messages:redis:6379:1
-ENV HTTP_USER user_dev
-ENV HTTP_PASSWORD pass_dev
+# Defined here the env vars ( Not workig here. Defined at docker-compose )
+#ENV REDIS_HOSTS=${REDIS_HOSTS}
+#ENV HTTP_USER ${REDIS_USER}
+#ENV HTTP_PASSWORD ${REDIS_PASS}
 
 # Port expose
 EXPOSE 8081
