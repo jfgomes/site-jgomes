@@ -65,6 +65,11 @@
     </nav> <!-- end #nav-wrap -->
 
     <div class="row banner">
+        @if(app()->isDownForMaintenance())
+            <div class="maintenance-mode">
+                <p>The application is currently under maintenance!</p>
+            </div>
+        @endif
         <div class="banner-text">
             <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
             <h1 class="responsive-headline">José Gomes</h1>

@@ -8,6 +8,7 @@ use Google\Cloud\Storage\StorageClient;
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\MaintenanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +23,10 @@ use Illuminate\Support\Facades\Mail;
 
 ########################################### START COOKIE ROUTES
 ## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
-
 $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG', false);
 if (($conditionalFlag && Cookie::get($conditionalFlag))
     || app()->environment('local')
 ) {
-
     // CHECK DB CONNECTION
     Route::get('/db', function () {
         try {
@@ -171,6 +170,20 @@ if (($conditionalFlag && Cookie::get($conditionalFlag))
 
         return 'Success!';
     });
+
+    // Maintenance activate. Site down.
+    Route::get('/off-activate',
+        [
+            MaintenanceController::class, 'activate'
+        ]
+    )->name('off-activate');
+
+    // Maintenance deactivate. Site up.
+    Route::get('/off-deactivate',
+        [
+            MaintenanceController::class, 'deactivate'
+        ]
+    )->name('off-deactivate');
 }
 
 ########################################### END COOKIE ROUTES
