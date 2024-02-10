@@ -23,8 +23,8 @@ use App\Http\Controllers\MaintenanceController;
 
 ########################################### START COOKIE ROUTES
 ## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
-$conditionalFlag = env('APP_ROUTE_COOKIE_FLAG', false);
-if (($conditionalFlag && Cookie::get($conditionalFlag))
+$conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
+if (($conditionalFlag && Cookie::has($conditionalFlag))
     || app()->environment('local')
 ) {
     // CHECK DB CONNECTION

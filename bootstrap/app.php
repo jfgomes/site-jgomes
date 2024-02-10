@@ -54,8 +54,7 @@ if (file_exists($filePath))
 
 } else {
 
-    // For Jenkins, for tests...
-    $app->loadEnvironmentFrom('.env.test');
+    $app->loadEnvironmentFrom('.env');
 }
 
 // To run jobs in prod manually using APP_ENV var like:
