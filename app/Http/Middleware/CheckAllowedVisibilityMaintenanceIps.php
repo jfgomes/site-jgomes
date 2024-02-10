@@ -4,16 +4,17 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
-class CheckAllowedVisibilityMaintenanceIps
+class CheckAllowedVisibilityMaintenance
 {
     public function handle(Request $request, Closure $next)
     {
-        // Checks if the application is in maintenance mode
+        // Check if the application is in maintenance mode
         if (app()->isDownForMaintenance())
         {
-            // Checks if the IP is in the allowed list
-            if ($this->isAllowedIp($request->ip()))
+            // Checks if allowed
+            if ($this->isAllowed())
             {
                 return $next($request);
             }
@@ -26,9 +27,10 @@ class CheckAllowedVisibilityMaintenanceIps
         return $next($request);
     }
 
-    private function isAllowedIp($ip): bool
+    private function isAllowed(): bool
     {
-        // Add the logic here to check if the IP is allowed
-        return $ip == env('APP_MAINTENANCE_ALLOWED_IP');
+        // Check if is allowed
+        $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
+        return ($conditionalFlag && Cookie::has($conditionalFlag));
     }
 }
