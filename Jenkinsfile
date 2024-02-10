@@ -62,7 +62,7 @@ pipeline
 
                 // .env file is mandatory to generate app key
                 echo 'Copy dev .env file'
-                sh 'cp .env.dev .env'
+                sh 'cp .env.test .env'
 
                 // App key is mandatory to run tests
                 // echo 'Generate application key'
