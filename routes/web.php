@@ -172,18 +172,18 @@ if (($conditionalFlag && Cookie::get($conditionalFlag))
     });
 
     // Maintenance activate. Site down.
-    Route::get('/off-activate',
-        [
-            MaintenanceController::class, 'activate'
-        ]
-    )->name('off-activate');
-
-    // Maintenance deactivate. Site up.
-    Route::get('/off-deactivate',
+    Route::get('/deactivate',
         [
             MaintenanceController::class, 'deactivate'
         ]
-    )->name('off-deactivate');
+    )->name('deactivate');
+
+    // Maintenance deactivate. Site up.
+    Route::get('/activate',
+        [
+            MaintenanceController::class, 'activate'
+        ]
+    )->name('activate');
 }
 
 ########################################### END COOKIE ROUTES
