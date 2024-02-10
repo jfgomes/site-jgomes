@@ -22,6 +22,8 @@ class CheckAllowedVisibilityMaintenanceIps
             $message = 'The application is undergoing maintenance!';
             return response()->view('maintenance', ['message' => $message], 503);
         }
+
+        return $next($request);
     }
 
     private function isAllowedIp($ip): bool
