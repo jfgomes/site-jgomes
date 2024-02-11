@@ -6,7 +6,7 @@ ENV_FILE=".env.dev"
 # Verify if we have the param 'load-env-vars'
 if [ "$1" == "load-env-vars" ]; then
 
-    rm "$ENV_FILE"
+    #rm "$ENV_FILE"
     touch "$ENV_FILE"
 
     ZIP_FILE=env_vars_list_local.zip
