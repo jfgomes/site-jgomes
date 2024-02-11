@@ -107,8 +107,8 @@
 <div class="container">
     <h1 style="text-align: center">Services</h1>
     <div class="section">
-        <p class="category">Development
-            <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the development links will not work ) <span> </p>
+        <p class="category">Local
+            <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the local links will not work ) <span> </p>
         <div class="sub-section">
             <div>
                 <p class="service-name">Webpage</p>
@@ -118,7 +118,6 @@
                     </div>
                     <div style="float: right">
                         <span style="margin-right: 10px">Port: 8000</span>
-                        <!--<button class="more-info-btn" onclick="togglePopup('webPageInfo')">More</button>-->
                     </div>
                 </div>
                 <div class="popup" id="webPageInfo">
@@ -235,6 +234,48 @@
                     <button onclick="togglePopup('RabbitMQApiInfo')">Close</button>
                 </div>
             </div>
+            <div>
+                <p class="service-name">Redis</p>
+                <div>
+                    <div>
+                        <span>
+                            ( Internal )
+                        </span>
+                    </div>
+                    <div style="float: right">
+                        <span style="margin-right: 10px">Port: 6379</span>
+                        <button class="more-info-btn" onclick="togglePopup('RedisInfo')">More</button>
+                    </div>
+                </div>
+                <div class="popup" id="RabbitMQInfo">
+                    <p><strong>RabbitMQ:</strong></p>
+                    <div class="info-popup">
+                        USERNAME: <strong> user_dev </strong>
+                        PASSWORD: <strong> pass_dev </strong>
+                    </div>
+                    <button onclick="togglePopup('RedisInfo')">Close</button>
+                </div>
+            </div>
+            <div>
+                <p class="service-name">Redis Commander</p>
+                <div>
+                    <div>
+                        <a class="link" target="_blank" href="http://127.0.0.1:8081">Link</a>
+                    </div>
+                    <div style="float: right">
+                        <span style="margin-right: 10px">Port: 8081</span>
+                        <button class="more-info-btn" onclick="togglePopup('RedisCommander')">More</button>
+                    </div>
+                </div>
+                <div class="popup" id="RedisCommander">
+                    <p><strong>RabbitMQ API:</strong></p>
+                    <div class="info-popup">
+                        USERNAME: <strong> user_dev </strong>
+                        PASSWORD: <strong> pass_dev </strong>
+                    </div>
+                    <button onclick="togglePopup('RedisCommander')">Close</button>
+                </div>
+            </div>
         </div>
     </div>
     <br>
@@ -308,6 +349,30 @@
                     </div>
                     <div style="float: right">
                         <span style="margin-right: 10px">Port: 15672</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="service-name">Redis</p>
+                <div>
+                    <div>
+                        <span>
+                            ( Internal )
+                        </span>
+                    </div>
+                    <div style="float: right">
+                        <span style="margin-right: 10px">Port: 6379</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="service-name">Redis Commander</p>
+                <div>
+                    <div>
+                        <a class="link" target="_blank" href="https://jgomes.site/redis/">Link</a>
+                    </div>
+                    <div style="float: right">
+                        <span style="margin-right: 10px">Port: 8081</span>
                     </div>
                 </div>
             </div>
