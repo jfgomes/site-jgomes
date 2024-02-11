@@ -134,7 +134,7 @@
 <div id="notfound">
     <div class="notfound">
         <h3>🚧 {{ $message }} 🚧</h3><br>
-        <img style="width: 100%; height: 100%" src="../images/personal/maintenance.png" alt=""><br><br>
+        <img style="width: 100%; height: 100%;padding: 10px" src="../images/personal/maintenance.png" alt=""><br><br>
         <h3>We will be back soon!</h3>
     </div>
 
