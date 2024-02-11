@@ -12,7 +12,7 @@
 This website is just a digital and simple project to show my CV and my WOW to the world.
 The storage of this project was home made, so this is a private server in my personal network, with multiple containers that work as services where is only mandatory to have the web server accessible outside of my internal network. The rest of the services are internal.
 
-It was build with:
+It was build with.:
 
 - [Laravel 10](https://laravel.com/docs/10.x/)
 - [PHP 8.1](https://www.php.net/)
