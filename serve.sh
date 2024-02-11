@@ -40,7 +40,6 @@ if [ "$1" == "load-env-vars" ]; then
 
     # Delete unzipped env vars
     rm "$DESTINATION_FILE"
-
 else
     # Check if file .env.dev exists
     if [ ! -f "$ENV_FILE" ]; then
@@ -194,6 +193,10 @@ export APP_ENV=local
 # shellcheck disable=SC2103
 cd ..
 
+# Update Composer
+echo -e "\n 🚀 Updating Composer packages...\n"
+composer update
+
 ############## google credentials env var set START
 
 # For JSON files it seems it cannot read env vars. Let's doing using other approach:
@@ -284,6 +287,9 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 php artisan tinker --execute="DB::select('SELECT 1')" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo -e "\n ✅  Successfully pinged Mysql \n"
+    # Run migrations
+    echo -e "\n 🚀 Running migrations...\n"
+    php artisan migrate
 else
     echo -e "\n ❌  Connection to Mysql failed. \n"
     exit 1
