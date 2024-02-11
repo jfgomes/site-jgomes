@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Updating environment variables..."
+echo "Updating environment variables - LOCAL"
 
 source env_vars_list_local.sh
 
@@ -24,14 +24,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=$value" >> "$ENV_FILE"
+            echo "$var='$value'" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # Log:
@@ -46,14 +44,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=$value" >> "$ENV_FILE"
+            echo "$var='$value'" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # Mail:
@@ -68,14 +64,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=$value" >> "$ENV_FILE"
+            echo "$var='$value'" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # DB:
@@ -90,14 +84,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
             echo "$var=$value" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # Rabbit:
@@ -112,14 +104,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=$value" >> "$ENV_FILE"
+            echo "$var='$value'" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # Redis:
@@ -134,14 +124,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=$value" >> "$ENV_FILE"
+            echo "$var='$value'" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # Google cloud:
@@ -156,14 +144,12 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
-            echo "$var=\"$value\"" >> "$ENV_FILE"
+            echo "$var='$value'" >> "$ENV_FILE"
         fi
     done
-
-    echo -e "\n" >> "$ENV_FILE"
 
     ########################################################################
     # Jenkins:
@@ -178,7 +164,7 @@ if [ -f "$ENV_FILE" ]; then
         # Check if the variable already exists in the .env file
         if grep -q "^$var=" "$ENV_FILE"; then
             # If it exists, update the value
-            awk -v var_name="$var" -v var_value="$value" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
+            awk -v var_name="'$var'" -v var_value="'$value'" '{gsub("^"var_name"=.*$", var_name"=" var_value)}1' "$ENV_FILE" > tmpfile && mv tmpfile "$ENV_FILE"
         else
             # If it doesn't exist, add the variable to the end of the file
             echo "$var=$value" >> "$ENV_FILE"
@@ -189,4 +175,4 @@ else
     echo "File not found."
 fi
 
-echo "Environment variables loaded successfully."
+echo "Environment variables loaded successfully - LOCAL"

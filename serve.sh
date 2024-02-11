@@ -46,6 +46,12 @@ else
     fi
 fi
 
+# Check if the environment is 'local' before running the script
+if [ "$APP_ENV" != "local" ]; then
+    echo "This script should only be run in local environments."
+    exit 1
+fi
+
 # shellcheck disable=SC2059
 printf "\n \xF0\x9F\xA7\xAD My workdir: $CURRENT_DIRECTORY \n"
 
