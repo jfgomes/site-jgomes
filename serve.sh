@@ -44,7 +44,7 @@ if [ "$1" == "load-env-vars" ]; then
 else
     # Check if file .env.dev exists
     if [ ! -f "$ENV_FILE" ]; then
-        echo -e "\n ⚠️ The file $ENV_FILE does not exist. Run './serve.sh load-env-vars' to create it with a password."
+        echo -e "\n ⚠️  The file $ENV_FILE does not exist. Run './serve.sh load-env-vars' to create it with a password. \n"
         exit 1
     fi
 fi
@@ -324,16 +324,24 @@ sleep 10
 
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
-    echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
-    nohup php artisan queue:messages --is-scheduled=true >> storage/cronlogs/output_consumer_"$i".log 2>&1 &
-    sleep 60 # Never less than 10 seconds
-    disown
+        RABBIT_LOG_FILE="storage/cronlogs/output_consumer_$i.log"
+        if [ ! -f "$RABBIT_LOG_FILE" ]; then
+            touch "$RABBIT_LOG_FILE"
+        fi
+        echo -e "\n \xF0\x9F\x9A\x80 Running messages consumer $i.. \n"
+        nohup php artisan queue:messages --is-scheduled=true >> "$RABBIT_LOG_FILE" 2>&1 &
+        sleep 60 # Never less than 10 seconds
+        disown
 done &
 
 # Monitor the server PID and terminate the backup loop when the server is no longer running
 while kill -0 $SERVER_PID 2>/dev/null; do
+    MSG_LOG_FILE="storage/cronlogs/messages-backups.log"
+    if [ ! -f "$MSG_LOG_FILE" ]; then
+        touch "$MSG_LOG_FILE"
+    fi
     echo -e "\n \xF0\x9F\x9A\x80 Running messages-backups to cloud bucket..\n"
-    nohup php artisan db:messages-backup-to-cloud >> storage/cronlogs/messages-backups.log 2>&1
+    nohup php artisan db:messages-backup-to-cloud >> "$MSG_LOG_FILE" 2>&1
     sleep 7200
 done
 
