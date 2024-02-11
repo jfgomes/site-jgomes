@@ -65,9 +65,29 @@
     </nav> <!-- end #nav-wrap -->
 
     <div class="row banner">
+        <style>
+            .maintenance-mode {
+                background-color: #ff6347;
+                color: #fff;
+                padding: 10px 0 15px 0;
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 25px;
+            }
+
+            .maintenance-mode p {
+                margin: 0;
+            }
+
+            .maintenance-mode::before {
+                content: "⚠️";
+                font-size: 24px;
+                margin-right: 10px;
+            }
+        </style>
         @if(app()->isDownForMaintenance())
             <div class="maintenance-mode">
-                <p>The application is currently under maintenance!</p>
+                <p>The application is currently under maintenance! <br /> Is only visible for you and all the other users have the application under maintenance mode page.</p>
             </div>
         @endif
         <div class="banner-text">
