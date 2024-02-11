@@ -284,15 +284,23 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 
 ###### Service test connections start
 # DB
+# Check if there are any changes in the codebase
+# Run the database-related commands only when there are changes
 php artisan tinker --execute="DB::select('SELECT 1')" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo -e "\n ✅  Successfully pinged Mysql \n"
-    # Run migrations
-    echo -e "\n 🚀 Running migrations...\n"
-    php artisan migrate
 else
     echo -e "\n ❌  Connection to Mysql failed. \n"
     exit 1
+fi
+
+# shellcheck disable=SC1009
+if git diff --quiet --exit-code -- db/; then
+    echo -e " 📡 No changes detected. No pending migrations to run..\n"
+else
+    # Run migrations
+    echo -e "\n 🚀 Running migrations...\n"
+    php artisan migrate
 fi
 
 # RabbitMQ
