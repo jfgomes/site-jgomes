@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "Updating environment variables - LOCAL"
+echo -e "\n 📂 ⌛️ Updating environment variables to LOCAL.."
 
 source env_vars_list_local.sh
 
 # Create global project env vars file
-rm "$ENV_FILE"
+#rm "$ENV_FILE"
 touch "$ENV_FILE"
 
 # Check if the .env file exists
@@ -175,4 +175,4 @@ else
     echo "File not found."
 fi
 
-echo "Environment variables loaded successfully - LOCAL"
+echo -e "\n ✅ Environment variables successfully loaded to LOCAL.. "

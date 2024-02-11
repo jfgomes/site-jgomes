@@ -13,11 +13,13 @@ if [ "$1" == "load-env-vars" ]; then
     DESTINATION_FILE=env_vars_list_local.sh
 
     # Prompt the user for the password to unzip
+    echo -e "\n 🙋‍♀️ 🙋 Welcome to \033[1;32mready to dev\033[0m script!\n"
+
     # shellcheck disable=SC2162
-    read -s -p "Enter the password to unzip the env vars file: " PASSWORD
+    read -s -p " 🔐 Enter the password to unlock the env vars: " PASSWORD
     echo
 
-    echo "Unzipping with password: $PASSWORD"
+    echo -e "\n 🔑 Trying to unlock with the password: '$PASSWORD'"
 
     # Unzip the file using the provided password
     unzip -P "$PASSWORD" "$ZIP_FILE" -d "$(dirname "$DESTINATION_FILE")"
@@ -25,11 +27,12 @@ if [ "$1" == "load-env-vars" ]; then
     # Check the return code of the unzip command
     # shellcheck disable=SC2181
     if [ $? -ne 0 ]; then
-      echo "Error: The provided password may be incorrect. Aborting the script..."
+      echo -e "\n ❌ Wrong password: The provided password is incorrect. Aborting the script...\n"
       exit 1
     fi
 
-    echo "File $ZIP_FILE successfully uncompressed to $DESTINATION_FILE."
+    echo -e "\n ✅ 🔓 Correct password: The env vars will be unlocked!"
+    sleep 5
 
     # Run script to add env vars to the project
     chmod +x env_vars_set.sh
@@ -41,14 +44,14 @@ if [ "$1" == "load-env-vars" ]; then
 else
     # Check if file .env.dev exists
     if [ ! -f "$ENV_FILE" ]; then
-        echo "The file $ENV_FILE does not exist. Run './serve.sh load-env-vars' to create it with a password."
+        echo -e "\n ⚠️ The file $ENV_FILE does not exist. Run './serve.sh load-env-vars' to create it with a password."
         exit 1
     fi
 fi
 
 # Check if the environment is 'local' before running the script
 if [ "$APP_ENV" != "local" ]; then
-    echo "This script should only be run in local environments."
+    echo -e "\n⛔️This script should only be run in local environments."
     exit 1
 fi
 
