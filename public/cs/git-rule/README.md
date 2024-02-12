@@ -2,7 +2,7 @@
 
 ## Introduction
 
-- This project uses Git-Hub as de repo provider.
+- This project uses Git-Hub as the repo provider.
 
 - The main branch is master.
 
