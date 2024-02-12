@@ -75,6 +75,9 @@ cleanup_and_exit() {
     rm -rf storage/cronlogs
     mkdir -p storage/cronlogs
 
+    # 3 - Remove unneeded dir if exists
+    rm -rf dev-services/storage
+
     # End the script
     exit
 }
