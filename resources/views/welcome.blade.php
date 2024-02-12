@@ -31,15 +31,6 @@
      ================================================== -->
     <link rel="shortcut icon" href="favicon.png" >
 
-    <script>
-        function downloadCV(urlDocument)
-        {
-            let link  = document.createElement('a');
-            link.href = urlDocument;
-            link.download = urlDocument;
-            link.click();
-        }
-    </script>
 </head>
 
 <body>
@@ -1072,7 +1063,15 @@
 <script src="js/jquery.fittext.js"></script>
 <script src="js/magnific-popup.js"></script>
 <script src="{{ (app()->environment() === 'prod') ? mix('js/prod/init.js') : 'js/init.js' }}"></script>
-
+<script>
+    function downloadCV(urlDocument)
+    {
+        let link  = document.createElement('a');
+        link.href = urlDocument;
+        link.download = urlDocument;
+        link.click();
+    }
+</script>
 </body>
 
 </html>
