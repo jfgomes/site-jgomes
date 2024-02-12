@@ -193,9 +193,11 @@ export APP_ENV=local
 # shellcheck disable=SC2103
 cd ..
 
-# Update Composer
-echo -e "\n 🚀 Updating Composer packages...\n"
-composer update
+if [ "$1" == "load-env-vars" ]; then
+    # Update Composer
+    echo -e "\n 🚀 Updating Composer packages...\n"
+    composer update
+fi
 
 ############## google credentials env var set START
 
@@ -289,28 +291,22 @@ d::::::ddddd::::::dde::::::::e                v:::::::v
 php artisan tinker --execute="DB::select('SELECT 1')" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo -e "\n ✅  Successfully pinged Mysql \n"
+        # Run migrations
+        echo -e " 🚀 Running migrations...\n"
+        php artisan migrate --path="database/*"
 else
     echo -e "\n ❌  Connection to Mysql failed. \n"
     exit 1
-fi
-
-# shellcheck disable=SC1009
-if git diff --quiet --exit-code -- db/; then
-    echo -e " 📡 No changes detected. No pending migrations to run..\n"
-else
-    # Run migrations
-    echo -e "\n 🚀 Running migrations...\n"
-    php artisan migrate
 fi
 
 # RabbitMQ
 php artisan rabbitmq:ping > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     # Success
-    echo -e " ✅  Successfully pinged RabbitMQ \n"
+    echo -e "\n ✅  Successfully pinged RabbitMQ \n"
 else
     # Failure
-    echo -e " ❌  Connection to RabbitMQ failed. \n"
+    echo -e "\n ❌  Connection to RabbitMQ failed. \n"
     exit 1
 fi
 
