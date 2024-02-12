@@ -18,9 +18,11 @@ and..
 
 ![git-branch-protection-codeowners](https://jgomes.site/images/cs/git-branch-protection-codeowners.png)
 
-- This codeowners file above ensures every change done on the code needs to have the approval of the user @jfgomes. Otherwise, the code is never pushed to master.
-
 ## Defined Git rules
+
+- This codeowners file above means every change on the code needs to have the approval of the user @jfgomes. Otherwise the code is never pushed to master.
+
+## Git rule notes
 
 - The master branch is blocked for direct pushes. Nobody can push directly to it.
 
@@ -64,3 +66,4 @@ and..
 
 ## Demonstration ( click on the image to see thw video )
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=6bGltddfJIM)
+
