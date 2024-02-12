@@ -9,7 +9,6 @@
         "ext-curl": "*",
         "ext-json": "*",
         "darkaonline/l5-swagger": "^8.5",
-        "fruitcake/laravel-cors": "^2.0",
         "google/cloud-storage": "^1.37",
         "graham-campbell/markdown": "^15.1",
         "guzzlehttp/guzzle": "^7.0.1",
