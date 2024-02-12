@@ -63,5 +63,5 @@ and..
 
 - Test and check if it works - check the video under ( video with a git simple example, where I have a code owner @jfgomes and a contributor user that is not on the code owner's list called jfgomes2 ):
 
-## Demonstration ( click on the image to see the video )
+## Demonstration ( Click on the image to see the video )
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=6bGltddfJIM)
