@@ -28,10 +28,10 @@ and..
 - Push to master is only allowed after approved PR's and is done via Git-Hub site.
 
 
-- Every developer needs to create a new branch to change the code and, create a PR to push the changes to master only after PR is approved.
+- Every developer needs to create a new branch to change the code and create a PR to push the changes to master only after PR is approved.
 
 
-- New branches can have the following prefixes: feature/xxxxx bugfix/xxxxx fix/xxxxx enhancement/xxxxx.
+- New branches can have the following prefixes: feature/xxxxx || bugfix/xxxxx || fix/xxxxx || enhancement/xxxxx.
 
 
 - There´s a codeowners file on the project where GitHub will read after the PR created and will ask for approve of the users configured inside that.
