@@ -14,15 +14,13 @@ and..
 
 ![git-branch-protection-setup.png](https://jgomes.site/images/cs/git-branch-protection-setup.png)
 
-- There's a CODEOWNERS file in the project.
+- There's also a CODEOWNERS file in the project.
 
 ![git-branch-protection-codeowners](https://jgomes.site/images/cs/git-branch-protection-codeowners.png)
 
+- This codeowners file above ensures every change done on the code needs to have the approval of the user @jfgomes. Otherwise, the code is never pushed to master.
+
 ## Defined Git rules
-
-- This codeowners file above means every change on the code needs to have the approval of the user @jfgomes. Otherwise the code is never pushed to master.
-
-## Git rule notes
 
 - The master branch is blocked for direct pushes. Nobody can push directly to it.
 
@@ -54,7 +52,7 @@ and..
 
 ![Git flow diagram](https://jgomes.site/images/diagrams/git.drawio.png)
 
-## Set CODEOWNERS 
+## Set CODEOWNERS
 
 - Create a simple file ( without extension ) called CODEOWNERS inside a dir called .github at the base of the project.
 
@@ -62,8 +60,8 @@ and..
 
 - Create a new rule in GitHub ( See the introduction block before ).
 
+
 - Test and check if it works - check the video under ( video with a git simple example, where I have a code owner @jfgomes and a contributor user that is not on the code owner's list called jfgomes2 ):
 
-## Demonstration ( click on the image to see thw video )
+## Demonstration ( click on the image to see the video )
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=6bGltddfJIM)
-
