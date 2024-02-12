@@ -8,19 +8,19 @@
 
 - There's a configured rule for master.
 
-![git-branch-protection.png](http://127.0.0.1:8000/images/cs/git-branch-protection.png)
+![git-branch-protection.png](https://jgomes.site/images/cs/git-branch-protection.png)
 
 and..
 
-![git-branch-protection-setup.png](http://127.0.0.1:8000/images/cs/git-branch-protection-setup.png)
+![git-branch-protection-setup.png](https://jgomes.site/images/images/cs/git-branch-protection-setup.png)
 
 - There's a CODEOWNERS file in the project.
 
-![git-branch-protection-codeowners](http://127.0.0.1:8000/images/cs/git-branch-protection-codeowners.png)
+![git-branch-protection-codeowners](https://jgomes.site/images/cs/git-branch-protection-codeowners.png)
 
-- This codeowners file above means every file needs to have the approval of the user @jfgomes. Otherwise the code is never pushed to master.
+- This codeowners file above means every change on the code needs to have the approval of the user @jfgomes. Otherwise the code is never pushed to master.
 
-## Git rules notes:
+## Git rule notes
 
 - The master branch is blocked for pushes. Nobody can push directly to it.
 
@@ -52,16 +52,15 @@ and..
 
 ![Git flow diagram](https://jgomes.site/images/diagrams/git.drawio.png)
 
-## How Git is set up changes
+## Set CODEOWNERS 
 
-- Create a simple file ( no ext. ) called CODEOWNERS at the base of the project -> .github -> CODEOWNERS
+- Create a simple file ( without ext ) called CODEOWNERS at the base of the project -> .github -> CODEOWNERS
 
-![git-branch-pzrotection-codeowners](http://127.0.0.1:8000/images/cs/git-branch-protection-create-codeowners.png)
+![git-branch-protection-codeowners](https://jgomes.site/images/cs/git-branch-protection-create-codeowners.png)
 
 - Create a new rule in GitHub ( See the introduction before ).
 
-- Test and check if it works:
+- Test and check if it works - check the video under ( using a git sample for this project, where I have a code owner @jfgomes and a contributor user that is not on the code owner's list called jfgomes2 ):
 
-## Git flow prototype for this project
-
-
+## Demonstration ( video )
+[![Demonstration video](http://img.youtube.com/vi/6bGltddfJIM/0.jpg)](http://www.youtube.com/watch?v=6bGltddfJIM)

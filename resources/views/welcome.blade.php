@@ -7,7 +7,7 @@
     <!--- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>José Gomes test</title>
+    <title>José Gomes</title>
 
     <meta name="description" content="">
     <meta name="author" content="">

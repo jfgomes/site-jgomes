@@ -2,6 +2,7 @@
 
 CURRENT_DIRECTORY=$(pwd)
 ENV_FILE=".env.dev"
+export APP_ENV='local'
 
 # Verify if we have the param 'load-env-vars'
 if [ "$1" == "load-env-vars" ]; then

@@ -35,23 +35,18 @@ class CaseStudiesService
         return null;
     }
 
-    private function convertDirName($name)
+    private function convertDirName($name): string
     {
-        switch ($name) {
-            case "wms":
-                return "Website message service";
-            case "test":
-                return "Cache implementation";
-            case "test2":
-                return "Elasticsearch implementation";
-            case "basic-setup":
-                return "Project basic setup";
-            case "setup":
-                return "Project complete infra setup";
-            case "cicd":
-                return "Project ci/cd with jenkins";
-            default:
-                return $name;
-        }
+        return match ($name)
+        {
+            "wms"         => "Website message service",
+            "test"        => "Cache implementation",
+            "test2"       => "Elasticsearch implementation",
+            "basic-setup" => "Project basic setup",
+            "setup"       => "Project complete infra setup",
+            "cicd"        => "Project ci/cd with jenkins",
+            "git-rule"    => "🧩 GitHub protection rule for master branch",
+            default => $name,
+        };
     }
 }
