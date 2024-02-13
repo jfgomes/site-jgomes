@@ -51,31 +51,31 @@
 
 ## Details about the serve.sh script
 
-- This script is NOT designed to run in prod. In prod, the needs specific infra.
+- This script is NOT designed to run in prod. In prod, It needs specific infra.
 
 
-- If 'load-env-vars' came as a param of ./serve.sh it will load / reload all the credentials of the project. This information are in a zip file protected by a password that need to be in the root of the project and is not in the repo.
+- If 'load-env-vars' came as a param of ./serve.sh it will load / reload all the credentials of the project. This information is in a zip file protected by a password that needs to be in the root of the project and this is not versioned in the repo. Need to ask for it.
 
 
 - It checks if some pending project PID are running. In so, it kills it.
 
 
-- It mounts all the services defined at dev-services by the file docker-composer.yam
+- It mounts all the services defined at dev-services dir by the file docker-composer.yam
 
 
-- Based on the zip file protected by a password all the credentials in there, if successfully unlocked, it will put all the credentials in place.
+- Based on the zip file protected by a password all the credentials in there, if successfully unlocked, will put all the credentials in place.
 
 
 - It generates the code coverage.
 
 
-- It runs the composer, the npm and db migrations case some change is detected.
+- It runs the composer, the npm and db migrations case some db change is detected.
 
 
 - It creates the listeners for rabbit.
 
 
-- it runs the cons based on the scheduler kernel
+- It runs the cons based on the scheduler kernel. It persists in background.
 
 
 ## Services and other information
