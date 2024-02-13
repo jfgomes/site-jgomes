@@ -1,13 +1,16 @@
 #!/bin/bash
 
+if [ -e .env ]; then
+    echo -e "\n 🤬🤬 No no no... you are in prod. This script is only available to run in local environments. \n"
+    exit 1
+fi
+
 CURRENT_DIRECTORY=$(pwd)
 ENV_FILE=".env.dev"
-APP_ENV="local"
 
 # Verify if we have the param 'load-env-vars'
 if [ "$1" == "load-env-vars" ]; then
 
-    #rm "$ENV_FILE"
     touch "$ENV_FILE"
 
     ZIP_FILE=env_vars_list_local.zip
@@ -51,7 +54,7 @@ fi
 
 # Check if the environment is 'local' before running the script
 if [ "$APP_ENV" != "local" ]; then
-    echo -e "\n⛔️This script should only be run in local environments."
+    echo -e "\n⛔️ This script is only be run in local environments. Probably you don't have the APP_ENV configured yet. Try type: 'APP_ENV=local ./serve.sh' \n"
     exit 1
 fi
 
