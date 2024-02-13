@@ -124,8 +124,10 @@ lsof -ti :8000 | xargs -r kill -9
 # shellcheck disable=SC2164
 cd dev-services
 
-# Prepare env vars to create the services
-rm .env
+# Prepare .env vars for dev-services.
+if [ -e .env ]; then
+    rm .env
+fi
 ln -s ../.env.dev .env
 source .env
 
