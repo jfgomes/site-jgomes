@@ -42,7 +42,7 @@ class CaseStudiesService
             "wms"         => "Website message service",
             "test"        => "Cache implementation",
             "test2"       => "Elasticsearch implementation",
-            "basic-setup" => "Project basic setup",
+            "basic-setup" => "💻 Local environment setup AKA Ready to Dev!",
             "setup"       => "Project complete infra setup",
             "cicd"        => "Project ci/cd with jenkins",
             "git-rule"    => "🧩 GitHub protection rule for master branch",
