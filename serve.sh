@@ -2,7 +2,7 @@
 
 CURRENT_DIRECTORY=$(pwd)
 ENV_FILE=".env.dev"
-export APP_ENV='local'
+APP_ENV="local"
 
 # Verify if we have the param 'load-env-vars'
 if [ "$1" == "load-env-vars" ]; then
@@ -189,9 +189,6 @@ echo -n > "$CURRENT_DIRECTORY/storage/logs/laravel.log"
 # Run docker services
 echo -e " \n \xE2\xAC\x86 Up docker images.."
 docker-compose up -d
-
-# Project vars can go here, like:
-export APP_ENV=local
 
 # Back to root
 # shellcheck disable=SC2103
