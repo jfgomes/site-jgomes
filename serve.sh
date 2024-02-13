@@ -23,7 +23,7 @@ if [ "$1" == "load-env-vars" ]; then
     read -s -p " 🔐 Enter the password to unlock the env vars: " PASSWORD
     echo
 
-    echo -e "\n 🔑 Trying to unlock with the password: '$PASSWORD'"
+    echo -e "\n 🔑 Trying to unlock with the password.."
 
     # Unzip the file using the provided password
     unzip -P "$PASSWORD" "$ZIP_FILE" -d "$(dirname "$DESTINATION_FILE")"
@@ -336,9 +336,17 @@ RABBIT_CONSUMERS_LIMIT=3
 echo -e " ✅  All services are up and running.. ( 'ctrl + c' to exit ) \n"
 sleep 10
 
+# Verify if cron logs dir exists
+CRON_LOGS_DIR="storage/cronlogs"
+if [ ! -d "$CRON_LOGS_DIR" ]; then
+    mkdir -p "$CRON_LOGS_DIR"
+fi
+
 # Turn on the rabbitmq listeners to run the queues
 for ((i=1; i<=RABBIT_CONSUMERS_LIMIT; i++)); do
         RABBIT_LOG_FILE="storage/cronlogs/output_consumer_$i.log"
+
+        # Verify log file
         if [ ! -f "$RABBIT_LOG_FILE" ]; then
             touch "$RABBIT_LOG_FILE"
         fi
@@ -351,6 +359,8 @@ done &
 # Monitor the server PID and terminate the backup loop when the server is no longer running
 while kill -0 $SERVER_PID 2>/dev/null; do
     MSG_LOG_FILE="storage/cronlogs/messages-backups.log"
+
+    # Verify log file
     if [ ! -f "$MSG_LOG_FILE" ]; then
         touch "$MSG_LOG_FILE"
     fi
