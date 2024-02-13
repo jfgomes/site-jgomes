@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -e .env ]; then
-    echo -e "\n 🤬🤬 No no no... you are in prod. This script is only available to run in local environments. \n"
+    echo -e "\n 🤬🤬 No no no... Hey.. you are in prod. This script is only available to run in local environments. \n"
     exit 1
 fi
 
@@ -16,6 +16,12 @@ if [ "$1" == "load-env-vars" ]; then
     ZIP_FILE=env_vars_list_local.zip
     DESTINATION_FILE=env_vars_list_local.sh
 
+    # Check if env vars zip is present in the project
+    if [ ! -f "$ZIP_FILE" ]; then
+        echo -e "\n ❌ You don't have the env vars zip in your project. Without this you cannot proceed. Ask the owner to unlock the script... \n"
+        exit 1
+    fi
+    
     # Prompt the user for the password to unzip
     echo -e "\n 🙋‍♀️ 🙋 Welcome to \033[1;32mready to dev\033[0m script!\n"
 
