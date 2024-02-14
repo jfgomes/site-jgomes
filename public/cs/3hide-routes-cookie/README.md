@@ -1,4 +1,4 @@
-![Cookie Editor Logo](https://cookie-editor.com/img/cookie-filled.svg)
+![Cookie Editor Logo](https://jgomes.site/images/cs/cookie-editor.jpg)
 
 ## Introduction
 

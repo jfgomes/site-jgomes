@@ -13,7 +13,11 @@
     <ul>
         @foreach($foldersWithFiles as $folder)
             <li>
-                {{ $folder['name'] }}
+                @if(str_contains($folder['name'], '##DONE##'))
+                    {{ str_replace('##DONE##', '✔️', $folder['name']) }}
+                @else
+                    {!! $folder['name'] . ' - <strong>( 🚧 Doc in WIP 🚧 ) </strong>' !!}
+                @endif
                 @if(count($folder['files']) > 0)
                     <ul>
                         @foreach($folder['files'] as $file)
@@ -27,8 +31,8 @@
                 @else
                     <p>Any file found.</p>
                 @endif
+                <br>
             </li>
-            ---
         @endforeach
     </ul>
 @else

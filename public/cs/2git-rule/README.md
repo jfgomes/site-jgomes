@@ -1,4 +1,4 @@
-![Git flow logo](https://qph.cf2.quoracdn.net/main-qimg-729a22aba98d1235fdce4883accaf81e)
+![Git flow logo](https://jgomes.site/images/cs/github.png)
 
 ## Introduction
 

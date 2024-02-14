@@ -39,14 +39,14 @@ class CaseStudiesService
     {
         return match ($name)
         {
-            "wms"         => "Website message service",
-            "test"        => "Cache implementation",
-            "test2"       => "Elasticsearch implementation",
-            "basic-setup" => "💻 Local env setup AKA Ready to Dev!",
-            "setup"       => "Project complete infra setup",
-            "cicd"        => "Project ci/cd with jenkins",
-            "git-rule"    => "🧩 GitHub protection rule for master branch",
-            "hide-routes-cookie" => "🙈 Hide routes in production",
+            "wms"          => "Website message service",
+            "test"         => "Cache implementation",
+            "test2"        => "Elasticsearch implementation",
+            "1basic-setup" => "💻 Local env setup AKA Ready to Dev! ##DONE##",
+            "setup"        => "Project complete infra setup",
+            "cicd"         => "Project ci/cd with jenkins",
+            "2git-rule"    => "🧩 GitHub protection rule for master branch ##DONE##",
+            "3hide-routes-cookie" => "🙈 Hide routes in production ##DONE##",
             default => $name,
         };
     }
