@@ -16,7 +16,7 @@
                 @if(str_contains($folder['name'], '##DONE##'))
                     {{ str_replace('##DONE##', '✔️', $folder['name']) }}
                 @else
-                    {!! $folder['name'] . ' - <strong>( 🚧 Doc in WIP 🚧 ) </strong>' !!}
+                    {!! $folder['name'] . '<strong> ( 🚧 Doc in WIP 🚧 ) </strong>' !!}
                 @endif
                 @if(count($folder['files']) > 0)
                     <ul>

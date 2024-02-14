@@ -234,7 +234,7 @@ class MessagesFromRabbit extends Command
 
 
     /**
-     * Handle validation failure by logging the error.
+     * Handle validation failure by 8logging the error.
      *
      * @param Validator $validator
      * @param string $originalData

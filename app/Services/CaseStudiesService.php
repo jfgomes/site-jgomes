@@ -39,14 +39,22 @@ class CaseStudiesService
     {
         return match ($name)
         {
+            "1basic-setup"        => "💻 Local env setup AKA Ready to Dev! ##DONE##",
+            "2git-rule"           => "🧩 GitHub protection rule for master branch ##DONE##",
+            "3hide-routes-cookie" => "🙈 Hide routes in production ##DONE##",
+            "4maintenance-mode"   => "🏗️ Site down in maintenance mode accessible only for devs",
+            "5env_vars_without"   => "🙈 Hide env vars",
+            "6webpack-mix"        => "🧑‍💻 Client browser cache - how to handlee",
+            "7rate-limit"         => "👮‍♀️Requests limit per route - rate limit security",
+            "8logging"            => "🗂️ Laravel log files",
+            "9error-pages"        => "📄 Laravel custom error views",
             "wms"          => "Website message service",
             "test"         => "Cache implementation",
             "test2"        => "Elasticsearch implementation",
-            "1basic-setup" => "💻 Local env setup AKA Ready to Dev! ##DONE##",
+
             "setup"        => "Project complete infra setup",
             "cicd"         => "Project ci/cd with jenkins",
-            "2git-rule"    => "🧩 GitHub protection rule for master branch ##DONE##",
-            "3hide-routes-cookie" => "🙈 Hide routes in production ##DONE##",
+
             default => $name,
         };
     }
