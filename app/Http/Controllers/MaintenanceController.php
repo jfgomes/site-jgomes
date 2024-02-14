@@ -15,7 +15,7 @@ class MaintenanceController extends Controller
     public function activate(): string
     {
         Artisan::call('up');
-        return 'Site is activated. Maintenance mode activated. Users will be able to access the site.';
+        return 'Site is activated. Maintenance mode <strong>NOT</strong> activated. Users will be able to access the site.';
     }
 
 }
