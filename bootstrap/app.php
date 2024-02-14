@@ -42,7 +42,7 @@ $app->singleton(
 );
 
 // For dev configs to avoid prod configs
-// Note: everytime you change something in this clean caches and reboot the env
+// Note: everytime you change something in this, clean caches and reboot the env.
 // Note: .env.dev is the default file and is auto generated. if It does not exist, it will use .env.test file
 $filePath = '.env.dev';
 if (file_exists($filePath))
