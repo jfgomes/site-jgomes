@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../css/case-studies-md.css">
 </head>
 <body>
-    <button onclick="window.history.back()">Voltar</button>
+    <button onclick="window.history.back()">Back</button>
     {!! $htmlContent !!}
 </body>
 </html>
