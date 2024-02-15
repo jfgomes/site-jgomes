@@ -31,6 +31,16 @@
      ================================================== -->
     <link rel="shortcut icon" href="favicon.png" >
 
+    <script>
+        function downloadCV(urlDocument)
+        {
+            let link  = document.createElement('a');
+            link.href = urlDocument;
+            link.download = urlDocument;
+            link.click();
+        }
+    </script>
+
 </head>
 
 <body>
@@ -957,121 +967,112 @@
 
         </div>
 
-    </div>
+        </div>
 
-    <div class="row">
+                <div class="row">
 
-        <div class="eight columns">
+                    <div class="eight columns">
 
-            <!-- form -->
-            <form action="/api/send" method="post" id="contactForm" name="contactForm">
-                @csrf
-                <fieldset>
-                    <div>
-                        <label for="name">Name <span class="required">*</span></label>
-                        <input type="text" value="" size="35" id="name" name="contactName">
-                    </div>
+                        <!-- form -->
+                        <form action="/api/send" method="post" id="contactForm" name="contactForm">
+                            @csrf
+                            <fieldset>
+                                <div>
+                                    <label for="name">Name <span class="required">*</span></label>
+                                    <input type="text" value="" size="35" id="name" name="contactName">
+                                </div>
 
-                    <div>
-                        <label for="email">Email <span class="required">*</span></label>
-                        <input type="text" value="" size="35" id="email" name="contactEmail">
-                    </div>
+                                <div>
+                                    <label for="email">Email <span class="required">*</span></label>
+                                    <input type="text" value="" size="35" id="email" name="contactEmail">
+                                </div>
 
-                    <div>
-                        <label for="subject">Subject</label>
-                        <input type="text" value="" size="35" id="subject" name="contactSubject">
-                    </div>
+                                <div>
+                                    <label for="subject">Subject</label>
+                                    <input type="text" value="" size="35" id="subject" name="contactSubject">
+                                </div>
 
-                    <div>
-                        <label for="content">Message <span class="required">*</span></label>
-                        <div class="chatCount">
-                            <span id="chatCount"></span>
+                                <div>
+                                    <label for="content">Message <span class="required">*</span></label>
+                                    <div class="chatCount">
+                                        <span id="chatCount"></span>
+                                    </div>
+                                    <textarea class="contactMessageExtra" cols="50" rows="15" id="content" name="contactMessage"></textarea>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="submit">Submit</button>
+                                    <span id="image-loader">
+                                        <img alt="" src="images/loader.gif">
+                                    </span>
+                                </div>
+                            </fieldset>
+                        </form> <!-- Form End -->
+
+                        <!-- contact-warning -->
+                        <div id="message-warning"></div>
+                        <!-- contact-success -->
+                        <div id="message-success">
+                            <i class="fa fa-check"></i>Your message was sent, thank you!<br>
                         </div>
-                        <textarea class="contactMessageExtra" cols="50" rows="15" id="content" name="contactMessage"></textarea>
+
                     </div>
 
-                    <div>
-                        <button type="submit" class="submit">Submit</button>
-                        <span id="image-loader">
-                            <img alt="" src="images/loader.gif">
-                        </span>
+
+                    <aside class="four columns footer-widgets">
+
+                        <div class="widget widget_contact">
+
+                            <h4>Contact</h4>
+                            <p class="address">
+                                José Gomes<br>
+                                Lisbon<br>
+                                <span>+351 937523892</span>
+                            </p>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </section> <!-- Contact Section End-->
+
+
+            <!-- footer
+            ================================================== -->
+            <footer>
+
+                <div class="row">
+
+                    <div class="twelve columns">
+
+                        <ul class="social-links">
+                            <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github"></i></a></li>
+                        </ul>
+
+                        <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
                     </div>
-                </fieldset>
-            </form> <!-- Form End -->
 
-            <!-- contact-warning -->
-            <div id="message-warning"></div>
-            <!-- contact-success -->
-            <div id="message-success">
-                <i class="fa fa-check"></i>Your message was sent, thank you!<br>
-            </div>
+                    <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
 
-        </div>
+                </div>
 
+            </footer> <!-- Footer End-->
 
-        <aside class="four columns footer-widgets">
+            <!-- Java Script
+            ================================================== -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+            <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/jquery.flexslider.js"></script>
+            <script src="js/waypoints.js"></script>
+            <script src="js/jquery.fittext.js"></script>
+            <script src="js/magnific-popup.js"></script>
+            <script src="{{ (app()->environment() === 'prod') ? mix('js/prod/init.js') : 'js/init.js' }}"></script>
 
-            <div class="widget widget_contact">
-
-                <h4>Contact</h4>
-                <p class="address">
-                    José Gomes<br>
-                    Lisbon<br>
-                    <span>+351 937523892</span>
-                </p>
-
-            </div>
-
-        </aside>
-
-    </div>
-
-</section> <!-- Contact Section End-->
-
-
-<!-- footer
-================================================== -->
-<footer>
-
-    <div class="row">
-
-        <div class="twelve columns">
-
-            <ul class="social-links">
-                <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github"></i></a></li>
-            </ul>
-
-            <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
-        </div>
-
-        <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
-
-    </div>
-
-</footer> <!-- Footer End-->
-
-<!-- Java Script
-================================================== -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-
-<script src="js/jquery.flexslider.js"></script>
-<script src="js/waypoints.js"></script>
-<script src="js/jquery.fittext.js"></script>
-<script src="js/magnific-popup.js"></script>
-<script src="{{ (app()->environment() === 'prod') ? mix('js/prod/init.js') : 'js/init.js' }}"></script>
-<script>
-    function downloadCV(urlDocument)
-    {
-        let link  = document.createElement('a');
-        link.href = urlDocument;
-        link.download = urlDocument;
-        link.click();
-    }
-</script>
-</body>
+    </body>
 
 </html>
