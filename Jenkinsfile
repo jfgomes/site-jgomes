@@ -105,7 +105,7 @@ pipeline
                             'npm cache clean --force && npm install && npm run production',
 
                              // Do phpunit report
-                            'vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html" && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/home/jgomes/my/jgomes/site-jgomes/app#(Coverage)#g" {} +'
+                            'vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html" && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/var/www/html/site-jgomes-prod-infra/site-jgomes/app#(Coverage)#g" {} +'
                         ]
 
                         for (command in commands)
