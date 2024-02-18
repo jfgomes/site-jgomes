@@ -102,184 +102,189 @@
             margin-right: 5px;
         }
     </style>
+    <title></title>
 </head>
 <body>
-<div class="container">
-    <h1 style="text-align: center">Services</h1>
-    <div class="section">
-        <p class="category">Local
-            <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the local links will not work ) <span> </p>
-        <div class="sub-section">
-            <div>
-                <p class="service-name">Webpage</p>
-                <div>
+    <div class="container">
+        <h1 style="text-align: center">Services</h1>
+        @if(app()->environment() === 'local')
+            <!-- Prod -->
+            <div class="section">
+                <p class="category">Local
+                    <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the local links will not work ) <span> </p>
+                <div class="sub-section">
                     <div>
-                        <a class="link" target="_blank" href="http://127.0.0.1:8000/">Link</a>
+                        <p class="service-name">Webpage</p>
+                        <div>
+                            <div>
+                                <a class="link" target="_blank" href="http://127.0.0.1:8000/">Link</a>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 8000</span>
+                            </div>
+                        </div>
+                        <div class="popup" id="webPageInfo">
+                            <p><strong>Webpage:</strong></p>
+                            <button onclick="togglePopup('webPageInfo')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 8000</span>
-                    </div>
-                </div>
-                <div class="popup" id="webPageInfo">
-                    <p><strong>Webpage:</strong></p>
-                    <button onclick="togglePopup('webPageInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">MySQL</p>
-                <div>
                     <div>
-                        <span>
-                            ( Internal )
-                        </span>
-                    </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 3306</span>
-                        <button class="more-info-btn" onclick="togglePopup('MySQLInfo')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="MySQLInfo">
-                    <p><strong>MySQL:</strong></p>
-                    <div class="info-popup">
-                        DATABASE: <strong>jgomes_site_dev</strong> <br><br>
+                        <p class="service-name">MySQL</p>
+                        <div>
+                            <div>
+                                <span>
+                                    ( Internal )
+                                </span>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 3306</span>
+                                <button class="more-info-btn" onclick="togglePopup('MySQLInfo')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="MySQLInfo">
+                            <p><strong>MySQL:</strong></p>
+                            <div class="info-popup">
+                                DATABASE: <strong>jgomes_site_dev</strong> <br><br>
 
-                        HOST: <strong> 127.0.0.1 </strong>
-                        PORT: <strong>3306</strong> <br><br>
+                                HOST: <strong> 127.0.0.1 </strong>
+                                PORT: <strong>3306</strong> <br><br>
 
-                        USERNAME: <strong>user_dev</strong>
-                        PASSWORD: <strong>pass_dev</strong>
+                                USERNAME: <strong>user_dev</strong>
+                                PASSWORD: <strong>pass_dev</strong>
+                            </div>
+                            <button onclick="togglePopup('MySQLInfo')">Close</button>
+                        </div>
                     </div>
-                    <button onclick="togglePopup('MySQLInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">PhpMyAdmin</p>
-                <div>
                     <div>
-                        <a class="link" target="_blank" href="http://127.0.0.1:8090/">Link</a>
+                        <p class="service-name">PhpMyAdmin</p>
+                        <div>
+                            <div>
+                                <a class="link" target="_blank" href="http://127.0.0.1:8090/">Link</a>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 8090</span>
+                                <button class="more-info-btn" onclick="togglePopup('PhpMyAdminInfo')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="PhpMyAdminInfo">
+                            <p><strong>PhpMyAdmin:</strong></p>
+                            <div class="info-popup">
+                                USERNAME: <strong> user_dev </strong>
+                                PASSWORD: <strong> pass_dev </strong>
+                            </div>
+                            <button onclick="togglePopup('PhpMyAdminInfo')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 8090</span>
-                        <button class="more-info-btn" onclick="togglePopup('PhpMyAdminInfo')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="PhpMyAdminInfo">
-                    <p><strong>PhpMyAdmin:</strong></p>
-                    <div class="info-popup">
-                        USERNAME: <strong> user_dev </strong>
-                        PASSWORD: <strong> pass_dev </strong>
-                    </div>
-                    <button onclick="togglePopup('PhpMyAdminInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">RabbitMQ</p>
-                <div>
                     <div>
-                        <span>
-                            ( Internal )
-                        </span>
+                        <p class="service-name">RabbitMQ</p>
+                        <div>
+                            <div>
+                                <span>
+                                    ( Internal )
+                                </span>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 5672</span>
+                                <button class="more-info-btn" onclick="togglePopup('RabbitMQInfo')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="RabbitMQInfo">
+                            <p><strong>RabbitMQ:</strong></p>
+                            <div class="info-popup">
+                                USERNAME: <strong> user_dev </strong>
+                                PASSWORD: <strong> pass_dev </strong>
+                            </div>
+                            <button onclick="togglePopup('RabbitMQInfo')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 5672</span>
-                        <button class="more-info-btn" onclick="togglePopup('RabbitMQInfo')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="RabbitMQInfo">
-                    <p><strong>RabbitMQ:</strong></p>
-                    <div class="info-popup">
-                        USERNAME: <strong> user_dev </strong>
-                        PASSWORD: <strong> pass_dev </strong>
-                    </div>
-                    <button onclick="togglePopup('RabbitMQInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">RabbitMQ Interface</p>
-                <div>
                     <div>
-                        <a class="link" target="_blank" href="http://127.0.0.1:15672/">Link</a>
+                        <p class="service-name">RabbitMQ Interface</p>
+                        <div>
+                            <div>
+                                <a class="link" target="_blank" href="http://127.0.0.1:15672/">Link</a>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 15672</span>
+                                <button class="more-info-btn" onclick="togglePopup('RabbitMQInterfaceInfo')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="RabbitMQInterfaceInfo">
+                            <p><strong>RabbitMQ Interface:</strong></p>
+                            <div class="info-popup">
+                                USERNAME: <strong> user_dev </strong>
+                                PASSWORD: <strong> pass_dev </strong>
+                            </div>
+                            <button onclick="togglePopup('RabbitMQInterfaceInfo')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 15672</span>
-                        <button class="more-info-btn" onclick="togglePopup('RabbitMQInterfaceInfo')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="RabbitMQInterfaceInfo">
-                    <p><strong>RabbitMQ Interface:</strong></p>
-                    <div class="info-popup">
-                        USERNAME: <strong> user_dev </strong>
-                        PASSWORD: <strong> pass_dev </strong>
-                    </div>
-                    <button onclick="togglePopup('RabbitMQInterfaceInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">RabbitMQ API</p>
-                <div>
                     <div>
-                        <a class="link" target="_blank" href="http://127.0.0.1:15672/api/queues/%2F/messages_dev">Link</a>
+                        <p class="service-name">RabbitMQ API</p>
+                        <div>
+                            <div>
+                                <a class="link" target="_blank" href="http://127.0.0.1:15672/api/queues/%2F/messages_dev">Link</a>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 15672</span>
+                                <button class="more-info-btn" onclick="togglePopup('RabbitMQApiInfo')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="RabbitMQApiInfo">
+                            <p><strong>RabbitMQ API:</strong></p>
+                            <div class="info-popup">
+                                USERNAME: <strong> user_dev </strong>
+                                PASSWORD: <strong> pass_dev </strong>
+                            </div>
+                            <button onclick="togglePopup('RabbitMQApiInfo')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 15672</span>
-                        <button class="more-info-btn" onclick="togglePopup('RabbitMQApiInfo')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="RabbitMQApiInfo">
-                    <p><strong>RabbitMQ API:</strong></p>
-                    <div class="info-popup">
-                        USERNAME: <strong> user_dev </strong>
-                        PASSWORD: <strong> pass_dev </strong>
-                    </div>
-                    <button onclick="togglePopup('RabbitMQApiInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">Redis</p>
-                <div>
                     <div>
-                        <span>
-                            ( Internal )
-                        </span>
+                        <p class="service-name">Redis</p>
+                        <div>
+                            <div>
+                                <span>
+                                    ( Internal )
+                                </span>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 6379</span>
+                                <button class="more-info-btn" onclick="togglePopup('RedisInfo')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="RabbitMQInfo">
+                            <p><strong>RabbitMQ:</strong></p>
+                            <div class="info-popup">
+                                USERNAME: <strong> user_dev </strong>
+                                PASSWORD: <strong> pass_dev </strong>
+                            </div>
+                            <button onclick="togglePopup('RedisInfo')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 6379</span>
-                        <button class="more-info-btn" onclick="togglePopup('RedisInfo')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="RabbitMQInfo">
-                    <p><strong>RabbitMQ:</strong></p>
-                    <div class="info-popup">
-                        USERNAME: <strong> user_dev </strong>
-                        PASSWORD: <strong> pass_dev </strong>
-                    </div>
-                    <button onclick="togglePopup('RedisInfo')">Close</button>
-                </div>
-            </div>
-            <div>
-                <p class="service-name">Redis Commander</p>
-                <div>
                     <div>
-                        <a class="link" target="_blank" href="http://127.0.0.1:8081">Link</a>
+                        <p class="service-name">Redis Commander</p>
+                        <div>
+                            <div>
+                                <a class="link" target="_blank" href="http://127.0.0.1:8081">Link</a>
+                            </div>
+                            <div style="float: right">
+                                <span style="margin-right: 10px">Port: 8081</span>
+                                <button class="more-info-btn" onclick="togglePopup('RedisCommander')">More</button>
+                            </div>
+                        </div>
+                        <div class="popup" id="RedisCommander">
+                            <p><strong>RabbitMQ API:</strong></p>
+                            <div class="info-popup">
+                                USERNAME: <strong> user_dev </strong>
+                                PASSWORD: <strong> pass_dev </strong>
+                            </div>
+                            <button onclick="togglePopup('RedisCommander')">Close</button>
+                        </div>
                     </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 8081</span>
-                        <button class="more-info-btn" onclick="togglePopup('RedisCommander')">More</button>
-                    </div>
-                </div>
-                <div class="popup" id="RedisCommander">
-                    <p><strong>RabbitMQ API:</strong></p>
-                    <div class="info-popup">
-                        USERNAME: <strong> user_dev </strong>
-                        PASSWORD: <strong> pass_dev </strong>
-                    </div>
-                    <button onclick="togglePopup('RedisCommander')">Close</button>
                 </div>
             </div>
-        </div>
-    </div>
-    <br>
-    <div class="section">
+            <br>
+        @endif
+        <!-- Local -->
+        <div class="section">
         <p class="category">Production</p>
         <div class="sub-section">
             <div>
@@ -378,56 +383,57 @@
             </div>
         </div>
     </div>
-    <br>
-    <div class="section">
-        <p class="category">CI/CD</p>
-        <div class="sub-section">
-            <div>
-                <p class="service-name">Jenkins</p>
+        <br>
+        <!-- CI / CD -->
+        <div class="section">
+            <p class="category">CI/CD</p>
+            <div class="sub-section">
                 <div>
+                    <p class="service-name">Jenkins</p>
                     <div>
-                        <span>
-                            ( Internal )
-                        </span>
-                    </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 50001</span>
+                        <div>
+                            <span>
+                                ( Internal )
+                            </span>
+                        </div>
+                        <div style="float: right">
+                            <span style="margin-right: 10px">Port: 50001</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <p class="service-name">Jenkins Interface</p>
                 <div>
+                    <p class="service-name">Jenkins Interface</p>
                     <div>
-                        <a class="link" target="_blank" href="https://jjenkins.xyz">Link</a>
-                    </div>
-                    <div style="float: right">
-                        <span style="margin-right: 10px">Port: 8891</span>
+                        <div>
+                            <a class="link" target="_blank" href="https://jjenkins.xyz">Link</a>
+                        </div>
+                        <div style="float: right">
+                            <span style="margin-right: 10px">Port: 8891</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const popups = document.querySelectorAll('.popup');
-        popups.forEach(popup => popup.style.display = 'none');
-    });
-
-    function togglePopup(popupId) {
-        const popup = document.getElementById(popupId);
-        if (popup) {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             const popups = document.querySelectorAll('.popup');
-            popups.forEach(otherPopup => {
-                if (otherPopup.id !== popupId) {
-                    otherPopup.style.display = 'none';
-                }
-            });
+            popups.forEach(popup => popup.style.display = 'none');
+        });
 
-            popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+        function togglePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                const popups = document.querySelectorAll('.popup');
+                popups.forEach(otherPopup => {
+                    if (otherPopup.id !== popupId) {
+                        otherPopup.style.display = 'none';
+                    }
+                });
+
+                popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
