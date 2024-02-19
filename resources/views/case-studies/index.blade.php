@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/case-studies.css">
 </head>
 <body>
-<h1>Project case studies:</h1>
+<h1>Adilia! Project case studies:</h1>
 @if(count($foldersWithFiles) > 0)
     <ul>
         @foreach($foldersWithFiles as $folder)
@@ -16,7 +16,7 @@
                 @if(str_contains($folder['name'], '##DONE##'))
                     {{ str_replace('##DONE##', '✔️', $folder['name']) }}
                 @elseif(str_contains($folder['name'], '##STARTED_NOT_DONE##'))
-                    {!! $folder['name'] . '<strong> ( 🚧 Work in progress 🚧) </strong>' !!}
+                    {!! str_replace('##STARTED_NOT_DONE##', '<strong> ( 🚧 Work in progress 🚧) </strong>', $folder['name']) !!}
                 @elseif(str_contains($folder['name'], '##NOT_STARTED##'))
                     {!! str_replace('##NOT_STARTED##', '<strong> ( ❌ Dev not started ❌) </strong>', $folder['name']) !!}
                 @endif
