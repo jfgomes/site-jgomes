@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/case-studies.css">
 </head>
 <body>
-<h1>jgomes.site project case study list:</h1>
+<h1>Project case studies:</h1>
 @if(count($foldersWithFiles) > 0)
     <ul>
         @foreach($foldersWithFiles as $folder)
@@ -16,7 +16,7 @@
                 @if(str_contains($folder['name'], '##DONE##'))
                     {{ str_replace('##DONE##', '✔️', $folder['name']) }}
                 @else
-                    {!! $folder['name'] . '<strong> ( 🚧 Doc in WIP 🚧 ) </strong>' !!}
+                    {!! $folder['name'] . '<strong> ( 🚧 Doc in Progress 🚧 ) </strong>' !!}
                 @endif
                 @if(count($folder['files']) > 0)
                     <ul>
