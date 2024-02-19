@@ -38,7 +38,7 @@
 
 ## Technical details links
 
-- [Production implementation](/case-studies/file/Y3MvMHNldHVwL1JFQURNRS5tZA==)
+- [Production implementation AKA Adilia!](/case-studies/file/Y3MvMHNldHVwL1JFQURNRS5tZA==)
 
 - [Local implementation AKA Ready to dev!](/case-studies/file/Y3MvMWJhc2ljLXNldHVwL1JFQURNRS5tZA==)
 
