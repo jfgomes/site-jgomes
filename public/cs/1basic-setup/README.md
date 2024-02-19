@@ -2,7 +2,7 @@
 
 ## Introduction
 
-- The goal of this project is to create an easy way to set an environment up and running with just a single command. 
+- The goal of this is to create an easy way to set a local environment up and running with just a single command. 
 
 
 - No need to configure anything manual.
@@ -49,7 +49,7 @@
 
 5) And is done.
 
-## Details about the serve.sh script
+## Details about the ./serve.sh script
 
 - This script is NOT designed to run in prod. In prod, It needs specific infra.
 
@@ -77,10 +77,14 @@
 
 - It runs the cons based on the scheduler kernel. It persists in background.
 
+## ./serve.sh details
+
+ - [./serve.sh link](https://raw.githubusercontent.com/jfgomes/site-jgomes/master/serve.sh)
+
 
 ## Services and other information
 
-- In local, the web server is provided by the laravel artisan. ( In prod there's a dedicated service for this using apache )
+- In local, the web server is provided by the laravel artisan. ( In prod there's a dedicated service for this using apache - [Link](/case-studies/file/Y3MvMHNldHVwL1JFQURNRS5tZA==) )
 
 
 - The services phpmyadmin and redis came directly from the docker hub as it doesn't need customizations. The other services are customized and need to be built.

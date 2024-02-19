@@ -39,9 +39,10 @@ class CaseStudiesService
     {
         return match ($name)
         {
-            "0setup"              => "⚙️ Prod env Project - complete infra setup",
+            "0presentation"       => "📝️ Presentation of this project ##DONE##",
+            "0setup"              => "⚙️ Prod env setup AKA Adilia! ( Complete infra setup )",
             "1basic-setup"        => "💻 Local env setup AKA Ready to Dev! ##DONE##",
-            "2.1ci-cd"            => "🌤️ Project CI/CD with jenkins",
+            "2.1ci-cd"            => "🌤️ CI/CD with jenkins",
             "2.2git-rule"         => "🧩 GitHub protection rule for master branch ##DONE##",
             "2.3wms"              => "📩 Website message service",
             "2.4gc-bucket"        => "☁️ Do backups to a bucket using google cloud",
