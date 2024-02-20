@@ -1,10 +1,12 @@
-![Git flow logo](https://cdn-icons-png.flaticon.com/512/2519/2519375.png)
+## Adilia! project
+
+![Prod logo](https://cdn-icons-png.flaticon.com/512/2519/2519375.png)
 
 ## Introduction
 
-- This is a functional prototype to new projects. 
+- This is a functional prototype to new projects called Adilia!
 
-- This project is for web, is based in PHP and all associated services are 100% open source.
+- This project is for web, is based in PHP ( Laravel ) and all associated services are 100% open source.
 
 - It shows and defines a simple way to create, to develop, to iterate and what we'll need to be well succeed during the development process.
 

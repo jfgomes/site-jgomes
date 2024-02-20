@@ -1,4 +1,6 @@
-![Ready to Dev logo](http://127.0.0.1:8000/images/cs/adilia.png)
+## Production environment
+
+![Ready to Dev logo](https://jgomes.site/images/cs/adilia.png)
 
 ## Introduction
 
