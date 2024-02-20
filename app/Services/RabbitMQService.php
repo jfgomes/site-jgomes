@@ -18,6 +18,7 @@ class RabbitMQService
     private string $queueListUrl;
     private mixed $apiHost;
     private mixed $queue;
+    private mixed $consumers;
 
     /**
      * RabbitMQService constructor.

@@ -1,3 +1,18 @@
+![Git flow logo](https://cdn-icons-png.flaticon.com/512/2519/2519375.png)
+
+## Introduction
+
+- This is a functional prototype to new projects.
+
+
+## Diagram overview
+
+![git-branch-protection.png](https://jgomes.site/images/diagrams/wms.drawio.png)
+
+## Details
+
+## Orchestration
+
 ## Complete infra CI/CD setup
 
 Update the docker-composer with jenkins service:
