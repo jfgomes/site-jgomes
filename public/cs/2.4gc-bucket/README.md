@@ -1,4 +1,4 @@
-![Google cloud logo](http://127.0.0.1:8000/images/cs/gc.png)
+![Google cloud logo](https://jgomes.site/images/cs/gc.png)
 
 ## Introduction
 
@@ -16,7 +16,7 @@
 
 ## DB Backup/Restore diagram
 
-![Google cloud Backup/Restore diagram](http://jgomes.site/images/diagrams/backup-restore.drawio.png)
+![Google cloud Backup/Restore diagram](https://jgomes.site/images/diagrams/backup-restore.drawio.png)
 
 ## Configuration Laravel side
 
