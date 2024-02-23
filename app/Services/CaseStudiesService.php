@@ -48,7 +48,7 @@ class CaseStudiesService
             "2.3wms"              => "📩 Website message service ##DONE##",
             "2.4gc-bucket"        => "☁️ Do backups to a bucket using google cloud ##DONE##",
             "3hide-routes-cookie" => "🙈 Hide routes in production ##DONE##",
-            "4maintenance-mode"   => "🏗️ Site down in maintenance mode accessible only for devs ##STARTED_NOT_DONE##",
+            "4maintenance-mode"   => "🏗️ Site down in maintenance mode accessible only for devs ##DONE##",
             "5env_vars_without"   => "🙈 Hide env vars ##STARTED_NOT_DONE##",
             "6webpack-mix"        => "🧑‍💻 Client browser cache - how to handle ##STARTED_NOT_DONE##",
             "7rate-limit"         => "👮‍♀️Requests limit per route - rate limit security ##STARTED_NOT_DONE##",
