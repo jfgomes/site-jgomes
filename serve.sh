@@ -21,7 +21,7 @@ if [ "$1" == "load-env-vars" ]; then
         echo -e "\n ❌ You don't have the env vars zip in your project. Without this you cannot proceed. Ask the owner to unlock the script... \n"
         exit 1
     fi
-    
+
     # Prompt the user for the password to unzip
     echo -e "\n 🙋‍♀️ 🙋 Welcome to \033[1;32mready to dev\033[0m script!\n"
 
@@ -80,6 +80,7 @@ cleanup_and_exit() {
     echo -n > "$CURRENT_DIRECTORY/storage/logs/messages.log"
     echo -n > "$CURRENT_DIRECTORY/storage/logs/messages-backups.log"
     echo -n > "$CURRENT_DIRECTORY/storage/logs/emails.log"
+    echo -n > "$CURRENT_DIRECTORY/storage/logs/access.log"
 
     # 2 - Remove and create new cron logs directory if exists
     rm -rf storage/cronlogs

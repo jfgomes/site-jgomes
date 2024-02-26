@@ -35,6 +35,8 @@
 
 - redis-tools - case Ubuntu / Debian || redis - case macOS
 
+- apcu ( for mac: CFLAGS="-I/opt/homebrew/include" pecl install apcu )
+
 ## How to set up
 
 1) Clone the project: git clone git@github.com:jfgomes/site-jgomes.git

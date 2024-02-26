@@ -129,6 +129,11 @@ return [
             'path' => storage_path('logs/emails.log'),
             'level' => 'debug',
         ],
+        'access' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/access.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];
