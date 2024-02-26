@@ -27,3 +27,4 @@ gc-local.json
 env_vars_list_local.sh
 env_vars_list_local.zip
 /dev-services/mysql/init-local.sql
+/storage/logs/*

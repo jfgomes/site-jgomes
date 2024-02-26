@@ -8,6 +8,7 @@ use Google\Cloud\Storage\StorageClient;
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\ApcController;
 use App\Http\Controllers\MaintenanceController;
 
 /*
@@ -21,12 +22,73 @@ use App\Http\Controllers\MaintenanceController;
 |
 */
 
+## THIS ROUTES ARE ONLY AVAILABLE IF THE ENV IS LOCAL
+if (app()->environment('local'))
+{
+    // TEST APCu + Redis + BD + CACHE WITH LOAD BALANCE locally
+    Route::get('/test_load_balance_cache_sys', function () {
+        // Ensure data at db
+        // Get 10 rows from DB
+        // Run another server ( php artisan serve --port=8001 )
+        // Test with ab ( ab -n 1000 -c 10 http://127.0.0.1:8000/test_load_balance_cache_sys )
+        // Get data from apcu
+        // If apcu is not set, get data from redis
+        // If redis is not set, get data from db
+        // Ensure all systems are populated
+        // Test with ab ( ab -n 1000 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys )
+        // Ensure data is available at redis and the apcu for 8001 is populated
+        // Repeat ( ab -n 1000 -c 10 http://127.0.0.1:8000/test_load_balance_cache_sys ) and check if apcu for 8000 has the keys
+        // Repeat ( ab -n 1000 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys ) and check if apcu for 8001 has the keys
+    });
+}
+
 ########################################### START COOKIE ROUTES
 ## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
 $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
 if (($conditionalFlag && Cookie::has($conditionalFlag))
     || app()->environment('local')
 ) {
+    // APCu DASHBOARD PAGE
+    Route::get('/apcu', [ApcController::class, 'index']);
+
+    // TEST APCu
+    Route::get('/test_apcu', function () {
+
+        // Checking in APCu extension is loaded
+        if (extension_loaded('apcu'))
+        {
+            echo "<pre>APCu is up!\n";
+
+        } else {
+
+            dd('APCu is down. 😖');
+        }
+
+        // Save the testing value to APCu
+        echo "<pre>Trying to store the value 'testing_value' in APCu.. success!\n";
+        apcu_store('key', 'testing_value');
+
+        // Recovering the testing value from APCu
+        $valor = apcu_fetch('key');
+
+        // Check if the testing key exists in APCu
+        if (apcu_exists('key'))
+        {
+            echo "<pre>Trying to get your value from APCu: $valor.. success!\n";
+
+        } else {
+
+            dd('APCu is not storing the test value. 😖');
+        }
+
+        // Deleting the testing value from APCu
+        apcu_delete('key');
+        echo "<pre>Trying to delete your value from APCu.. success!\n";
+
+        // Return success!
+        return '<pre>APCu is up and running successfully! 👍';
+    });
+
     // CHECK DB CONNECTION
     Route::get('/db', function () {
         try {
@@ -117,7 +179,7 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
 
             foreach ($oldBackups as $oldBackup) {
                 echo "<pre> ------ " . $oldBackup->name();
-                //$oldBackup->delete();
+                $oldBackup->delete();
             }
 
             echo "<pre> - Filter test done with success!";
