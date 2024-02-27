@@ -14,7 +14,7 @@ apt install php-pear
 apt-get install php-dev
 pecl install xdebug
 sudo apt-get install php-mysql
-
+pecl install redis
 cd ~/.ssh/
 cp /tmp/installation-tmp/ssh/id_rsa .
 cp /tmp/installation-tmp/ssh/id_rsa.pub .

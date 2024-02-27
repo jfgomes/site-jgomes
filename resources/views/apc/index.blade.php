@@ -471,11 +471,11 @@ function menu_entry($ob, $title, $aux=null) {
     if (!is_null($aux)) {
         $MYREQUEST=$aux;
         if ($MYREQUEST['OB']!=$ob) {
-            return "<li><a href=\"/apcu?SCOPE=" . htmlspecialchars($MYREQUEST['OB']) . "&SORT1=" . htmlspecialchars($MYREQUEST['SORT1']) . "&SORT2=" . htmlspecialchars($MYREQUEST['SORT1']) . "&COUNT=" . htmlspecialchars($MYREQUEST['SORT1']) . "&OB=" . htmlspecialchars($ob) . "\">$title</a></li>";
+            return "<li><a href=\"/apcu?SCOPE=" . htmlspecialchars($MYREQUEST['OB']) . "&SORT1=" . htmlspecialchars($MYREQUEST['SORT1']) . "&SORT2=" . htmlspecialchars($MYREQUEST['SORT1']) . "&COUNT=" . htmlspecialchars($MYREQUEST['SORT1']) . "&OB=" . htmlspecialchars($ob) . "&CC=" . htmlspecialchars($MYREQUEST['CC']) . "\">$title</a></li>";
         } else if (empty($MYREQUEST['SH'])) {
             return "<li><span class=active>$title</span></li>";
         } else {
-            return "<li><a class=\"child_active\" href=\"/apcu?SCOPE=" . htmlspecialchars($MYREQUEST['OB']) . "&SORT1=" . htmlspecialchars($MYREQUEST['SORT1']) . "&SORT2=" . htmlspecialchars($MYREQUEST['SORT1']) . "&COUNT=" . htmlspecialchars($MYREQUEST['SORT1']) . "&OB=" . htmlspecialchars($ob) . "\">$title</a></li>";
+            return "<li><a class=\"child_active\" href=\"/apcu?SCOPE=" . htmlspecialchars($MYREQUEST['OB']) . "&SORT1=" . htmlspecialchars($MYREQUEST['SORT1']) . "&SORT2=" . htmlspecialchars($MYREQUEST['SORT1']) . "&COUNT=" . htmlspecialchars($MYREQUEST['SORT1']) . "&OB=" . htmlspecialchars($ob) . "&CC=" . htmlspecialchars($MYREQUEST['CC']) . "\">$title</a></li>";
         }
     }
 
@@ -1173,6 +1173,11 @@ echo <<< EOB
     </div>
 EOB;
 
+// Refresh URL vars
+if (isset($_GET['CC']) && $_GET['CC'] == 1) {
+    header("Location: /apcu");
+    exit;
+}
 ?>
 
     <!-- <?php echo "\nBased on APCGUI By R.Becker\n"?> -->
