@@ -23,12 +23,115 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
+## THIS ROUTES ARE ONLY AVAILABLE IF THE ENV IS LOCAL
+if (app()->environment('local'))
+{
+    // CLEANUP TEST APCu + Redis
+    Route::get('/cleanup_location_caches', function ()
+    {
+        // Get all location Ids
+        $locations = LocationsPt::pluck('id')->toArray();
+
+        // Ensure locations redis DB
+        Redis::select(2);
+
+        foreach ($locations as $locationId)
+        {
+            $key = 'location_pt_-' . $locationId;
+
+            // Deleting the testing value from APCu
+            apcu_delete($key);
+
+            // Deleting the testing value from Redis
+            Redis::del($key);
+        }
+    });
+
+    // TEST APCu + Redis + BD + CACHE WITH LOAD BALANCE locally
+    Route::get('/warmup_location_caches', function () {
+
+        // Ignore.. this just a note: ( ab -n 20 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys )
+
+        // Run frontend 1 ( php artisan serve --port=8001 )
+        // Run frontend 2 ( php artisan serve --port=8002 )
+
+        // Test 1 with in frontend 1 ( http://127.0.0.1:8001/test_load_balance_cache_sys )
+        // This must go to DB and populate Redis and APCu for the frontend 1
+
+        // Test 2 with in frontend 2 ( http://127.0.0.1:8002/test_load_balance_cache_sys )
+        // This must go to Redis and populate APCu for the frontend 2
+
+        // Test 3 with again in frontend 1 ( http://127.0.0.1:8001/test_load_balance_cache_sys )
+        // This must have the values in APCu for the frontend 1
+
+        // Test 4 with again in frontend 2 ( http://127.0.0.1:8002/test_load_balance_cache_sys )
+        // This must have the values in APCu for the frontend 2
+
+        // Get all location Ids
+        $locations = LocationsPt::pluck('id')->toArray();
+
+        // Ensure tests redis DB
+        Redis::select(2);
+
+        foreach ($locations as $locationId) {
+
+            $key = "location_pt_" . $locationId;
+
+            // Go to APCu and check if the value key exists
+            $value = apcu_fetch($key);
+            if (apcu_exists($key))
+            {
+                echo "<pre>APCu: $value\n";
+
+                // Iterate
+                continue;
+            }
+
+            // Go to Redis and check if the value key exists. Case exists save in APCu.
+            $value = Redis::get($key);
+            if ($value)
+            {
+                echo "<pre>Redis: $value\n";
+
+                // Save in APCu
+                apcu_store($key, $value);
+
+                // Iterate
+                continue;
+            }
+
+            // Go to DB and check if the value exists. Case exists save in Redis and APCu.
+            $value = LocationsPt::find($locationId);
+            if ($value)
+            {
+                $value = json_encode($value);
+                echo "<pre>DB: $value\n";
+
+                // Save in Redis
+                Redis::set($key, $value);
+
+                // Save in APCu
+                apcu_store($key, $value);
+
+                // Iterate
+                continue;
+            }
+
+            echo "<pre>Location not found!\n";
+        }
+
+        return '<pre>Test concluded!';
+
+    });
+}
+
 ########################################### START COOKIE ROUTES
 ## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
 $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
 if (($conditionalFlag && Cookie::has($conditionalFlag))
     || app()->environment('local')
 ) {
+
     // CLEANUP TEST APCu + Redis
     Route::get('/cleanup_location_caches', function ()
     {
