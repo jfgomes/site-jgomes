@@ -30,7 +30,7 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
     || app()->environment('local')
 ) {
     // CLEANUP TEST APCu + Redis
-    Route::get('/cleanup_location_caches', function ()
+        Route::get('/cleanup_location_caches', function ()
     {
         // Get all location Ids
         $locations = LocationsPt::pluck('id')->toArray();
@@ -75,12 +75,11 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
 
         if (count($locations) == 0)
         {
-            dd('APCu is down. 😖');
+            dd('No data to cache on DB. 😖');
         }
 
         // Ensure tests redis DB
         Redis::select(2);
-
         foreach ($locations as $locationId) {
 
             $key = "location_pt_" . $locationId;
