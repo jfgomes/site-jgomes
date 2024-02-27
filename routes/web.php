@@ -23,9 +23,12 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
-## THIS ROUTES ARE ONLY AVAILABLE IF THE ENV IS LOCAL
-if (app()->environment('local'))
-{
+########################################### START COOKIE ROUTES
+## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
+$conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
+if (($conditionalFlag && Cookie::has($conditionalFlag))
+    || app()->environment('local')
+) {
     // CLEANUP TEST APCu + Redis
     Route::get('/cleanup_location_caches', function ()
     {
@@ -69,6 +72,11 @@ if (app()->environment('local'))
 
         // Get all location Ids
         $locations = LocationsPt::pluck('id')->toArray();
+
+        if (count($locations) == 0)
+        {
+            dd('APCu is down. 😖');
+        }
 
         // Ensure tests redis DB
         Redis::select(2);
@@ -123,14 +131,7 @@ if (app()->environment('local'))
         return '<pre>Test concluded!';
 
     });
-}
 
-########################################### START COOKIE ROUTES
-## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
-$conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
-if (($conditionalFlag && Cookie::has($conditionalFlag))
-    || app()->environment('local')
-) {
     // APCu DASHBOARD PAGE
     Route::get('/apcu', [ApcController::class, 'index']);
 
