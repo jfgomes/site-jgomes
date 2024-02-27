@@ -470,4 +470,5 @@ networks:
 ```
 127.0.0.1 rabbitmq
 127.0.0.1 mysql
+127.0.0.1 redis
 ```

@@ -1,15 +1,16 @@
 <?php
 
-use App\Mail\MessageEmail;
-use App\Services\CaseStudiesService;
-use Illuminate\Support\Facades\Route;
-use Google\Cloud\Storage\StorageClient;
-
-use App\Mail\TestEmail;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\ApcController;
 use App\Http\Controllers\MaintenanceController;
+use App\Mail\MessageEmail;
+use App\Mail\TestEmail;
+use App\Models\LocationsPt;
+use App\Services\CaseStudiesService;
+use Google\Cloud\Storage\StorageClient;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +26,102 @@ use App\Http\Controllers\MaintenanceController;
 ## THIS ROUTES ARE ONLY AVAILABLE IF THE ENV IS LOCAL
 if (app()->environment('local'))
 {
+    // CLEANUP TEST APCu + Redis
+    Route::get('/cleanup_location_caches', function ()
+    {
+        // Get all location Ids
+        $locations = LocationsPt::pluck('id')->toArray();
+
+        // Ensure locations redis DB
+        Redis::select(2);
+
+        foreach ($locations as $locationId)
+        {
+            $key = 'location_pt_-' . $locationId;
+
+            // Deleting the testing value from APCu
+            apcu_delete($key);
+
+            // Deleting the testing value from Redis
+            Redis::del($key);
+        }
+    });
+
     // TEST APCu + Redis + BD + CACHE WITH LOAD BALANCE locally
-    Route::get('/test_load_balance_cache_sys', function () {
-        // Ensure data at db
-        // Get 10 rows from DB
-        // Run another server ( php artisan serve --port=8001 )
-        // Test with ab ( ab -n 1000 -c 10 http://127.0.0.1:8000/test_load_balance_cache_sys )
-        // Get data from apcu
-        // If apcu is not set, get data from redis
-        // If redis is not set, get data from db
-        // Ensure all systems are populated
-        // Test with ab ( ab -n 1000 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys )
-        // Ensure data is available at redis and the apcu for 8001 is populated
-        // Repeat ( ab -n 1000 -c 10 http://127.0.0.1:8000/test_load_balance_cache_sys ) and check if apcu for 8000 has the keys
-        // Repeat ( ab -n 1000 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys ) and check if apcu for 8001 has the keys
+    Route::get('/warmup_location_caches', function () {
+
+        // Ignore.. this just a note: ( ab -n 20 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys )
+
+        // Run frontend 1 ( php artisan serve --port=8001 )
+        // Run frontend 2 ( php artisan serve --port=8002 )
+
+        // Test 1 with in frontend 1 ( http://127.0.0.1:8001/test_load_balance_cache_sys )
+        // This must go to DB and populate Redis and APCu for the frontend 1
+
+        // Test 2 with in frontend 2 ( http://127.0.0.1:8002/test_load_balance_cache_sys )
+        // This must go to Redis and populate APCu for the frontend 2
+
+        // Test 3 with again in frontend 1 ( http://127.0.0.1:8001/test_load_balance_cache_sys )
+        // This must have the values in APCu for the frontend 1
+
+        // Test 4 with again in frontend 2 ( http://127.0.0.1:8002/test_load_balance_cache_sys )
+        // This must have the values in APCu for the frontend 2
+
+        // Get all location Ids
+        $locations = LocationsPt::pluck('id')->toArray();
+
+        // Ensure tests redis DB
+        Redis::select(2);
+
+        foreach ($locations as $locationId) {
+
+            $key = "location_pt_" . $locationId;
+
+            // Go to APCu and check if the value key exists
+            $value = apcu_fetch($key);
+            if (apcu_exists($key))
+            {
+                echo "<pre>APCu: $value\n";
+
+                // Iterate
+                continue;
+            }
+
+            // Go to Redis and check if the value key exists. Case exists save in APCu.
+            $value = Redis::get($key);
+            if ($value)
+            {
+                echo "<pre>Redis: $value\n";
+
+                // Save in APCu
+                apcu_store($key, $value);
+
+                // Iterate
+                continue;
+            }
+
+            // Go to DB and check if the value exists. Case exists save in Redis and APCu.
+            $value = LocationsPt::find($locationId);
+            if ($value)
+            {
+                $value = json_encode($value);
+                echo "<pre>DB: $value\n";
+
+                // Save in Redis
+                Redis::set($key, $value);
+
+                // Save in APCu
+                apcu_store($key, $value);
+
+                // Iterate
+                continue;
+            }
+
+            echo "<pre>Location not found!\n";
+        }
+
+        return '<pre>Test concluded!';
+
     });
 }
 
@@ -69,12 +152,12 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
         apcu_store('key', 'testing_value');
 
         // Recovering the testing value from APCu
-        $valor = apcu_fetch('key');
+        $value = apcu_fetch('key');
 
         // Check if the testing key exists in APCu
         if (apcu_exists('key'))
         {
-            echo "<pre>Trying to get your value from APCu: $valor.. success!\n";
+            echo "<pre>Trying to get your value from APCu: $value.. success!\n";
 
         } else {
 
