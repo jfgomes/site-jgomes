@@ -750,8 +750,9 @@ menu_entry(OB_USER_CACHE,'User Cache Entries',$MYREQUEST),
 menu_entry(OB_VERSION_CHECK,'Version Check',$MYREQUEST);
 
 if ($AUTHENTICATED) {
+    $MY_SELF = str_replace('/index.php', '', $MY_SELF);
     echo <<<EOB
-        <li><a class="aright" href="$MY_SELF&CC=1&OB={$MYREQUEST['OB']}" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
+        <li><a class="aright" href="/apcu$MY_SELF&CC=1&OB={$MYREQUEST['OB']}" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
 EOB;
 }
 echo <<<EOB
@@ -854,6 +855,7 @@ EOB;
         </tr>
 EOB;
 
+        $PHP_SELF = 'apcu';
         echo
         graphics_avail() ?
             '<tr>'.
@@ -861,8 +863,8 @@ EOB;
             "<td class=td-1><img alt=\"\" $size src=\"$PHP_SELF?IMG=2&$time\"></td></tr>\n"
             : "",
         '<tr>',
-            /* '<td class=td-0><span class="green box">&nbsp;</span>Free: ', apc . phpbsize($mem_avail) . sprintf(" (%.1f%%)", $mem_avail * 100 / $mem_size),"</td>\n",
-          */ '<td class=td-1><span class="green box">&nbsp;</span>Hits: ',$cache['num_hits'].@sprintf(" (%.1f%%)",$cache['num_hits']*100/$num_hits_and_misses),"</td>\n",
+            '<td class=td-0><span class="green box">&nbsp;</span>Free: ', sprintf(" (%.1f%%)", $mem_avail * 100 / $mem_size),"</td>\n",
+            '<td class=td-1><span class="green box">&nbsp;</span>Hits: ',$cache['num_hits'].@sprintf(" (%.1f%%)",$cache['num_hits']*100/$num_hits_and_misses),"</td>\n",
             '</tr>',
         '<tr>',
         '<td class=td-0><span class="red box">&nbsp;</span>Used: ',bsize($mem_used).sprintf(" (%.1f%%)",$mem_used *100/$mem_size),"</td>\n",
