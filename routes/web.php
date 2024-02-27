@@ -40,7 +40,7 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
 
         foreach ($locations as $locationId)
         {
-            $key = 'location_pt_-' . $locationId;
+            $key = 'location_pt_' . $locationId;
 
             // Deleting the testing value from APCu
             apcu_delete($key);
