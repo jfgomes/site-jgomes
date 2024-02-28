@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,47 @@ Route::middleware('throttle:5,5')->group(function () {
         ]
     )->name('send');
 });
+
+Route::prefix('v1')->group(function () {
+
+    // Allow 10 tries to log in per min
+    Route::middleware('throttle:10,1')->group(function () {
+        Route::post('/login',
+            [
+                AuthController::class, 'login'
+            ]
+        )->name('login');
+    });
+
+// Protected routes by Sanctum
+Route::middleware('auth:sanctum')->group(function ()
+{
+        // Allow a margin of 3 logouts per min as it should run once a time
+        Route::middleware('throttle:3,1')->group(function () {
+            Route::post('/logout',
+                [
+                    AuthController::class, 'logout'
+                ]
+            )->name('logout');
+        });
+
+        // Allow a margin of 5 refresh per min, as it only suppose to run rarely
+        Route::middleware('throttle:5,1')->group(function () {
+            Route::post('/refresh',
+                [
+                    AuthController::class, 'refresh'
+                ]
+            )->name('refresh');
+        });
+
+        // Allow 5 refresh per min, as it will be cached
+        Route::middleware('throttle:5,1')->group(function () {
+            Route::post('/user',
+                [
+                    AuthController::class, 'user'
+                ]
+            )->name('user');
+        });
+    });
+});
+

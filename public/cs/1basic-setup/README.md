@@ -37,7 +37,9 @@
 
 - apcu ( for mac: CFLAGS="-I/opt/homebrew/include" pecl install apcu )
 
-- redis ( pecl install redis )
+- redis ( pecl install redis 
+
+- gd
 
 ## How to set up
 
