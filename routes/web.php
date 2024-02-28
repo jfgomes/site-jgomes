@@ -5,8 +5,10 @@ use App\Http\Controllers\MaintenanceController;
 use App\Mail\MessageEmail;
 use App\Mail\TestEmail;
 use App\Models\LocationsPt;
+use App\Models\User;
 use App\Services\CaseStudiesService;
 use Google\Cloud\Storage\StorageClient;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
@@ -29,8 +31,70 @@ $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
 if (($conditionalFlag && Cookie::has($conditionalFlag))
     || app()->environment('local')
 ) {
+
+    // CREATE USER FOR TEST
+    Route::get('/create_test_user', function ()
+    {
+        // Verify if
+        $existingUser = User::where('email', 'test@test.test')
+            ->first();
+
+        if ($existingUser)
+        {
+            // If the user already exists, exit
+            return response()->json(
+                [
+                    'message' => 'User already exists'
+                ],
+                400
+            );
+        }
+
+        $user           = new User();
+        $user->name     = 'Zé Manel';
+        $user->email    = 'test@test.test';
+        $user->password = Hash::make('Test@123');
+        $user->save();
+
+        return response()->json(
+            [
+                'message' => 'User created. In prod dont forget to delete'
+            ],
+            400
+        );
+    });
+
+    // DELETE USER FOR TEST
+    Route::get('/delete_test_user', function () {
+
+        // Find the user by the test email
+        $user = User::where('email', 'test@test.test')
+            ->first();
+
+        // If the user is not found, return a response indicating that the user was not found
+        if (!$user) {
+            return response()->json(
+                [
+                    'message' => 'User not found'
+                ],
+                404
+            );
+        }
+
+        // If the user is found, delete the user
+        $user->delete();
+
+        // Return a response indicating that the user was deleted successfully
+        return response()->json(
+            [
+                'message' => 'User deleted successfully'
+            ],
+            200
+        );
+    });
+
     // CLEANUP TEST APCu + Redis
-        Route::get('/cleanup_location_caches', function ()
+    Route::get('/cleanup_location_caches', function ()
     {
         // Get all location Ids
         $locations = LocationsPt::pluck('id')->toArray();
