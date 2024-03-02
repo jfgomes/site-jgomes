@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -433,3 +435,13 @@ Route::middleware('throttle:20,1')->group(function () {
 });
 
 ########################################### END PUBLIC ROUTES
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('auth.login');
+
+Route::get('/home', function () {
+    return view('home.index');
+})->name('home.index');
+
+

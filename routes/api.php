@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 // Rate limit on ( 5 post requests per 5 min )
 Route::middleware('throttle:5,5')->group(function () {
@@ -40,9 +36,9 @@ Route::prefix('v1')->group(function () {
         )->name('login');
     });
 
-// Protected routes by Sanctum
-Route::middleware('auth:sanctum')->group(function ()
-{
+    // Protected routes by Sanctum
+    Route::middleware('auth:sanctum')->group(function ()
+    {
         // Allow a margin of 3 logouts per min as it should run once a time
         Route::middleware('throttle:3,1')->group(function () {
             Route::post('/logout',
@@ -68,6 +64,23 @@ Route::middleware('auth:sanctum')->group(function ()
                     AuthController::class, 'user'
                 ]
             )->name('user');
+        });
+
+        // Check if user is authenticated...
+        // This route will be cached... No need more than 1 non cached access per minute
+        Route::get('/check',
+            [
+                AuthController::class, 'check'
+            ]
+        )->name('check');
+
+        // Private home page. Let's allow 30 accesses per min
+        Route::middleware('throttle:30,1')->group(function () {
+            Route::get('/home',
+                [
+                    HomeController::class, 'index'
+                ]
+            )->name('home.index');
         });
     });
 });

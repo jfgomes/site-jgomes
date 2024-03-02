@@ -11,9 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix
+    // local - public
+    .js([
+        'public/js/local/public/init.js'
 
-mix.js('public/js/init.js', 'public/js/prod').version();
+    // prod output - public
+    ], 'public/js/prod/public/app.js') // Combine all public area js into prod/public/app.js
+
+    // local - private
+    .js([
+        'public/js/local/private/serverLessRequests.js'
+
+    // prod output - private
+    ],'public/js/prod/private/app.js') // Combine all private area js into prod/private/app.js
+
+    .version();
