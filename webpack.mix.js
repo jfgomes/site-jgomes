@@ -12,18 +12,13 @@ const mix = require('laravel-mix');
  */
 
 mix
-    // local - public
     .js([
-        'public/js/local/public/init.js'
-
-    // prod output - public
-    ], 'public/js/prod/public/app.js') // Combine all public area js into prod/public/app.js
-
-    // local - private
-    .js([
+        // local - public
+        'public/js/local/public/init.js',
+        // local - private
         'public/js/local/private/serverLessRequests.js'
 
     // prod output - private
-    ],'public/js/prod/private/app.js') // Combine all private area js into prod/private/app.js
+    ],'public/js/prod/private/app.js') // Combine all local js into prod/private/app.js
 
     .version();
