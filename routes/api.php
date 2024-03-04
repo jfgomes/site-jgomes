@@ -41,7 +41,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function ()
     {
         // Allow a margin of 3 logouts per min as it should run once a time
-        Route::middleware('throttle:3,1')->group(function () {
+        Route::middleware('throttle:10,1')->group(function () {
             Route::post('/logout',
                 [
                     AuthController::class, 'logout'
