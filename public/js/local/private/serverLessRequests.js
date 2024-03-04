@@ -2,7 +2,7 @@
 let access_token_str  = 'access_token';
 
 // Access token ttl
-let access_token_ttl_minutes = 1;
+let access_token_ttl_minutes = 15;
 
 // Login page
 let login_page       =  '/login';
@@ -27,21 +27,32 @@ let serverLessRequests = (function($)
             success: function(response)
             {
                 // Store the access_token at localStorage
-                setWithExpiry(access_token_str, response.access_token, access_token_ttl_minutes);
+                setTokenWithExpiry(access_token_str, response.access_token, access_token_ttl_minutes);
 
                 // Handle successful login - redirect to home
                 window.location.href = `${home_page}`;
             },
             error: function(xhr)
             {
+                // Remove the overlay
+                $("#overlay").hide();
+
+                // Inform client about 429 ( Too many requests )
+                if (xhr.status !== 429)
+                {
+                    // Show error to client
+                    showFlashMessage(
+                        'error',
+                        'Invalid login.'
+                    );
+                    return;
+                }
+
                 // Show error to client
                 showFlashMessage(
                     'error',
-                    xhr.statusText || 'Login failed. Please try again.'
+                    'Too many request at this moment.'
                 );
-
-                // Remove the overlay
-                $("#overlay").hide();
             }
         });
     }
@@ -92,13 +103,12 @@ let serverLessRequests = (function($)
                         localStorage.removeItem(access_token_str);
 
                         // Redirect to login page
-                        window.location.href = `${login_page}?success=Logout`;
+                        window.location.href = `${login_page}?` + btoa('b64=true&success=Logout');
                     }
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 // Here we can handle the error appropriately (e.g., redirect to an error page)
-                console.error(error);
             });
     }
 
@@ -117,7 +127,8 @@ let serverLessRequests = (function($)
             })
             .catch(error => {
                 // Case error redirect to login page
-                window.location.href = `${login_page}?error=${error}`;
+                console.log(error);
+                window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
             })
             .finally(() => {
                 // Hide the overlay regardless of success or failure
@@ -142,17 +153,22 @@ let serverLessRequests = (function($)
                 },
                 error: function(xhr)
                 {
-                    resolve(xhr);
-                },
-                complete: function(xhr)
-                {
-                    reject(new Error(xhr.statusText || 'Cannot load data. Please try again.'));
+                    // Inform client about 429 ( Too many requests )
+                    if (xhr.status !== 429)
+                    {
+                        // xhr.statusText || 'Cannot load data. Please try again.'
+                        reject('Cannot load data.');
+                        return;
+                    }
+
+                    // Reject the promise for too many requests
+                    reject('Too many requests.');
                 }
             });
         });
     }
 
-    // Function to create and show flash errors
+    // Function to create and show errors
     function showFlashMessage(type, message)
     {
         $('.flash-message').remove();
@@ -162,7 +178,7 @@ let serverLessRequests = (function($)
     }
 
     // Function to set the token in localStorage with an expiration time
-    function setWithExpiry(key, value, ttlInMinutes)
+    function setTokenWithExpiry(key, value, ttlInMinutes)
     {
         let now = new Date();
         let item = {
@@ -186,13 +202,22 @@ let serverLessRequests = (function($)
                 success: function (response) {
 
                     // Store the access_token at localStorage
-                    setWithExpiry(access_token_str, response.access_token, access_token_ttl_minutes);
+                    setTokenWithExpiry(access_token_str, response.access_token, access_token_ttl_minutes);
 
                     // Return the new token
                     resolve(response.access_token);
                 },
-                error: function () {
-                    reject(new Error('Token refresh failed'));
+                error: function (xhr) {
+
+                    // Inform client about 429 ( Too many requests )
+                    if (xhr.status !== 429) {
+
+                        // Reject the promise as the token refresh failed
+                        reject('Authentication needed.');
+                        return;
+                    }
+
+                    reject('Too many requests.');
                 }
             });
         });
@@ -206,10 +231,10 @@ let serverLessRequests = (function($)
             // Check if token is stored in localStorage
             let accessToken = localStorage.getItem(key);
 
-            // If localStorage is empty, exit the promise
+            // If localStorage is empty, reject the promise as the no token was not found
             if (!accessToken)
             {
-                reject(new Error('Token not found'));
+                reject('Authentication needed.');
                 return;
             }
 
@@ -224,9 +249,6 @@ let serverLessRequests = (function($)
 
             // Compare current date with the token validation date. If the token expired, delete the current localStorage
             if (now.getTime() > access_token.expiry) {
-
-                // Remove the token if it has expired
-                localStorage.removeItem(key);
 
                 // Use the promise returned by doRefreshToken to create a new token and store it in localStorage
                 doRefreshToken(token)
@@ -250,11 +272,19 @@ let serverLessRequests = (function($)
                         resolve(token);
                     },
                     error: function(xhr) {
-                        // Remove the token fom localStorage if it is invalid
-                        localStorage.removeItem(key);
+                        // Remove the token fom localStorage if it is invalid.
+                        // Allow to keep 429 ( Too many requests )
+                        if (xhr.status !== 429) {
+                            // Remove the token from localStorage if it is invalid.
+                            localStorage.removeItem(key);
 
-                        // Reject the promise
-                        reject(new Error('Invalid Refresh'));
+                            // Reject the promise as the refresh token is invalid
+                            reject('Authentication needed.');
+                            return;
+                        }
+
+                        // Reject the promise for too many requests
+                        reject('Too many requests.');
                     }
                 });
             }
@@ -265,14 +295,25 @@ let serverLessRequests = (function($)
     // Assigning events to HTML elements, initializing other functions, etc...
     function init()
     {
-        // Login btn
+        // Login btn via click
         $('#login-btn').on('click', doLogin);
+
+        // Login btn via btn enter
+        $(document).on('keypress', function(event) {
+            if (event.which === 13) { // Enter btn code
+                event.preventDefault();
+                doLogin(); // Call the func doLogin
+            }
+        });
 
         // Bypass login page case user has a valid access_token
         if (window.location.pathname === `${login_page}`)
         {
             checkAuthAndByPassLogin();
         }
+
+        // Set time to remove flash messages
+        $('.flash-message').delay(3000).fadeOut(1000);
     }
 
     // Return init
