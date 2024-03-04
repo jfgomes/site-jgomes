@@ -16,14 +16,14 @@
         <div id="overlay">
             <div id="overlay-content"> ⏳</div>
         </div>
-        @if(request()->has('error'))
+        @if($errorMessage)
             <div class="flash-message error">
-                {{ request()->get('error') }}
+                {{ $errorMessage }}
             </div>
         @endif
-        @if(request()->has('success'))
+        @if($successMessage)
             <div class="flash-message success">
-                {{ request()->get('success') }}
+                {{ $successMessage }}
             </div>
         @endif
         <h2>Login</h2>

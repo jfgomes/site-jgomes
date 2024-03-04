@@ -437,7 +437,34 @@ Route::middleware('throttle:20,1')->group(function () {
 ########################################### END PUBLIC ROUTES
 
 Route::get('/login', function () {
-    return view('auth.login');
+
+    $paramName      = key(request()->all());
+    $decodedString  = base64_decode($paramName);
+    $successMessage = null;
+    $errorMessage   = null;
+
+    if ($decodedString !== false)
+    {
+        parse_str($decodedString, $params);
+        if (isset($params['b64']))
+        {
+            // Parse success messages
+            if (isset($params['success'])){
+                $successMessage = $params['success'];
+            }
+
+            // Parse error messages
+            if (isset($params['error'])){
+                $errorMessage = $params['error'];
+            }
+        }
+    }
+
+    return view('auth.login', [
+        'successMessage' => $successMessage,
+        'errorMessage'   => $errorMessage,
+    ]);
+
 })->name('auth.login');
 
 Route::get('/home', function () {
