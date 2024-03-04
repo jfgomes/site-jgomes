@@ -17,7 +17,6 @@ mix
         'public/js/local/public/init.js',
         // local - private
         'public/js/local/private/serverLessRequests.js'
-
     // prod output - private
     ],'public/js/prod/private/app.js') // Combine all local js into prod/private/app.js
 
