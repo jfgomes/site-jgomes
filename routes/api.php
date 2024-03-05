@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,6 +82,15 @@ Route::prefix('v1')->group(function () {
                     HomeController::class, 'index'
                 ]
             )->name('home.index');
+        });
+
+        // Allow only admin
+        Route::middleware(['checkRole:admin', 'throttle:5,1'])->group(function () {
+            Route::get('/admin',
+                [
+                    AdminController::class, 'index'
+                ]
+            )->name('admin');
         });
     });
 });

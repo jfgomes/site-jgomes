@@ -5,10 +5,13 @@ let access_token_str  = 'access_token';
 let access_token_ttl_minutes = 15;
 
 // Login page
-let login_page       =  '/login';
+let login_page       = '/login';
 
 // Home page
-let home_page        =  '/home';
+let home_page        = '/home';
+
+// Forbidden page
+let forbidden_page   = '/error-403';
 
 // Ajax requests module definition
 let serverLessRequests = (function($)
@@ -126,9 +129,15 @@ let serverLessRequests = (function($)
                 console.log(response);
             })
             .catch(error => {
-                // Case error redirect to login page
-                console.log(error);
-                window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
+                // Case forbidden (403) errors go to forbidden page
+                if (error === 403)
+                {
+                    window.location.href = forbidden_page;
+
+                } else {
+                    // Case other errors redirect to login page
+                    window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
+                }
             })
             .finally(() => {
                 // Hide the overlay regardless of success or failure
@@ -153,16 +162,23 @@ let serverLessRequests = (function($)
                 },
                 error: function(xhr)
                 {
-                    // Inform client about 429 ( Too many requests )
-                    if (xhr.status !== 429)
+                    // Case Forbidden go back
+                    if (xhr.status === 403)
                     {
-                        // xhr.statusText || 'Cannot load data. Please try again.'
-                        reject('Cannot load data.');
+                        reject(403);
                         return;
                     }
 
-                    // Reject the promise for too many requests
-                    reject('Too many requests.');
+                    // Inform client about 429 ( Too many requests )
+                    if (xhr.status === 429)
+                    {
+                        // Reject the promise for too many requests
+                        reject('Too many requests.');
+                        return;
+                    }
+
+                    // xhr.statusText || 'Cannot load data. Please try again.'
+                    reject('Cannot load data.');
                 }
             });
         });
