@@ -50,11 +50,4 @@
             });
         </script>
     </body>
-    <script>
-        // Initialize the module when the DOM is ready.
-        $(document).ready(function()
-        {
-            serverLessRequests.init();
-        });
-    </script>
 </html>

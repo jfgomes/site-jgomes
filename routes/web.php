@@ -66,6 +66,39 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
         );
     });
 
+    // CREATE USER FOR TEST
+    Route::get('/create_test_admin_user', function ()
+    {
+        // Verify if
+        $existingUser = User::where('email', 'admin@test.test')
+            ->first();
+
+        if ($existingUser)
+        {
+            // If the user already exists, exit
+            return response()->json(
+                [
+                    'message' => 'Admin user already exists'
+                ],
+                400
+            );
+        }
+
+        $user           = new User();
+        $user->name     = 'Zé Manel Admin';
+        $user->email    = 'admin@test.test';
+        $user->role     = 'admin';
+        $user->password = Hash::make('Test@123');
+        $user->save();
+
+        return response()->json(
+            [
+                'message' => 'Admin User created. In prod dont forget to delete'
+            ],
+            400
+        );
+    });
+
     // DELETE USER FOR TEST
     Route::get('/delete_test_user', function () {
 
@@ -436,6 +469,9 @@ Route::middleware('throttle:20,1')->group(function () {
 
 ########################################### END PUBLIC ROUTES
 
+########################################### START SERVERLESS ROUTES
+
+// Route to authenticate
 Route::get('/login', function () {
 
     $paramName      = key(request()->all());
@@ -465,10 +501,25 @@ Route::get('/login', function () {
         'errorMessage'   => $errorMessage,
     ]);
 
-})->name('auth.login');
+})
+    ->name('auth.login');
 
+// Route for authenticated user
 Route::get('/home', function () {
     return view('home.index');
-})->name('home.index');
+})
+    ->name('home.index');
 
+// Route for 'admin' rule
+Route::get('/admin', function () {
+    return view('admin.index');
+})
+    ->name('admin.index');
 
+// Route for '403' message
+Route::get('/error-403', function () {
+    return view('errors.403');
+})
+    ->name('error.403');
+
+########################################### END SERVERLESS ROUTES
