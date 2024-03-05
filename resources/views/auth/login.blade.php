@@ -4,13 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
-        <link rel="stylesheet" href="css/local/private/loadingOverlay.css">
-        <link rel="stylesheet" href="css/local/private/flashMessages.css">
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="{{ (app()->environment() === 'prod')
-            ? mix('js/prod/private/app.js')
-            : 'js/local/private/serverLessRequests.js' }}">
-        </script>
+        @if(app()->environment('prod'))
+            <script src="{{ mix('js/prod/app.js') }}"></script>
+            <link rel="stylesheet" href="{{ mix('css/prod/app.css') }}">
+        @else
+            <link rel="stylesheet" href="css/local/private/loadingOverlay.css">
+            <link rel="stylesheet" href="css/local/private/flashMessages.css">
+            <script src="/js/jquery-3.7.1.js"></script>
+            <script src="/js/local/private/serverLessRequests.js"></script>
+        @endif
     </head>
     <body id="login-body">
         <div id="overlay">
@@ -40,6 +42,13 @@
                 Login
             </button>
         </form>
+        <script>
+            // Initialize the module when the DOM is ready.
+            $(document).ready(function()
+            {
+                serverLessRequests.init();
+            });
+        </script>
     </body>
     <script>
         // Initialize the module when the DOM is ready.
