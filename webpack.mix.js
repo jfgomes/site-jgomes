@@ -12,12 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix
-    .js([
-        // local - public
-        'public/js/local/public/init.js',
-        // local - private
-        'public/js/local/private/serverLessRequests.js'
-    // prod output - private
-    ],'public/js/prod/private/app.js') // Combine all local js into prod/private/app.js
-
+    .styles([
+    'public/css/local/private/flashMessages.css',
+    'public/css/local/private/loadingOverlay.css',
+], 'public/css/prod/app.css')
+    .scripts([
+    'public/js/jquery-3.7.1.js',
+    'public/js/local/private/serverLessRequests.js'
+], 'public/js/prod/app.js')
     .version();
