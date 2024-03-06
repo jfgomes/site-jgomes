@@ -16,6 +16,7 @@ yarn-error.log
 .env
 .env.dev
 /public/js/prod
+/public/css/prod
 /public/coverage-report
 /storage/coverage-report
 /storage/cronlogs

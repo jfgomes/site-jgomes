@@ -15,9 +15,11 @@ mix
     .styles([
     'public/css/local/private/flashMessages.css',
     'public/css/local/private/loadingOverlay.css',
+    'public/css/cookies.css',
 ], 'public/css/prod/app.css')
     .scripts([
     'public/js/jquery-3.7.1.js',
-    'public/js/local/private/serverLessRequests.js'
+    'public/js/local/private/serverLessRequests.js',
+    'public/js/cookies.js',
 ], 'public/js/prod/app.js')
     .version();
