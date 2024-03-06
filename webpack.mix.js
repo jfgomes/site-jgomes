@@ -19,8 +19,6 @@ mix
     'public/css/local/private/home.css',
     'public/css/local/private/general.css',
     'public/css/cookies.css',
-    'public/css/default.css',
-    'public/css/layout.css',
 ], 'public/css/prod/app.css')
     .scripts([
     'public/js/jquery-3.7.1.js',
