@@ -5,7 +5,7 @@
     <head>
         <!--- Basic Page Needs
         ================================================== -->
-        <title>Login</title>
+        <title>Authentication</title>
         <meta charset="utf-8">
         <meta name="description" content="Private area">
         <meta name="author" content="José Gomes">
@@ -46,7 +46,11 @@
 
         <!-- Header
         ================================================== -->
-        <header></header> <!-- Header End -->
+        <header>
+            <div class="header-content">
+                <h1>🔐Authentication</h1>
+            </div>
+        </header> <!-- Header End -->
 
         <!-- footer
         ================================================== -->
@@ -89,7 +93,8 @@
         </div>
         <script>
             // Initialize the module when the DOM is ready.
-            $(document).ready(function() {
+            $(document).ready(function()
+            {
                 serverLessRequests.init();
 
                 // Extra style actions
