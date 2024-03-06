@@ -30,6 +30,7 @@ header {
 #loginForm label {
     font-family: 'opensans-regular', sans-serif;
     font-weight: bold;
+    font-size: 14px;
     -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
     -webkit-text-size-adjust: 100%;
     margin: 12px 0;

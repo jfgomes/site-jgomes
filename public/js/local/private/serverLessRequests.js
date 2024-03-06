@@ -126,7 +126,11 @@ let serverLessRequests = (function($)
             .then(token => getData(url, token))
             .then(response => {
                 // Handle successful data retrieval
-                console.log(response);
+                // console.log(response);
+                if(response.result.user.role === 'admin')
+                {
+                    $(".adminLink").show();
+                }
             })
             .catch(error => {
                 // Case forbidden (403) errors go to forbidden page

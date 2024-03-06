@@ -85,7 +85,7 @@ Route::prefix('v1')->group(function () {
         });
 
         // Allow only admin
-        Route::middleware(['checkRole:admin', 'throttle:5,1'])->group(function () {
+        Route::middleware(['checkRole:admin', 'throttle:20,1'])->group(function () {
             Route::get('/admin',
                 [
                     AdminController::class, 'index'
