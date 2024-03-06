@@ -131,14 +131,15 @@
 </head>
 
     <body>
-    <div id="notfound">
-        <div class="notfound">
-            <h3>Oops! Access Forbidden</h3>
-            <div class="notfound-404">
-                <h1><span>4</span><span>0</span><span>3</span></h1>
+        <a href="/home"><button  style="cursor: pointer">🏠 Back to home</button></a>
+        <div id="notfound">
+            <div class="notfound">
+                <h3>Oops! Access Forbidden</h3>
+                <div class="notfound-404">
+                    <h1><span>4</span><span>0</span><span>3</span></h1>
+                </div>
             </div>
         </div>
-    </div>
     </body>
 
 </html>

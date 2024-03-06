@@ -9,8 +9,9 @@ class AdminController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
+        $user = $request->user();
         return response()->json([
-            'result'  => "test test"
+            'result'  => compact('user')
         ]);
     }
 }

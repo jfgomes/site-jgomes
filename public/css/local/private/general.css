@@ -21,7 +21,25 @@ header {
 }
 
 h1 {
-    font-size: 20px;
+    font-size: 25px;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+}
+
+button.adminBtn {
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 button#logout-btn {
@@ -29,6 +47,15 @@ button#logout-btn {
     color: white;
     border: none;
     padding: 8px 15px;
-    border-radius: 4px;
     font-size: 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.adminLink {
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px;
+    background-color: dodgerblue;
+    display: none;
 }

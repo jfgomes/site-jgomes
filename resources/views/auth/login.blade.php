@@ -5,65 +5,40 @@
     <head>
         <!--- Basic Page Needs
         ================================================== -->
-        <title>Authentication</title>
-        <meta charset="utf-8">
-        <meta name="description" content="Private area">
-        <meta name="author" content="José Gomes">
-
-        <!-- Mobile Specific Metas
-        ================================================== -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Login</title>
+        @include('partials.meta')
 
         <!-- Favicons
          ================================================== -->
         <link rel="shortcut icon" href="favicon.png" >
 
-        <!-- JS + CSS
+        <!-- CSS + JS
         ================================================== -->
-        @if(app()->environment('prod'))
-            <script src="{{ mix('js/prod/app.js') }}"></script>
-            <link rel="stylesheet" href="{{ mix('css/prod/app.css') }}">
-        @else
-            <!-- CSS -->
-            <link rel="stylesheet" href="css/cookies.css">
-            <link rel="stylesheet" href="css/local/private/loadingOverlay.css">
-            <link rel="stylesheet" href="css/local/private/flashMessages.css">
-            <link rel="stylesheet" href="css/local/private/login.css">
-            <link rel="stylesheet" href="css/local/private/general.css">
-
-            <!-- JS -->
-            <script src="/js/jquery-3.7.1.js"></script>
-            <script src="/js/local/private/serverLessRequests.js"></script>
-            <script src="/js/cookies.js"></script>
-        @endif
+        @include('partials.css_js')
     </head>
     <body>
         <!-- Overlay to block the page during the loading
-         ================================================== -->
-        <div id="overlay">
-            <div id="overlay-content"> ⏳</div>
-        </div>
+        ================================================== -->
+        @include('partials.overlay')
 
         <!-- Header
         ================================================== -->
         <header>
             <div class="header-content">
-                <h1>🔐Authentication</h1>
+                <h1>Login</h1>
             </div>
         </header> <!-- Header End -->
 
         <!-- footer
         ================================================== -->
         <footer>
-            <div id="cookie-consent-bar" class="cookie-consent-barExtra">
-                <p>🍪 This website uses cookies to ensure you get the best experience on our website.</p>
-                <button onclick="acceptCookies()">✅ Got it!</button>
-            </div>
+            @include('partials.cookies')
         </footer> <!-- Footer End-->
 
         <!-- Modal -->
         <div id="loginModal">
             <form id="loginForm">
+                <h2>🔐</h2>
                 <!-- Messages area
                 ================================================== -->
                 <div id="loginMsg">
@@ -92,9 +67,9 @@
             </form>
         </div>
         <script>
-            // Initialize the module when the DOM is ready.
             $(document).ready(function()
             {
+                // Initialize the module when the DOM is ready.
                 serverLessRequests.init();
 
                 // Extra style actions
