@@ -26,7 +26,7 @@ let serverLessRequests = (function($)
         $.ajax({
             type: 'POST',
             url: '/api/v1/login',
-            data: $('#login-form').serialize(),
+            data: $('#loginForm').serialize(),
             success: function(response)
             {
                 // Store the access_token at localStorage
@@ -46,7 +46,7 @@ let serverLessRequests = (function($)
                     // Show error to client
                     showFlashMessage(
                         'error',
-                        'Invalid login.'
+                        'Invalid login'
                     );
                     return;
                 }
@@ -54,7 +54,7 @@ let serverLessRequests = (function($)
                 // Show error to client
                 showFlashMessage(
                     'error',
-                    'Too many request at this moment.'
+                    'Too many request at this moment'
                 );
             }
         });
@@ -106,7 +106,7 @@ let serverLessRequests = (function($)
                         localStorage.removeItem(access_token_str);
 
                         // Redirect to login page
-                        window.location.href = `${login_page}?` + btoa('b64=true&success=Logout');
+                        window.location.href = `${login_page}?` + btoa('b64=true&success=Logout done with success');
                     }
                 });
             })
@@ -173,24 +173,25 @@ let serverLessRequests = (function($)
                     if (xhr.status === 429)
                     {
                         // Reject the promise for too many requests
-                        reject('Too many requests.');
+                        reject('Too many requests');
                         return;
                     }
 
                     // xhr.statusText || 'Cannot load data. Please try again.'
-                    reject('Cannot load data.');
+                    reject('Cannot load data');
                 }
             });
         });
     }
 
     // Function to create and show errors
-    function showFlashMessage(type, message)
-    {
-        $('.flash-message').remove();
-        let flashElement = $('<div>').addClass('flash-message ' + type)
-            .text(message);
-        $('body').prepend(flashElement);
+    function showFlashMessage(type, message) {
+        $('<div>', {
+            class: 'flashMessage ' + type,
+            text: message
+        }).prependTo('#loginMsg').delay(3000).fadeOut(1000, function() {
+            $(this).remove();
+        });
     }
 
     // Function to set the token in localStorage with an expiration time
@@ -229,11 +230,11 @@ let serverLessRequests = (function($)
                     if (xhr.status !== 429) {
 
                         // Reject the promise as the token refresh failed
-                        reject('Authentication needed.');
+                        reject('Authentication needed');
                         return;
                     }
 
-                    reject('Too many requests.');
+                    reject('Too many requests');
                 }
             });
         });
@@ -250,7 +251,7 @@ let serverLessRequests = (function($)
             // If localStorage is empty, reject the promise as the no token was not found
             if (!accessToken)
             {
-                reject('Authentication needed.');
+                reject('Authentication needed');
                 return;
             }
 
@@ -284,7 +285,7 @@ let serverLessRequests = (function($)
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
-                    success: function(result) {
+                    success: function() {
                         resolve(token);
                     },
                     error: function(xhr) {
@@ -295,12 +296,12 @@ let serverLessRequests = (function($)
                             localStorage.removeItem(key);
 
                             // Reject the promise as the refresh token is invalid
-                            reject('Authentication needed.');
+                            reject('Authentication needed');
                             return;
                         }
 
                         // Reject the promise for too many requests
-                        reject('Too many requests.');
+                        reject('Too many requests');
                     }
                 });
             }
@@ -312,7 +313,7 @@ let serverLessRequests = (function($)
     function init()
     {
         // Login btn via click
-        $('#login-btn').on('click', doLogin);
+        $('#loginBtn').on('click', doLogin);
 
         // Login btn via btn enter
         $(document).on('keypress', function(event) {
@@ -329,7 +330,7 @@ let serverLessRequests = (function($)
         }
 
         // Set time to remove flash messages
-        $('.flash-message').delay(3000).fadeOut(1000);
+        $('.flashMessage').delay(3000).fadeOut(1000);
     }
 
     // Return init
