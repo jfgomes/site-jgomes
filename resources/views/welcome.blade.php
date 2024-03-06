@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/media-queries.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/cookies.css">
 
     <!-- Script
     ================================================== -->
@@ -1060,6 +1061,11 @@
 
                 </div>
 
+                <div id="cookie-consent-bar">
+                    <p>🍪 This website uses cookies to ensure you get the best experience on our website.</p>
+                    <button onclick="acceptCookies()">✅ Got it!</button>
+                </div>
+
             </footer> <!-- Footer End-->
 
             <!-- Java Script
@@ -1075,6 +1081,7 @@
                         ? mix('js/prod/public/app.js')
                         : 'js/local/public/init.js' }}">
             </script>
+            <script src="/js/cookies.js"></script>
     </body>
 
 </html>
