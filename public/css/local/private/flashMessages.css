@@ -1,16 +1,16 @@
-.flash-message {
-    padding: 10px;
-    border-radius: 5px;
+.flashMessage {
+    padding: 20px 10px;
     opacity: 0.9;
     z-index: 9999;
+    margin: 10px 0 15px;
 }
 
-.flash-message.success {
+.flashMessage.success {
     background-color: #4CAF50;
     color: #fff;
 }
 
-.flash-message.error {
+.flashMessage.error {
     background-color: #f44336;
     color: #fff;
 }
