@@ -24,9 +24,7 @@
         <!-- Header
         ================================================== -->
         <header>
-            <div class="header-content">
-                <h1>Login</h1>
-            </div>
+            <div class="header-content"></div>
         </header> <!-- Header End -->
 
         <!-- footer
