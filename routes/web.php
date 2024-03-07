@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 
-use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -474,6 +472,7 @@ Route::middleware('throttle:20,1')->group(function () {
 // Route to authenticate
 Route::get('/login', function () {
 
+    // The redirects can come with short messages in the url and we encode it to not show plain text
     $paramName      = key(request()->all());
     $decodedString  = base64_decode($paramName);
     $successMessage = null;
@@ -517,7 +516,7 @@ Route::get('/admin', function () {
     ->name('admin.index');
 
 // Route for '403' message
-Route::get('/error-403', function () {
+Route::get('/403', function () {
     return view('errors.403');
 })
     ->name('error.403');

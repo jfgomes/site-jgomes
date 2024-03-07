@@ -11,7 +11,7 @@ let login_page       = '/login';
 let home_page        = '/home';
 
 // Forbidden page
-let forbidden_page   = '/error-403';
+let forbidden_page   = '/403';
 
 // Ajax requests module definition
 let serverLessRequests = (function($)
