@@ -526,4 +526,5 @@ Route::get('/429', function () {
     return view('errors.429');
 })
     ->name('error.429');
+
 ########################################### END SERVERLESS ROUTES
