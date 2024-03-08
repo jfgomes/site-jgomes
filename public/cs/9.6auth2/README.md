@@ -274,13 +274,16 @@ let access_token_str  = 'access_token';
 let access_token_ttl_minutes = 15;
 
 // Login page
-let login_page       = '/login';
+let login_page           = '/login';
 
 // Home page
-let home_page        = '/home';
+let home_page            = '/home';
 
 // Forbidden page
-let forbidden_page   = '/403';
+let forbidden_page       = '/403';
+
+// Too many requests page
+let many_requests_page   = '/429';
 
 // Ajax requests module definition
 let serverLessRequests = (function($)
@@ -407,6 +410,11 @@ let serverLessRequests = (function($)
                 {
                     window.location.href = forbidden_page;
 
+                // Case too many requests (429) errors go to many requests page
+                } else if (error === 429)
+                {
+                    window.location.href = many_requests_page;
+
                 } else {
                     // Case other errors redirect to login page
                     window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
@@ -446,7 +454,7 @@ let serverLessRequests = (function($)
                     if (xhr.status === 429)
                     {
                         // Reject the promise for too many requests
-                        reject('Too many requests');
+                        reject(429);
                         return;
                     }
 
@@ -640,6 +648,12 @@ Route::get('/403', function () {
     return view('errors.403');
 })
     ->name('error.403');
+    
+// Route for '429' message
+Route::get('/429', function () {
+    return view('errors.429');
+})
+    ->name('error.429');
 ```
 ## Requirement list ( All tested! ): 
 
