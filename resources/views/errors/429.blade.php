@@ -129,8 +129,8 @@
     </style>
     <meta name="robots" content="noindex, follow">
 </head>
-
     <body>
+        <a href="/home"><button  style="cursor: pointer">🏠 Back to home</button></a>
         <div id="notfound">
             <div class="notfound">
                 <h3>Oops! Too Many Requests</h3>

@@ -521,4 +521,9 @@ Route::get('/403', function () {
 })
     ->name('error.403');
 
+// Route for '403' message
+Route::get('/429', function () {
+    return view('errors.429');
+})
+    ->name('error.429');
 ########################################### END SERVERLESS ROUTES
