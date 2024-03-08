@@ -45,5 +45,5 @@
 ![Cookie Protection diagram](https://jgomes.site/images/diagrams/cookie.drawio.png)
 
 ## Demonstration 
-#### ( Click on the image to see the video )
+#### ( Click on the image to watch the video )
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=s0f3kEI5ZGk)

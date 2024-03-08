@@ -21,7 +21,7 @@
 
 - Users who are already authenticated with a valid token, if they reach the login page, are automatically redirected to the private area.
 - A TTL (Time-to-Live) was defined in the frontend to renew the access token.
-- A TTL in the API is a development in progress to renew the access token, as Sanctum don´t has a native way to invalidate the access_tokens.
+- A TTL in the API side is a development in progress to renew the access token, as Sanctum don´t has a native way to renew the access_tokens.
 
 ## API diagram overview:
 ![Authorization.png](https://jgomes.site/images/diagrams/auth.drawio.png)
