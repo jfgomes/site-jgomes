@@ -16,9 +16,9 @@
                 @if(str_contains($folder['name'], '##DONE##'))
                     {{ str_replace('##DONE##', '✔️', $folder['name']) }}
                 @elseif(str_contains($folder['name'], '##STARTED_NOT_DONE##'))
-                    {!! str_replace('##STARTED_NOT_DONE##', '<strong> ( 🚧 Work in progress 🚧) </strong>', $folder['name']) !!}
+                    {!! str_replace('##STARTED_NOT_DONE##', '<strong> ( 🚧 Work in progress 🚧 ) </strong>', $folder['name']) !!}
                 @elseif(str_contains($folder['name'], '##NOT_STARTED##'))
-                    {!! str_replace('##NOT_STARTED##', '<strong> ( ❌ Dev not started ❌) </strong>', $folder['name']) !!}
+                    {!! str_replace('##NOT_STARTED##', '<strong> ( ❌ Dev not started ❌ ) </strong>', $folder['name']) !!}
                 @endif
                 @if(count($folder['files']) > 0)
                     <ul>
