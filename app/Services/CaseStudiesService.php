@@ -50,7 +50,7 @@ class CaseStudiesService
             "3hide-routes-cookie" => "🙈 Hide routes in production ##DONE##",
             "4maintenance-mode"   => "🏗️ Site down in maintenance mode accessible only for devs ##DONE##",
             "5env_vars_without"   => "🙈 Hide env vars ##DONE##",
-            "6webpack-mix"        => "🧑‍💻 Asset compile/minify + Handle with client browser caches ##DONE##",
+            "6webpack-mix"        => "🧑‍💻 JS+CSS assets compile/minify + Handle with client browser caches ##DONE##",
             "7rate-limit"         => "👮‍♀️Requests limit per route - rate limit security ##STARTED_NOT_DONE##",
             "8logging"            => "🗂️ Laravel log files ##STARTED_NOT_DONE##",
             "9.0error-pages"      => "📄 Laravel custom error views ##STARTED_NOT_DONE##",
