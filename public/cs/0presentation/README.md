@@ -1,10 +1,12 @@
-## Adilia! project
+## Adilia project!
 
 ![Prod logo](https://cdn-icons-png.flaticon.com/512/2519/2519375.png)
 
 ## Introduction
 
-- This is a functional prototype to new projects called Adilia!
+- This is a ready functional prototype to be used in new projects.
+
+- It is in use in my personal website, so all case studies here are real and already implemented.
 
 - This project is for web, is based in PHP ( Laravel ) and all associated services are 100% open source.
 
