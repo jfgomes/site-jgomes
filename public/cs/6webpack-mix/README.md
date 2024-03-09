@@ -1,4 +1,4 @@
-![Webpack mix Logo](http://127.0.0.1:8000/images/cs/webpackmix.png)
+![Webpack mix Logo](https://jgomes.site/images/cs/webpackmix.png)
 
 ## Introduction
 
@@ -40,12 +40,10 @@
     </head>
 ```
 - css
-
-![Css assets in local env](http://127.0.0.1:8000/images/cs/webpackmix/css-local.png)
+![Css assets in local env](https://jgomes.site/images/cs/webpackmix/css-local.png)
 
 - js
-
-![Js assets in local env](http://127.0.0.1:8000/images/cs/webpackmix/js-local.png)
+![Js assets in local env](https://jgomes.site/images/cs/webpackmix/js-local.png)
 
 ## webpack.mix.js file instructions to compile all the assets into a single compressed file css and a single js file
 ```
@@ -81,11 +79,12 @@ mix
 ```
 - css
 
-![Css assets in prod env](http://127.0.0.1:8000/images/cs/webpackmix/css-prod.png)
+![Css assets in prod env](https://jgomes.site/images/cs/webpackmix/css-prod.png)
 
 - js
 
-![Js assets in prod env](http://127.0.0.1:8000/images/cs/webpackmix/js-prod.png)
+![Js assets in prod env](https://jgomes.site/images/cs/webpackmix/js-prod.png)
+
 
 ## In the template
 ```
@@ -115,7 +114,7 @@ mix
 - Make sure the file webpack.mix.js is valid and all the asset source paths are correct. Pay attention in the order of the file.
 - Run the command 'npm run production'
 
-![Command npm run production](http://127.0.0.1:8000/images/cs/webpackmix/cmd.png)
+![Command npm run production](https://jgomes.site/images/cs/webpackmix/cmd.png)
 
 ## Demonstration
 #### ( Click on the image to watch the video )
