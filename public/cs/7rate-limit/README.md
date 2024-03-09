@@ -1,4 +1,4 @@
-![Rate limit Logo](http://127.0.0.1:8000/images/cs/rate-limit.jpg)
+![Rate limit Logo](https://jgomes.site/images/cs/rate-limit.jpg)
 
 ## Introduction
 
