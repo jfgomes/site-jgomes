@@ -40,11 +40,9 @@
     </head>
 ```
 - css
-
 ![Css assets in local env](https://jgomes.site/images/cs/webpackmix/css-local.png)
 
 - js
-
 ![Js assets in local env](https://jgomes.site/images/cs/webpackmix/js-local.png)
 
 ## webpack.mix.js file instructions to compile all the assets into a single compressed file css and a single js file
@@ -86,6 +84,7 @@ mix
 - js
 
 ![Js assets in prod env](https://jgomes.site/images/cs/webpackmix/js-prod.png)
+
 
 ## In the template
 ```
