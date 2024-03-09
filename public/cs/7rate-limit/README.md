@@ -14,7 +14,7 @@
 
 - This control is done at the route file level.
 
-## How to configure:
+## How to configure
 #### Ensure the kernel file is loading the throttle middleware
 ```
 <?php
