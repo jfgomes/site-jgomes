@@ -41,7 +41,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function ()
     {
         // Allow a margin of 3 logouts per min as it should run once a time
-        Route::middleware('throttle:10,1')->group(function () {
+        Route::middleware('throttle:3,1')->group(function () {
             Route::post('/logout',
                 [
                     AuthController::class, 'logout'
@@ -68,7 +68,7 @@ Route::prefix('v1')->group(function () {
         });
 
         // Check if user is authenticated...
-        // This route will be cached... No need more than 1 non cached access per minute
+        // This route will be cached as well... No need more than 1 non cached access per minute
         Route::get('/check',
             [
                 AuthController::class, 'check'
@@ -84,8 +84,8 @@ Route::prefix('v1')->group(function () {
             )->name('home.index');
         });
 
-        // Allow only admin
-        Route::middleware(['checkRole:admin', 'throttle:20,1'])->group(function () {
+        // Allow only admin. But let's define 30 request per min
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function () {
             Route::get('/admin',
                 [
                     AdminController::class, 'index'
