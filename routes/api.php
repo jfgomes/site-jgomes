@@ -93,5 +93,10 @@ Route::prefix('v1')->group(function () {
             )->name('admin');
         });
     });
+
+    // Middleware de fallback to return 401 for unauthenticated requests
+    Route::fallback(function () {
+        return response()->json(['error' => 'Unauthorized'], 401);
+    });
 });
 

@@ -55,7 +55,7 @@ class CaseStudiesService
             "8logging"            => "🗂️ Laravel custom log files ##DONE##",
             "9.0error-pages"      => "📄 Laravel custom error views ##DONE##",
             "9.0.1redis"          => "💿 Redis implementation ##STARTED_NOT_DONE##",
-            "9.1swagger"          => "🕹️ Swagger implementation ##STARTED_NOT_DONE##",
+            "9.1swagger"          => "🕹️ Swagger implementation ##DONE##",
             "9.2reboot-cron"      => "⚙️ Some jobs in prod ##STARTED_NOT_DONE##",
             "9.3unit-tests"       => "🧪 Phpunit tests ##STARTED_NOT_DONE##",
             "9.4es"               => "🔎 Elasticsearch implementation ##STARTED_NOT_DONE##",
