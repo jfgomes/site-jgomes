@@ -38,7 +38,7 @@ curl -fsSL https://github.com/docker/compose/releases/latest/download/docker-com
    95  sudo apt-get install apache2-bin
    96  sudo a2enmod proxy
   103  sudo a2enmod proxy_http
-    109  sudo a2enmod mod_headers
+
     110  sudo a2enmod headers
 
   111  systemctl restart apache2
@@ -225,7 +225,7 @@ curl -fsSL https://github.com/docker/compose/releases/latest/download/docker-com
   365  sudo service apache2 restart
   366  cd /var/www/html/site-jgomes-prod-infra/site-jgomes/
   367  vendor/bin/phpunit --coverage-html storage/coverage-report
-
-  371  vendor/bin/phpunit --coverage-html storage/coverage-report
+cd public/
+ln -s ../storage/coverage-report/ coverage-report
 
   375  sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html" && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/var/www/html/site-jgomes-prod-infra/site-jgomes/app#(Coverage)#g" {} +
