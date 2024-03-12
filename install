@@ -1,8 +1,8 @@
 # Instala as extensões PHP via PECL e habilita-as
 RUN pecl install apcu \
-    && docker-php-ext-enable apcu \
+  ªªªªª  && docker-php-ext-enable apcu \
     && pecl install redis \
-    && docker-php-ext-enable redis
+ ªªªªª  && docker-php-ext-enable redis
 
 
 apt-get update && apt-get install -y     apt-transport-https     ca-certificates     curl     gnupg     lsb-release    software-properties-common
@@ -11,14 +11,15 @@ curl -fsSL https://github.com/docker/compose/releases/latest/download/docker-com
 apt-get install apache2
 npm install
 apt install npm
-apt-get install php-curl
+
+
 apt-get install composer
-apt-get install ext-dom
-apt-get install php-xml
+ªªªªªª apt-get install ext-dom Ja instalado?
+apt-get install php-xml  Ja istalado?
 pecl install xdebug
-apt install php-pear
-apt-get install php-dev
-pecl install xdebug
+apt install php-pear Ja instalado?
+**** apt-get install php-dev       ja?
+
 sudo apt-get install php-mysql
 pecl install redis
 cd ~/.ssh/
@@ -29,7 +30,7 @@ cd /var/www/html/certs
 cp /tmp/installation-tmp/certs/* .
 chmod 600 *
 
-cd /etc/apache5/sites-available
+cd /etc/apache2/sites-available
 cp /tmp/installation-tmp/vhosts/* .
 
 a2dissite default-ssl.conf && rm default-ssl.conf -f
@@ -41,8 +42,8 @@ a2enmod mod_headers &&
 a2enmod headers &&
 a2enmod ssl
 
-a2ensite vhost-80-443.conf
-a2ensite vhost-app-ssl.conf
+a2ensite vhost-80-443.conf &&
+a2ensite vhost-app-ssl.conf &&
 a2ensite vhost-jenkins.conf
 
 service apache2 restart
@@ -53,13 +54,16 @@ git clone git@github.com:jfgomes/site-jgomes-prod-infra.git
 cd site-jgomes-prod-infra/
 git clone git@github.com:jfgomes/site-jgomes.git
 
-docker-compose down
-docker-compose up --build
+sudo service docker restart
+sudo /etc/init.d/docker restart
+
+docker-compose up --build -d
 
 cd site-jgomes/
 cp /tmp/installation-tmp/.env .
 
 composer update
+# Composer is operating significantly slower than normal because you do not have the PHP curl extension enabled
 npm run production
 php artisan migrate
 
