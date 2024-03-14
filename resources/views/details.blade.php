@@ -111,7 +111,7 @@
             <!-- Prod -->
             <div class="section">
                 <p class="category">Local
-                    <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the local links will not work ) <span> </p>
+                    <br> <span style="font-size: 12px">( If you don't have this project up and running locally, the local links will not work ) </span> </p>
                 <div class="sub-section">
                     <div>
                         <p class="service-name">Webpage</p>
