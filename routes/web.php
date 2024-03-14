@@ -319,7 +319,7 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
 
             // TEST CONNECTION
             $storage   = new StorageClient([
-                'keyFilePath' => base_path() . "/gc-" . env('APP_ENV') . ".json"
+                'keyFilePath' => base_path() . "/gc-" . env('GC_APP_ENV') . ".json"
             ]);
 
             echo '<pre> - Connection done with success!';

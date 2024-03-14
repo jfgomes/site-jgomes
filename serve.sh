@@ -232,17 +232,22 @@ else
     exit 1
 fi
 
-# Read the content of gc-local.json JSON file
+# Read the content of the JSON file
 json_content_gc=$(<gc-local.json)
 
-# Replace the env var to "real" private kwy in file
-escaped_private_key=$(echo "$GC_PRIVATE_KEY" | awk '{gsub(/\\n/, "\\\\n")}1')
-formatted_json_gc=$(echo "$json_content_gc" | awk -v private_key="$escaped_private_key" '{gsub(/{GC_PRIVATE_KEY}/, private_key)}1')
+# Remove newline characters from the private key
+cleaned_private_key=$(echo "$GC_PRIVATE_KEY" | tr -d '\n')
 
-# Remove $ from the beginning of private_key
+# Escape special characters in the private key to prevent misinterpretation by sed
+escaped_private_key=$(printf '%s\n' "$cleaned_private_key" | sed -e 's/[\/&]/\\&/g')
+
+# Substitute the environment variable in the JSON
+formatted_json_gc=$(echo "$json_content_gc" | sed "s/{GC_PRIVATE_KEY}/$escaped_private_key/g")
+
+# Remove the $ character at the beginning of the private key
 formatted_json_gc="${formatted_json_gc/\$}"
 
-# Save the JSON well formatted with the real env var
+# Save the well-formatted JSON with the actual environment variable
 echo "$formatted_json_gc" > gc-local.json
 
 ############## google credentials env var set END
