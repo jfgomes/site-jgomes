@@ -137,7 +137,7 @@
                                 </span>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 3306</span>
+                                <span style="margin-right: 10px">Port: 3406</span>
                                 <button class="more-info-btn" onclick="togglePopup('MySQLInfo')">More</button>
                             </div>
                         </div>
@@ -159,10 +159,10 @@
                         <p class="service-name">PhpMyAdmin</p>
                         <div>
                             <div>
-                                <a class="link" target="_blank" href="http://127.0.0.1:8090/">Link</a>
+                                <a class="link" target="_blank" href="http://127.0.0.1:8092/">Link</a>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 8090</span>
+                                <span style="margin-right: 10px">Port: 8092</span>
                                 <button class="more-info-btn" onclick="togglePopup('PhpMyAdminInfo')">More</button>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                                 </span>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 5672</span>
+                                <span style="margin-right: 10px">Port: 5673</span>
                                 <button class="more-info-btn" onclick="togglePopup('RabbitMQInfo')">More</button>
                             </div>
                         </div>
@@ -201,10 +201,10 @@
                         <p class="service-name">RabbitMQ Interface</p>
                         <div>
                             <div>
-                                <a class="link" target="_blank" href="http://127.0.0.1:15672/">Link</a>
+                                <a class="link" target="_blank" href="http://127.0.0.1:15673/">Link</a>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 15672</span>
+                                <span style="margin-right: 10px">Port: 15673</span>
                                 <button class="more-info-btn" onclick="togglePopup('RabbitMQInterfaceInfo')">More</button>
                             </div>
                         </div>
@@ -221,10 +221,10 @@
                         <p class="service-name">RabbitMQ API</p>
                         <div>
                             <div>
-                                <a class="link" target="_blank" href="http://127.0.0.1:15672/api/queues/%2F/messages_dev">Link</a>
+                                <a class="link" target="_blank" href="http://127.0.0.1:15673/api/queues/%2F/messages_dev">Link</a>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 15672</span>
+                                <span style="margin-right: 10px">Port: 15673</span>
                                 <button class="more-info-btn" onclick="togglePopup('RabbitMQApiInfo')">More</button>
                             </div>
                         </div>
@@ -246,7 +246,7 @@
                                 </span>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 6379</span>
+                                <span style="margin-right: 10px">Port: 6378</span>
                                 <button class="more-info-btn" onclick="togglePopup('RedisInfo')">More</button>
                             </div>
                         </div>
@@ -263,10 +263,10 @@
                         <p class="service-name">Redis Commander</p>
                         <div>
                             <div>
-                                <a class="link" target="_blank" href="http://127.0.0.1:8081">Link</a>
+                                <a class="link" target="_blank" href="http://127.0.0.1:8082">Link</a>
                             </div>
                             <div style="float: right">
-                                <span style="margin-right: 10px">Port: 8081</span>
+                                <span style="margin-right: 10px">Port: 8082</span>
                                 <button class="more-info-btn" onclick="togglePopup('RedisCommander')">More</button>
                             </div>
                         </div>
