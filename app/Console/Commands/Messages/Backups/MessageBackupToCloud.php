@@ -43,11 +43,11 @@ class MessageBackupToCloud extends Command
     {
         // Create cloud connection
         $storage = new StorageClient([
-            'keyFilePath' => base_path() . "/gc-" . env('APP_ENV') . ".json"
+            'keyFilePath' => base_path() . "/gc-" . env('GC_APP_ENV') . ".json"
         ]);
 
         // Create bucket instance
-        $bucket = $storage->bucket(env('APP_ENV') . "-backups-bd");
+        $bucket = $storage->bucket(env('GC_APP_ENV') . "-backups-bd");
 
         // Get data from DB
         $data = DB::table('messages')->get();
@@ -180,11 +180,11 @@ class MessageBackupToCloud extends Command
     {
         // Create a new storage client for cloud backups
         $storage = new StorageClient([
-            'keyFilePath' => base_path() . "/gc-" . env('APP_ENV') . ".json"
+            'keyFilePath' => base_path() . "/gc-" . env('GC_APP_ENV') . ".json"
         ]);
 
         // Create a bucket instance for cloud backups
-        $bucket = $storage->bucket(env('APP_ENV') . "-backups-bd");
+        $bucket = $storage->bucket(env('GC_APP_ENV') . "-backups-bd");
 
         // Upload the latest backup to the cloud
         $bucket->upload(fopen($path . env('GC_CLOUD_FILE'), 'r'), [
