@@ -1,8 +1,16 @@
 #!/bin/bash
 
+# Verify if the user is not running this script in prod
 if [ -e .env ]; then
     echo -e "\n 🤬🤬 No no no... Hey.. you are in prod. This script is only available to run in local environments. \n"
     exit 1
+fi
+
+# Verify if the user can use docker
+if ! groups "$(whoami)" | grep &>/dev/null '\bdocker\b'; then
+    echo -e "\n ❌ You are not in the Docker group. Please add yourself to the Docker group and restart the script."
+    # groups $(whoami)
+    # sudo usermod -aG docker
 fi
 
 CURRENT_DIRECTORY=$(pwd)
@@ -100,9 +108,9 @@ trap cleanup_and_exit SIGINT
 # shellcheck disable=SC2034
 SCRIPT_PID=$$
 
-# Find and kill all the serve.sh processes that can be running
+# Find and kill all the serve.sh processes that can be running except he current
 # shellcheck disable=SC2207
-SERVE_PIDS=($(pgrep -f "serve.sh"))
+SERVE_PIDS=($(pgrep -f "serve.sh" | grep -v $$))
 
 if [ ${#SERVE_PIDS[@]} -gt 0 ]; then
     # shellcheck disable=SC2145
@@ -192,8 +200,10 @@ done
 # Wait a bit
 sleep 10
 
-# Kill existing rabbit processes
-lsof -ti :5672 | xargs -r kill -9
+# Kill existing rabbit and redis processes
+lsof -ti :5673 | xargs -r kill -9
+lsof -ti :6380 | xargs -r kill -9
+lsof -ti :15673 | xargs -r kill -9
 
 # Need to have this cleaning ( laravel.log ) here as eliminated consumers in the last command, it generates messages on the log
 echo -n > "$CURRENT_DIRECTORY/storage/logs/laravel.log"
@@ -323,8 +333,8 @@ else
     exit 1
 fi
 
-# Redis
-redis-cli ping  > /dev/null 2>&1
+# Redis local port != default = 6379 to avoid misconception
+redis-cli -p 6378 ping > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     # Success
     echo -e " ✅  Successfully pinged Redis \n"

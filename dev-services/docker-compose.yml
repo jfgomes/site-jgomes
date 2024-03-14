@@ -19,7 +19,7 @@ services:
         env_file:
             - .env
         ports:
-            - "8090:80"
+            - "8092:80"
         environment:
             PMA_HOST: mysql
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
@@ -31,8 +31,8 @@ services:
         env_file:
             - .env
         ports:
-            - "5672:5672"
-            - "15672:15672"
+            - "5673:5672"
+            - "15673:15672"
         environment:
             -  RABBITMQ_USER=${RABBIT_USER}
             -  RABBITMQ_PASSWORD=${RABBIT_PASS}
@@ -42,14 +42,13 @@ services:
     redis:
         container_name: jgomes_site_dev_redis
         restart: always
-        image: redis:latest
+        build: './redis'
         command: ["redis-server", "--bind", "${REDIS_HOST}", "--port", "${REDIS_PORT}"]
         volumes:
             - redis:/var/lib/redis
-            - redis-config:/usr/local/etc/redis/redis.conf
             - dbRedis:/data
         ports:
-            - "6379:6379"
+            - "6378:6378"
         networks:
             - redis-network
 
@@ -59,7 +58,7 @@ services:
         platform: linux/amd64  # Forces the platform to amd64
         restart: always
         ports:
-            - "8081:8081"
+            - "8082:8081"
         networks:
             - redis-network
         depends_on:
@@ -75,4 +74,4 @@ volumes:
     dbData:
     dbRedis:
     redis:
-    redis-config:
+   # redis-config:
