@@ -25,7 +25,8 @@ gc-prod.json
 gc-local.json
 /public/mix-manifest.json
 /dev-services/rabbitmq/definitions-local.json
+/dev-services/mysql/init-local.sql
+/dev-services/redis/redis-local.conf
 env_vars_list_local.sh
 env_vars_list_local.zip
-/dev-services/mysql/init-local.sql
 /storage/logs/*
