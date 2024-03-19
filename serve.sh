@@ -371,7 +371,7 @@ fi
 ###### Service test connections end
 
 # Init the server and get the PID
-php artisan serve &
+php -d apc.enable_cli=1 artisan serve &
 SERVER_PID=$!
 
 # Set the number of consumers to RABBIT_CONSUMERS_LIMIT

@@ -28,6 +28,7 @@
                 <h1>Home</h1>
                 <div class="button-container">
                     <a href="/admin" class="adminLink"><button class="adminBtn">👮‍♀️ Admin</button></a>
+                    <a href="/map-caches"><button class="adminBtn">🗺️ Map / Caches</button></a>
                     @include('partials.logout')
                 </div>
             </div>

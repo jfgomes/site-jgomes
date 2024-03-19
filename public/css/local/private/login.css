@@ -15,9 +15,13 @@
 header {
     height: 100vh;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     background: #161415 url(/images/header-background.jpg) no-repeat top center;
     background-size: cover !important;
     -webkit-background-size: cover !important;
+    z-index: 1;
 }
 
 #loginForm {
