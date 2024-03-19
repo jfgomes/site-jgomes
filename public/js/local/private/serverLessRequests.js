@@ -119,43 +119,48 @@ let serverLessRequests = (function($)
     }
 
     // Get data if authorized
-    function checkAuthAndGetData(url)
-    {
-        // Had the overlay
-        $("#overlay").show();
+    function checkAuthAndGetData(url) {
+        return new Promise((resolve, reject) => {
+            // Had the overlay
+            $("#overlay").show();
 
-        // Wait for the promise to be resolved
-        getToken(access_token_str)
-            .then(token => getData(url, token))
-            .then(response => {
-                // Handle successful data retrieval
-                // console.log(response);
-                if(response.result.user.role === 'admin')
-                {
-                    $(".adminLink").show();
-                }
-            })
-            .catch(error => {
-                // Case forbidden (403) errors go to forbidden page
-                if (error === 403)
-                {
-                    window.location.href = forbidden_page;
+            // Wait for the promise to be resolved
+            getToken(access_token_str)
+                .then(token => getData(url, token))
+                .then(response => {
+                    // Handle successful data retrieval
+                    if(response.result.user.role === 'admin')
+                    {
+                        $(".adminLink").show();
+                    }
 
-                // Case too many requests (429) errors go to many requests page
-                } else if (error === 429)
-                {
-                    window.location.href = many_requests_page;
+                    // Resolve the promise with the response
+                    resolve(response);
+                })
+                .catch(error => {
+                    // Case forbidden (403) errors go to forbidden page
+                    if (error === 403)
+                    {
+                        window.location.href = forbidden_page;
 
-                } else {
-                    // Case other errors redirect to login page
-                    window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
-                }
-            })
-            .finally(() => {
-                // Hide the overlay regardless of success or failure
-                $("#overlay").hide();
-            });
+                        // Case too many requests (429) errors go to many requests page
+                    } else if (error === 429)
+                    {
+                        window.location.href = many_requests_page;
+
+                    } else {
+                        // Case other errors redirect to login page
+                        window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
+                    }
+                    reject(error); // Rejeita a promessa com o erro
+                })
+                .finally(() => {
+                    // Hide the overlay regardless of success or failure
+                   // $("#overlay").hide();
+                });
+        });
     }
+
 
     // Function to get data from backend with a valid token
     function getData(url, token)

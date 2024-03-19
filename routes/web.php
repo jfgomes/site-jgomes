@@ -147,10 +147,24 @@ if (($conditionalFlag && Cookie::has($conditionalFlag))
         }
     });
 
+    Route::get('/reset_redis_cache_for_locations', function () {
+        Redis::select(2);
+        Redis::flushdb();
+        return "done";
+    });
+
+    Route::get('/reset_apcu_cache_for_locations', function () {
+        foreach (new \APCUIterator("/^location_pt_/") as $counter) {
+            echo "<pre>"; print_r("apcu_delete for key: " . $counter['key']);
+            apcu_delete($counter['key']);
+        }
+        return "done";
+    });
+
     // TEST APCu + Redis + BD + CACHE WITH LOAD BALANCE locally
     Route::get('/warmup_location_caches', function () {
 
-        // Ignore.. this just a note: ( ab -n 20 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys )
+        // Ignore.. this is just a note: ( ab -n 20 -c 10 http://127.0.0.1:8001/test_load_balance_cache_sys )
 
         // Run frontend 1 ( php artisan serve --port=8001 )
         // Run frontend 2 ( php artisan serve --port=8002 )
@@ -508,6 +522,12 @@ Route::get('/home', function () {
     return view('home.index');
 })
     ->name('home.index');
+
+// Map + Cache
+Route::get('/map-caches', function () {
+    return view('map.index');
+})
+    ->name('map.index');
 
 // Route for 'admin' rule
 Route::get('/admin', function () {
