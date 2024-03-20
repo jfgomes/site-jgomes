@@ -20,10 +20,10 @@ let locationsModule = (function($)
                         $(".backInRight").removeClass("animate__animated animate__headShake");
                     }, 1000);
                 },
-                error: function()
+                error: function(xhr, status, error)
                 {
                     // Logic to handle errors
-                    alert('An error occurred while trying to reset all caches.');
+                    alert(error);
                 }
             });
         });
@@ -51,7 +51,7 @@ let locationsModule = (function($)
                 error: function(xhr, status, error)
                 {
                     // Logic to handle errors
-                    alert('An error occurred while trying to reset all caches.');
+                    alert(error);
                 }
             });
         });
