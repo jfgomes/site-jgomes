@@ -81,7 +81,7 @@
         <script>
             $(document).ready(function()
             {
-                let frontend_endpoint = '{{ url()->to('/') }}';
+                let frontend_endpoint = '{{ (app()->environment() === 'prod') ? env('APP_URL') : url()->to('/') }}';
 
                 // Initialize the module when the DOM is ready.
                 locationsModule.init(frontend_endpoint);

@@ -68,7 +68,7 @@ let locationsModule = (function($)
                 .then(data => {
                     const lat = data[0].lat;
                     const long = data[0].lon;
-                    console.log(lat, long)
+
                     if (mymap !== undefined) {
                         mymap.remove();
                     }
