@@ -752,7 +752,7 @@ menu_entry(OB_VERSION_CHECK,'Version Check',$MYREQUEST);
 if ($AUTHENTICATED) {
     $MY_SELF = str_replace('/index.php', '', $MY_SELF);
     echo <<<EOB
-        <li><a class="aright" href="/apcu$MY_SELF&CC=1&OB={$MYREQUEST['OB']}" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
+        <li><a class="aright" href="$MY_SELF&CC=1&OB={$MYREQUEST['OB']}" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
 EOB;
 }
 echo <<<EOB

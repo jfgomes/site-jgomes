@@ -156,7 +156,7 @@ let serverLessRequests = (function($)
                 })
                 .finally(() => {
                     // Hide the overlay regardless of success or failure
-                   // $("#overlay").hide();
+                    // $("#overlay").hide();
                 });
         });
     }

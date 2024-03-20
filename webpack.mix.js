@@ -19,10 +19,15 @@ mix
     'public/css/local/private/home.css',
     'public/css/local/private/general.css',
     'public/css/cookies.css',
+    'public/css/animate.min.css',
+    'public/css/leaflet.css',
+    'public/css/local/private/locations.css',
 ], 'public/css/prod/app.css')
     .scripts([
     'public/js/jquery-3.7.1.js',
     'public/js/local/private/serverLessRequests.js',
     'public/js/cookies.js',
+    'public/js/leaflet.min.js',
+    'public/js/local/private/locations.js',
 ], 'public/js/prod/app.js')
     .version();

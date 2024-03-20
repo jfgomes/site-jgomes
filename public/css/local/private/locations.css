@@ -1,0 +1,206 @@
+/* Style to set the height of the map */
+#map {
+    height: 88vh; /* Adjust as necessary */
+}
+
+/* Container for the map */
+.map-container {
+    display: flex;
+}
+
+/* Container for the logs */
+.logs-container {
+    flex: 1;
+    margin-left: 1%;
+}
+
+/* Style to set the height of the textarea */
+#loadLogs {
+    height: 88vh; /* Adjust as necessary */
+    padding: 5px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    background-color: #0c5460;
+    color: white;
+    border: 1px solid white;
+    font-size: 10px;
+}
+
+/* Main container style */
+section {
+    display: flex;
+    flex-direction: row;
+    height: 90vh; /* Adjust as necessary */
+}
+
+/* Style for the left column container */
+section > div:first-child {
+    flex: 2;
+}
+
+/* Style for the right column container */
+section > div:last-child {
+    flex: 1;
+}
+
+/* Custom button style */
+.custom-btn {
+    color: #fff; /* Text color */
+    background-color: dodgerblue; /* Background color */
+    border: none; /* No border */
+    padding: 5px 10px; /* Padding */
+    margin-bottom: 10px; /* Bottom margin */
+    cursor: pointer; /* Cursor */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+/* Hover effect for custom button */
+.custom-btn:hover {
+    background-color: #ddd; /* Background color on hover */
+    color: #333; /* Text color on hover */
+    border-color: #bbb; /* Border color on hover */
+}
+
+/* Style for the fake height container */
+.fake-height {
+    height: 55px;
+}
+
+/* Selector container style */
+#map-level-selector {
+    flex: 2;
+}
+
+/* Container for the selects */
+.select-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Side panel style */
+.side-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container for buttons */
+.buttons-container {
+    position: relative;
+    z-index: 2;
+    display: none;
+    margin-left: 1%;
+}
+
+/* Hide elements by default */
+.hidden {
+    display: none;
+}
+
+/* Media query for screens with a maximum width of 900px */
+@media (max-width: 900px) {
+    /* Adjust font size of h1 */
+    h1 {
+        font-size: 18px;
+    }
+
+    /* Margin adjustment for elements with .backInRight class */
+    .backInRight {
+        margin-top: 15px;
+    }
+
+    /* Set width to 100% and revert to initial display for .map-container and .side-panel */
+    .map-container, .side-panel {
+        width: 100%;
+        display: initial;
+    }
+
+    /* Adjust height of #map */
+    #map {
+        height: 50vh;
+    }
+
+    /* Adjust height of #loadLogs */
+    #loadLogs {
+        height: 30vh;
+    }
+
+    /* Margin adjustment for .map-container */
+    .map-container {
+        margin: 6px;
+    }
+
+    /* Margin adjustment for .logs-container */
+    .logs-container {
+        margin: 4px;
+    }
+
+    /* Adjust width of select elements to fill container */
+    select {
+        width: 100%;
+    }
+
+    /* Adjust height of fake-height container */
+    .fake-height {
+        height: 51px;
+    }
+
+    /* Margin adjustment for .header-content */
+    .header-content {
+        margin-right: -5px;
+    }
+}
+
+/* Media query for screens with a maximum width of 370px */
+@media (max-width: 370px) {
+    /* Hide h1 by setting font size to 0 */
+    h1 {
+        font-size: 0;
+    }
+
+    /* Adjust display and padding for .header-content */
+    .header-content {
+        display: block;
+        padding: 12px;
+        margin-right: 0;
+    }
+
+    /* Adjust display, text alignment, and margin for .button-container */
+    .button-container {
+        display: block;
+        text-align: right;
+        margin-right: -6px;
+    }
+
+    /* Adjust height of fake-height container */
+    .fake-height {
+        height: 48px;
+    }
+
+    /* Adjust padding and margin for button elements */
+    button {
+        padding: 6px 9px !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Media query for screens with a maximum width of 270px */
+@media (max-width: 270px) {
+    /* Adjust padding, font size, and margin for button elements */
+    button {
+        padding: 6px 9px !important;
+        font-size: 13px !important;
+        margin-left: 0 !important;
+    }
+
+    /* Adjust height of fake-height container */
+    .fake-height {
+        height: 46px;
+    }
+
+    /* Margin adjustment for .header-content */
+    .header-content {
+        margin-right: 0;
+    }
+}
