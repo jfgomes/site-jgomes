@@ -523,11 +523,11 @@ Route::get('/home', function () {
 })
     ->name('home.index');
 
-// Map + Cache
-Route::get('/map-caches', function () {
-    return view('map.index');
+// Locations + Cache
+Route::get('/locations', function () {
+    return view('locations.index');
 })
-    ->name('map.index');
+    ->name('locations.index');
 
 // Route for 'admin' rule
 Route::get('/admin', function () {
@@ -541,7 +541,7 @@ Route::get('/403', function () {
 })
     ->name('error.403');
 
-// Route for '403' message
+// Route for '429' message
 Route::get('/429', function () {
     return view('errors.429');
 })

@@ -29,8 +29,12 @@ h2 {
     text-align: center;
 }
 
-.button-container {
+.button-container  {
     display: flex;
+}
+
+.button-container a {
+    margin-left:10px;
 }
 
 button.adminBtn {
@@ -53,9 +57,5 @@ button#logout-btn {
 }
 
 .adminLink {
-    text-decoration: none;
-    color: white;
-    padding: 8px 15px;
-    background-color: dodgerblue;
     display: none;
 }
