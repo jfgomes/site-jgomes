@@ -56,13 +56,15 @@
                     <div id="map"></div>
                 </div>
                 <div class="side-panel">
-                    <div class="backInRight buttons-container">
-                        <button id="resetRedisCache" class="custom-btn">
-                            Clean Redis
-                        </button>
-                        <button id="resetAPCuCache" class="custom-btn">
-                            Clean APCu
-                        </button>
+                    <div class="backInRight buttons-container" style="min-height: 36px;">
+                        @if ($cookieExists || app()->environment('local'))
+                            <button id="resetRedisCache" class="custom-btn">
+                                Clean Redis
+                            </button>
+                            <button id="resetAPCuCache" class="custom-btn">
+                                Clean APCu
+                            </button>
+                        @endif
                     </div>
                     <div class="logs-container">
                         <label for="loadLogs"></label>
