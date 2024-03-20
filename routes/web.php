@@ -523,9 +523,16 @@ Route::get('/home', function () {
 })
     ->name('home.index');
 
-// Locations + Cache
+// Locations + Caches
 Route::get('/locations', function () {
-    return view('locations.index');
+
+    $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
+    $cookieExists    = ($conditionalFlag && Cookie::has($conditionalFlag));
+    return view('locations.index',
+        [
+            'cookieExists' => $cookieExists
+        ]
+    ) ;
 })
     ->name('locations.index');
 
