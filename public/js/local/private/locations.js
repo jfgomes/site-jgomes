@@ -1,6 +1,6 @@
 let locationsModule = (function($)
 {
-    function init(frontend_endpoint)
+    function init(frontend_endpoint, show_cache_buttons)
     {
         $('#resetRedisCache').on('click', function()
         {
@@ -341,6 +341,22 @@ let locationsModule = (function($)
                 $(".backInRight").removeClass("animate__animated animate__headShake");
             }, 1000);
         });
+
+        // Function to show or hide the cache buttons based on the presence of the cookie
+        function toggleButtons(show_cache_buttons)
+        {
+            let cacheButtons = $('#resetRedisCache, #resetAPCuCache');
+            if (show_cache_buttons) {
+                // If the cookie is present, show the buttons
+                cacheButtons.show();
+            } else {
+                // Otherwise, hide the buttons
+                cacheButtons.hide();
+            }
+        }
+
+        toggleButtons(show_cache_buttons);
+
     }
 
     // Return init
