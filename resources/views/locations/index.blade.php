@@ -84,10 +84,14 @@
         <script>
             $(document).ready(function()
             {
-                let frontend_endpoint = '{{ (app()->environment() === 'prod') ? env('APP_URL') : url()->to('/') }}';
+                let frontend_endpoint  = '{{ (app()->environment() === 'prod') ? env('APP_URL') : url()->to('/') }}';
+                let show_cache_buttons = '{{ $hasSpecialCookie }}';
 
                 // Initialize the module when the DOM is ready.
-                locationsModule.init(frontend_endpoint);
+                locationsModule.init(
+                    frontend_endpoint,
+                    show_cache_buttons
+                );
             });
         </script>
     </body>

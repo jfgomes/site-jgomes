@@ -25,10 +25,13 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
+$conditionalFlag  = env('APP_ROUTE_COOKIE_FLAG');
+$hasSpecialCookie = Cookie::has($conditionalFlag) || app()->environment('local');
+
 ########################################### START COOKIE ROUTES
 ## THIS ROUTES ARE ONLY AVAILABLE UNDER A COOKIE OR IF THE ENV IS LOCAL
-$conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
-if (($conditionalFlag && Cookie::has($conditionalFlag))
+
+if (($conditionalFlag && $hasSpecialCookie)
     || app()->environment('local')
 ) {
 
@@ -523,16 +526,11 @@ Route::get('/home', function () {
 })
     ->name('home.index');
 
-// Locations + Caches
-Route::get('/locations', function () {
-
-    $conditionalFlag = env('APP_ROUTE_COOKIE_FLAG');
-    $cookieExists    = ($conditionalFlag && Cookie::has($conditionalFlag));
-    return view('locations.index',
-        [
-            'cookieExists' => $cookieExists
-        ]
-    ) ;
+// Locations
+Route::get('/locations', function ()  use ($hasSpecialCookie) {
+    return view('locations.index', [
+        'hasSpecialCookie' => $hasSpecialCookie
+    ]);
 })
     ->name('locations.index');
 
