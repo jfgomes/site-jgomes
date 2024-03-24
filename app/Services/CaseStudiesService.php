@@ -45,7 +45,7 @@ class CaseStudiesService
             "1basic-setup"        => "💻 Local env setup AKA Ready to Dev! ##DONE##",
             "2.1ci-cd"            => "🌤️ CI / CD with jenkins ##STARTED_NOT_DONE##",
             "2.2git-rule"         => "🧩 GitHub protection rule for master branch ##DONE##",
-            "2.3wms"              => "📩 Website message service ##DONE##",
+            "2.3wms"              => "📩 Website message service with Rabbitmq ##DONE##",
             "2.4gc-bucket"        => "☁️ Do backups to a bucket using google cloud ##DONE##",
             "3hide-routes-cookie" => "🙈 Hide routes in production ##DONE##",
             "4maintenance-mode"   => "🏗️ Site down in maintenance mode accessible only for devs ##DONE##",
