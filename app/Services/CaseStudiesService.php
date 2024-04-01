@@ -60,7 +60,7 @@ class CaseStudiesService
             "9.3unit-tests"       => "🧪 Phpunit tests ##STARTED_NOT_DONE##",
             "9.4es"               => "🔎 Elasticsearch implementation ##STARTED_NOT_DONE##",
             "9.5apc"              => "💿 APCu implementation ##NOT_STARTED##",
-            "9.5caches"           => "💿 Backend cache system implementation for load balanced with multiple frontends ##STARTED_NOT_DONE##",
+            "9.5caches"           => "💿 Backend cache system implementation for load balanced with multiple frontends ##DONE##",
             "9.6auth2"            => "🔑 Implementation of authentication with Sanctum ( Token management ) ##DONE##",
             "9.7areas_for_admins" => "🔐 Special routes only accessible for some users ##STARTED_NOT_DONE##",
             "9.8dashboard"        => "🔐 Dashboard with the system status accessible only for admins ##STARTED_NOT_DONE##",

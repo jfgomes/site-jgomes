@@ -56,16 +56,13 @@
                     <div id="map"></div>
                 </div>
                 <div class="side-panel">
-
                     <div class="backInRight buttons-container" style="min-height: 36px">
-
-                            <button id="resetRedisCache" class="custom-btn">
-                                Clean Redis
-                            </button>
-                            <button id="resetAPCuCache" class="custom-btn">
-                                Clean APCu
-                            </button>
-
+                        <button id="resetRedisCache" class="custom-btn">
+                            Clean Redis
+                        </button>
+                        <button id="resetAPCuCache" class="custom-btn">
+                            Clean APCu
+                        </button>
                     </div>
                     <div class="logs-container">
                         <label for="loadLogs"></label>

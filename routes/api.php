@@ -91,7 +91,7 @@ Route::prefix('v1')->group(function () {
                 [
                     LocationsController::class, 'getLocations'
                 ]
-            )->name('map.test');
+            )->name('locations.test');
         });
 
         // Allow only admin. But let's define 30 request per min

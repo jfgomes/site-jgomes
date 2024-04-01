@@ -152,7 +152,7 @@ let serverLessRequests = (function($)
                         // Case other errors redirect to login page
                         window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
                     }
-                    reject(error); // Rejeita a promessa com o erro
+                    reject(error); // Reject the promise
                 })
                 .finally(() => {
                     // Hide the overlay regardless of success or failure
