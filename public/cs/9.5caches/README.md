@@ -1,4 +1,4 @@
-![Caches Logo](http://127.0.0.1:8000/images/cs/redis-apc.png)
+![Caches Logo](https://jgomes.site/images/cs/redis-apc.png)
 
 ## Introduction
 - For PHP applications, I propose an efficient architecture for handling geographic data, in this example case, for districts, municipalities, and parishes, which are stored as the source of truth in a MySQL database. 
@@ -8,7 +8,7 @@
 For this situation, we want the database not to receive many requests and for them to be resolved by cache systems,
 however the source of truth remains the information stored in the database.
 
-![Redis-commander](http://127.0.0.1:8000/images/cs/redis/db.png)
+![Redis-commander](https://jgomes.site/images/cs/redis/db.png)
 
 ## What is Redis and why?
 Redis is an in-memory caching storage system known for its speed and flexibility. 
@@ -79,7 +79,7 @@ Additionally, Redis supports various data types such as strings, lists, sets, et
 ```
 
 #### Redis / Redis-commander interface
-![Redis-commander](http://127.0.0.1:8000/images/cs/redis/redis.png)
+![Redis-commander](https://jgomes.site/images/cs/redis/redis.png)
 
 ## What is APCu and why?
 APCu (Alternative PHP Cache) is a PHP extension that provides a local, in-memory caching system for storing temporary data. 
@@ -123,7 +123,7 @@ class ApcController extends Controller
 APCu interface file link [here](https://raw.githubusercontent.com/jfgomes/site-jgomes/master/resources/views/apc/index.blade.php)
 
 #### APCu's interface 
-![APCu](http://127.0.0.1:8000/images/cs/redis/apcu.png)
+![APCu](https://jgomes.site/images/cs/redis/apcu.png)
 
 ## Application functionality - How does it work
 In the proposed system, when a frontend receives a request for geographic data, it first checks the local APCu cache. 
@@ -139,7 +139,7 @@ This reduces the load on the main database, speeds up client requests, and enhan
 
 ## Laravel technical implementation
 #### Server less route
-![Serverless route](http://127.0.0.1:8000/images/cs/redis/serve_less_route.png)
+![Serverless route](https://jgomes.site/images/cs/redis/serve_less_route.png)
 
 #### Server less view blade template
 ```
@@ -612,7 +612,7 @@ let locationsModule = (function($)
 ```
 
 #### Service route
-![Service route](http://127.0.0.1:8000/images/cs/redis/service_route.png)
+![Service route](https://jgomes.site/images/cs/redis/service_route.png)
 
 #### Service controller
 ```
@@ -906,7 +906,7 @@ Case we want to reset the Redis / APCu caches in production we need to add the s
 
 This graphic reflects the application functionality example in a X location place in 2 frontends with 4 hypothetical users
 
-![Caches diagram](http://127.0.0.1:8000/images/diagrams/caches.drawio.png)
+![Caches diagram](https://jgomes.site/images/diagrams/caches.drawio.png)
 
 ## Demonstration
 #### ( Click on the image to watch the video )
