@@ -17,8 +17,8 @@
 
 ## Caches diagram
 
-![Caches diagram](https://jgomes.site/images/diagrams/cookie.drawio.png)
+![Caches diagram](http://127.0.0.1:8000/images/diagrams/caches.drawio.png)
 
 ## Demonstration
-#### ( Click on the image to watch the video )
+#### ( Click on the image to watch the video ) sinistros.auto@tranquilidad.pt 2 dias
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=s0f3kEI5ZGk)
