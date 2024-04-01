@@ -129,7 +129,7 @@ if (($conditionalFlag && $hasSpecialCookie)
         );
     });
 
-    // CLEANUP TEST APCu + Redis
+    // CLEANUP APCu + Redis
     Route::get('/cleanup_location_caches', function ()
     {
         // Get all location Ids
@@ -150,12 +150,14 @@ if (($conditionalFlag && $hasSpecialCookie)
         }
     });
 
+    // CLEANUP JUST Redis
     Route::get('/reset_redis_cache_for_locations', function () {
         Redis::select(2);
         Redis::flushdb();
         return "done";
     });
 
+    // CLEANUP JUST APCu ( on the frontend this is executed )
     Route::get('/reset_apcu_cache_for_locations', function () {
         foreach (new \APCUIterator("/^location_pt_/") as $counter) {
             echo "<pre>"; print_r("apcu_delete for key: " . $counter['key']);
