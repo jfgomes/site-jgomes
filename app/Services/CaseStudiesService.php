@@ -43,7 +43,7 @@ class CaseStudiesService
             "0presentation"       => "📝️ Presentation of this project ##DONE##",
             "0setup"              => "⚙️ Prod env setup AKA Adilia! ##DONE##",
             "1basic-setup"        => "💻 Local env setup AKA Ready to Dev! ##DONE##",
-            "2.1ci-cd"            => "🌤️ CI / CD with jenkins ##STARTED_NOT_DONE##",
+            "2.1ci-cd"            => "🌤️ CI / CD with jenkins ##DONE##",
             "2.2git-rule"         => "🧩 GitHub protection rule for master branch ##DONE##",
             "2.3wms"              => "📩 Website message service with Rabbitmq ##DONE##",
             "2.4gc-bucket"        => "☁️ Do backups to a bucket using google cloud ##DONE##",

@@ -1,25 +1,24 @@
 ## CI / CD with Jenkins
 
-![Jenkins logo](http://127.0.0.1:8000/images/cs/jenkins/jenkins_logo.png)
+![Jenkins logo](https://jgomes.site/images/cs/jenkins/jenkins_logo.png)
 
 ## Introduction
 
-- The objective of this case study is to create um processo de automatização na entrega do código
-- A ferramenta escolhida é o jenkins
-- O Jenkins é uma ferramenta de código aberto utilizada para automação de pipelines de integração contínua (CI) e entrega contínua (CD). 
-- é usado no desenvolvimento de software para automatizar tarefas repetitivas, como compilação, teste e implantação de código em produção.
-- Fornece uma integração Contínua (CI) onde automatiza o processo de integração de código de vários desenvolvedores em um repositório compartilhado. Ele verifica constantemente se há alterações no repositório e, quando detecta uma alteração, realiza a compilação, teste e notifica os desenvolvedores sobre o status do build.
-- Entrega Contínua (CD): Além da integração contínua, o Jenkins pode ser configurado para automatizar a entrega de software em diferentes ambientes (desenvolvimento, produção, etc.). Ele pode implantar automaticamente o código em um servidor de teste ou produção após a conclusão bem-sucedida de um pipeline.
-- Pipelines: No Jenkins, as automações são definidas por meio de pipelines, que são uma série de etapas (também conhecidas como jobs) que o código passa desde a integração até a entrega. Esses pipelines podem ser configurados visualmente ou definidos como código usando o Jenkinsfile.
-- Plugins: O Jenkins oferece vários plugins que estendem sua funcionalidade. Esses plugins podem ser usados para integração com várias ferramentas e tecnologias, como controle de versão (Git).
-
-- No geral, o Jenkins é uma ferramenta poderosa para automatizar o ciclo de vida do desenvolvimento de software, permitindo que as equipes entreguem software de alta qualidade de forma rápida e eficiente.
-
+- The objective of this case study is to create an automation process in code delivery.
+- The chosen tool is Jenkins.
+- Jenkins is an open-source tool used for automating continuous integration (CI) and continuous delivery (CD) pipelines.
+- It is used in software development to automate repetitive tasks such as code compilation, testing, and deployment to production.
+- It provides Continuous Integration (CI) where it automates the process of integrating code from multiple developers into a shared repository. It constantly checks for changes in the repository and, upon detecting a change, performs compilation, testing, and notifies developers about the build status.
+- Continuous Delivery (CD): In addition to continuous integration, Jenkins can be configured to automate software delivery to different environments (development, production, etc.). It can automatically deploy the code to a test or production server after a successful completion of a pipeline.
+- Pipelines: In Jenkins, automations are defined through pipelines, which are a series of steps (also known as jobs) that the code goes through from integration to delivery. These pipelines can be configured visually or defined as code using a Jenkinsfile.
+- Plugins: Jenkins offers various plugins that extend its functionality. These plugins can be used for integration with various tools and technologies, such as version control (Git).
+- Overall, Jenkins is a powerful tool for automating the software development lifecycle, enabling teams to deliver high-quality software quickly and efficiently.
 
 ## Workflow diagram overview
-## Setup server side
-#### Jenkins orchestration
-###### No docker-compose, este é o serviço do Jenkins:
+![git-branch-protection.png](https://jgomes.site/images/diagrams/schema.drawio.png)
+
+## Jenkins orchestration
+#### No docker-compose, este é o serviço do Jenkins:
 ```
     jenkins:
         container_name: jgomes_jenkins
@@ -37,7 +36,7 @@
         networks:
             - jgomes-site_prod-docker
  ```
-###### No docker-compose, o Dockerfile está em /prod-services/jenkins
+#### No docker-compose, o Dockerfile está em /prod-services/jenkins
  ```
 FROM jenkins/jenkins
 
@@ -73,9 +72,9 @@ RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/
 ```
 #### Jenkins VHosts details:
 
-- Este serviço está numa rede local, parém através de um ProxyPass o mesmo é exposto para fora.
-- É necessário configurar um dominio independente para o serviço a resolver para o IP da maquina. Neste caso o dominio é: jjenkins.xyz
-- É também necessário ter mod_ssl activo bem como o proxy_module, proxy_http_module e o headers_module
+- This service is on a local network, but it is exposed outside through a ProxyPass.
+- It is necessary to configure an independent domain for the service to resolve to the machine's IP. In this case, the domain is: jjenkins.xyz.
+- It is also necessary to have mod_ssl active as well as the proxy_module, proxy_http_module, and headers_module.
 
 ###### Jenkins service vhost
 
@@ -117,7 +116,6 @@ RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/
 ###### Jenkins redirect port 80->443 vhost
 
  ```
- 
  <VirtualHost *:80>
       ServerName jjenkins.xyz
       ServerAlias www.jjenkins.xyz
@@ -311,14 +309,75 @@ pipeline
 
  ```
 ## Explanation of the Jenkinsfile
-## Jenkins interface configuration
-#### Jenkins plugins
-#### Jenkins project configurations
-#### Jenkins gitHub configurations
-## Extra information:
 
-env vars at Jenkins
+The Jenkins file above is a declarative script that defines a workflow for continuous integration and continuous delivery (CI/CD) of a PHP application.
+
+Here's a summary of what each stage does:
+
+- Get Environment Variables (ENV vars): In this stage, the necessary environment variables for SSH connection to the remote server where the application will be deployed are configured.
+- Checkout: A checkout operation is performed from the source code repository.
+- Build: In this stage, actions related to building the application are executed, such as updating project dependencies using Composer and copying an environment file (.env) needed for generating an application key.
+- Tests: Unit tests are executed using PHPUnit.
+- Deploy: This stage is crucial as it involves deploying the application to a production environment. Various actions are performed here, such as resetting the repository, updating dependencies with Composer, running database migrations, clearing caches, and generating client version files, among other things. The execution of these commands is done via SSH on the specified remote server in the environment variables. If any of the implementation commands fail (i.e., if their exit code is not 0), the workflow is interrupted, and an error is logged.
+- Post: This section defines actions after the main workflow:
+    Failure: If the implementation fails, a script is executed to notify the error, passing an error message to the remote server via an SSH command.
+    Success: If the implementation is successful, a script is executed to notify the success to the remote server.
+
+In summary, this Jenkinsfile automates the process of continuous integration and delivery of a PHP application, from building to deployment in a production environment, using Jenkins and SSH for automation and status notification.
+
+## Jenkins interface configuration
+ 
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f1.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f2.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f3.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f4.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f9.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f10.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f11.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f12.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f13.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f14.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f15.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f17.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f16.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f18.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f21.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f22.png)
+
+#### Jenkins plugins
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f5.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f6.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f7.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f8.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f23.png)
+
+#### Jenkins gitHub configuration
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f19.png)
+
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f20.png)
+
+#### Jenkins env vars configuration
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f24.png)
 
 ## Demonstration
 #### ( Click on the image to watch the demo video )
-[![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=6bGltddfJIM)
+[![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=zNz07YnnJSA)
