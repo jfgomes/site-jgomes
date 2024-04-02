@@ -57,7 +57,7 @@ class CaseStudiesService
             "9.0.1redis"          => "💿 Redis implementation ##STARTED_NOT_DONE##",
             "9.1swagger"          => "🕹️ Swagger implementation ##DONE##",
             "9.2reboot-cron"      => "⚙️ Some jobs in prod ##STARTED_NOT_DONE##",
-            "9.3unit-tests"       => "🧪 Phpunit tests ##STARTED_NOT_DONE##",
+            "9.3unit-tests"       => "🧪 Phpunit tests ##DONE##",
             "9.4es"               => "🔎 Elasticsearch implementation ##STARTED_NOT_DONE##",
             "9.5apc"              => "💿 APCu implementation ##NOT_STARTED##",
             "9.5caches"           => "💿 Backend cache system implementation for load balanced with multiple frontends ##DONE##",
