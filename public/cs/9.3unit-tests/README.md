@@ -25,7 +25,7 @@ of high-quality and reliable software.
 ## Laravel phpunit implementation
 #### Phpunit test structure
 
-![Phpunit test structure](http://127.0.0.1:8000/images/cs/phpunit/f3.png)
+![Phpunit test structure](https://jgomes.site/images/cs/phpunit/f3.png)
 
 #### Unit tests ( PWD: tests -> Unit -> ExamplesTest.php )
 ```
@@ -75,12 +75,12 @@ class ExampleTest extends TestCase
 ## Run tests
 php artisan test
 
-![Phpunit run tests](http://127.0.0.1:8000/images/cs/phpunit/f1.png)
+![Phpunit run tests](https://jgomes.site/images/cs/phpunit/f1.png)
 
 ## Generate report
 vendor/bin/phpunit --coverage-html storage/coverage-report/
 
-![Phpunit run tests](http://127.0.0.1:8000/images/cs/phpunit/f2.png)
+![Phpunit run tests](https://jgomes.site/images/cs/phpunit/f2.png)
 
 ## Case we want to expose the coverage to public
 - cd /home/jgomes/my/jgomes/site-jgomes/public ( pwd example )
