@@ -105,8 +105,15 @@
     <title></title>
 </head>
 <body>
+<!-- Header ==================================================== -->
     <div class="container">
         <h1 style="text-align: center">Services</h1>
+        <div class="button-container">
+        <a href="/#testimonials">
+            <button class="publicBtn">
+                ⏪ Go back to CV site
+            </button>
+        </a>
         @if(app()->environment() === 'local')
             <!-- Prod -->
             <div class="section">

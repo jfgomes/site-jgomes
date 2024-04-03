@@ -57,11 +57,13 @@
 
         <ul id="nav" class="nav">
             <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About</a></li>
+            <li><a class="smoothscroll" href="#about">About me</a></li>
             <li><a class="smoothscroll" href="#resume">Resume</a></li>
+            <li><a class="smoothscroll" href="#call-to-action">Stack / Tools</a></li>
             <li><a class="smoothscroll" href="#portfolio">Projects</a></li>
-            <li><a class="smoothscroll" href="#testimonials">Case studies</a></li>
+            <li><a class="smoothscroll" href="#testimonials">WOW</a></li>
             <li><a class="smoothscroll" href="#contact">Contact</a></li>
+            <li><a href="/login"> 🔐Login</a></li>
         </ul> <!-- end #nav -->
 
     </nav> <!-- end #nav-wrap -->
@@ -110,6 +112,7 @@
                 <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter social_extra"></i></a></li>
                 <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin social_extra"></i></a></li>
                 <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github social_extra"></i></a></li>
+                <li><a href="https://www.youtube.com/@JGomes-dev/videos" target="_blank"><i class="fa fa-youtube social_extra"></i></a></li>
             </ul>
         </div>
     </div>
@@ -396,20 +399,28 @@
             <h2><span class="lead">Preferred stack / tools:</span></h2>
             <p class="text-left">
                 <span class="lead">
-                <img src="/images/personal/logos/ubuntu.png" /> linux (ubuntu) <br>
-                <img src="/images/personal/logos/phpstorm.png" width="32px" height="32px" /> phpstorm<br>
-                <img src="/images/personal/logos/workb.png" /> mysql workbench<br>
-                <img src="/images/personal/logos/phpmyadmin.png" width="32px" height="40px" /> phpmyadmin<br>
-                <img src="/images/personal/logos/docker.png" width="32px" height="32px" /> docker desktop<br>
-                <img src="/images/personal/logos/postman.png" /> postman<br>
-                <img src="/images/personal/logos/zoom.png" /> zoom<br>
-                <img src="/images/personal/logos/apache.png" /> apache2<br>
-                <img src="/images/personal/logos/gc.png" width="32px" height="32px" /> gcp buckets<br>
-                <img src="/images/personal/logos/gimp.png" /> gimp <br>
-                <img src="/images/personal/logos/slack.png" /> slack <br>
-                - etc...<br>
+                    <img src="/images/personal/logos/ubuntu.png" width="32px" height="32px" /> linux (ubuntu)<br>
+                    <img src="/images/personal/logos/phpstorm.png" width="32px" height="32px" /> phpstorm<br>
+                    <img src="/images/personal/logos/workb.png" width="32px" height="32px" /> mysql workbench<br>
+                    <img src="/images/personal/logos/phpmyadmin.png" width="32px" height="40px" /> phpmyadmin<br>
+                    <img src="/images/personal/logos/docker.png" width="32px" height="32px" /> docker desktop<br>
+                    <img src="/images/personal/logos/postman.png" width="32px" height="32px" /> postman<br>
+                    <img src="/images/personal/logos/zoom.png" width="32px" height="32px" /> zoom<br>
+                    <img src="/images/personal/logos/apache.png" width="32px" height="32px" /> apache2<br>
+                    <img src="/images/personal/logos/gc.png" width="32px" height="32px" /> gcp buckets<br>
+                    <img src="/images/personal/logos/gimp.png" width="32px" height="32px" /> gimp <br>
+                    <img src="/images/personal/logos/slack.png" width="32px" height="32px" /> slack <br>
+                    <img src="/images/personal/logos/drawio.png" width="32px" height="32px" style="padding: 3px"/> draw io <br>
+                    - etc...<br>
                 </span>
             </p>
+
+            <style>
+                .lead img {
+                    vertical-align: middle;
+                    margin-bottom: 6px;
+                }
+            </style>
 
         </div>
 
@@ -455,7 +466,7 @@
                             <img alt="Routineris" class="portfolio-image" src="images/personal/routineris2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Routineris</h5>
+                                    <h5>Routineris <br/> <span style="color:orange; font-size: 12px">( migration in progress )</span></h5>
                                     <p>Web Development</p>
                                 </div>
                             </div>
@@ -855,7 +866,7 @@
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/routineris-det.png" alt="Routineris modal" />
 
             <div class="description-box">
-                <h4>Routineris</h4>
+                <h4>Routineris<br/> <span style="color:orange; font-size: 12px">( migration in progress )</span> </h4>
                 <p>
                     Website to save photos in the cloud.
                     Allows the user to create maps ( which we can call it albums ) where you can invite other people
@@ -865,7 +876,8 @@
             </div>
 
             <div class="link-box">
-                <a href="https://routineris.xyz/" target="_blank">Site</a>
+                <span class="portfolio-modal-deprecated-site">Temporary unavailable</span>
+                <!-- <a href="https://routineris.xyz/" target="_blank">Site</a> -->
                 <a class="popup-modal-dismiss">Close</a>
             </div>
 
@@ -906,7 +918,7 @@
 
             <div class="two columns header-col">
 
-                <!-- <h1><span>Case studies</span></h1> -->
+                 <h1><span>Case studies</span></h1>
 
             </div>
 
@@ -917,12 +929,13 @@
                     <p class="case-studies">
                         I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted.
                         So you can have more details about this site with read access to: <br/><br/>
-                        - The repo: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>Repository here</u></a> <br/>
-                        - The board: <a target="_blank" href="https://trello.com/b/zOuG1loa/j-gomes-site"><u>Board here</u></a> <br />
-                        - The swagger: <a href="/api/documentation#/Message" target="_blank"><u>Swagger here</u></a> <br />
-                        - The phpunit: <a href="/coverage-report/index.html" target="_blank"><u>Code coverage here</u></a> <br />
-                        - The features of this cv project: <a href="/case-studies" target="_blank"><u>Features here</u></a> <br />
-                        - More info: <a href="/details" target="_blank"><u>Details about this website here</u></a> <br />
+                        - Repository: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>here</u></a> <br/>
+                        - Trello board: <a target="_blank" href="https://trello.com/b/zOuG1loa/j-gomes-site"><u>here</u></a> <br />
+                        - Swagger: <a href="/api/documentation#/Message" target="_blank"><u>here</u></a> <br />
+                        - Phpunit: <a href="/coverage-report/index.html" target="_blank"><u>here</u></a> <br />
+                        - Features & case studies: <a href="/case-studies" target="_blank"><u>here</u></a> <br />
+                        - Service list: <a href="/details" target="_blank"><u>here</u></a> <br />
+                        - Jenkins: <a href="https://jjenkins.xyz/" target="_blank"><u>here</u></a> <br />
                     </p>
                     <ul class="slides">
                     <!-- <li>
@@ -1049,9 +1062,10 @@
                     <div class="twelve columns">
 
                         <ul class="social-links">
-                            <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github"></i></a></li>
+                            <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter social_extra"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin social_extra"></i></a></li>
+                            <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github social_extra"></i></a></li>
+                            <li><a href="https://www.youtube.com/@JGomes-dev/videos" target="_blank"><i class="fa fa-youtube social_extra"></i></a></li>
                         </ul>
 
                         <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>

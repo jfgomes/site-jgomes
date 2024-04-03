@@ -21,10 +21,18 @@
         ================================================== -->
         @include('partials.overlay')
 
-        <!-- Header
-        ================================================== -->
+        <!-- Header ==================================================== -->
         <header>
-            <div class="header-content"></div>
+            <div class="header-content">
+                <h1>🔐 Login</h1>
+                <div class="button-container">
+                    <a href="/">
+                        <button class="publicBtn">
+                            ⏪ Go back to CV site
+                        </button>
+                    </a>
+                </div>
+            </div>
         </header> <!-- Header End -->
 
         <!-- footer
