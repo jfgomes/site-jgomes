@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://jgomes.site:8000/images/lotus.png" width="400" alt="Descrição da imagem" />
+  <img src="https://jgomes.site/images/lotus.png" width="400" alt="Descrição da imagem" />
 </p>
 
 <h1 align="center">Adília! Project</h1>
