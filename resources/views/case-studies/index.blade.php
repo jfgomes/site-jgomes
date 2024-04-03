@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case study list</title>
+    <title>Feature list</title>
     <link rel="shortcut icon" href="favicon.png" >
     <link rel="stylesheet" href="../css/case-studies.css">
 </head>
 <body>
-<h1>Project:</h1>
+<a href="/#testimonials">
+    <button class="publicBtn">
+        ⏪ Go back to CV site
+    </button>
+</a>
+<h1>📚 About this project:</h1>
 <p style="color: grey; font-size:15px">
     My CV portal is based on all the next listed features, and therefore all topics are implemented, functional and tested.
     <br />
     <br />
-    All the next features are the base of this project and it has an executable setup that automatically creates a production environment, all with microservices, <br />
+    All the next features are the base of this project and the goal is to have an executable setup for new projects that automatically creates a production environment, all with microservices, <br />
     with a data backup systems, cache systems, versioning, minification of JS and CSS, authentication system, api, serverless,
-    asynchronous messaging system, a CI/CD system, ssl certificated, etc... <br /> without the need code more and make it up and running easy... all with just a single command.
+    asynchronous messaging system, a CI/CD system, ssl certificated, etc... etc... <br /> without the need code more and ensure to make it up and running easy... all with just a single command.
     <br />
     <br />
-    Also the local / development env has a executable setup that mounts a production similar env, all done automatically and allow the developers ready to dev in seconds.
+    Also the local / development env has an executable setup that mounts a production similar env, all done automatically and allow the developers ready to dev in seconds.
     <br />
     This local env works with GIT and Jenkins, and this 2 techs act like a bridge to prod.
     <br />
     <br />
     Checkout the following features list to get more details.
 </p>
-<h1>Features list:</h1>
+<h1>📜 Features list:</h1>
 @if(count($foldersWithFiles) > 0)
     <ul>
         @foreach($foldersWithFiles as $folder)
