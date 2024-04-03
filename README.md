@@ -81,11 +81,10 @@ Ensure the following tools are installed:
 
 I'm using this project in my CV. Here are some additional links for more details:
 
-- Repository: [here](https://github.com/jfgomes/site-jgomes/blob/master/README.md)
 - Trello board: [here](https://trello.com/b/zOuG1loa/j-gomes-site)
-- Swagger: [here](/api/documentation#/Message)
-- Phpunit: [here](/coverage-report/index.html)
-- Features & case studies: [here](/case-studies)
-- Service list: [here](/details)
+- Swagger: [here](https://jgomes.site/api/documentation#/Message)
+- Phpunit: [here](https://jgomes.site/coverage-report/index.html)
+- Features & case studies: [here](https://jgomes.site/case-studies)
+- Service list: [here](https://jgomes.site/details)
 - Jenkins: [here](https://jjenkins.xyz/)
 
