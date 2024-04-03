@@ -1,4 +1,4 @@
-![phpunit Logo](https://iconape.com/wp-content/png_logo_vector/phpunit.png)
+![phpunit Logo](https://jgomes.site/images/cs/phpunit/phpunit.png)
 
 ## Introduction
 
@@ -122,6 +122,3 @@ Edit php.ini file: nano /opt/homebrew/etc/php/{version}/php.ini
 - For mac: sed -i '' 's|<head>|<head><title>coverage-report</title>|' coverage-report/index.html
 - For linux: sed -i "s|<head>|<head><title>coverage-report</title>|" "coverage-report/index.html"
 
-## Demonstration
-#### ( Click on the image to watch the video )
-[![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=qu3Etw_2Ksw)
