@@ -1,10 +1,14 @@
-# Adília! Project
+<p align="center">
+  <img src="https://jgomes.site:8000/images/lotus.png" width="400" alt="Descrição da imagem" />
+</p>
 
-This project is aimed at providing a functional base with everything ready for the automatic implementation of new projects, thereby avoiding manual configurations.
+<h1 align="center">Adília! Project</h1>
+
+<p align="center">This project is aimed at providing a functional base with everything ready for the automatic implementation of new projects, thereby avoiding manual configurations.</p>
 
 ## Overview
 
-When we say "everything ready," it means that various concepts such as local environment setup, testing, production deployment, automation, repository management, code reviewing, and more are predefined, minimizing manual intervention during project setup.
+When we say "everything ready", it means that various concepts such as local/prod environment setup, testing, deployment, automation, repository management, code reviewing, etc.. etc... all this topics are managed to minimize manual intervention during project setup.
 
 ## Local Environment Setup
 
