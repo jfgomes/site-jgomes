@@ -76,3 +76,16 @@ Ensure the following tools are installed:
 10. Checkout the `Ready_to_Prod!` script inside the server and execute it.
 11. Place the extracted SSL certificates on the server and associate them with the respective vhosts.
 12. Configure Jenkins and set up the webhook in Git for Jenkins.
+
+## Case Studies and Additional Links
+
+I'm using this project in my CV. Here are some additional links for more details:
+
+- Repository: [here](https://github.com/jfgomes/site-jgomes/blob/master/README.md)
+- Trello board: [here](https://trello.com/b/zOuG1loa/j-gomes-site)
+- Swagger: [here](/api/documentation#/Message)
+- Phpunit: [here](/coverage-report/index.html)
+- Features & case studies: [here](/case-studies)
+- Service list: [here](/details)
+- Jenkins: [here](https://jjenkins.xyz/)
+
