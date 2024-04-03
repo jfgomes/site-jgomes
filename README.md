@@ -85,7 +85,7 @@ Ensure the following tools are installed:
 
 I'm using this project in my personal CV to show more information about me and about my implementations. Here are some additional links for more details:
 
-- Site: [here](https://jgome.site)
+- Site: [here](https://jgomes.site)
 - Trello board: [here](https://trello.com/b/zOuG1loa/j-gomes-site)
 - Swagger: [here](https://jgomes.site/api/documentation#/Message)
 - Phpunit: [here](https://jgomes.site/coverage-report/index.html)
