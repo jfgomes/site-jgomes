@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://jgomes.site:8000/images/lotus.png" width="400" alt="Descrição da imagem" />
+  <img src="https://jgomes.site/images/lotus.png" width="400" alt="Descrição da imagem" />
 </p>
 
 <h1 align="center">Adília! Project</h1>
@@ -83,8 +83,9 @@ Ensure the following tools are installed:
 
 ## Case Studies and Additional Links
 
-I'm using this project in my CV. Here are some additional links for more details:
+I'm using this project in my personal CV to show more information about me and about my implementations. Here are some additional links for more details:
 
+- Site: [here](https://jgomes.site)
 - Trello board: [here](https://trello.com/b/zOuG1loa/j-gomes-site)
 - Swagger: [here](https://jgomes.site/api/documentation#/Message)
 - Phpunit: [here](https://jgomes.site/coverage-report/index.html)
