@@ -161,4 +161,17 @@ class RabbitMQService
             throw new \Exception('Error: Unable to retrieve the number of consumers. No consumers up now.');
         }
     }
+
+
+    public function setConnection($connection): void
+    {
+        $this->connection = $connection;
+    }
+
+    public function setChannel($channel): void
+    {
+        $this->channel = $channel;
+    }
+
+
 }

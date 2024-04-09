@@ -10,9 +10,9 @@ class RabbitEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private string $email_data;
+    public string $email_data;
 
-    private string $email_error;
+    public string $email_error;
 
     /**
      * Create a new message instance.
@@ -52,4 +52,5 @@ class RabbitEmail extends Mailable
     {
         return [];
     }
+
 }

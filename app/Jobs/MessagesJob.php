@@ -15,17 +15,20 @@ class MessagesJob implements ShouldQueue
 
     protected mixed $data;
     public $queue;
+    protected RabbitMQService $rabbitMQService;
 
     /**
      * Create a new job instance.
      *
      * @param mixed $data The message data to be published to RabbitMQ.
      * @param string $queue The RabbitMQ queue name.
+     * @param RabbitMQService $rabbitMQService The RabbitMQ service instance.
      */
-    public function __construct(mixed $data, string $queue)
+    public function __construct(mixed $data, string $queue, RabbitMQService $rabbitMQService)
     {
         $this->data  = $data;
         $this->queue = $queue;
+        $this->rabbitMQService = $rabbitMQService;
     }
 
     /**
@@ -36,14 +39,9 @@ class MessagesJob implements ShouldQueue
      */
     public function handle(): void
     {
-        // Create a new instance of RabbitMQService
-        $rabbitMQService = new RabbitMQService();
-        $rabbitMQService->createConnection(true);
-
-        // Publish the message to the specified RabbitMQ queue
-        $rabbitMQService->publishMessage($this->queue, $this->data);
-
-        // Close the RabbitMQ connection
-        $rabbitMQService->closeConnection();
+        // Use the injected RabbitMQService instance
+        $this->rabbitMQService->createConnection(true);
+        $this->rabbitMQService->publishMessage($this->queue, $this->data);
+        $this->rabbitMQService->closeConnection();
     }
 }
