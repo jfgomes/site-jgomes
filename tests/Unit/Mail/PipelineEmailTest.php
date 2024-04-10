@@ -13,7 +13,7 @@ class PipelineEmailTest extends TestCase
 
     public function testBuildEmail()
     {
-        // Dados de teste para construir o e-mail
+        // Test data to build the email
         $data = [
             'name' => 'John Doe',
             'email' => 'john@example.com',
@@ -21,13 +21,13 @@ class PipelineEmailTest extends TestCase
             'content' => 'Test Content',
         ];
 
-        // Criar uma instância do e-mail
+        // Create an instance of the email
         $email = new MessageEmail($data);
 
-        // Construir o e-mail
+        // Build the email
         $builtEmail = $email->build();
 
-        // Verificar se o e-mail foi construído corretamente
+        // Verify if the email was built correctly
         $this->assertInstanceOf(MessageEmail::class, $builtEmail);
         // $this->assertEquals(env('MAIL_USERNAME'), $data['email']);
         // $this->assertEquals(env('MAIL_FROM_NAME'), $builtEmail->from[0]['name']);
@@ -35,6 +35,4 @@ class PipelineEmailTest extends TestCase
         //  $this->assertEquals('mail.message', $builtEmail->viewData['view']);
         $this->assertEquals($data['name'], $builtEmail->viewData['email_name']);
     }
-
-
 }

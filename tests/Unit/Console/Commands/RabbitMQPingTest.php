@@ -2,43 +2,39 @@
 
 namespace Tests\Unit\Console\Commands;
 
-use Tests\TestCase;
 use App\Console\Commands\RabbitMQPing;
+use Illuminate\Support\Facades\Config;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Illuminate\Console\OutputStyle;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
-
-
-
-
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Tests\TestCase;
 
 class RabbitMQPingTest extends TestCase
 {
-
-
-    /** @test */
-   /* public function it_pings_rabbitmq_server_successfully()
+    public function tesItPingsRabbitMQServerSuccessfully()
     {
         // Mock do AMQPStreamConnection
-        $mockConnection = $this->createMock(\PhpAmqpLib\Connection\AMQPStreamConnection::class);
+        $mockConnection = $this->getMockBuilder(AMQPStreamConnection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockConnection->expects($this->once())
             ->method('close');
 
-        // Mock do comando com injeção de dependência do AMQPStreamConnection
-        $command = new \App\Console\Commands\RabbitMQPing($mockConnection);
+        // Criar instância do comando com injeção de dependência
+        $command = new RabbitMQPing($mockConnection);
 
         // Configuração da saída para o teste
         $output = new BufferedOutput();
 
         // Definir a saída do comando
-        $command->setOutput($output);
+        $command->setOutput(new SymfonyStyle(new ArrayInput([]), $output));
 
         // Definir as configurações do RabbitMQ para o teste
-        config(['rabbitmq.connections.default.host' => 'testhost']);
-        config(['rabbitmq.connections.default.port' => 5672]);
-        config(['rabbitmq.connections.default.user' => 'testuser']);
-        config(['rabbitmq.connections.default.pass' => 'testpass']);
+        Config::set('env.RABBIT_USER', 'testuser');
+        Config::set('env.RABBIT_PASS', 'testpass');
+        Config::set('env.RABBIT_HOST', 'testhost');
+        Config::set('env.RABBIT_PORT', 5673);
 
         // Executar o comando
         $command->handle();
@@ -46,26 +42,23 @@ class RabbitMQPingTest extends TestCase
         // Verificar a saída
         $this->assertStringContainsString('Successfully pinged RabbitMQ server!', $output->fetch());
     }
-*/
 
-
-    /** @test */
-    public function it_handles_connection_failure_gracefully()
+    public function tesItHandlesConnectionFailureGracefully()
     {
-        // Mock do comando sem injeção de dependência do AMQPStreamConnection
+        // Criar instância do comando
         $command = new RabbitMQPing();
 
         // Configuração da saída para o teste
         $output = new BufferedOutput();
 
         // Definir a saída do comando
-        $command->setOutput(new OutputStyle(new ArrayInput([]), $output));
+        $command->setOutput(new SymfonyStyle(new ArrayInput([]), $output));
 
         // Definir as configurações do RabbitMQ para o teste
-        config(['rabbitmq.connections.default.host' => 'invalidhost']);
-        config(['rabbitmq.connections.default.port' => 5672]);
-        config(['rabbitmq.connections.default.user' => 'testuser']);
-        config(['rabbitmq.connections.default.pass' => 'testpass']);
+        Config::set('env.RABBIT_USER', 'testuser');
+        Config::set('env.RABBIT_PASS', 'testpass');
+        Config::set('env.RABBIT_HOST', 'invalidhost'); // Host inválido
+        Config::set('env.RABBIT_PORT', 5673); // Porta inválida
 
         // Executar o comando
         $command->handle();

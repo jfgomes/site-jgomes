@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ControllerTest extends TestCase
 {
     /**
-     * Verifica se a classe Controller existe.
+     * Checks if the Controller class exists.
      *
      * @return void
      */
@@ -18,7 +18,7 @@ class ControllerTest extends TestCase
     }
 
     /**
-     * Verifica se a classe Controller usa os traços esperados.
+     * Checks if the Controller class uses the expected traits.
      *
      * @return void
      */
@@ -32,7 +32,7 @@ class ControllerTest extends TestCase
     }
 
     /**
-     * Verifica se a classe Controller possui os métodos esperados.
+     * Checks if the Controller class has the expected methods.
      *
      * @return void
      */
@@ -51,14 +51,3 @@ class ControllerTest extends TestCase
         }
     }
 }
-
-
-/*
- Neste exemplo de teste, estamos verificando três aspectos:
-
-    Se a classe Controller existe.
-    Se a classe Controller usa os traços esperados (AuthorizesRequests, DispatchesJobs e ValidatesRequests).
-    Se a classe Controller possui os métodos esperados (authorize, dispatch e validate).
-
-Você pode ajustar e expandir este teste conforme necessário, dependendo dos métodos e funcionalidades específicas que sua classe Controller pode fornecer.
- */

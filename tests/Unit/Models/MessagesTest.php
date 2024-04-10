@@ -4,7 +4,6 @@ namespace Tests\Unit\Models;
 
 use App\Models\Messages;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class MessagesTest extends TestCase
@@ -13,7 +12,7 @@ class MessagesTest extends TestCase
 
     public function testValidateData()
     {
-        // Criar dados de exemplo para validar
+        // Create example data for validation
         $data = [
             'name' => 'John Doe',
             'email' => 'john@example.com',
@@ -21,13 +20,13 @@ class MessagesTest extends TestCase
             'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         ];
 
-        // Chamar o método de validação
+        // Call the validation method
         $validator = Messages::validateData($data);
 
-        // Verificar se a validação passou
+        // Assert that validation passes
         $this->assertFalse($validator->fails());
 
-        // Verificar se todos os campos foram aceitos
+        // Assert that all fields were accepted
         $this->assertEquals($data['name'], $validator->validated()['name']);
         $this->assertEquals($data['email'], $validator->validated()['email']);
         $this->assertEquals($data['subject'], $validator->validated()['subject']);

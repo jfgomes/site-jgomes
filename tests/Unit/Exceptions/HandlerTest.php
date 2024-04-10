@@ -3,7 +3,6 @@
 namespace Tests\Unit\Exceptions;
 
 use App\Exceptions\Handler;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\View;
@@ -69,21 +68,4 @@ class HandlerTest extends TestCase
         $this->assertEquals(429, $response->getStatusCode());
         $this->assertTrue(View::exists('errors.429'));
     }
-
-    /**
-     * @throws Throwable
-     */
-   /* public function testRenderCallsParentRenderForNonHttpException()
-    {
-        // Arrange
-        $handler = new Handler($this->app);
-        $request = Request::create('/');
-        $exception = new \Exception();
-
-        // Act
-        $response = $handler->render($request, $exception);
-
-        // Assert
-        $this->assertNull($response); // Parent render should be called for non-HttpException
-    } */
 }

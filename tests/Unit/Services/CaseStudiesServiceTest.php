@@ -20,7 +20,7 @@ class CaseStudiesServiceTest extends TestCase
 
     public function testGetCaseStudies()
     {
-        // Simulate directory structure with test folders and files
+        // Simulates directory structure with test folders and files
         $fakeDirectories = [
             '/public/cs/folder1' => ['file1.txt', 'file2.md'],
             '/public/cs/folder2' => ['file3.txt'],
@@ -28,7 +28,7 @@ class CaseStudiesServiceTest extends TestCase
 
         // Mock File facade
         File::shouldReceive('directories')
-            ->with(base_path() . "/public/cs")
+            ->with(base_path() . '/public/cs')
             ->andReturn(array_keys($fakeDirectories));
 
         File::shouldReceive('files')
@@ -55,7 +55,7 @@ class CaseStudiesServiceTest extends TestCase
         // Mock File facade to return a fake file content
         $fileContent = "This is a test file content.";
         File::shouldReceive('exists')->andReturn(true);
-        File::shouldReceive('extension')->andReturn('txt'); // Adicionando expectativa para o método extension
+        File::shouldReceive('extension')->andReturn('txt'); // Adding expectation for the extension method
         File::shouldReceive('get')->andReturn($fileContent);
 
         // Call the method to get file content
