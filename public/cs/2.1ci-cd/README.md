@@ -381,6 +381,7 @@ In summary, this Jenkinsfile automates the process of continuous integration and
 
 ## Extra notes
 
+- Need to ensure 'sudo apt install openssh-server'
 - Need to ensure the plugin "Pipeline: Stage View Plugin" is installed
 - Need to ensure no pending approvals at Dashboard -> Manage Jenkins -> ScriptApproval
 - The authorized_keys is a file that has the pub key
