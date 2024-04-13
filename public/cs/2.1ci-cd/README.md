@@ -355,7 +355,8 @@ In summary, this Jenkinsfile automates the process of continuous integration and
 
 ![jenkins setup](https://jgomes.site/images/cs/jenkins/f18.png)
 
-![jenkins setup](https://jgomes.site/images/cs/jenkins/f21.png)
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f21.png)sudo iptables-save
+
 
 ![jenkins setup](https://jgomes.site/images/cs/jenkins/f22.png)
 
@@ -382,7 +383,7 @@ In summary, this Jenkinsfile automates the process of continuous integration and
 
 - Need to ensure the plugin "Pipeline: Stage View Plugin" is installed
 - Need to ensure no pending approvals at Dashboard -> Manage Jenkins -> ScriptApproval
-- The authorized_keys is a file the has the pub key
+- The authorized_keys is a file that has the pub key
 - Need to add the iptables:
   ###### sudo iptables -A INPUT -p tcp --dport 22 -s ---server ip--- -j ACCEPT
   ###### sudo iptables -A INPUT -p tcp --dport 22 -s 172.0.0.0/8 -j ACCEPT
