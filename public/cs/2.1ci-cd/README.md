@@ -378,6 +378,18 @@ In summary, this Jenkinsfile automates the process of continuous integration and
 #### Jenkins env vars configuration
 ![jenkins setup](https://jgomes.site/images/cs/jenkins/f24.png)
 
+## Extra notes
+
+- Need to ensure the plugin "Pipeline: Stage View Plugin" is installed
+- Need to ensure no pending approvals at Dashboard -> Manage Jenkins -> ScriptApproval
+- The authorized_keys is a file the has the pub key
+- Need to had the iptables:
+  ###### sudo iptables -A INPUT -p tcp --dport 22 -s <server ip> -j ACCEPT
+  ###### sudo iptables -A INPUT -p tcp --dport 22 -s 172.0.0.0/8 -j ACCEPT
+  ###### sudo iptables -A INPUT -p tcp --dport 22 -j DROP
+  ###### sudo iptables-save
+
+
 ## Demonstration
 #### ( Click on the image to watch the demo video )
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=zNz07YnnJSA)
