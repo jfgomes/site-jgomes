@@ -59,6 +59,9 @@ class MessageBackupToCloud extends Command
         // Write data to a local file and get the file size
         $localFileSize = $this->writeDataToFile($data, $path);
 
+        // Delete tmp file
+        $this->deleteTmpFile($path);
+
         // Check if backup can be skipped
         if ($this->shouldSkipBackup($localFileSize, $bucket))
         {
@@ -101,7 +104,7 @@ class MessageBackupToCloud extends Command
      * @param string $path
      * @return void
      */
-    private function createPathIfNotExists(string $path): void
+    public function createPathIfNotExists(string $path): void
     {
         if (!file_exists($path)) {
             mkdir($path, 775, true);
@@ -115,13 +118,18 @@ class MessageBackupToCloud extends Command
      * @param string $path
      * @return int
      */
-    private function writeDataToFile(mixed $data, string $path): int
+    public function writeDataToFile(mixed $data, string $path): int
     {
         $tmp_file = $path . '/tmp_file.json';
-        file_put_contents($tmp_file, json_encode($data));
-        $localFileSize = filesize($tmp_file);
+        file_put_contents($tmp_file, json_encode($data), FILE_APPEND);
+        // unlink($tmp_file);
+        return filesize($tmp_file);
+    }
+
+    public function deleteTmpFile(string $path): void
+    {
+        $tmp_file = $path . '/tmp_file.json';
         unlink($tmp_file);
-        return $localFileSize;
     }
 
     /**
@@ -131,7 +139,7 @@ class MessageBackupToCloud extends Command
      * @param mixed $bucket
      * @return bool
      */
-    private function shouldSkipBackup(int $localFileSize, mixed $bucket): bool
+    public function shouldSkipBackup(int $localFileSize, mixed $bucket): bool
     {
         $objectName = env('GC_CLOUD_PATH') . env('GC_CLOUD_FILE');
         $latestBackupObject = $bucket->object($objectName);
@@ -159,7 +167,7 @@ class MessageBackupToCloud extends Command
      * @param string $path
      * @return void
      */
-    private function performLocalBackups(mixed $data, string $path): void
+    public function performLocalBackups(mixed $data, string $path): void
     {
         $file    = $path . env('GC_HOST_FILE');
         $timeAux = date("Y_m_d_H_i_s");

@@ -108,19 +108,21 @@ class AuthController extends Controller
      */
     public function refresh(Request $request): JsonResponse
     {
-        // Revoke all tokens except the current one
-        $request->user()->tokens()
-            ->where('id', '<>', $request->user()->currentAccessToken()->id)
-            ->delete();
+        // Verifica se há um token de acesso atual
+        $currentAccessToken = $request->user()->currentAccessToken();
+        if ($currentAccessToken) {
+            // Revoke all tokens except the current one
+            $request->user()->tokens()
+                ->where('id', '<>', $currentAccessToken->id)
+                ->delete();
+        }
 
         // Create a new token
         $accessToken = $request->user()
             ->createToken('MyApp')
             ->plainTextToken;
 
-        return response()->json(
-            ['access_token' => $accessToken]
-        );
+        return response()->json(['access_token' => $accessToken]);
     }
 
     /**

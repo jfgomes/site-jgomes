@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\RabbitMQService;
 use App\Jobs\MessagesJob;
 use App\Models\Messages;
 use Illuminate\Http\JsonResponse;
@@ -73,7 +74,7 @@ class MessagesController extends Controller
 
             // Send message to the RabbitMQ queue
             $queue = env('RABBIT_MESSAGE_QUEUE');
-            dispatch(new MessagesJob(json_encode($message), $queue));
+            dispatch(new MessagesJob(json_encode($message), $queue, new RabbitMQService()));
 
         } catch (\Exception $e) {
             return response()->json(
@@ -121,7 +122,7 @@ class MessagesController extends Controller
      * @param Request $request
      * @return array
      */
-    private function prepareMessage(Request $request): array
+    public function prepareMessage(Request $request): array
     {
         return [
             'name'    => $request->input('name'),
@@ -137,7 +138,7 @@ class MessagesController extends Controller
      * @param string $message
      * @return void
      */
-    private function logError(string $message): void
+    public function logError(string $message): void
     {
         Log::channel('messages')
             ->error('Error on Controller receiving message from client: ' . $message);
