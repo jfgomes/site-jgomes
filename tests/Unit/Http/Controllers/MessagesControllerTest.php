@@ -114,7 +114,7 @@ class MessagesControllerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidateDataWithValidationErrors()
+    public function tesValidateDataWithValidationErrors()
     {
         // Arrange
         $data = [
