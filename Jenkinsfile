@@ -61,7 +61,7 @@ pipeline
                 sh 'composer update'
 
                 // Start MySQL with skip-grant-tables
-                sh 'sudo mysqld_safe --skip-grant-tables'
+                sh 'sudo mysqld_safe --skip-grant-tables &'
                 
                 // .env file is mandatory to generate app key
                 echo 'Copy dev .env file'
