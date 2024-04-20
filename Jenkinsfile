@@ -56,8 +56,6 @@ pipeline
         {
             steps
             {
-                sh 'php artisan migrate'
-                
                 // Mandatory as I want to run unit tests using the phpunit from vendor
                 echo 'Run composer'
                 sh 'composer update'
@@ -69,6 +67,8 @@ pipeline
                 // App key is mandatory to run tests
                 // echo 'Generate application key'
                 // sh 'php artisan key:generate'
+
+                sh 'php artisan migrate'
             }
         }
         stage('Tests')
