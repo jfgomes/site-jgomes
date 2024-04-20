@@ -56,6 +56,8 @@ pipeline
         {
             steps
             {
+                sh 'php artisan migrate'
+                
                 // Mandatory as I want to run unit tests using the phpunit from vendor
                 echo 'Run composer'
                 sh 'composer update'
