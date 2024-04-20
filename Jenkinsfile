@@ -60,6 +60,9 @@ pipeline
                 echo 'Run composer'
                 sh 'composer update'
 
+                // Start MySQL with skip-grant-tables
+                sh 'sudo mysqld_safe --skip-grant-tables'
+                
                 // .env file is mandatory to generate app key
                 echo 'Copy dev .env file'
                 sh 'cp .env.test .env'
