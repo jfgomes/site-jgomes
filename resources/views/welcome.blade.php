@@ -1093,7 +1093,7 @@
             <script src="js/magnific-popup.js"></script>
             <script src="js/local/public/init.js"></script>
             <script src="{{ (app()->environment() === 'prod')
-                        ? mix('js/prod/public/app.js')
+                        ? mix('js/prod/app.js')
                         : 'js/local/public/init.js' }}">
             </script>
             <script src="/js/cookies.js"></script>
