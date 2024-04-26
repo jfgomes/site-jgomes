@@ -2,6 +2,12 @@
 
 return [
 
+    'available_locales' =>
+    [
+        'English'    => 'en',
+        'Portuguese' => 'pt',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

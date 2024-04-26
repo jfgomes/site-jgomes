@@ -57,16 +57,84 @@
 
         <ul id="nav" class="nav">
             <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About me</a></li>
+            <li><a class="smoothscroll" href="#about">{{ __('welcome.about_me') }}</a></li>
             <li><a class="smoothscroll" href="#resume">Resume</a></li>
             <li><a class="smoothscroll" href="#call-to-action">Stack / Tools</a></li>
             <li><a class="smoothscroll" href="#portfolio">Projects</a></li>
             <li><a class="smoothscroll" href="#testimonials">WOW</a></li>
             <li><a class="smoothscroll" href="#contact">Contact</a></li>
             <li><a href="/login"> 🔐Login</a></li>
+            <li>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <div class="custom-select-trigger" style="font-size: 25px; position: relative; top: 5px;">{{ app()->getLocale() == 'en' ? '󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁥󠁮󠁧󠁿' : '🇵🇹' }}</div>
+                        <div class="custom-options">
+                            <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'en']) }}">🏴󠁧󠁢󠁥󠁮󠁧󠁿EN</span>
+                            <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'pt']) }}">🇵🇹PT</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul> <!-- end #nav -->
 
     </nav> <!-- end #nav-wrap -->
+<style>
+    .custom-select-wrapper {
+        position: relative;
+        width: 80px; /* Largura desejada */
+    }
+
+    .custom-select {
+        position: relative;
+        font-family: 'opensans-bold', sans-serif;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .custom-select-trigger {
+        position: relative;
+        display: block;
+
+        background: transparent;
+        color: #fff;
+        border: none;
+        width: 100%;
+    }
+
+    .custom-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: #333;
+        border: 1px solid #fff;
+
+        margin-left: 30%;
+        margin-top: 10px;
+        width: 60px;
+    }
+
+    .custom-options.active {
+        display: block;
+    }
+
+    .custom-option {
+        position: relative;
+        display: block;
+        padding: 10px;
+        background: #333;
+        color: #fff;
+        border-bottom: 1px solid #fff;
+        cursor: pointer;
+    }
+
+    .custom-option:last-child {
+        border-bottom: none;
+    }
+
+</style>
+
 
     <div class="row banner">
         <style>
@@ -1097,6 +1165,49 @@
                         : 'js/local/public/init.js' }}">
             </script>
             <script src="/js/cookies.js"></script>
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('.custom-select').each(function() {
+            var $select = $(this);
+            var $trigger = $select.find('.custom-select-trigger');
+            var $options = $select.find('.custom-options');
+            var $optionsList = $options.find('.custom-option');
+
+            $trigger.click(function(e) {
+                e.stopPropagation(); // Impede a propagação do evento para o documento
+                $('.custom-options').not($options).removeClass('active'); // Fecha outros dropdowns
+                $options.toggleClass('active');
+            });
+
+            $optionsList.click(function() {
+                var value = $(this).attr('data-value');
+                window.location.href = value;
+            });
+        });
+
+        $(document).click(function(e) {
+            if (!$('.custom-select').is(e.target) && $('.custom-select').has(e.target).length === 0) {
+                $('.custom-options').removeClass('active');
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
     </body>
 
 </html>

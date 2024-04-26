@@ -555,3 +555,9 @@ Route::get('/429', function () {
     ->name('error.429');
 
 ########################################### END SERVERLESS ROUTES
+
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name('lang.switch');
