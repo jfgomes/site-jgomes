@@ -150,8 +150,6 @@
     }
 
 </style>
-
-
     <div class="row banner">
         <style>
             .maintenance-mode {
@@ -204,7 +202,6 @@
     <p class="scrolldown">
         <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
     </p>
-
 </header> <!-- Header End -->
 
 <!-- About Section
@@ -383,7 +380,11 @@
             <h1><span></span></h1>
         </div>
         <div class="seven columns">
-            <h2><span class="lead">{{ __('welcome.Stack_Tools') }}</span></h2><br />
+            <h2>
+                <span class="lead">
+                    {{ __('welcome.Stack_Tools') }}
+                </span>
+            </h2><br>
             <p class="text-left">
                 <span class="lead">
                     <img src="/images/personal/logos/ubuntu.png" width="32px" height="32px" alt=""/> linux (ubuntu)<br>
@@ -398,7 +399,7 @@
                     <img src="/images/personal/logos/gimp.png" width="32px" height="32px" alt="" /> gimp <br>
                     <img src="/images/personal/logos/slack.png" width="32px" height="32px" alt="" /> slack <br>
                     <img src="/images/personal/logos/drawio.png" width="32px" height="32px" alt="" style="padding: 3px"/> draw io <br>
-                    - etc...<br>
+                    - {{ __('welcome.Etc') }}<br>
                 </span>
             </p>
             <style>
@@ -684,7 +685,6 @@
                 <p>{{ __('welcome.Project3_desc_textarea') }}</p>
                 <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project3_role') }}</span>
             </div>
-
             <div class="link-box">
                 <span class="portfolio-modal-deprecated-site">{{ __('welcome.Deprecated') }}</span>
                 <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
@@ -748,33 +748,41 @@
     <div class="text-container">
         <div class="row">
             <div class="two columns header-col">
-                 <h1><span>Case studies</span></h1>
+                 <h1><span>{{ __('welcome.WOW') }}</span></h1>
             </div>
             <div class="ten columns flex-container">
                 <div class="flexslider">
                     <p class="case-studies">
-                        I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted.
-                        So you can have more details about this site with read access to: <br/><br/>
-                        - Repository: <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md"><u>here</u></a> <br/>
-                        - Trello board: <a target="_blank" href="https://trello.com/b/zOuG1loa/j-gomes-site"><u>here</u></a> <br />
-                        - Swagger: <a href="/api/documentation#/Message" target="_blank"><u>here</u></a> <br />
-                        - Phpunit: <a href="/coverage-report/index.html" target="_blank"><u>here</u></a> <br />
-                        - Features & case studies: <a href="/case-studies" target="_blank"><u>here</u></a> <br />
-                        - Service list: <a href="/details" target="_blank"><u>here</u></a> <br />
-                        - Jenkins: <a href="https://jjenkins.xyz/" target="_blank"><u>here</u></a> <br />
+                        {{ __('welcome.WOW_desc_textarea') }} : <br/><br/>
+                        - {{ __('welcome.WOW_info1') }}:
+                        <a target="_blank" href="https://github.com/jfgomes/site-jgomes/blob/master/README.md">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br/>
+                        - {{ __('welcome.WOW_info2') }}:
+                        <a target="_blank" href="https://trello.com/b/zOuG1loa/j-gomes-site">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br />
+                        - {{ __('welcome.WOW_info3') }}:
+                        <a href="/api/documentation#/Message" target="_blank">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br />
+                        - {{ __('welcome.WOW_info4') }}:
+                        <a href="/coverage-report/index.html" target="_blank">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br />
+                        - {{ __('welcome.WOW_info5') }}:
+                        <a href="/case-studies" target="_blank">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br />
+                        - {{ __('welcome.WOW_info6') }}:
+                        <a href="/details" target="_blank">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br />
+                        - {{ __('welcome.WOW_info7') }}:
+                        <a href="https://jjenkins.xyz/" target="_blank">
+                            <u>{{ __('welcome.Here') }}</u>
+                        </a> <br />
                     </p>
-                    <ul class="slides">
-                    <!-- <li>
-                            <blockquote>
-                                <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                                    nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
-                                </p>
-                                <cite>Mr. Adobe</cite>
-                            </blockquote>
-                        </li> -->
-                        <!-- slide ends -->
-                    </ul>
                 </div> <!-- div.flexslider ends -->
             </div> <!-- div.flex-container ends -->
         </div> <!-- row ends -->
@@ -784,138 +792,123 @@
 <!-- Contact Section
 ================================================== -->
 <section id="contact">
-
     <div class="row section-head">
-
         <div class="two columns header-col">
-
-            <h1><span>Get In Touch</span></h1>
-
+            <h1><span>{{ __('welcome.Contact') }}</span></h1>
         </div>
-
         <div class="ten columns">
-
             <p class="lead text-left">
-                If you want to contact me, please leave your message using this form. I will respond as soon as possible! Thank you.
+                {{ __('welcome.Contact_desc_textarea') }}
             </p>
-
         </div>
-
+    </div>
+    <div class="row">
+        <div class="eight columns">
+            <!-- form -->
+            <form action="/api/send" method="post" id="contactForm" name="contactForm">
+                @csrf
+                <fieldset>
+                    <div>
+                        <label for="name"> {{ __('welcome.Contact_name') }} <span class="required">*</span></label>
+                        <input type="text" value="" size="35" id="name" name="contactName">
+                    </div>
+                    <div>
+                        <label for="email"> {{ __('welcome.Contact_email') }} <span class="required">*</span></label>
+                        <input type="text" value="" size="35" id="email" name="contactEmail">
+                    </div>
+                    <div>
+                        <label for="subject"> {{ __('welcome.Contact_subject') }} </label>
+                        <input type="text" value="" size="35" id="subject" name="contactSubject">
+                    </div>
+                    <div>
+                        <label for="content"> {{ __('welcome.Contact_message') }} <span class="required">*</span></label>
+                        <div class="chatCount">
+                            <span id="chatCount"></span>
+                        </div>
+                        <textarea class="contactMessageExtra" cols="50" rows="15" id="content" name="contactMessage"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="submit">{{ __('welcome.Contact_submit') }} </button>
+                        <span id="image-loader">
+                            <img alt="" src="images/loader.gif">
+                        </span>
+                    </div>
+                </fieldset>
+            </form> <!-- Form End -->
+            <!-- contact-warning -->
+            <div id="message-warning"></div>
+            <!-- contact-success -->
+            <div id="message-success">
+                <i class="fa fa-check"></i>{{ __('welcome.Contact_sent_success') }} <br>
+            </div>
         </div>
+        <aside class="four columns footer-widgets">
+            <div class="widget widget_contact">
+                <h4>{{ __('welcome.Contact') }}</h4>
+                <p class="address">
+                    José Gomes<br>
+                    {{ __('welcome.City') }}<br>
+                    <span>+351937523892</span>
+                </p>
+            </div>
+        </aside>
+    </div>
+</section> <!-- Contact Section End -->
 
-                <div class="row">
-
-                    <div class="eight columns">
-
-                        <!-- form -->
-                        <form action="/api/send" method="post" id="contactForm" name="contactForm">
-                            @csrf
-                            <fieldset>
-                                <div>
-                                    <label for="name">Name <span class="required">*</span></label>
-                                    <input type="text" value="" size="35" id="name" name="contactName">
-                                </div>
-
-                                <div>
-                                    <label for="email">Email <span class="required">*</span></label>
-                                    <input type="text" value="" size="35" id="email" name="contactEmail">
-                                </div>
-
-                                <div>
-                                    <label for="subject">Subject</label>
-                                    <input type="text" value="" size="35" id="subject" name="contactSubject">
-                                </div>
-
-                                <div>
-                                    <label for="content">Message <span class="required">*</span></label>
-                                    <div class="chatCount">
-                                        <span id="chatCount"></span>
-                                    </div>
-                                    <textarea class="contactMessageExtra" cols="50" rows="15" id="content" name="contactMessage"></textarea>
-                                </div>
-
-                                <div>
-                                    <button type="submit" class="submit">Submit</button>
-                                    <span id="image-loader">
-                                        <img alt="" src="images/loader.gif">
-                                    </span>
-                                </div>
-                            </fieldset>
-                        </form> <!-- Form End -->
-
-                        <!-- contact-warning -->
-                        <div id="message-warning"></div>
-                        <!-- contact-success -->
-                        <div id="message-success">
-                            <i class="fa fa-check"></i>Your message was sent, thank you!<br>
-                        </div>
-
-                    </div>
-
-
-                    <aside class="four columns footer-widgets">
-
-                        <div class="widget widget_contact">
-
-                            <h4>Contact</h4>
-                            <p class="address">
-                                José Gomes<br>
-                                Lisbon<br>
-                                <span>+351 937523892</span>
-                            </p>
-
-                        </div>
-
-                    </aside>
-
-                </div>
-
-            </section> <!-- Contact Section End-->
-
-
-            <!-- footer
-            ================================================== -->
-            <footer>
-
-                <div class="row">
-
-                    <div class="twelve columns">
-
-                        <ul class="social-links">
-                            <li><a href="https://twitter.com/routineris" target="_blank"><i class="fa fa-twitter social_extra"></i></a></li>
-                            <li><a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank"><i class="fa fa-linkedin social_extra"></i></a></li>
-                            <li><a href="https://github.com/jfgomes?tab=repositories" target="_blank"><i class="fa fa-github social_extra"></i></a></li>
-                            <li><a href="https://www.youtube.com/@JGomes-dev/videos" target="_blank"><i class="fa fa-youtube social_extra"></i></a></li>
-                        </ul>
-
-                        <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
-                    </div>
-
-                    <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
-
-                </div>
-
-                <footer>
-                    @include('partials.cookies')
-                </footer> <!-- Footer End-->
-
-            </footer> <!-- Footer End-->
-
-            <!-- Java Script
-            ================================================== -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-            <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery.flexslider.js"></script>
-            <script src="js/waypoints.js"></script>
-            <script src="js/jquery.fittext.js"></script>
-            <script src="js/magnific-popup.js"></script>
-            <script src="js/local/public/init.js"></script>
-            <script src="{{ (app()->environment() === 'prod')
-                        ? mix('js/prod/app.js')
-                        : 'js/local/public/init.js' }}">
-            </script>
-            <script src="/js/cookies.js"></script>
+<!-- footer
+================================================== -->
+<footer>
+    <div class="row">
+        <div class="twelve columns">
+            <ul class="social-links">
+                <li>
+                    <a href="https://twitter.com/routineris" target="_blank">
+                        <i class="fa fa-twitter social_extra"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/jos%C3%A9-gomes-3ba05869/" target="_blank">
+                        <i class="fa fa-linkedin social_extra"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/jfgomes?tab=repositories" target="_blank">
+                        <i class="fa fa-github social_extra"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/@JGomes-dev/videos" target="_blank">
+                        <i class="fa fa-youtube social_extra"></i>
+                    </a>
+                </li>
+            </ul>
+            <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
+        </div>
+        <div id="go-top">
+            <a class="smoothscroll" title="Back to Top" href="#home">
+                <i class="icon-up-open"></i>
+            </a>
+        </div>
+    </div>
+    <footer>
+        @include('partials.cookies')
+    </footer> <!-- Footer End-->
+</footer> <!-- Footer End-->
+        <!-- Java Script
+        ================================================== -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+        <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery.flexslider.js"></script>
+        <script src="js/waypoints.js"></script>
+        <script src="js/jquery.fittext.js"></script>
+        <script src="js/magnific-popup.js"></script>
+        <script src="js/local/public/init.js"></script>
+        <script src="{{ (app()->environment() === 'prod')
+                    ? mix('js/prod/app.js')
+                    : 'js/local/public/init.js' }}">
+        </script>
+        <script src="/js/cookies.js"></script>
         <script>
             $(document).ready(function() {
                 $('.custom-select').each(function() {
