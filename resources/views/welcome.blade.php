@@ -207,17 +207,13 @@
 
 </header> <!-- Header End -->
 
-
 <!-- About Section
 ================================================== -->
 <section id="about">
-
     <div class="row">
-
         <div class="three columns">
             <img class="profile-pic"  src="images/personal/logo.png" alt="" />
         </div>
-
         <div class="nine columns main-col">
             <h2>{{ __('welcome.About_me') }}</h2>
             <p>{{ __('welcome.About_me_details_textarea') }}</p>
@@ -230,9 +226,7 @@
                         <span>+351937503892</span><br>
                         <span>zx.gomes@gmail.com</span>
                     </p>
-
                 </div>
-
                 <div class="columns download">
                     <p>
                         <a onclick="downloadCV('jgomes-cv-en.pdf')" class="button"><i class="fa fa-download"></i>Download C.V. (EN - PDF)</a>
@@ -249,169 +243,100 @@
                         </a>
                     </p>
                 </div>
-
             </div> <!-- end row -->
-
         </div> <!-- end .main-col -->
-
     </div>
-
 </section> <!-- About Section End-->
-
 
 <!-- Resume Section
 ================================================== -->
 <section id="resume">
-
     <!-- Education
     ----------------------------------------------- -->
     <div class="row education">
-
         <div class="three columns header-col">
-            <h1><span>Education</span></h1>
+            <h1><span>{{ __('welcome.Education') }}</span></h1>
         </div>
-
         <div class="nine columns main-col">
-
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="65" height="65" src="images/personal/olx_group_logo.jpeg">
-                    <h3>Training in company, Lisbon</h3>
-                    <p class="info">PHPUnit with Sebastian Bergmann<span>&bull;</span> <em class="date">2017</em></p>
+                    <img width="65" height="65" src="images/personal/olx_group_logo.jpeg" alt="">
+                    <h3>{{ __('welcome.Education_place1') }}</h3>
+                    <p class="info">{{ __('welcome.Education_place1_desc') }}<span>&bull;</span> <em class="date">{{ __('welcome.Education_place1_year') }}</em></p>
                 </div>
-
             </div> <!-- item end -->
             <br/>
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="50" height="50" src="images/personal/edit.png">
-                    <h3><i>EDIT School</i>, Lisbon</h3>
-                    <p class="info">Workshop / UX - User Experience<span>&bull;</span> <em class="date">2015</em></p>
+                    <img width="50" height="50" src="images/personal/edit.png" alt="">
+                    <h3>{{ __('welcome.Education_place2') }}</h3>
+                    <p class="info">{{ __('welcome.Education_place2') }}<span>&bull;</span> <em class="date">{{ __('welcome.Education_place2_year') }}</em></p>
                 </div>
-
             </div> <!-- item end -->
             <br/>
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="50" height="50" src="images/personal/doitbetter.jpeg">
-                    <h3><i>Do It Better - Training center</i>, Amadora</h3>
-                    <p class="info">IEFP Training of Trainers Certification - CCP (formerly CAP)<span>&bull;</span> <em class="date">2014</em></p>
+                    <img width="50" height="50" src="images/personal/doitbetter.jpeg" alt="">
+                    <h3>{{ __('welcome.Education_place3') }}</h3>
+                    <p class="info">{{ __('welcome.Education_place3_desc') }}<span>&bull;</span> <em class="date">{{ __('welcome.Education_place3_year') }}</em></p>
                     <p>
-                        - CCP no. F629584/2014
+                        - {{ __('welcome.Education_place3_qualification') }}
                     </p>
                 </div>
-
             </div> <!-- item end -->
-
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="60" height="60" src="images/personal/ipt.png" />
-                    <h3><i>Higher School of Technology</i>, Tomar</h3>
-                    <p class="info">Degree in computer engineering<span>&bull;</span> <em class="date">2006 - 2010</em></p>
+                    <img width="60" height="60" src="images/personal/ipt.png"  alt=""/>
+                    <h3>{{ __('welcome.Education_place4') }}</h3>
+                    <p class="info">{{ __('welcome.Education_place4_desc') }}<span>&bull;</span> <em class="date">{{ __('welcome.Education_place4_year') }}</em></p>
                 </div>
-
             </div> <!-- item end -->
-
         </div> <!-- main-col end -->
-
     </div> <!-- End Education -->
-
 
     <!-- Work
     ----------------------------------------------- -->
     <div class="row work">
-
         <div class="three columns header-col">
-            <h1><span>Work</span></h1>
+            <h1><span>{{ __('welcome.Work') }}</span></h1>
         </div>
-
         <div class="nine columns main-col">
-
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="65" height="65" src="images/personal/olx_group_logo.jpeg" />
-                    <h3>OLX</h3>
-                    <p class="info">Software Developer <span>&bull;</span> <em class="date">2016 - Present</em></p>
-
-                    <p>
-                        During my initial tenure (one year and a half) at the company, I worked on business tools for real estate consultants.
-                        With the company's acquisition by OLX, I shifted my focus to managing public real estate portals, working and adapting within the industry.
-                        In this role, I ensured the effective implementation of Scrum principles and ceremonies in our iterations, guaranteed proper task planning,
-                        and contributed as a developer in implementing new features. I handled bug corrections, hot fixes, and maintained the portals continuously.
-                        I belonged to the team responsible for all location-related information across real estate portals such as Imovirtual, Storia and Otodom.pl.
-                        When necessary, I conduct demonstrations of new features and improvements for other teams and managers.
-                    </p>
-
+                    <img width="65" height="65" src="images/personal/olx_group_logo.jpeg" alt=""/>
+                    <h3>{{ __('welcome.Work_company1') }}</h3>
+                    <p class="info">{{ __('welcome.Work_role1') }}<span>&bull;</span> <em class="date">{{ __('welcome.Work_time1') }}</em></p>
+                    <p>{{ __('welcome.Work_desc1_textarea') }}</p>
                 </div>
-
             </div> <!-- item end -->
-
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="50" height="50" src="images/personal/bk_group_logo.jpeg" />
-                    <h3>BLKO</h3>
-                    <p class="info">Software Developer<span>&bull;</span> <em class="date">2014 - 2016</em></p>
-
-                    <p>
-                        Worked as a developer in a startup-minded company, primarily focused on developing projects to generate funding
-                        for the company's main project named THO (Trojan Worse was an Unicorn).
-                        Engaged in full-stack development.
-                        Created turnkey portals operating in an offshore engineering mode for external companies like "Great Western Railway" and others.
-                        Developed projects for internal companies such as "Yellowpages" and "Caminho.
-                    </p>
-
+                    <img width="50" height="50" src="images/personal/bk_group_logo.jpeg" alt=""/>
+                    <h3>{{ __('welcome.Work_company2') }}</h3>
+                    <p class="info">{{ __('welcome.Work_role2') }}<span>&bull;</span> <em class="date">{{ __('welcome.Work_time2') }}</em></p>
+                    <p>{{ __('welcome.Work_desc2_textarea') }}</p>
                 </div>
-
             </div> <!-- item end -->
-
             <div class="row item">
-
                 <div class="twelve columns">
-                    <img width="50" height="50" src="images/personal/gw.jpeg" />
-                    <h3>Gatewit</h3>
-                    <p class="info">Software Developer<span>&bull;</span> <em class="date">2010 - 2014</em></p>
-
-                    <p>
-                        Worked as developer at compraspublicas.com, a government-selected portal for state public procurement,
-                        enabling supplier competition and proposal submissions. ( site deprecated due to company closure )
-                        and warehouse.procurement.com developing for "Nextrans" to streamline transportation registrations,
-                        logistics, supply chain, and warehousing. ( site deprecated due to company closure )
-                        My Responsibilities here was guarantee full-stack development, implementing, new features, satellite portals and bug fixing.
-                    </p>
-
+                    <img width="50" height="50" src="images/personal/gw.jpeg" alt=""/>
+                    <h3>{{ __('welcome.Work_company3') }}</h3>
+                    <p class="info">{{ __('welcome.Work_role3') }}<span>&bull;</span> <em class="date">{{ __('welcome.Work_time3') }}</em></p>
+                    <p>{{ __('welcome.Work_desc3_textarea') }}</p>
                 </div>
-
             </div> <!-- item end -->
-
         </div> <!-- main-col end -->
-
     </div> <!-- End Work -->
-
 
     <!-- Skills
     ----------------------------------------------- -->
     <div class="row skill">
-
         <div class="three columns header-col">
-            <h1><span>Skills</span></h1>
+            <h1><span>{{ __('welcome.Skills') }}</span></h1>
         </div>
-
         <div class="nine columns main-col">
-
-            <p>
-                The following skills and respective quotation ( bar width ) are based on the technologies used in the projects I am/was involved plus the training I had in the projects context.
-                It reflects my experience in real projects and not in what quotation I should have in each tech.
-                Indicative values and in some technologies may be based on my professional experience and not on total technical knowledge.
-            </p>
-
+            <p>{{ __('welcome.Skills_desc_textarea') }}</p>
             <div class="bars">
-
                 <ul class="skills">
                     <li><span class="bar-expand php"></span><em>PHP</em></li>
                     <li><span class="bar-expand apcu"></span><em>APCu</em></li>
@@ -445,559 +370,388 @@
                     <li><span class="bar-expand aws"></span><em>Amazon Web Services (AWS)</em></li>
                     <li><span class="bar-expand gcp"></span><em> Google Cloud Platform (GCP)</em></li>
                 </ul>
-
             </div><!-- end skill-bars -->
-
         </div> <!-- main-col end -->
-
     </div> <!-- End skills -->
-
 </section> <!-- Resume Section End-->
 
-<!-- Call-To-Action Section
+<!-- Preferred stack / tools Section
 ================================================== -->
 <section id="call-to-action">
-
     <div class="row">
-
         <div class="two columns header-col">
-
             <h1><span></span></h1>
-
         </div>
-
         <div class="seven columns">
-
-            <h2><span class="lead">Preferred stack / tools:</span></h2>
+            <h2><span class="lead">{{ __('welcome.Stack_Tools') }}</span></h2><br />
             <p class="text-left">
                 <span class="lead">
-                    <img src="/images/personal/logos/ubuntu.png" width="32px" height="32px" /> linux (ubuntu)<br>
-                    <img src="/images/personal/logos/phpstorm.png" width="32px" height="32px" /> phpstorm<br>
-                    <img src="/images/personal/logos/workb.png" width="32px" height="32px" /> mysql workbench<br>
-                    <img src="/images/personal/logos/phpmyadmin.png" width="32px" height="40px" /> phpmyadmin<br>
-                    <img src="/images/personal/logos/docker.png" width="32px" height="32px" /> docker desktop<br>
-                    <img src="/images/personal/logos/postman.png" width="32px" height="32px" /> postman<br>
-                    <img src="/images/personal/logos/zoom.png" width="32px" height="32px" /> zoom<br>
-                    <img src="/images/personal/logos/apache.png" width="32px" height="32px" /> apache2<br>
-                    <img src="/images/personal/logos/gc.png" width="32px" height="32px" /> gcp buckets<br>
-                    <img src="/images/personal/logos/gimp.png" width="32px" height="32px" /> gimp <br>
-                    <img src="/images/personal/logos/slack.png" width="32px" height="32px" /> slack <br>
-                    <img src="/images/personal/logos/drawio.png" width="32px" height="32px" style="padding: 3px"/> draw io <br>
+                    <img src="/images/personal/logos/ubuntu.png" width="32px" height="32px" alt=""/> linux (ubuntu)<br>
+                    <img src="/images/personal/logos/phpstorm.png" width="32px" height="32px" alt="" /> phpstorm<br>
+                    <img src="/images/personal/logos/workb.png" width="32px" height="32px" alt="" /> mysql workbench<br>
+                    <img src="/images/personal/logos/phpmyadmin.png" width="32px" height="40px" alt="" /> phpmyadmin<br>
+                    <img src="/images/personal/logos/docker.png" width="32px" height="32px" alt="" /> docker desktop<br>
+                    <img src="/images/personal/logos/postman.png" width="32px" height="32px" alt="" /> postman<br>
+                    <img src="/images/personal/logos/zoom.png" width="32px" height="32px" alt="" /> zoom<br>
+                    <img src="/images/personal/logos/apache.png" width="32px" height="32px" alt="" /> apache2<br>
+                    <img src="/images/personal/logos/gc.png" width="32px" height="32px" alt="" /> gcp buckets<br>
+                    <img src="/images/personal/logos/gimp.png" width="32px" height="32px" alt="" /> gimp <br>
+                    <img src="/images/personal/logos/slack.png" width="32px" height="32px" alt="" /> slack <br>
+                    <img src="/images/personal/logos/drawio.png" width="32px" height="32px" alt="" style="padding: 3px"/> draw io <br>
                     - etc...<br>
                 </span>
             </p>
-
             <style>
                 .lead img {
                     vertical-align: middle;
                     margin-bottom: 6px;
                 }
             </style>
-
         </div>
-
-        <div class="three columns action">
-
-        </div>
-
+        <div class="three columns action"></div>
     </div>
-
-</section> <!-- Call-To-Action Section End-->
+</section> <!-- Preferred stack / tools Section End-->
 
 <!-- Portfolio Section
 ================================================== -->
 <section id="portfolio">
-
     <div class="row">
-
         <div class="twelve columns collapsed">
-
-            <h1 class="portfolio-text-size">Projects</h1>
-
+            <h1 class="portfolio-text-size">{{ __('welcome.Projects') }}</h1>
             <!-- portfolio-wrapper -->
             <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
                         <a href="#modal-12">
                             <img alt="José Gomes Site" class="portfolio-image" src="images/personal/logo3.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>José Gomes Site</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project12') }}</h5>
+                                    <p>{{ __('welcome.Project12_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
                     </div>
                 </div>  <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
                         <a href="#modal-11">
                             <img alt="Routineris" class="portfolio-image" src="images/personal/routineris2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Routineris <br/> <span style="color:orange; font-size: 12px">( migration in progress )</span></h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project11') }} <br/> <span style="color:orange; font-size: 12px">{{ __('welcome.Project11_migration') }}</span></h5>
+                                    <p>{{ __('welcome.Project11_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
                     </div>
                 </div>  <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-01">
                             <img alt="Imovirtual" class="portfolio-image" src="images/personal/imo2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Imovirtual</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project10') }}</h5>
+                                    <p>{{ __('welcome.Project10_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-02">
                             <img alt="Otodom" class="portfolio-image" src="images/personal/otodom.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Otodom</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project9') }}</h5>
+                                    <p>{{ __('welcome.Project9_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-03">
                             <img alt="Storia" class="portfolio-image" src="images/personal/storia2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Storia</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project8') }}</h5>
+                                    <p>{{ __('welcome.Project8_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-04">
                             <img alt="Atlastock" class="portfolio-image" src="images/personal/as2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Atlastock</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project7') }}</h5>
+                                    <p>{{ __('welcome.Project7_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-05">
                             <img alt="Young Great Westerners!" class="portfolio-image" src="images/personal/gwr2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Young Great Westerners!</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project6') }}</h5>
+                                    <p>{{ __('welcome.Project6_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-06">
                             <img alt="PA MySite" class="portfolio-image" src="images/personal/paginas-amarelas-sa-lisboa_big2.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>PA MySite</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project5') }}</h5>
+                                    <p>{{ __('welcome.Project5_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-07">
                             <img alt="THU" class="portfolio-image" src="images/personal/trojan.jpg">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>THU</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project4') }}</h5>
+                                    <p>{{ __('welcome.Project4_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div> <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-08">
                             <img alt="Gatewit - Warehouse" class="portfolio-image" src="images/personal/logo_wh.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Gatewit - Warehouse</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project3') }}</h5>
+                                    <p>{{ __('welcome.Project3_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div>  <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-09">
                             <img alt="Gatewit - Requisition" class="portfolio-image" src="images/personal/logo_req.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Gatewit - Requisition</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project2') }}</h5>
+                                    <p>{{ __('welcome.Project2_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div>  <!-- item end -->
-
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-
                         <a href="#modal-10">
                             <img alt="Gatewit - Compras Públicas" class="portfolio-image" src="images/personal/compras2.png">
                             <div class="overlay">
                                 <div class="portfolio-item-meta">
-                                    <h5>Gatewit - Compras Públicas</h5>
-                                    <p>Web Development</p>
+                                    <h5>{{ __('welcome.Project1') }}</h5>
+                                    <p>{{ __('welcome.Project1_role') }}</p>
                                 </div>
                             </div>
                             <div class="link-icon"><i class="icon-plus"></i></div>
                         </a>
-
                     </div>
                 </div>  <!-- item end -->
-
-
             </div> <!-- portfolio-wrapper end -->
-
         </div> <!-- twelve columns end -->
-
 
         <!-- Modal Popup
          --------------------------------------------------------------- -->
-
         <div id="modal-01" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/imo-det.png" alt="Imovirtual modal" />
-
             <div class="description-box">
-                <h4>Imovirtual</h4>
-                <p>
-                    This application is an online portal specialized in real estate classifieds,
-                    where we can find advertisements for the sale and rental of properties, such as houses, apartments,
-                    land, among others, for the Portuguese market.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project10') }}</h4>
+                <p>{{ __('welcome.Project10_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project10_role') }}</span>
             </div>
-
             <div class="link-box">
-                <a href="https://www.imovirtual.com" target="_blank">Site</a>
-                <a class="popup-modal-dismiss">Close</a>
+                <a href="https://www.imovirtual.com" target="_blank">{{ __('welcome.Site') }}</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-01 End -->
-
         <div id="modal-02" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/otodom-det.png" alt="Otodom modal" />
-
             <div class="description-box">
-                <h4>Otodom</h4>
-                <p>
-                    This application is an online portal specialized in real estate classifieds,
-                    where we can find advertisements for the sale and rental of properties, such as houses, apartments,
-                    land, among others, for the Polish market.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project9') }}</h4>
+                <p>{{ __('welcome.Project9_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project9_role') }}</span>
             </div>
-
             <div class="link-box">
-                <a href="https://www.otodom.pl" target="_blank">Site</a>
-                <a class="popup-modal-dismiss">Close</a>
+                <a href="https://www.otodom.pl" target="_blank">{{ __('welcome.Site') }}</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-02 End -->
-
         <div id="modal-03" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/storia-det.jpg" alt="Storia modal" />
-
             <div class="description-box">
-                <h4>Storia</h4>
-                <p>
-                    This application is an online portal specialized in real estate classifieds,
-                    where we can find advertisements for the sale and rental of properties, such as houses, apartments,
-                    land, among others, for the Romanian market.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project8') }}</h4>
+                <p>{{ __('welcome.Project8_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project8_role') }}</span>
             </div>
-
             <div class="link-box">
-                <a href="https://www.storia.ro" target="_blank">Details</a>
-                <a class="popup-modal-dismiss">Close</a>
+                <a href="https://www.storia.ro" target="_blank">{{ __('welcome.Site') }}</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-03 End -->
-
         <div id="modal-04" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/as-det2.png" alt="Atlastock modal" />
-
             <div class="description-box">
-                <h4>Atlastock</h4>
-                <p> Application that was a business tool for real estate, which allowed consultants to manage their
-                    properties in their portfolio. One of the main features was the exportation of properties to Imovirtual
-                    and/or OLX, transforming this content into advertisements visible to the public user.</p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project7') }}</h4>
+                <p>{{ __('welcome.Project7_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project7_role') }}</span>
             </div>
-
             <div class="link-box">
-                <span class="portfolio-modal-deprecated-site">Deprecated</span>
-                <a class="popup-modal-dismiss">Close</a>
+                <span class="portfolio-modal-deprecated-site">{{ __('welcome.Deprecated') }}</span>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-04 End -->
-
         <div id="modal-05" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/gwr-det.jpg" alt="Young Great Westerners! modal" />
-
             <div class="description-box">
-                <h4>Young Great Westerners!</h4>
-                <p> Application for a British railway company for a project associated with
-                    public education where the goal is to publicize the company and at the same time giving
-                    the possibility to students from various schools to be aware about the points of interest in Great Britain that are
-                    accessible by traveling on the British train network. </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project6') }}</h4>
+                <p>{{ __('welcome.Project6_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project6_role') }}</span>
             </div>
-
             <div class="link-box">
-                <a href="https://www.younggreatwesterners.com/" target="_blank">Site</a>
-                <a class="popup-modal-dismiss">Close</a>
+                <a href="https://www.younggreatwesterners.com/" target="_blank">{{ __('welcome.Site') }}</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-05 End -->
-
         <div id="modal-06" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/pa-det.jpg" alt="PA Mysite modal" />
-
             <div class="description-box">
-                <h4>PA Mysite</h4>
-                <p>
-                    Portal for company information and contacts. Custom web page generator for PA customers through the
-                    mysite-page solution instantly.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project5') }}</h4>
+                <p>{{ __('welcome.Project5_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project5_role') }}</span>
             </div>
-
             <div class="link-box">
-                <span class="portfolio-modal-deprecated-site">Deprecated</span>
-                <a class="popup-modal-dismiss">Close</a>
+                <span class="portfolio-modal-deprecated-site">{{ __('welcome.Deprecated') }}</span>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-06 End -->
-
         <div id="modal-07" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/trojan-det.jpg" alt="THU modal" />
-
             <div class="description-box">
-                <h4>THU</h4>
-                <p>
-                    Application that serves as a communication platform of articles, initiatives and announces
-                    the main event ( THU ) that combines conferences, festival and meeting for professionals in digital media,
-                    animation, visual effects, design and related areas that aims to bring together talented and inspiring artists.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project4') }}</h4>
+                <p>{{ __('welcome.Project4_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project4_role') }}</span>
             </div>
-
             <div class="link-box">
-                <a href="https://www.trojan-unicorn.com/" target="_blank">Site</a>
-                <a class="popup-modal-dismiss">Close</a>
+                <a href="https://www.trojan-unicorn.com/" target="_blank">{{ __('welcome.Site') }}</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-07 End -->
-
         <div id="modal-08" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo_wh-det.png" alt="Gatewit - Warehouse modal" />
-
             <div class="description-box">
-                <h4>Gatewit - Warehouse</h4>
-                <p>
-                    Application to manage inventory controlling prices and costs of various items, creating alerts for stock outages, creating
-                    orders and preparation of purchase orders. Allows management and control of movements.
-                    Customized usage profiles per user. History of all actions performed and their respective users.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project3') }}</h4>
+                <p>{{ __('welcome.Project3_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project3_role') }}</span>
             </div>
 
             <div class="link-box">
-                <span class="portfolio-modal-deprecated-site">Deprecated</span>
-                <a class="popup-modal-dismiss">Close</a>
+                <span class="portfolio-modal-deprecated-site">{{ __('welcome.Deprecated') }}</span>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-08 End -->
-
         <div id="modal-09" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo_req-det.png" alt="Gatewit - Requisition modal" />
-
             <div class="description-box">
-                <h4>Gatewit - Requisition</h4>
-                <p>
-                    Application for product management, orders, purchase orders, stocks
-                    and requests.
-                    It allows different degrees of access and permissions per user depending on their profile.
-                    Integration with Public Sourcing to launch procedures and treatment of awards.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project2') }}</h4>
+                <p>{{ __('welcome.Project2_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project2_role') }}</span>
             </div>
-
             <div class="link-box">
-                <span class="portfolio-modal-deprecated-site">Deprecated</span>
-                <a class="popup-modal-dismiss">Close</a>
+                <span class="portfolio-modal-deprecated-site">{{ __('welcome.Deprecated') }}</span>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-09 End -->
-
         <div id="modal-10" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/compras-det.png" alt="Gatewit - Compras Públicas modal" />
-
             <div class="description-box">
-                <h4>Gatewit - Compras Públicas</h4>
-                <p>
-                    Management platform and procedures for contracting goods and services. Through this application, suppliers could consult
-                    public advertisements and present their offers and associated value. Also through this application,
-                    all offers were analyzed to obtain the award of the good or service.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project1') }}</h4>
+                <p>{{ __('welcome.Project1_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project1_role') }}</span>
             </div>
-
             <div class="link-box">
-                <span class="portfolio-modal-deprecated-site">Deprecated</span>
-                <a class="popup-modal-dismiss">Close</a>
+                <span class="portfolio-modal-deprecated-site">{{ __('welcome.Deprecated') }}</span>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-10 End -->
-
         <div id="modal-11" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/routineris-det.png" alt="Routineris modal" />
-
             <div class="description-box">
-                <h4>Routineris<br/> <span style="color:orange; font-size: 12px">( migration in progress )</span> </h4>
-                <p>
-                    Website to save photos in the cloud.
-                    Allows the user to create maps ( which we can call it albums ) where you can invite other people
-                    to contribute with their photos to the map. At the end, this application works as a family social network.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project11') }}<br/> <span style="color:orange; font-size: 12px">{{ __('welcome.Project11_migration') }}</span> </h4>
+                <p>{{ __('welcome.Project11_desc_textarea') }} </p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project11_role') }}</span>
             </div>
-
             <div class="link-box">
-                <span class="portfolio-modal-deprecated-site">Temporary unavailable</span>
+                <span class="portfolio-modal-deprecated-site">{{ __('welcome.Temporary_unavailable') }}</span>
                 <!-- <a href="https://routineris.xyz/" target="_blank">Site</a> -->
-                <a class="popup-modal-dismiss">Close</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-11 End -->
-
         <div id="modal-12" class="popup-modal mfp-hide">
-
             <img class="scale-with-grid portfolio-image-modal" src="images/personal/logo-det2.png" alt="José Gomes site modal" />
-
             <div class="description-box">
-                <h4>José Gomes site</h4>
-                <p>
-                    Personal website where I show my CV, the technologies I like most,
-                    the ones I had the opportunity to work on and also some case studies of some features that
-                    I can't demonstrate on sites where I don't have rights to show the code.
-                </p>
-                <span class="categories"><i class="fa fa-tag"></i>Web Development</span>
+                <h4>{{ __('welcome.Project12') }}</h4>
+                <p> {{ __('welcome.Project12_desc_textarea') }}</p>
+                <span class="categories"><i class="fa fa-tag"></i>{{ __('welcome.Project12_role') }}</span>
             </div>
-
             <div class="link-box">
-                <a href="https://jgomes.site" target="_blank">Site</a>
-                <a class="popup-modal-dismiss">Close</a>
+                <a href="https://jgomes.site" target="_blank">{{ __('welcome.Site') }}</a>
+                <a class="popup-modal-dismiss">{{ __('welcome.Close') }}</a>
             </div>
-
         </div><!-- modal-12 End -->
-
     </div> <!-- row End -->
-
 </section> <!-- Portfolio Section End-->
 
-<!-- Testimonials Section
+<!-- WOW Section
 ================================================== -->
 <section id="testimonials">
-
     <div class="text-container">
-
         <div class="row">
-
             <div class="two columns header-col">
-
                  <h1><span>Case studies</span></h1>
-
             </div>
-
             <div class="ten columns flex-container">
-
                 <div class="flexslider">
-
                     <p class="case-studies">
                         I'm using this website to show some of my WOW as the majority of the projects I worked / I'm working for are copyrighted.
                         So you can have more details about this site with read access to: <br/><br/>
@@ -1021,17 +775,11 @@
                         </li> -->
                         <!-- slide ends -->
                     </ul>
-
                 </div> <!-- div.flexslider ends -->
-
             </div> <!-- div.flex-container ends -->
-
         </div> <!-- row ends -->
-
     </div>  <!-- text-container ends -->
-
-</section> <!-- Testimonials Section End-->
-
+</section> <!-- WOW Section End-->
 
 <!-- Contact Section
 ================================================== -->
@@ -1168,49 +916,32 @@
                         : 'js/local/public/init.js' }}">
             </script>
             <script src="/js/cookies.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.custom-select').each(function() {
+                    var $select = $(this);
+                    var $trigger = $select.find('.custom-select-trigger');
+                    var $options = $select.find('.custom-options');
+                    var $optionsList = $options.find('.custom-option');
 
+                    $trigger.click(function(e) {
+                        e.stopPropagation(); // Impede a propagação do evento para o documento
+                        $('.custom-options').not($options).removeClass('active'); // Fecha outros dropdowns
+                        $options.toggleClass('active');
+                    });
 
+                    $optionsList.click(function() {
+                        var value = $(this).attr('data-value');
+                        window.location.href = value;
+                    });
+                });
 
-
-
-
-
-<script>
-    $(document).ready(function() {
-        $('.custom-select').each(function() {
-            var $select = $(this);
-            var $trigger = $select.find('.custom-select-trigger');
-            var $options = $select.find('.custom-options');
-            var $optionsList = $options.find('.custom-option');
-
-            $trigger.click(function(e) {
-                e.stopPropagation(); // Impede a propagação do evento para o documento
-                $('.custom-options').not($options).removeClass('active'); // Fecha outros dropdowns
-                $options.toggleClass('active');
+                $(document).click(function(e) {
+                    if (!$('.custom-select').is(e.target) && $('.custom-select').has(e.target).length === 0) {
+                        $('.custom-options').removeClass('active');
+                    }
+                });
             });
-
-            $optionsList.click(function() {
-                var value = $(this).attr('data-value');
-                window.location.href = value;
-            });
-        });
-
-        $(document).click(function(e) {
-            if (!$('.custom-select').is(e.target) && $('.custom-select').has(e.target).length === 0) {
-                $('.custom-options').removeClass('active');
-            }
-        });
-    });
-</script>
-
-
-
-
-
-
-
-
-
+        </script>
     </body>
-
 </html>

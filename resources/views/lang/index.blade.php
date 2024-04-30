@@ -49,13 +49,12 @@ text-align: right;
   margin-right: 9px;
   overflow-y: scroll;
             ">
-
                 <div id="translationsContainer" style=" padding: 30px;"></div>
             </form>
         </section>
         <section style=" float: right;  margin-top: 50px; ">
             <div style="z-index: 9999999;">
-                <button  class="adminBtn" style="padding:40px;margin-right: 30px" onclick="saveTranslations(event)">Save</button>
+                <button  class="adminBtn" style="padding:10px;margin-right: 30px" onclick="saveTranslations(event)">Save</button>
             </div>
         </section>
         <!-- Footer ================================================== -->
