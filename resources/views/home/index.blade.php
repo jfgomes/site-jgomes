@@ -34,7 +34,7 @@
                     </a>
                     <a href="/lang" class="adminLink">
                         <button class="adminBtn">
-                            📝 Languages
+                            📝 Translations
                         </button>
                     </a>
                     <a href="/locations">

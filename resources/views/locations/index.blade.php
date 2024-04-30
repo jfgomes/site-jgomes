@@ -21,16 +21,17 @@
             <div class="header-content">
                 <h1>🇵🇹 Locations</h1>
                 <div class="button-container">
-                    <a href="/admin" class="adminLink">
-                        <button class="adminBtn">
-                            👮‍♀️ Admin
-                        </button>
-                    </a>
                     <a href="/home">
                         <button class="adminBtn">
                             🏠 Home
                         </button>
                     </a>
+                    <a href="/lang" class="">
+                        <button class="adminBtn">
+                            📝 Translations
+                        </button>
+                    </a>
+
                     @include('partials.logout')
                 </div>
             </div>

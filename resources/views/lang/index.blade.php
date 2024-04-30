@@ -21,16 +21,6 @@
             <div class="header-content">
                 <h1>Translations</h1>
                 <div class="button-container">
-                    <a href="/admin" class="adminLink">
-                        <button class="adminBtn">
-                            👮‍♀️ Admin
-                        </button>
-                    </a>
-                    <a href="/lang" class="adminLink">
-                        <button class="adminBtn">
-                            📝 Translations
-                        </button>
-                    </a>
                     <a href="/home">
                         <button class="adminBtn">
                             🏠 Home
