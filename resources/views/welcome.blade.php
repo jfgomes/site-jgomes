@@ -56,21 +56,37 @@
         <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
 
         <ul id="nav" class="nav">
-            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">{{ __('welcome.about_me') }}</a></li>
-            <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#call-to-action">Stack / Tools</a></li>
-            <li><a class="smoothscroll" href="#portfolio">Projects</a></li>
-            <li><a class="smoothscroll" href="#testimonials">WOW</a></li>
-            <li><a class="smoothscroll" href="#contact">Contact</a></li>
-            <li><a href="/login"> 🔐Login</a></li>
+            <li class="current"><a class="smoothscroll" href="#home">{{ __('welcome.Home') }}</a></li>
+            <li><a class="smoothscroll" href="#about">{{ __('welcome.About_me') }}</a></li>
+            <li><a class="smoothscroll" href="#resume">{{ __('welcome.Resume') }}</a></li>
+            <li><a class="smoothscroll" href="#call-to-action">{{ __('welcome.Stack_Tools') }}</a></li>
+            <li><a class="smoothscroll" href="#portfolio">{{ __('welcome.Projects') }}</a></li>
+            <li><a class="smoothscroll" href="#testimonials">{{ __('welcome.WOW') }}</a></li>
+            <li><a class="smoothscroll" href="#contact">{{ __('welcome.Contact') }}</a></li>
+            <li><a href="/login"> 🔐{{ __('welcome.Login') }}</a></li>
             <li>
                 <div class="custom-select-wrapper">
                     <div class="custom-select">
-                        <div class="custom-select-trigger" style="font-size: 25px; position: relative; top: 5px;">{{ app()->getLocale() == 'en' ? '󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁥󠁮󠁧󠁿' : '🇵🇹' }}</div>
+                        @php
+                            switch(app()->getLocale()) {
+                                case 'en':
+                                    $emoji = '🏴󠁧󠁢󠁥󠁮󠁧󠁿';
+                                    break;
+                                case 'pt':
+                                    $emoji = '🇵🇹';
+                                    break;
+                                case 'jp':
+                                    $emoji = '🇯🇵';
+                                    break;
+                                default:
+                                    $emoji = '';
+                            }
+                        @endphp
+                        <div class="custom-select-trigger" style="font-size: 25px; position: relative; top: 5px;">{{ $emoji }}</div>
                         <div class="custom-options">
                             <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'en']) }}">🏴󠁧󠁢󠁥󠁮󠁧󠁿EN</span>
                             <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'pt']) }}">🇵🇹PT</span>
+                            <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'jp']) }}">🇯🇵JP</span>
                         </div>
                     </div>
                 </div>
@@ -172,7 +188,7 @@
             <script language="JavaScript" type="text/javascript">
                 TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_md_167x42.png", "POSDV", "none");
             </script> <br/>
-            <h3>I'm a Lisbon based <span>software developer</span>.<br/><span> Let's <a class="smoothscroll" href="#about">start scrolling</a> and know more <a class="smoothscroll" href="#about">about me</a>.</span>
+            <h3> {{ __('welcome.Phrase_1') }} <span> {{ __('welcome.Phrase_2') }} </span>.<br/><span>{{ __('welcome.Phrase_3') }}<a class="smoothscroll" href="#about"> {{ __('welcome.Phrase_4') }} </a> {{ __('welcome.Phrase_5') }} <a class="smoothscroll" href="#about"> {{ __('welcome.Phrase_6') }}</a>.</span>
             </h3>
             <hr />
 
@@ -199,30 +215,18 @@
     <div class="row">
 
         <div class="three columns">
-
             <img class="profile-pic"  src="images/personal/logo.png" alt="" />
-
         </div>
 
         <div class="nine columns main-col">
-
-            <h2>About Me</h2>
-
-            <p> I'm a software developer passionate about open source technologies, agile methodologies and helping the product achieve its proposed objectives.
-                I don't consider myself as a technology CR7 or a guru, I'm always learning. Is mandatory to me deliver code without errors,
-                well tested and developed, always offering the best possible quality in my work. Over the years, I have become more customer-focused,
-                in the performance offered to them and in the best possible planning to delivery the tasks,
-                contributing to product quality. Legacy code doesn't scare me, in fact I see everything as a challenge and opportunity for improvement.
-            </p>
-
+            <h2>{{ __('welcome.About_me') }}</h2>
+            <p>{{ __('welcome.About_me_details_textarea') }}</p>
             <div class="row">
-
                 <div class="columns contact-details">
-
-                    <h2>Contact Details</h2>
+                    <h2>{{ __('welcome.Contact_details') }}</h2>
                     <p class="address">
                         <span>José Gomes</span><br>
-                        <span>Lisbon</span><br>
+                        <span>{{ __('welcome.City') }}</span><br>
                         <span>+351937503892</span><br>
                         <span>zx.gomes@gmail.com</span>
                     </p>
@@ -1143,10 +1147,9 @@
 
                 </div>
 
-                <div id="cookie-consent-bar">
-                    <p>🍪 This website uses cookies to ensure you get the best experience on our website.</p>
-                    <button onclick="acceptCookies()">✅ Got it!</button>
-                </div>
+                <footer>
+                    @include('partials.cookies')
+                </footer> <!-- Footer End-->
 
             </footer> <!-- Footer End-->
 
