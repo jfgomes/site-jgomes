@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\I18nController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MessagesController;
 use Illuminate\Support\Facades\Route;
@@ -101,6 +102,24 @@ Route::prefix('v1')->group(function () {
                     AdminController::class, 'index'
                 ]
             )->name('admin');
+        });
+
+        // Allow only admin. But let's define 30 request per min
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function () {
+            Route::get('/translations',
+                [
+                    I18nController::class, 'getTranslations'
+                ]
+            )->name('translations');
+        });
+
+        // Allow only admin. But let's define 30 request per min
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function () {
+            Route::post('/translations',
+                [
+                    I18nController::class, 'postTranslations'
+                ]
+            )->name('translations');
         });
     });
 

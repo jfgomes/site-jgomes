@@ -484,6 +484,13 @@ Route::middleware('throttle:20,1')->group(function () {
     });
 });
 
+// I18N public
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name('lang.switch');
+
 ########################################### END PUBLIC ROUTES
 
 ########################################### START SERVERLESS ROUTES
@@ -553,5 +560,11 @@ Route::get('/429', function () {
     return view('errors.429');
 })
     ->name('error.429');
+
+// Route for I18N
+Route::get('/lang', function () {
+    return view('lang.index');
+})
+    ->name('lang.index');
 
 ########################################### END SERVERLESS ROUTES

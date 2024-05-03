@@ -161,6 +161,102 @@ let serverLessRequests = (function($)
         });
     }
 
+    // Post data if authorized
+    function checkAuthAndPostData(url, data)
+    {
+        return new Promise((resolve, reject) =>
+        {
+            // Had the overlay
+            $("#overlay").show();
+
+            // Wait for the token promise to be resolved
+            getToken(access_token_str)
+
+                // Post data to server
+                .then(token => postData(url, data, token))
+                .then(response => {
+
+                    // Resolve the promise with the response
+                    resolve(response);
+                })
+                .catch(error => {
+
+                    // Case forbidden (403) errors go to forbidden page
+                    if (error === 403)
+                    {
+                        window.location.href = forbidden_page;
+
+                        // Case too many requests (429) errors go to many requests page
+                    } else if (error === 429)
+                    {
+                        window.location.href = many_requests_page;
+
+                    } else {
+                        // Case other errors redirect to login page
+                        window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
+                    }
+                    reject(error); // Reject the promise
+                })
+                .finally(() => {
+                    // Hide the overlay regardless of success or failure
+                    // $("#overlay").hide();
+                });
+        });
+    }
+
+    // Function to post data from frontend to backend with a valid token
+    function postData(url, data, token)
+    {
+        // Promise to post data
+        return new Promise(function(resolve, reject)
+        {
+            try {
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: { 'data': $("#translationsForm").serialize() },
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    success: function(response)
+                    {
+                        resolve(response);
+                    },
+                    error: function(xhr)
+                    {
+                        // Case Forbidden go back
+                        if (xhr.status === 403)
+                        {
+                            reject(403);
+                            return;
+                        }
+
+                        // Inform client about 429 ( Too many requests )
+                        if (xhr.status === 429)
+                        {
+                            // Reject the promise for too many requests
+                            reject(429);
+                            return;
+                        }
+
+                        // Uncomment the next lines if we want to see the request error before the redirect
+                        // console.log(xhr);
+                        // debugger;
+                        // alert(xhr.statusText);
+                         alert(xhr.responseText);
+
+                        // xhr.statusText || 'Cannot load data. Please try again.'
+                        reject('Cannot post data. Details: ' + xhr.responseText);
+                    }
+                });
+            } catch (error) {
+                // Handle any errors that occur within the try block
+                alert('An error occurred: ' + error.message);
+            }
+        });
+
+    }
 
     // Function to get data from backend with a valid token
     function getData(url, token)
@@ -295,33 +391,48 @@ let serverLessRequests = (function($)
 
             } else {
 
-                // Last check... check if the current token is valid
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/v1/check',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    success: function() {
-                        resolve(token);
-                    },
-                    error: function(xhr) {
-                        // Remove the token fom localStorage if it is invalid.
-                        // Allow to keep 429 ( Too many requests )
-                        if (xhr.status !== 429) {
-                            // Remove the token from localStorage if it is invalid.
-                            localStorage.removeItem(key);
+                // Use the promise returned by doCheckToken to check the current token in localStorage is valid
+                doCheckToken(token, key)
+                    .then((ValidCurrentToken) => {
+                        resolve(ValidCurrentToken);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    })
 
-                            // Reject the promise as the refresh token is invalid
-                            reject('Authentication needed');
-                            return;
-                        }
-
-                        // Reject the promise for too many requests
-                        reject('Too many requests');
-                    }
-                });
             }
+        });
+    }
+
+    function doCheckToken(token, key)
+    {
+        return new Promise((resolve, reject) => {
+            // Last check... check if the current token is valid
+            $.ajax({
+                type: 'GET',
+                url: '/api/v1/check',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                success: function() {
+                    resolve(token);
+                },
+                error: function(xhr) {
+                    // Remove the token fom localStorage if it is invalid.
+                    // Allow to keep 429 ( Too many requests )
+                    if (xhr.status !== 429) {
+                        // Remove the token from localStorage if it is invalid.
+                        localStorage.removeItem(key);
+
+                        // Reject the promise as the refresh token is invalid
+                        reject('Authentication needed');
+                        return;
+                    }
+
+                    // Reject the promise for too many requests
+                    reject('Too many requests');
+                }
+            });
         });
     }
 
@@ -354,6 +465,7 @@ let serverLessRequests = (function($)
     return {
         init: init,
         checkAuthAndGetData: checkAuthAndGetData,
+        checkAuthAndPostData: checkAuthAndPostData,
         doLogout: doLogout
     };
 

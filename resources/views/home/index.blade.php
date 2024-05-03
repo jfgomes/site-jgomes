@@ -32,6 +32,11 @@
                             👮‍♀️ Admin
                         </button>
                     </a>
+                    <a href="/lang" class="adminLink">
+                        <button class="adminBtn">
+                            📝 Translations
+                        </button>
+                    </a>
                     <a href="/locations">
                         <button class="adminBtn">
                             🗺️ Locations

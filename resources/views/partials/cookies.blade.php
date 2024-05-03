@@ -1,4 +1,4 @@
 <div id="cookie-consent-bar" class="cookie-consent-barExtra">
-    <p>🍪 This website uses cookies to ensure you get the best experience on our website.</p>
-    <button onclick="acceptCookies()">✅ Got it!</button>
+    <p>🍪 {{ __('welcome.Cookies_textarea') }}.</p>
+    <button onclick="acceptCookies()">✅ {{ __('welcome.Cookies_accept') }}!</button>
 </div>
