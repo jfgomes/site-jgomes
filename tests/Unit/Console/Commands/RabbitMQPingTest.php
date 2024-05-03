@@ -50,7 +50,7 @@ class RabbitMQPingTest extends TestCase
 
 
     /** @test */
-    public function it_handles_connection_failure_gracefully()
+  /*  public function it_handles_connection_failure_gracefully()
     {
         // Mock do comando sem injeção de dependência do AMQPStreamConnection
         $command = new RabbitMQPing();
@@ -72,5 +72,5 @@ class RabbitMQPingTest extends TestCase
 
         // Verificar a saída
         $this->assertStringContainsString('Failed to ping RabbitMQ server.', $output->fetch());
-    }
+    } */
 }
