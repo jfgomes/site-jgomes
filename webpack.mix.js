@@ -30,6 +30,5 @@ mix
     'public/js/cookies.js',
     'public/js/leaflet.min.js',
     'public/js/local/private/locations.js',
-    'public/js/local/private/lang.js',
 ], 'public/js/prod/app.js')
     .version();
