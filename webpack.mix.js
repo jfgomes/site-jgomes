@@ -31,6 +31,6 @@ mix
     'public/js/cookies.js',
     'public/js/leaflet.min.js',
     'public/js/local/private/locations.js',
-    'public/js/local/public/init.js',
+    'public/js/local/public/general.js',
 ], 'public/js/prod/app.js')
     .version();
