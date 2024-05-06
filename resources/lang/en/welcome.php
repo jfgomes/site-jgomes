@@ -114,4 +114,6 @@ return array (
   'Contact_submit' => 'Submit',
   'Contact_sent_success' => 'Your message was sent. Thank you!',
   'Etc' => 'Etc..',
+  'Maintenance1' => 'The application is currently under maintenance!',
+  'Maintenance2' => 'Is only visible for you and all the other users have the application under maintenance mode page.',
 );

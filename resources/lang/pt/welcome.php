@@ -110,4 +110,6 @@ Quando necessário, realizo demonstrações de novas funcionalidades e melhorias
   'Contact_submit' => 'Enviar',
   'Contact_sent_success' => 'A tua mensagem foi enviada. Obrigado!',
   'Etc' => 'Etc..',
+  'Maintenance1' => 'O site está atualmente em manutenção!',
+  'Maintenance2' => 'Está apenas visivel para ti e todos os outros utilizadores vêm a página em modo de manutenção.',
 );

@@ -110,4 +110,7 @@ Imovirtual、Storia、Otodomplなどの不動産ポータルに関連する情�
   'Contact_submit' => '送信',
   'Contact_sent_success' => 'メッセージが送信されました。ありがとうございます！',
   'Etc' => '等..',
+  'Maintenance1' => 'アプリケーションは現在メンテナンス中です！',
+  'Maintenance2' => 'あなたのみが見ることができ、他のすべてのユーザーはアプリケーションのメンテナンスモードページを表示しています。'
+
 );

@@ -491,12 +491,6 @@ Route::get('/language/{locale}', function ($locale) {
     return redirect()->to(env('APP_URL'));
 })->name('lang.switch');;
 
-/*Route::get('language/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
-    return redirect()->back();
-})->name('lang.switch');*/
-
 ########################################### END PUBLIC ROUTES
 
 ########################################### START SERVERLESS ROUTES
