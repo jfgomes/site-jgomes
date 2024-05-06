@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="css/media-queries.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/cookies.css">
-    <link rel="stylesheet" href="css/local/public/general.css">
 
     <!-- Script
     ================================================== -->
@@ -32,6 +31,16 @@
     <!-- Favicons
      ================================================== -->
     <link rel="shortcut icon" href="favicon.png" >
+
+    <script>
+        function downloadCV(urlDocument)
+        {
+            let link  = document.createElement('a');
+            link.href = urlDocument;
+            link.download = urlDocument;
+            link.click();
+        }
+    </script>
 
 </head>
 
@@ -85,18 +94,93 @@
         </ul> <!-- end #nav -->
 
     </nav> <!-- end #nav-wrap -->
+<style>
+    .custom-select-wrapper {
+        position: relative;
+        width: 80px; /* Largura desejada */
+    }
 
+    .custom-select {
+        position: relative;
+        font-family: 'opensans-bold', sans-serif;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .custom-select-trigger {
+        position: relative;
+        display: block;
+
+        background: transparent;
+        color: #fff;
+        border: none;
+        width: 100%;
+    }
+
+    .custom-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: #333;
+        border: 1px solid #fff;
+
+        margin-left: 30%;
+        margin-top: 10px;
+        width: 60px;
+    }
+
+    .custom-options.active {
+        display: block;
+    }
+
+    .custom-option {
+        position: relative;
+        display: block;
+        padding: 10px;
+        background: #333;
+        color: #fff;
+        border-bottom: 1px solid #fff;
+        cursor: pointer;
+    }
+
+    .custom-option:last-child {
+        border-bottom: none;
+    }
+
+</style>
     <div class="row banner">
+        <style>
+            .maintenance-mode {
+                background-color: #ff6347;
+                color: #fff;
+                padding: 10px 0 15px 0;
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 25px;
+            }
+
+            .maintenance-mode p {
+                margin: 0;
+            }
+
+            .maintenance-mode::before {
+                content: "⚠️";
+                font-size: 24px;
+                margin-right: 10px;
+            }
+        </style>
         @if(app()->isDownForMaintenance())
             <div class="maintenance-mode">
-                <p> {{ __('welcome.Maintenance1') }} <br /> {{ __('welcome.Maintenance2') }} </p>
+                <p>The application is currently under maintenance! <br /> Is only visible for you and all the other users have the application under maintenance mode page.</p>
             </div>
         @endif
         <div class="banner-text">
             <a href="https://www.codewars.com/users/JGomes87" target="_blank"><img alt="Dark Badge (large)" class="hidden dark:block" src="https://www.codewars.com/users/JGomes87/badges/large"></a>
             <h1 class="responsive-headline">José Gomes</h1>
             <script type="text/javascript"> //<![CDATA[
-                let tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+                var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
                 document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
                 //]]></script>
             <script language="JavaScript" type="text/javascript">
@@ -664,7 +748,7 @@
     <div class="text-container">
         <div class="row">
             <div class="two columns header-col">
-                <h1><span>{{ __('welcome.WOW') }}</span></h1>
+                 <h1><span>{{ __('welcome.WOW') }}</span></h1>
             </div>
             <div class="ten columns flex-container">
                 <div class="flexslider">
@@ -810,55 +894,47 @@
         @include('partials.cookies')
     </footer> <!-- Footer End-->
 </footer> <!-- Footer End-->
-<!-- Java Script
-     ================================================== -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery.flexslider.js"></script>
-<script src="js/waypoints.js"></script>
-<script src="js/jquery.fittext.js"></script>
-<script src="js/magnific-popup.js"></script>
-<script src="js/local/public/init.js"></script>
-<script src="{{ (app()->environment() === 'prod')
+        <!-- Java Script
+        ================================================== -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+        <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery.flexslider.js"></script>
+        <script src="js/waypoints.js"></script>
+        <script src="js/jquery.fittext.js"></script>
+        <script src="js/magnific-popup.js"></script>
+        <script src="js/local/public/init.js"></script>
+        <script src="{{ (app()->environment() === 'prod')
                     ? mix('js/prod/app.js')
                     : 'js/local/public/init.js' }}">
-</script>
-<script src="/js/cookies.js"></script>
-<script>
-    function downloadCV(urlDocument)
-    {
-        let link  = document.createElement('a');
-        link.href = urlDocument;
-        link.download = urlDocument;
-        link.click();
-    }
+        </script>
+        <script src="/js/cookies.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.custom-select').each(function() {
+                    var $select = $(this);
+                    var $trigger = $select.find('.custom-select-trigger');
+                    var $options = $select.find('.custom-options');
+                    var $optionsList = $options.find('.custom-option');
 
-    $(document).ready(function() {
-        $('.custom-select').each(function() {
-            let $select = $(this);
-            let $trigger = $select.find('.custom-select-trigger');
-            let $options = $select.find('.custom-options');
-            let $optionsList = $options.find('.custom-option');
+                    $trigger.click(function(e) {
+                        e.stopPropagation(); // Impede a propagação do evento para o documento
+                        $('.custom-options').not($options).removeClass('active'); // Fecha outros dropdowns
+                        $options.toggleClass('active');
+                    });
 
-            $trigger.click(function(e) {
-                e.stopPropagation(); // Impede a propagação do evento para o documento
-                $('.custom-options').not($options).removeClass('active'); // Fecha outros dropdowns
-                $options.toggleClass('active');
+                    $optionsList.click(function() {
+                        var value = $(this).attr('data-value');
+                        window.location.href = value;
+                    });
+                });
+
+                $(document).click(function(e) {
+                    if (!$('.custom-select').is(e.target) && $('.custom-select').has(e.target).length === 0) {
+                        $('.custom-options').removeClass('active');
+                    }
+                });
             });
-
-            $optionsList.click(function() {
-                window.location.href = $(this).attr('data-value');
-            });
-        });
-
-        $(document).click(function(e) {
-            if (!$('.custom-select').is(e.target) && $('.custom-select').has(e.target).length === 0) {
-                $('.custom-options').removeClass('active');
-            }
-        });
-    });
-</script>
-</body>
+        </script>
+    </body>
 </html>
-
