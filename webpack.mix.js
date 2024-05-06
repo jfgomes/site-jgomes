@@ -23,7 +23,6 @@ mix
     'public/css/leaflet.css',
     'public/css/local/private/locations.css',
     'public/css/local/private/lang.css',
-    'public/css/local/public/general.css',
 ], 'public/css/prod/app.css')
     .scripts([
     'public/js/jquery-3.7.1.js',
@@ -31,6 +30,5 @@ mix
     'public/js/cookies.js',
     'public/js/leaflet.min.js',
     'public/js/local/private/locations.js',
-    'public/js/local/public/general.js',
 ], 'public/js/prod/app.js')
     .version();
