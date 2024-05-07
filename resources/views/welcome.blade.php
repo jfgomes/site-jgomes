@@ -82,6 +82,7 @@
                                     $emoji = '';
                             }
                         @endphp
+                        <div class="custom-select-trigger" style="font-size: 25px; position: relative; top: 5px;">{{ $emoji }}</div>
                         <div class="custom-options">
                             <span class="custom-option" data-value="/language/en">🏴󠁧󠁢󠁥󠁮󠁧󠁿EN</span>
                             <span class="custom-option" data-value="/language/pt">🇵🇹PT</span>
