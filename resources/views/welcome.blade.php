@@ -68,9 +68,9 @@
                                 @endphp
                                 <div class="custom-select-trigger" style="font-size: 25px; position: relative; top: 5px;">{{ $emoji }}</div>
                                 <div class="custom-options">
-                                    <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'en']) }}">🏴󠁧󠁢󠁥󠁮󠁧󠁿EN</span>
-                                    <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'pt']) }}">🇵🇹PT</span>
-                                    <span class="custom-option" data-value="{{ route('lang.switch', ['locale' => 'jp']) }}">🇯🇵JP</span>
+                                    <span class="custom-option" data-value="/language/en">🏴󠁧󠁢󠁥󠁮󠁧󠁿EN</span>
+                                    <span class="custom-option" data-value="/language/pt">🇵🇹PT</span>
+                                    <span class="custom-option" data-value="/language/jp">🇯🇵JP</span>
                                 </div>
                             </div>
                         </div>
