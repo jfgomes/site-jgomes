@@ -40,16 +40,16 @@ Route::prefix('v1')->group(function () {
         )->name('login');
     });
 
-    // Allow 5 requests per min
-    Route::middleware('throttle:5,1')->group(function () {
+    // Allow 10 requests per min
+    Route::middleware('throttle:10,1')->group(function () {
         Route::get('/users-count', function ()
         {
             return DB::table('users')->count();
         });
     });
 
-    // Allow 5 request per min
-    Route::middleware('throttle:5,1')->group(function () {
+    // Allow 10 request per min
+    Route::middleware('throttle:10,1')->group(function () {
         Route::get('/locations-count', function ()
         {
             return DB::table('locations_pt')->count();
