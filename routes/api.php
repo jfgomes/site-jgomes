@@ -7,6 +7,7 @@ use App\Http\Controllers\I18nController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MessagesController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,22 @@ Route::prefix('v1')->group(function () {
                 AuthController::class, 'login'
             ]
         )->name('login');
+    });
+
+    // Allow 5 requests per min
+    Route::middleware('throttle:5,1')->group(function () {
+        Route::get('/users-count', function ()
+        {
+            return DB::table('users')->count();
+        });
+    });
+
+    // Allow 5 request per min
+    Route::middleware('throttle:5,1')->group(function () {
+        Route::get('/locations-count', function ()
+        {
+            return DB::table('locations_pt')->count();
+        });
     });
 
     // Protected routes by Sanctum
