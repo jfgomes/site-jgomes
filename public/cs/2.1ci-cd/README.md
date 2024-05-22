@@ -395,3 +395,225 @@ In summary, this Jenkinsfile automates the process of continuous integration and
 ## Demonstration
 #### ( Click on the image to watch the demo video )
 [![Demonstration video](https://jgomes.site/images/cs/git-branch-protection-video-thumbnail.jpg)](http://www.youtube.com/watch?v=zNz07YnnJSA)
+
+# Update - 22/05/2024
+#### The goal here was to create a testing DB for unit testing proposes: 
+
+##### 1) Update the init.sql
+```
+-- Drop the production/test user and database if they exist
+DROP USER IF EXISTS 'user_prod'@'%';
+DROP USER IF EXISTS 'user_test'@'%'; <----- here
+
+DROP DATABASE IF EXISTS jgomes_site_prod;
+DROP DATABASE IF EXISTS jgomes_site_prod_test; <----- here
+
+-- Create the production database
+CREATE DATABASE jgomes_site_prod;
+CREATE DATABASE jgomes_site_prod_test; <----- here
+
+-- Create the production user and grant permissions
+CREATE USER 'user_prod'@'%' IDENTIFIED BY '******';
+GRANT ALL PRIVILEGES ON jgomes_site_prod.* TO 'user_prod'@'%';
+
+-- Create test user and grant permissions
+CREATE USER 'user_test'@'%' IDENTIFIED BY '*****'; <----- here
+GRANT ALL PRIVILEGES ON jgomes_site_prod_test.* TO 'user_test'@'%'; <----- here
+
+-- Flush privileges to apply changes
+FLUSH PRIVILEGES;
+```
+
+##### 2) Update the Jenkinsfile
+```
+import groovy.json.JsonBuilder
+
+def sshCredentials         = null
+def remoteUser             = null
+def remoteHost             = null
+def remoteProjectDir       = null
+def lastRemoteCommandError = null
+def remoteCommandPrefix    = null
+
+def executeRemoteCommand(command, remoteCommandPrefix)
+{
+    // Prepare full cmd
+    def remoteCommandComplete = "${remoteCommandPrefix} ${command}'"
+
+    // Tmp Jenkins to save thr logs
+    def outputFile = "/tmp/${command.hashCode()}_output.txt"
+
+    // Execute the remote command and redirect standard output and error to the file
+    def result = sh(script: "${remoteCommandComplete} > ${outputFile} 2>&1", returnStatus: true)
+
+    // Read standard output and error from the file
+    def outputContent = readFile(file: outputFile).trim()
+
+    // Return both output and exit code
+    return [output: outputContent, exitCode: result]
+}
+
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('Get ENV vars')
+        {
+            steps
+            {
+                script
+                {
+                    sshCredentials      = env.SSH_CREDENTIALS
+                    remoteUser          = env.REMOTE_USER
+                    remoteHost          = env.REMOTE_HOST
+                    remoteProjectDir    = env.REMOTE_PROJECT_DIR
+                    remoteCommandPrefix = "ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'cd ${remoteProjectDir} &&"
+                    remoteTestDB        = env.REMOTE_TEST_DB <----- here
+                    remoteTestDBUser    = env.REMOTE_TEST_DB_USER <----- here
+                    remoteTestDBPass    = env.REMOTE_TEST_DB_PASS <----- here
+                    remoteTestCommandPrefix = "DB_DATABASE=${remoteTestDB} DB_USERNAME=${remoteTestDBUser} DB_PASSWORD=${remoteTestDBPass}" <----- here
+                }
+            }
+        }
+        stage('Checkout')
+        {
+            steps
+            {
+               echo 'Do the checkout from the repo and put the code i this context.'
+               checkout scm
+            }
+        }
+        stage('Build')
+        {
+            steps
+            {
+                // Mandatory as I want to run unit tests using the phpunit from vendor
+                echo 'Run composer'
+                sh 'composer update'
+
+                // Start MySQL with skip-grant-tables
+                sh 'sudo mysqld_safe --skip-grant-tables &'
+
+                // .env file is mandatory to generate app key
+                echo 'Copy dev .env file'
+                sh 'cp .env.test .env'
+
+                // App key is mandatory to run tests
+                // echo 'Generate application key'
+                // sh 'php artisan key:generate'
+
+                sh 'php artisan migrate'
+            }
+        }
+        stage('Tests')
+        {
+            steps
+            {
+                echo 'Run tests'
+                sh 'vendor/bin/phpunit'
+            }
+        }
+        stage('Deploy')
+        {
+            when
+            {
+                // Only deploy to prod if master
+                expression
+                {
+                    return (env.BRANCH_NAME == 'master')
+                }
+            }
+            steps
+            {
+                script
+                {
+                    sshagent(credentials: [sshCredentials])
+                    {
+                        def commands = [
+
+                             // Do deploy
+                            'git reset --hard HEAD && git pull origin master',
+
+                             // Do composer update, migration, and clean all backend caches
+                            'APP_ENV=prod RABBIT_HOST=0.0.0.0 composer update && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan migrate && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan route:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan config:clear && APP_ENV=prod RABBIT_HOST=0.0.0.0 php artisan cache:clear',
+
+                             // Do client files versioning
+                            'npm cache clean --force && npm install && npm run production',
+
+                             // Create testing DB to do phpunit report after
+                            "${remoteTestCommandPrefix} php artisan migrate", <----- here
+
+                            // Do phpunit report
+                            "${remoteTestCommandPrefix} vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i \"s|<head>|<head><title>Coverage</title>|\" \"storage/coverage-report/index.html\" && sed -i \"s|<head>|<head><title>Dashboard</title>|\" \"storage/coverage-report/dashboard.html\" && find \"storage/coverage-report\" -type f -exec sed -i \"s#/var/www/html/site-jgomes-prod-infra/site-jgomes/app#(Coverage)#g\" {} +" <----- here
+
+                            ]
+
+                        for (command in commands)
+                        {
+                            def commandResult = executeRemoteCommand(command, remoteCommandPrefix)
+                            if (commandResult.exitCode != 0)
+                            {
+                                lastRemoteCommandError = commandResult.output
+                                currentBuild.result    = 'FAILURE'
+                                echo commandResult.output
+                                error("The pipeline was interrupted during deployment while executing the command: ${command}")
+                                return
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post
+    {
+        failure
+        {
+            script
+            {
+                // Check of the branch is master
+                if (env.BRANCH_NAME == 'master')
+                {
+                    sshagent(credentials: [sshCredentials])
+                    {
+                        echo "Send pipeline failure notification with the error.."
+
+                        // Prepare error message
+                        def jsonError = new JsonBuilder(lastRemoteCommandError).toPrettyString().replaceAll('"', '\\"')
+
+                        // Prepare command
+                        command = "APP_ENV=prod php artisan pipeline:result --result=nok --msg=${jsonError}"
+
+                        // Execute command
+                        executeRemoteCommand(command, remoteCommandPrefix)
+                    }
+                }
+            }
+        }
+        success
+        {
+            script
+            {
+                // Check of the branch is master
+                if (env.BRANCH_NAME == 'master')
+                {
+                    sshagent(credentials: [sshCredentials])
+                    {
+                        echo "Send pipeline success notification.."
+
+                        // Prepare command
+                        command = 'APP_ENV=prod php artisan pipeline:result --result=ok --msg=ok'
+
+                        // Execute command
+                        executeRemoteCommand(command, remoteCommandPrefix)
+                    }
+                }
+            }
+        }
+    }
+}
+
+```
+##### 3) Added the env vars to Jenkins
+![jenkins setup](https://jgomes.site/images/cs/jenkins/f25.png)
