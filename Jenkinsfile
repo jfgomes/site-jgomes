@@ -41,6 +41,10 @@ pipeline
                     remoteHost          = env.REMOTE_HOST
                     remoteProjectDir    = env.REMOTE_PROJECT_DIR
                     remoteCommandPrefix = "ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'cd ${remoteProjectDir} &&"
+                    remoteTestDB        = env.REMOTE_TEST_DB
+                    remoteTestDBUser    = env.REMOTE_TEST_DB_USER
+                    remoteTestDBPass    = env.REMOTE_TEST_DB_PASS
+                    remoteTestCommandPrefix = "DB_DATABASE=${remoteTestDB} DB_USERNAME=${remoteTestDBUser} DB_PASSWORD=${remoteTestDBPass}"
                 }
             }
         }
@@ -62,7 +66,7 @@ pipeline
 
                 // Start MySQL with skip-grant-tables
                 sh 'sudo mysqld_safe --skip-grant-tables &'
-                
+
                 // .env file is mandatory to generate app key
                 echo 'Copy dev .env file'
                 sh 'cp .env.test .env'
@@ -109,9 +113,11 @@ pipeline
                              // Do client files versioning
                             'npm cache clean --force && npm install && npm run production',
 
+                             // Create testing DB to do phpunit report after
+                            '${remoteTestCommandPrefix} php artisan migrate',
+
                              // Do phpunit report
-                             // DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=nome_do_banco_de_testes DB_USERNAME=usuario_de_teste DB_PASSWORD=senha_de_teste
-                             //'vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html" && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/var/www/html/site-jgomes-prod-infra/site-jgomes/app#(Coverage)#g" {} +'
+                            '${remoteTestCommandPrefix} vendor/bin/phpunit --coverage-html storage/coverage-report && sed -i "s|<head>|<head><title>Coverage</title>|" "storage/coverage-report/index.html" && sed -i "s|<head>|<head><title>Dashboard</title>|" "storage/coverage-report/dashboard.html" && find "storage/coverage-report" -type f -exec sed -i "s#/var/www/html/site-jgomes-prod-infra/site-jgomes/app#(Coverage)#g" {} +'
                         ]
 
                         for (command in commands)
