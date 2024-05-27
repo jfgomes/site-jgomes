@@ -30,3 +30,4 @@ gc-local.json
 env_vars_list_local.sh
 env_vars_list_local.zip
 /storage/logs/*
+/resources/lang/*

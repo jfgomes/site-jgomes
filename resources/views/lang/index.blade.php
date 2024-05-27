@@ -37,10 +37,11 @@
         </header> <!-- Header End -->
 
         <!-- Language ====================================================== -->
-        <section style=" float: right;  margin-top: 50px; ">
+        <section style=" margin-top: 50px; ">
             <form id="translationsForm" style="
     z-index: 9999;
-text-align: right;
+    width: 100%;
+    text-align: right;
     height: 104%;
     background-color: #0c5460;
   color: white;
@@ -52,12 +53,12 @@ text-align: right;
                 <div id="translationsContainer" style=" padding: 30px;"></div>
             </form>
         </section>
-        <section style=" float: right;  margin-top: 50px; ">
-            <div style="z-index: 9999999;">
-                <button  class="adminBtn" style="padding:10px;margin-right: 30px" onclick="saveTranslations(event)">Save</button>
-            </div>
-        </section>
-        <!-- Footer ================================================== -->
+         <section style=" ">
+             <div style="z-index: 9999999;position: absolute;top:80px;left:90px;">
+                 <button  class="adminBtn" style="padding:40px;margin-right: 30px" onclick="saveTranslations(event)">Save</button>
+             </div>
+         </section>
+         <!-- Footer ================================================== -->
         <footer>
             @include('partials.cookies')
         </footer> <!-- Footer End-->
