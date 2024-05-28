@@ -326,6 +326,73 @@
                 <div class="twelve columns collapsed">
                     <h1 class="portfolio-text-size">{{ __('welcome.Projects') }}</h1>
                     <!-- portfolio-wrapper -->
+
+
+                    <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
+                        <div class="columns portfolio-item">
+                            <div class="item-wrap">
+                                <a href="#">
+                                    <img alt="Cimac - Plataforma criativa" class="portfolio-image" src="images/personal/cimac.png">
+                                    <div class="overlay">
+                                        <div class="portfolio-item-meta">
+                                            <h5>Cimac - Plataforma criativa</h5>
+                                            <p>Backend dev + Integrations</p>
+                                        </div>
+                                    </div>
+                                    <div class="link-icon"><i class="icon-plus"></i></div>
+                                </a>
+                            </div>
+                        </div>  <!-- item end -->
+                        <div class="columns portfolio-item">
+                            <div class="item-wrap">
+                                <a href="#">
+                                    <img alt="Savoy Residence" class="portfolio-image" src="images/personal/savoy.png">
+                                    <div class="overlay">
+                                        <div class="portfolio-item-meta">
+                                            <h5>Savoy Residence</h5>
+                                            <p>Backend dev + Security</p>
+                                        </div>
+                                    </div>
+                                    <div class="link-icon"><i class="icon-plus"></i></div>
+                                </a>
+                            </div>
+                        </div>  <!-- item end -->
+                        <div class="columns portfolio-item">
+                            <div class="item-wrap">
+                                <a href="#">
+                                    <img alt="Mautic for Skilltech and OAL" class="portfolio-image" src="images/personal/mautic.png">
+                                    <div class="overlay">
+                                        <div class="portfolio-item-meta">
+                                            <h5>Mautic for Skilltech and OAL</h5>
+                                            <p>Infra + Supervisor + Crons + Queues</p>
+                                        </div>
+                                    </div>
+                                    <div class="link-icon"><i class="icon-plus"></i></div>
+                                </a>
+                            </div>
+                        </div> <!-- item end -->
+                        <div class="columns portfolio-item">
+                            <div class="item-wrap">
+                                <a href="#">
+                                    <img alt="MyFib" class="portfolio-image" src="images/personal/myfib.png">
+                                    <div class="overlay">
+                                        <div class="portfolio-item-meta">
+                                            <h5>MyFib</h5>
+                                            <p>Backend + platform support</p>
+                                        </div>
+                                    </div>
+                                    <div class="link-icon"><i class="icon-plus"></i></div>
+                                </a>
+                            </div>
+                        </div> <!-- item end -->
+
+
+
+
+
+
+
+
                     <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
                         <div class="columns portfolio-item">
                             <div class="item-wrap">
