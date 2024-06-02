@@ -66,10 +66,35 @@ services:
             - REDIS_HOSTS=${REDIS_HOSTS}
             - HTTP_USER=${REDIS_USER}
             - HTTP_PASSWORD=${REDIS_PASS}
+
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
+        container_name: jgomes_site_dev_elasticsearch
+        environment:
+            - node.name=elasticsearch
+            - cluster.name=es-single-node
+            - discovery.type=single-node
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - ELASTIC_PASSWORD=${ELASTICSEARCH_PASS}
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        volumes:
+            - esdata:/usr/share/elasticsearch/data
+            - ./es/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+
 networks:
     redis-network:
         driver: bridge
+
 volumes:
     dbData:
     dbRedis:
     redis:
+    esdata:
+        driver: local

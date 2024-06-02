@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\I18nController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -139,6 +140,13 @@ Route::prefix('v1')->group(function () {
             )->name('translations');
         });
     });
+
+    // ES search Let's allow for now 100 accesses per min
+    Route::get('/search',
+        [
+            SearchController::class, 'search'
+        ]
+    )->name('search');
 
     // Middleware de fallback to return 401 for unauthenticated requests
     Route::fallback(function () {
