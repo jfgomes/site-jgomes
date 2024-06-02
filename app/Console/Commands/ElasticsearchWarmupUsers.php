@@ -21,10 +21,10 @@ class ElasticsearchWarmupUsers extends Command
     {
         parent::__construct();
 
-        $host = env('ELASTICSEARCH_HOST');
+        $host = '127.0.0.1'; //env('ELASTICSEARCH_HOST');
         $port = env('ELASTICSEARCH_PORT');
         $username = env('ELASTICSEARCH_USERNAME');
-        $password = env('ELASTICSEARCH_PASS');
+        $password = env('ELASTICSEARCH_PASSWORD');
 
         $this->elasticsearch = ClientBuilder::create()
             ->setHosts(["$host:$port"])

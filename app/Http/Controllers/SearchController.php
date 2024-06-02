@@ -18,10 +18,11 @@ class SearchController extends Controller
         $host = env('ELASTICSEARCH_HOST');
         $port = env('ELASTICSEARCH_PORT');
         $username = env('ELASTICSEARCH_USERNAME');
-        $password = env('ELASTICSEARCH_PASS');
+        $password = env('ELASTICSEARCH_PASSWORD');
+
 
         $this->elasticsearch = ClientBuilder::create()
-            ->setHosts(['localhost:' . env('ELASTICSEARCH_PORT')])
+            ->setHosts(["$host:$port"])
             ->setBasicAuthentication($username, $password)
             ->build();
     }
@@ -36,7 +37,6 @@ class SearchController extends Controller
     {
         try {
             $exists = $this->elasticsearch->indices()->exists(['index' => $index]);
-
             if (!$exists->asBool()) {
                 $params = [
                     'index' => $index,
@@ -68,6 +68,7 @@ class SearchController extends Controller
                 ];
 
                 $this->elasticsearch->indices()->create($params);
+
             }
         } catch (\Exception $e) {
             throw new \RuntimeException('Erro ao verificar ou criar o índice: ' . $e->getMessage());
@@ -94,8 +95,8 @@ class SearchController extends Controller
             'body'  => [
                 'query' => [
                     'multi_match' => [
-                        'query'  => '*',
-                        'fields' => ['title', 'role']
+                        'query'  => $query,
+                        'fields' => ['title', 'email', 'role']
                     ]
                 ]
             ]

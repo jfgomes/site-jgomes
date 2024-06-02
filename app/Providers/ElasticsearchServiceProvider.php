@@ -15,18 +15,18 @@ class ElasticsearchServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('Elasticsearch', function ($app) {
-            $host = 'localhost';
-            $port = env('ELASTICSEARCH_PORT', 9200);
+            $host     = env('ELASTICSEARCH_HOST');
+            $port     = env('ELASTICSEARCH_PORT');
             $username = env('ELASTICSEARCH_USERNAME');
-            $password = env('ELASTICSEARCH_PASS');
+            $password = env('ELASTICSEARCH_PASSWORD');
 
             $hosts = [
                 [
-                    'host' => $host,
-                    'port' => $port,
+                    'host'   => $host,
+                    'port'   => $port,
                     'scheme' => 'http',
-                    'user' => $username,
-                    'pass' => $password
+                    'user'   => $username,
+                    'pass'   => $password
                 ]
             ];
 

@@ -1,16 +1,30 @@
 version: "3.9"
 services:
+    php-apache:
+        container_name: jgomes_site_dev_php-apache
+        restart: always
+        build: './php-apache'
+        ports:
+            - "8080:81"
+        volumes:
+            - ../:/var/www/html
+        depends_on:
+            - mysql
+        networks:
+            - jgomes-site_dev-docker
     mysql:
         container_name: jgomes_site_dev_mysql
         build: './mysql'
         env_file:
             - .env
         ports:
-            - "3406:3306"
+            - "3306:3306"
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
         volumes:
             - dbData:/var/lib/mysql
+        networks:
+            - jgomes-site_dev-docker
 
     phpmyadmin:
         container_name: jgomes_site_dev_phpmyadmin
@@ -23,7 +37,8 @@ services:
         environment:
             PMA_HOST: mysql
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
-
+        networks:
+            - jgomes-site_dev-docker
     rabbitmq:
         container_name: jgomes_site_dev_rabbit
         build:
@@ -31,14 +46,15 @@ services:
         env_file:
             - .env
         ports:
-            - "5673:5672"
-            - "15673:15672"
+            - "5672:5672"
+            - "15672:15672"
         environment:
             -  RABBITMQ_USER=${RABBIT_USER}
             -  RABBITMQ_PASSWORD=${RABBIT_PASS}
             -  RABBITMQ_DEFAULT_USER=${RABBIT_USER}
             -  RABBITMQ_DEFAULT_PASS=${RABBIT_PASS}
-
+        networks:
+            - jgomes-site_dev-docker
     redis:
         container_name: jgomes_site_dev_redis
         restart: always
@@ -49,7 +65,7 @@ services:
         ports:
             - "6378:6378"
         networks:
-            - redis-network
+            - jgomes-site_dev-docker
 
     redis-commander:
         container_name: jgomes_site_dev_redis-commander
@@ -59,7 +75,7 @@ services:
         ports:
             - "8082:8081"
         networks:
-            - redis-network
+            - jgomes-site_dev-docker
         depends_on:
             - redis
         environment:
@@ -76,7 +92,8 @@ services:
             - discovery.type=single-node
             - bootstrap.memory_lock=true
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - ELASTIC_PASSWORD=${ELASTICSEARCH_PASS}
+            - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
+            - ELASTIC_USERNAME=${ELASTICSEARCH_USERNAME}
         ulimits:
             memlock:
                 soft: -1
@@ -87,10 +104,16 @@ services:
         ports:
             - "9200:9200"
             - "9300:9300"
+        networks:
+            - jgomes-site_dev-docker
 
 networks:
-    redis-network:
+    jgomes-site_dev-docker:
         driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.18.0.0/16"
 
 volumes:
     dbData:
