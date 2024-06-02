@@ -8,7 +8,7 @@ return array (
   'Projects' => 'Projectos',
   'WOW' => 'WOW',
   'Contact' => 'Contacto',
-  'Login' => 'Entrar',
+  'Login' => 'Área Privada',
   'Phrase_1' => 'Sou um software developer',
   'Phrase_2' => 'e moro em Lisboa',
   'Phrase_3' => 'Vamos',
