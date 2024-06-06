@@ -82,15 +82,72 @@ class SearchController extends Controller
         }
     }
 
-    public function search(Request $request): \Illuminate\Http\JsonResponse
+    /*
+  ´
+    protected function recreateIndex()
+    {
+        $indexName = 'users';
+
+        // Verificar se o índice existe
+        if ($this->elasticsearch->indices()->exists(['index' => $indexName])) {
+            // Se o índice existir, excluí-lo
+            $this->elasticsearch->indices()->delete(['index' => $indexName]);
+        }
+
+        $params = [
+            'index' => $indexName,
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                    'number_of_replicas' => 0,
+                    'analysis' => [
+                        'analyzer' => [
+                            'email_analyzer' => [
+                                'type' => 'custom',
+                                'tokenizer' => 'uax_url_email'
+                            ]
+                        ]
+                    ]
+                ],
+                'mappings' => [
+                    'properties' => [
+                        'name' => [
+                            'type' => 'keyword'
+                        ],
+                        'email' => [
+                            'type' => 'text',
+                            'analyzer' => 'email_analyzer'
+                        ],
+                        'role' => [
+                            'type' => 'text'
+                        ],
+                        'created_at' => [
+                            'type' => 'date'
+                        ],
+                        'updated_at' => [
+                            'type' => 'date'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $this->elasticsearch->indices()->create($params);
+    } */
+
+    public function search(Request $request)
     {
         try {
-            // Validação para garantir que 'query' não é null
             $request->validate([
-                'query' => 'required|string'
+                'query' => 'nullable|string',
+                'page' => 'nullable|integer|min:1',
+                'perPage' => 'nullable|integer|min:1|max:100'
             ]);
 
             $query = $request->input('query');
+            $page = $request->input('page', 1);
+            $perPage = $request->input('perPage', 10);
+            $offset = ($page - 1) * $perPage;
 
             // Verificar se o índice existe e criar se não existir
             $this->ensureIndexExists('users');
@@ -99,7 +156,9 @@ class SearchController extends Controller
             $params = [
                 'index' => 'users',
                 'body'  => [
-                    'query' => [
+                    'from' => $offset,
+                    'size' => $perPage,
+                    'query' => $query ? [ // Se houver uma consulta, use-a
                         'bool' => [
                             'should' => [
                                 [
@@ -120,13 +179,15 @@ class SearchController extends Controller
                                 ]
                             ]
                         ]
+                    ] : [ // Se não houver consulta, corresponder a todos os documentos
+                        'match_all' => (object) []
                     ]
                 ]
             ];
 
             // Realizar a pesquisa
             $results = $this->elasticsearch->search($params);
-            return response()->json($results->asArray());
+            return response()->json($results['hits']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

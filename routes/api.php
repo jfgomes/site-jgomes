@@ -7,6 +7,7 @@ use App\Http\Controllers\I18nController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -138,6 +139,57 @@ Route::prefix('v1')->group(function () {
                     I18nController::class, 'postTranslations'
                 ]
             )->name('translations');
+        });
+
+
+        // Allow only admin. Users list. Let's allow for now 30 accesses per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::get('/users',
+                [
+                    UsersController::class, 'get'
+                ]
+            )->name('get-users');
+        });
+
+        // Allow only admin. Users list. Let's allow for now 30 accesses per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::get('/users-es',
+                [
+                    UsersController::class, 'getEs'
+                ]
+            )->name('get-users-es');
+        });
+
+        // Allow only admin. User post. Let's allow for now 5 posts per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::post('/users',
+                [
+                    UsersController::class, 'post'
+                ]
+            )->name('post-user');
+        });
+
+        // Allow only admin. User put. Let's allow for now 10 posts per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::put('/users/{id}',
+                [
+                    UsersController::class, 'put'
+                ]
+            )->name('put-user');
+        });
+
+        // Allow only admin. User put. Let's allow for now 10 posts per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:5,1'])->group(function ()  {
+
+            Route::delete('/users/{id}',
+                [
+                    UsersController::class, 'delete'
+                ]
+            )->name('delete-user');
         });
     });
 

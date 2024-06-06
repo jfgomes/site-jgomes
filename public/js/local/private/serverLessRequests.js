@@ -119,7 +119,8 @@ let serverLessRequests = (function($)
     }
 
     // Get data if authorized
-    function checkAuthAndGetData(url) {
+    function checkAuthAndGetData(url)
+    {
         return new Promise((resolve, reject) => {
             // Had the overlay
             $("#overlay").show();
@@ -215,10 +216,11 @@ let serverLessRequests = (function($)
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data: { 'data': $("#translationsForm").serialize() },
+                    data: data,
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
+                    contentType: 'application/x-www-form-urlencoded',
                     success: function(response)
                     {
                         resolve(response);
