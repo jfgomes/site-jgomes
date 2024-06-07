@@ -129,10 +129,13 @@
 
             // Post data updated
             serverLessRequests.checkAuthAndPostData(
+
                 // Set endpoint
                 '/api/v1/users',
+
                 // Set data
                 $("#add-user-form").serialize()
+                
             ).then(response => {
 
                 // Output from server

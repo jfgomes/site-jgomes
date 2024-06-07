@@ -3,30 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Elastic\Elasticsearch\ClientBuilder;
-use Elastic\Elasticsearch\Exception\AuthenticationException;
+use App\Services\ElasticsearchService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-    protected \Elastic\Elasticsearch\Client $elasticsearch;
+    protected ElasticsearchService $elasticsearch;
 
-    /**
-     * @throws AuthenticationException
-     */
-    public function __construct()
+    public function __construct(ElasticsearchService $elasticsearch)
     {
-        $host     = env('ELASTICSEARCH_HOST');
-        $port     = env('ELASTICSEARCH_PORT');
-        $username = env('ELASTICSEARCH_USERNAME');
-        $password = env('ELASTICSEARCH_PASSWORD');
-
-        $this->elasticsearch = ClientBuilder::create()
-            ->setHosts(["$host:$port"])
-            ->setBasicAuthentication($username, $password)
-            ->build();
+        $this->elasticsearch = $elasticsearch;
 
         // Check if the index exists and create it if it doesn't
         $this->ensureIndexExists('users');
@@ -40,7 +28,7 @@ class UsersController extends Controller
     {
         try {
 
-            $exists = $this->elasticsearch->indices()
+            $exists = $this->elasticsearch->getClient()->indices()
                 ->exists(['index' => $index]);
 
             if (!$exists->asBool()) {
@@ -81,7 +69,7 @@ class UsersController extends Controller
                     ]
                 ];
 
-                $this->elasticsearch->indices()
+                $this->elasticsearch->getClient()->indices()
                     ->create($params);
             }
         } catch (\Exception $e)
@@ -147,8 +135,8 @@ class UsersController extends Controller
             'data' =>
             [
                 'source' => 'db',
-                'users' => $users,
-                'total' => $total
+                'users'  => $users,
+                'total'  => $total
             ]
         ]);
     }
@@ -222,7 +210,7 @@ class UsersController extends Controller
             ];
 
             // Perform the search
-            $results = $this->elasticsearch->search($params);
+            $results = $this->elasticsearch->getClient()->search($params);
 
             // Map the results to the desired format
             $formattedResults = [];
@@ -244,8 +232,8 @@ class UsersController extends Controller
                 'data' =>
                     [
                         'source' => 'es',
-                        'users' => $formattedResults,
-                        'total' => null
+                        'users'  => $formattedResults,
+                        'total'  => null
                     ]
             ]);
         }
