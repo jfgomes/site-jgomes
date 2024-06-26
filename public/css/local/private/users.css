@@ -1,0 +1,386 @@
+/* Style for Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.5);
+}
+
+/* Style for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(136, 136, 136, 0.5) transparent;
+}
+
+/* DataTables specific styling */
+.dataTables_wrapper {
+    overflow: auto;
+}
+
+#add-user-form > input, #update-user-form > input, #delete-user-form > input  {
+    width: 448px !important;
+}
+
+/* Remover a borda ao focar no campo de entrada */
+input:focus {
+    outline: none; /* Remove a borda padrão do navegador */
+    border: none; /* Remove a borda definida */
+}
+
+/* Estilo para aumentar a barra de processamento */
+.dataTables_processing {
+    height: 100px !important; /* Altura da barra */
+    line-height: 60px; /* Alinhamento vertical do texto */
+
+}
+
+/**************************/
+
+#user-table_length, #user-table_filter, #user-table_info, #user-table_previous, #user-table_next{
+    color: white !important;
+    border: 0px !important;
+}
+#user-table_length > label > select, #user-table_filter > label > input{
+    color: white;
+}
+#user-table > thead{
+    color: white;
+}
+#user-table_length {
+    margin-bottom: 20px !important;
+    margin-top: 0 !important;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+/* Estilo para o contêiner de paginação */
+.dataTables_wrapper .dataTables_paginate {
+    color: #fff; /* Cor do texto */
+
+}
+
+.dataTables_paginate {
+
+    margin-right: -4px !important;
+}
+
+/* Estilo para os botões de paginação */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #fff !important; /* Cor do texto */
+    background-color: transparent !important; /* Cor do background */
+    border: 1px solid white; /* Borda */
+    border-radius: 4px; /* Arredondar cantos */
+    margin: 5px ; /* Margem entre os botões */
+    padding: 5px 10px; /* Padding para os botões */
+    transition: background-color 0.3s, color 0.3s; /* Transição suave para o background e cor do texto */
+}
+
+/* Estilo para o botão de paginação ativo */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: transparent !important;
+}
+
+/* Estilo para o botão de paginação na rolagem */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: transparent !important;
+}
+
+/* Estilo para desativar os botões de paginação */
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    background-color: #e9ecef !important; /* Cor do background desativado */
+    color: #6c757d !important; /* Cor do texto desativado */
+    border: transparent !important; /* Borda desativada */      border: transparent !important; /* Borda desativada */
+
+}
+
+/* Estilo para a paginação (anterior e próxima) */
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    background: transparent !important;
+
+}
+
+/* Estilo para a paginação (anterior e próxima) no hover */
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next:hover {
+    background: transparent !important;
+
+}
+
+/**************************/
+
+#user-table_wrapper{
+    overflow-x: hidden !important;
+}
+.odd, .even{
+    background-color: transparent !important;
+}
+table.dataTable tbody  {
+
+    color: white;
+}
+table.dataTable tbody td.column-odd {
+    background-color: transparent !important; /* cinza claro */
+}
+table.dataTable tbody td.column-even {
+    background-color: transparent !important;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #282c34;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+
+.user-section, .add-user-section {
+    padding: 20px;
+    margin: 20px;
+}
+
+button {
+    background-color: #61dafb;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/**************************/
+
+/* Estilos básicos para o corpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Estilos para o botão de abrir o modal */
+.open-modal-btn {
+    background-color: #4CAF50;
+    color: white;
+    /* padding: 15px 20px; */
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    /*  margin: 20px; */
+}
+
+/* Estilos para o modal */
+.modal {
+    display: none; /* Esconda o modal por padrão */
+    position: fixed; /* Fique fixo na tela */
+    z-index: 1; /* Fique na frente de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Tamanho total da largura */
+    height: 100%; /* Tamanho total da altura */
+    overflow: auto; /* Habilite scroll se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Com opacidade */
+}
+
+/* Estilos para o conteúdo do modal */
+
+
+/* Estilos para o botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/**************************/
+
+
+/* Estilos básicos para o corpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Estilos para o botão de abrir o modal */
+.open-modal-btn {
+    background-color: #4CAF50;
+    color: black;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 132px;
+    /*  margin: 20px; */
+}
+
+/* Estilos para o modal */
+.modal {
+    display: none; /* Esconda o modal por padrão */
+    position: fixed; /* Fique fixo na tela */
+    z-index: 1; /* Fique na frente de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Tamanho total da largura */
+    height: 100%; /* Tamanho total da altura */
+    overflow: auto; /* Habilite scroll se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Com opacidade */
+}
+
+/* Estilos para o conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* 15% do topo e centro horizontalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Pode ser ajustado conforme necessário */
+    max-width: 500px; /* Largura máxima */
+}
+
+/* Estilos para o botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para o formulário dentro do modal */
+input[type=text], input[type=email], input[type=password] {
+    width: 482px;
+    padding: 12px 30px;
+    margin: 8px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 48px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+.header-title {
+    position: absolute;
+    top: 15px;
+}
+
+.clear-both {
+    clear: both;
+}
+
+
+
+
+
+
+
+
+.search-add-user-container {
+    z-index: 9999999999;
+    position: absolute;
+    top: 85px;
+    color: black;
+    right: 10px;
+}
+
+.float-right {
+    float: right;
+}
+
+
+
+
+.user-list-section {
+    height: 740px;
+    z-index: 9999999;
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    color: black;
+    padding: 7px;
+    overflow-y: auto;
+}
+
+.user-table {
+    background-color: #0c5460 !important;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.table-header {
+    height: 50px;
+}
+
+
+
+

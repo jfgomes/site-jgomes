@@ -34,7 +34,7 @@ Route::middleware('throttle:5,5')->group(function () {
 Route::prefix('v1')->group(function () {
 
     // Allow 10 tries to log in per min
-    Route::middleware('throttle:10,1')->group(function () {
+    Route::middleware('throttle:100,1')->group(function () {
         Route::post('/login',
             [
                 AuthController::class, 'login'
@@ -153,7 +153,7 @@ Route::prefix('v1')->group(function () {
         });
 
         // Allow only admin. Users list. Let's allow for now 30 accesses per min per user.
-        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+        Route::middleware(['checkRole:admin', 'throttle:100,1'])->group(function ()  {
 
             Route::get('/users-es',
                 [
@@ -182,8 +182,8 @@ Route::prefix('v1')->group(function () {
             )->name('put-user');
         });
 
-        // Allow only admin. User put. Let's allow for now 10 posts per min per user.
-        Route::middleware(['checkRole:admin', 'throttle:5,1'])->group(function ()  {
+        // Allow only admin. User put. Let's allow for now 10 deletes per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:50,1'])->group(function ()  {
 
             Route::delete('/users/{id}',
                 [

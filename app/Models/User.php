@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Elastic\Elasticsearch\ClientBuilder;
+use App\Services\ElasticsearchService;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -15,6 +15,17 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected ElasticsearchService $elasticsearch;
+
+    /**
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->elasticsearch = new ElasticsearchService();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +58,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return void
+     */
     protected static function boot(): void
     {
         parent::boot();
@@ -68,25 +82,22 @@ class User extends Authenticatable
      */
     public function indexToElasticsearch(): void
     {
-        $client = ClientBuilder::create()
-            ->setHosts(config('database.connections.elasticsearch.hosts'))
-            ->setBasicAuthentication(
-                config('database.connections.elasticsearch.username'),
-                config('database.connections.elasticsearch.password')
-            )->build();
-
         // Get the attributes that should be indexed
         $attributes = $this->only(['name', 'email', 'role']);
 
         // Convert the created_at and updated_at fields to ISO 8601 format
-        if (isset($this->created_at)) {
-            $attributes['created_at'] = $this->created_at->toIso8601String();
+        if (isset($this->created_at))
+        {
+            $attributes['created_at'] = $this->created_at
+                ->toIso8601String();
         }
-        if (isset($this->updated_at)) {
-            $attributes['updated_at'] = $this->updated_at->toIso8601String();
+        if (isset($this->updated_at))
+        {
+            $attributes['updated_at'] = $this->updated_at
+                ->toIso8601String();
         }
 
-        $client->index([
+        $this->elasticsearch->getClient()->index([
             'index' => 'users',
             'id'    => $this->getKey(),
             'body'  => $attributes
@@ -94,21 +105,14 @@ class User extends Authenticatable
     }
 
     /**
-     * @throws AuthenticationException
      * @throws ClientResponseException
      * @throws ServerResponseException
      * @throws MissingParameterException
      */
     public function removeFromElasticsearch(): void
     {
-        $client = ClientBuilder::create()
-            ->setHosts(config('database.connections.elasticsearch.hosts'))
-            ->setBasicAuthentication(
-                config('database.connections.elasticsearch.username'),
-                config('database.connections.elasticsearch.password')
-            )->build();
-
-        $client->delete([
+        $this->elasticsearch->getClient()
+            ->delete([
             'index' => 'users',
             'id'    => $this->getKey(),
         ]);

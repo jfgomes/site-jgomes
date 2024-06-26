@@ -7,6 +7,7 @@ use App\Services\ElasticsearchService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -28,10 +29,13 @@ class UsersController extends Controller
     {
         try {
 
-            $exists = $this->elasticsearch->getClient()->indices()
+            $exists = $this->elasticsearch
+                ->getClient()
+                ->indices()
                 ->exists(['index' => $index]);
 
-            if (!$exists->asBool()) {
+            if (!$exists->asBool())
+            {
                 $params = [
                     'index' => $index,
                     'body' => [
@@ -69,10 +73,13 @@ class UsersController extends Controller
                     ]
                 ];
 
-                $this->elasticsearch->getClient()->indices()
+                $this->elasticsearch
+                    ->getClient()
+                    ->indices()
                     ->create($params);
             }
-        } catch (\Exception $e)
+        }
+        catch (\Exception $e)
         {
             throw new \RuntimeException('Error checking or creating index: ' . $e->getMessage());
         }
@@ -96,49 +103,88 @@ class UsersController extends Controller
      */
     public function get(Request $request): JsonResponse
     {
-        // Number of items per page
-        $limit = $request->input('limit', 10);
+        try {
 
-        // Page number
-        $page  = $request->input('page', 1);
+            // Validate the request parameters
+            $request->validate([
+                'query'     => 'nullable|string',
+                'page'      => 'nullable|integer|min:1',
+                'limit'     => 'nullable|integer|min:1|max:100',
+                'sortField' => 'nullable|string',
+                'sortOrder' => 'nullable|in:asc,desc',
+                'draw'      => 'nullable|integer'
+            ]);
 
-        // Offset calculation
-        $offset  = ($page - 1) * $limit;
+            // DataTables specific parameters
+            $draw = $request->input('draw');
 
-        $query = User::query();
+            // Number of items per page
+            $limit = $request->input('limit', 10);
 
-        // If there is a search by name
-        if ($request->has('query'))
+            // Page number
+            $page  = $request->input('page', 1);
+
+            // Offset calculation
+            $offset  = ($page - 1) * $limit;
+
+            // Create a query builder instance
+            $query = User::query();
+
+            // If there is a search query
+            if ($request->has('query')) {
+                $search = $request->input('query');
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%')
+                        ->orWhere('role', 'like', '%' . $search . '%');
+                });
+            }
+
+            // Sorting (Default sorting field)
+            $sortField = $request->input('sortField', 'created_at');
+
+            // Default sorting order
+            $sortOrder = $request->input('sortOrder', 'asc');
+
+            $query->orderBy($sortField, $sortOrder);
+
+            // Total number of records without applying pagination
+            $recordsTotal = User::count();
+
+            // Total number of filtered records
+            $recordsFiltered = $query->count();
+
+            // Apply pagination and offset
+            $users = $query->offset($offset)
+                ->limit($limit)
+                ->get();
+
+            // Get the authenticated user
+            $user = $request->user(); // This needs to be cached!
+
+            return response()->json([
+                'draw'            => intval($draw),
+                'recordsTotal'    => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data'            => $users,
+                'result'          => compact('user'),
+                'source'          => 'db'
+            ]);
+        } catch (\Exception $e)
         {
-            $search = $request->input('query');
-            $query->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('email', 'like', '%' . $search . '%');
+            Log::error('Error in get function:',
+                [
+                    'error' => $e->getMessage()
+                ]
+            );
+            return response()
+                ->json(
+                    [
+                        'error' => $e->getMessage()
+                    ],
+                    500
+                );
         }
-
-        // Sorting ( Default sorting field )
-        $sortField = $request->input('sortField', 'created_at');
-
-        // ( Default sorting order )
-        $sortOrder = $request->input('sortOrder', 'asc');
-
-        $query->orderBy($sortField, $sortOrder);
-
-        // Total number of records without applying pagination
-        $total = $query->count();
-
-        // Apply pagination and offset
-        $users = $query->offset($offset)->limit($limit)->get();
-
-        $user  = $request->user(); // this needs to be cached!
-        return response()->json([
-            'result'  => compact('user'),
-            'data' =>
-            [
-                'source' => 'db',
-                'users'  => $users,
-                'total'  => $total
-            ]
-        ]);
     }
 
     /**
@@ -147,76 +193,60 @@ class UsersController extends Controller
      */
     public function getEs(Request $request): JsonResponse
     {
-        try {
+        try
+        {
+            // Validate the request parameters
             $request->validate([
                 'query'     => 'nullable|string',
                 'page'      => 'nullable|integer|min:1',
                 'limit'     => 'nullable|integer|min:1|max:100',
-                // Field to sort by
                 'sortField' => 'nullable|string',
-                // Sorting order: 'asc' for ascending, 'desc' for descending
                 'sortOrder' => 'nullable|in:asc,desc',
-
             ]);
 
-            $query     = $request->input('query');
+            // Get request parameters
+            $query     = $request->input('query', null);
             $page      = $request->input('page', 1);
             $limit     = $request->input('limit', 10);
             $offset    = ($page - 1) * $limit;
-            // Default field for sorting
             $sortField = $request->input('sortField', 'created_at');
-            // Default field for sorting
             $sortOrder = $request->input('sortOrder', 'asc');
+            $draw      = $request->input('draw');
 
-            // Set the query
+            // Prepare search filter case filter not empty
+            $queryBody = !empty($query) ? [
+                'bool' => [
+                    'should' => [
+                          ['wildcard' => ['email' => "*$query*"]],
+                          ['wildcard' => ['name'  => "*$query*"]],
+                          ['wildcard' => ['role'  => "*$query*"]],
+                    ]
+                ]
+            ] : ['match_all' => (object)[]];
+
+            // Prepare ES Obj
             $params = [
                 'index' => 'users',
                 'body'  => [
-                    'from' => $offset,
-                    'size' => $limit,
-                    'query' => $query ? [ // If there is a query, use it
-                        'bool' => [
-                            'should' => [
-                                [
-                                    'match_phrase' => [ // Use full text matching
-                                        'email' => $query
-                                    ]
-                                ],
-                                [
-                                    'match_phrase' => [
-                                        'name' => $query
-                                    ]
-                                ],
-                                [
-                                    'multi_match' => [
-                                        'query'  => $query,
-                                        'fields' => ['role']
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ] : [ // If there is no query, match all documents
-                        'match_all' => (object) []
-                    ],
-                    'sort' => [ // Sorting parameters
+                    'from'  => $offset,
+                    'size'  => $limit,
+                    'query' => $queryBody,
+                    'sort'  => [
                         [
-                            $sortField =>
-                                [
-                                    'order' => $sortOrder
-                                ]
-                        ] // Sort by the specified field in the specified order
+                            $sortField => ['order' => $sortOrder]
+                        ]
                     ]
                 ]
             ];
 
-            // Perform the search
-            $results = $this->elasticsearch->getClient()->search($params);
+            // Get ES results based on ES Obj
+            $results = $this->elasticsearch
+                ->getClient()
+                ->search($params);
 
-            // Map the results to the desired format
-            $formattedResults = [];
-            foreach ($results['hits']['hits'] as $hit)
-            {
-                $formattedResults[] = [
+            // Prepare frontend obj based on ES results
+            $formattedResults = array_map(function($hit) {
+                return [
                     'id'         => $hit['_id'],
                     'name'       => $hit['_source']['name'],
                     'email'      => $hit['_source']['email'],
@@ -224,21 +254,40 @@ class UsersController extends Controller
                     'updated_at' => $hit['_source']['updated_at'],
                     'role'       => $hit['_source']['role']
                 ];
-            }
+            }, $results['hits']['hits']);
 
-            $user  = $request->user(); // this needs to be cached!
-            return response()->json([
-                'result'  => compact('user'),
-                'data' =>
+            // Get user (need to cache this info)
+            $user = $request->user();
+
+            // Get total results
+            $recordsTotal = $this->elasticsearch
+                ->getClient()
+                ->count(
                     [
-                        'source' => 'es',
-                        'users'  => $formattedResults,
-                        'total'  => null
+                        'index' => 'users'
                     ]
+                )['count'];
+
+            $recordsFiltered = $results['hits']['total']['value'];
+
+            // Create data obj to be return to frontend
+            return response()->json([
+                'result'          => compact('user'),
+                'source'          => 'es',
+                'draw'            => intval($draw),
+                'recordsTotal'    => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data'            => $formattedResults
             ]);
+
         }
         catch (\Exception $e)
         {
+            Log::error('Error in getEs function:',
+                [
+                    'error' => $e->getMessage()
+                ]
+            );
             return response()
                 ->json(
                     [
@@ -260,7 +309,7 @@ class UsersController extends Controller
             'name'     => 'required|string|max:255',
             'password' => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
-            'role'     => 'nullable|string|max:255',
+            'role'     => 'required|string|max:255',
         ]);
 
         // Create the new user
@@ -290,17 +339,27 @@ class UsersController extends Controller
 
         // Request data validation
         $validatedData = $request->validate([
-            'name'  => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role'  => 'nullable|string|max:255',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'role'     => 'required|string|max:255',
+            'password' => 'max:255'
         ]);
 
-        // Update user data
-        $user->update([
+        // Prepare the update data
+        $updateData = [
             'name'  => $validatedData['name'],
             'email' => $validatedData['email'],
             'role'  => $validatedData['role'],
-        ]);
+        ];
+
+        // Check if the password is provided and not null
+        if (!empty($validatedData['password']))
+        {
+            $updateData['password'] = bcrypt($validatedData['password']); // Hash the password before saving
+        }
+
+        // Update user data
+        $user->update($updateData);
 
         // Return a JSON response with a message indicating the user was successfully updated
         return response()->json([
