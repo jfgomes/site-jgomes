@@ -119,7 +119,8 @@ let serverLessRequests = (function($)
     }
 
     // Get data if authorized
-    function checkAuthAndGetData(url) {
+    function checkAuthAndGetData(url)
+    {
         return new Promise((resolve, reject) => {
             // Had the overlay
             $("#overlay").show();
@@ -204,6 +205,91 @@ let serverLessRequests = (function($)
         });
     }
 
+    // Put data if authorized
+    function checkAuthAndPutData(url, id, data)
+    {
+        return new Promise((resolve, reject) =>
+        {
+            // Had the overlay
+            $("#overlay").show();
+
+            // Wait for the token promise to be resolved
+            getToken(access_token_str)
+
+                // Post data to server
+                .then(token => putData(url, id, data, token))
+                .then(response => {
+
+                    // Resolve the promise with the response
+                    resolve(response);
+                })
+                .catch(error => {
+
+                    // Case forbidden (403) errors go to forbidden page
+                    if (error === 403)
+                    {
+                        window.location.href = forbidden_page;
+
+                        // Case too many requests (429) errors go to many requests page
+                    } else if (error === 429)
+                    {
+                        window.location.href = many_requests_page;
+
+                    } else {
+                        // Case other errors redirect to login page
+                        window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
+                    }
+                    reject(error); // Reject the promise
+                })
+                .finally(() => {
+                    // Hide the overlay regardless of success or failure
+                    // $("#overlay").hide();
+                });
+        });
+    }
+
+    function checkAuthAndDeleteData(url, id)
+    {
+        return new Promise((resolve, reject) =>
+        {
+            // Had the overlay
+            $("#overlay").show();
+
+            // Wait for the token promise to be resolved
+            getToken(access_token_str)
+
+                // Post data to server
+                .then(token => deleteData(url, id, token))
+                .then(response => {
+
+                    // Resolve the promise with the response
+                    resolve(response);
+                })
+                .catch(error => {
+
+                    // Case forbidden (403) errors go to forbidden page
+                    if (error === 403)
+                    {
+                        window.location.href = forbidden_page;
+
+                        // Case too many requests (429) errors go to many requests page
+                    } else if (error === 429)
+                    {
+                        window.location.href = many_requests_page;
+
+                    } else {
+                        // Case other errors redirect to login page
+                        window.location.href = `${login_page}?` + btoa(`b64=true&error=${error}`);
+                    }
+                    reject(error); // Reject the promise
+                })
+                .finally(() => {
+                    // Hide the overlay regardless of success or failure
+                    // $("#overlay").hide();
+                });
+        });
+    }
+
     // Function to post data from frontend to backend with a valid token
     function postData(url, data, token)
     {
@@ -215,10 +301,11 @@ let serverLessRequests = (function($)
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data: { 'data': $("#translationsForm").serialize() },
+                    data: data,
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
+                    contentType: 'application/x-www-form-urlencoded',
                     success: function(response)
                     {
                         resolve(response);
@@ -243,19 +330,74 @@ let serverLessRequests = (function($)
                         // Uncomment the next lines if we want to see the request error before the redirect
                         // console.log(xhr);
                         // debugger;
-                        // alert(xhr.statusText);
                          alert(xhr.responseText);
 
                         // xhr.statusText || 'Cannot load data. Please try again.'
                         reject('Cannot post data. Details: ' + xhr.responseText);
                     }
                 });
-            } catch (error) {
+            }
+            catch (error)
+            {
                 // Handle any errors that occur within the try block
                 alert('An error occurred: ' + error.message);
             }
         });
+    }
 
+    // Function to put data from frontend to backend with a valid token
+    function putData(url, id, data, token)
+    {
+        // Promise to put data
+        return new Promise(function(resolve, reject)
+        {
+            try {
+
+                $.ajax({
+                    type: 'PUT',
+                    url: `${url}/${id}`, // Add the ID to URL
+                    data: data,
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function(response)
+                    {
+                        resolve(response);
+                    },
+                    error: function(xhr)
+                    {
+                        // Case Forbidden go back
+                        if (xhr.status === 403)
+                        {
+                            reject(403);
+                            return;
+                        }
+
+                        // Inform client about 429 ( Too many requests )
+                        if (xhr.status === 429)
+                        {
+                            // Reject the promise for too many requests
+                            reject(429);
+                            return;
+                        }
+
+                        // Uncomment the next lines if we want to see the request error before the redirect
+                        // console.log(xhr);
+                        // debugger;
+                        alert(xhr.responseText);
+
+                        // xhr.statusText || 'Cannot load data. Please try again.'
+                        reject('Cannot put data. Details: ' + xhr.responseText);
+                    }
+                });
+            }
+            catch (error)
+            {
+                // Handle any errors that occur within the try block
+                alert('An error occurred: ' + error.message);
+            }
+        });
     }
 
     // Function to get data from backend with a valid token
@@ -291,7 +433,48 @@ let serverLessRequests = (function($)
                     }
 
                     // xhr.statusText || 'Cannot load data. Please try again.'
-                    reject('Cannot load data');
+                    reject('Cannot get data');
+                }
+            });
+        });
+    }
+
+    // Function to delete data from backend with a valid token
+    function deleteData(url, id, token)
+    {
+        return new Promise(function(resolve, reject)
+        {
+            $.ajax({
+                type: 'DELETE',
+                url: `${url}/${id}`, // Add the ID to URL
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                success: function(response)
+                {
+                    resolve(response);
+                },
+                error: function(xhr)
+                {
+                    // Case Forbidden go back
+                    if (xhr.status === 403)
+                    {
+                        reject(403);
+                        return;
+                    }
+
+                    // Inform client about 429 ( Too many requests )
+                    if (xhr.status === 429)
+                    {
+                        // Reject the promise for too many requests
+                        reject(429);
+                        return;
+                    }
+
+                    alert(xhr.responseText);
+
+                    // xhr.statusText || 'Cannot load data. Please try again.'
+                    reject('Cannot delete data');
                 }
             });
         });
@@ -466,6 +649,8 @@ let serverLessRequests = (function($)
         init: init,
         checkAuthAndGetData: checkAuthAndGetData,
         checkAuthAndPostData: checkAuthAndPostData,
+        checkAuthAndPutData: checkAuthAndPutData,
+        checkAuthAndDeleteData: checkAuthAndDeleteData,
         doLogout: doLogout
     };
 

@@ -140,7 +140,7 @@
                 serverLessRequests.checkAuthAndPostData(
                      // Set endpoint
                      '/api/v1/translations',
-                     // Set dat
+                     // Set data
                      $("#translationsForm").serialize()
                 ).then(response => {
 

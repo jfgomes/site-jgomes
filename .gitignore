@@ -13,8 +13,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-.env
-.env.dev
 /public/js/prod
 /public/css/prod
 /public/coverage-report
@@ -31,3 +29,5 @@ env_vars_list_local.sh
 env_vars_list_local.zip
 /storage/logs/*
 /resources/lang/*
+.env
+.env.dev

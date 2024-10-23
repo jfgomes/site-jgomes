@@ -9,6 +9,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "darkaonline/l5-swagger": "^8.5",
+        "elasticsearch/elasticsearch": "^8.13",
         "google/cloud-storage": "^1.37",
         "graham-campbell/markdown": "^15.1",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -65,7 +66,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

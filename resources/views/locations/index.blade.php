@@ -19,7 +19,7 @@
         <!-- Header ==================================================== -->
         <header>
             <div class="header-content">
-                <h1>🇵🇹 Locations</h1>
+                <h1>🇵🇹 Locations ( Redis + APCu ) </h1>
                 <div class="button-container">
                     <a href="/home">
                         <button class="adminBtn">
@@ -31,7 +31,11 @@
                             📝 Translations
                         </button>
                     </a>
-
+                    <a href="/users">
+                        <button class="adminBtn">
+                            🙋🏼‍♂️Users
+                        </button>
+                    </a>
                     @include('partials.logout')
                 </div>
             </div>

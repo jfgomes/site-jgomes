@@ -65,6 +65,7 @@ class CaseStudiesService
             "9.7i18n"             => "📝 Implementation of a translation system with the possibility to manage the translations in the private area ##STARTED_NOT_DONE##",
             "9.7areas_for_admins" => "🔐 Special routes only accessible for some users ##STARTED_NOT_DONE##",
             "9.8dashboard"        => "🔐 Dashboard with the system status accessible only for admins ##STARTED_NOT_DONE##",
+            "9.9vigilant"         => "👀 ##STARTED_NOT_DONE##",
             default => $name,
         };
     }

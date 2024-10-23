@@ -567,4 +567,9 @@ Route::get('/lang', function () {
 })
     ->name('lang.index');
 
+// Route for users list
+Route::get('/users', function () {
+    return view('users.index');
+})
+    ->name('lang.index');
 ########################################### END SERVERLESS ROUTES

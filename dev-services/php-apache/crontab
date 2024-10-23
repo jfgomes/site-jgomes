@@ -1,0 +1,1 @@
+* * * * * cd /var/www/html && APP_ENV=prod /usr/local/bin/php artisan schedule:run >> /tmp/cron-prod.log 2>&1

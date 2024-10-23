@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\I18nController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +34,7 @@ Route::middleware('throttle:5,5')->group(function () {
 Route::prefix('v1')->group(function () {
 
     // Allow 10 tries to log in per min
-    Route::middleware('throttle:10,1')->group(function () {
+    Route::middleware('throttle:100,1')->group(function () {
         Route::post('/login',
             [
                 AuthController::class, 'login'
@@ -138,7 +140,65 @@ Route::prefix('v1')->group(function () {
                 ]
             )->name('translations');
         });
+
+
+        // Allow only admin. Users list. Let's allow for now 30 accesses per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::get('/users',
+                [
+                    UsersController::class, 'get'
+                ]
+            )->name('get-users');
+        });
+
+        // Allow only admin. Users list. Let's allow for now 30 accesses per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:100,1'])->group(function ()  {
+
+            Route::get('/users-es',
+                [
+                    UsersController::class, 'getEs'
+                ]
+            )->name('get-users-es');
+        });
+
+        // Allow only admin. User post. Let's allow for now 5 posts per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::post('/users',
+                [
+                    UsersController::class, 'post'
+                ]
+            )->name('post-user');
+        });
+
+        // Allow only admin. User put. Let's allow for now 10 posts per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:30,1'])->group(function ()  {
+
+            Route::put('/users/{id}',
+                [
+                    UsersController::class, 'put'
+                ]
+            )->name('put-user');
+        });
+
+        // Allow only admin. User put. Let's allow for now 10 deletes per min per user.
+        Route::middleware(['checkRole:admin', 'throttle:50,1'])->group(function ()  {
+
+            Route::delete('/users/{id}',
+                [
+                    UsersController::class, 'delete'
+                ]
+            )->name('delete-user');
+        });
     });
+
+    // ES search Let's allow for now 100 accesses per min
+    Route::get('/search',
+        [
+            SearchController::class, 'search'
+        ]
+    )->name('search');
 
     // Middleware de fallback to return 401 for unauthenticated requests
     Route::fallback(function () {
