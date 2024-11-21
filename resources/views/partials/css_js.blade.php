@@ -18,4 +18,5 @@
     <script src="/js/cookies.js"></script>
     <script src="/js/leaflet.min.js"></script>
     <script src="/js/local/private/locations.js"></script>
+    <script src="/js/local/private/users.js"></script>
 @endif

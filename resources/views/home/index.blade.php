@@ -42,6 +42,11 @@
                             🗺️ Locations
                         </button>
                     </a>
+                    <a href="/users">
+                        <button class="adminBtn">
+                            🙋🏼‍♂️Users
+                        </button>
+                    </a>
                     @include('partials.logout')
                 </div>
             </div>

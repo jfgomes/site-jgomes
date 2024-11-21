@@ -813,7 +813,7 @@
         <script src="js/local/public/init.js"></script>
         <script src="{{ (app()->environment() === 'prod')
                             ? mix('js/prod/app.js')
-                            : 'js/local/public/init.js' }}">
+                            : '' }}">
         </script>
         <script src="/js/cookies.js"></script>
         <script src="js/local/public/general.js"></script>

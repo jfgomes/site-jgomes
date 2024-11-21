@@ -1,0 +1,443 @@
+/* Style for Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.5);
+}
+
+/* Style for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(136, 136, 136, 0.5) transparent;
+}
+
+/* DataTables specific styling */
+.dataTables_wrapper {
+    overflow: auto;
+}
+
+#add-user-form > input, #update-user-form > input, #delete-user-form > input  {
+    width: 448px !important;
+}
+
+/* Remove border on focus for input fields */
+input:focus {
+    outline: none; /* Remove default browser outline */
+    border: none; /* Remove defined border */
+}
+
+/* Style to increase the processing bar */
+.dataTables_processing {
+    height: 100px !important; /* Height of the bar */
+    line-height: 60px; /* Vertical alignment of text */
+}
+
+/**************************/
+
+#user-table_length, #user-table_filter, #user-table_info, #user-table_previous, #user-table_next {
+    color: white !important;
+    border: 0px !important;
+}
+#user-table_length > label > select, #user-table_filter > label > input {
+    color: white;
+}
+#user-table > thead {
+    color: white;
+}
+#user-table_length {
+    margin-bottom: 20px !important;
+    margin-top: 0 !important;
+    margin-left: 20px;
+}
+
+/* Style for the pagination container */
+.dataTables_wrapper .dataTables_paginate {
+    color: #fff; /* Text color */
+}
+
+.dataTables_paginate {
+    margin-right: -4px !important;
+}
+
+/* Style for pagination buttons */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #fff !important; /* Text color */
+    background-color: transparent !important; /* Background color */
+    border: 1px solid white; /* Border */
+    border-radius: 4px; /* Rounded corners */
+    margin: 5px; /* Margin between buttons */
+    padding: 5px 10px; /* Padding for buttons */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+}
+
+/* Style for the active pagination button */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: transparent !important;
+}
+
+/* Style for pagination buttons on hover */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: transparent !important;
+}
+
+/* Style to disable pagination buttons */
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    background-color: #e9ecef !important; /* Disabled background color */
+    color: #6c757d !important; /* Disabled text color */
+    border: transparent !important; /* Disabled border */
+}
+
+/* Style for pagination (previous and next) */
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    background: transparent !important;
+}
+
+/* Style for pagination (previous and next) on hover */
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next:hover {
+    background: transparent !important;
+}
+
+/**************************/
+
+#user-table_wrapper {
+    overflow-x: hidden !important;
+}
+.odd, .even {
+    background-color: transparent !important;
+}
+table.dataTable tbody {
+    color: white;
+}
+table.dataTable tbody td.column-odd {
+    background-color: transparent !important; /* Light grey */
+}
+table.dataTable tbody td.column-even {
+    background-color: transparent !important;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #282c34;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.user-section, .add-user-section {
+    padding: 20px;
+    margin: 20px;
+}
+
+button {
+    background-color: #61dafb;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/**************************/
+
+/* Basic styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Styles for the open modal button */
+.open-modal-btn {
+    background-color: #4CAF50;
+    color: white;
+    /* padding: 15px 20px; */
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    /*  margin: 20px; */
+}
+
+/* Styles for the modal */
+.modal {
+    display: none; /* Hide modal by default */
+    position: fixed; /* Stay fixed on screen */
+    z-index: 1; /* Stay in front of other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if necessary */
+    background-color: rgb(0,0,0); /* Background color */
+    background-color: rgba(0,0,0,0.4); /* With opacity */
+}
+
+/* Styles for modal content */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* 15% from top and center horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Can be adjusted as needed */
+    max-width: 500px; /* Maximum width */
+}
+
+/* Styles for the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/**************************/
+
+/* Basic styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Styles for the open modal button */
+.open-modal-btn {
+    background-color: #4CAF50;
+    color: black;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 132px;
+    /*  margin: 20px; */
+}
+
+/* Styles for the modal */
+.modal {
+    display: none; /* Hide modal by default */
+    position: fixed; /* Stay fixed on screen */
+    z-index: 1; /* Stay in front of other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if necessary */
+    background-color: rgb(0,0,0); /* Background color */
+    background-color: rgba(0,0,0,0.4); /* With opacity */
+}
+
+/* Styles for modal content */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* 15% from top and center horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Can be adjusted as needed */
+    max-width: 500px; /* Maximum width */
+}
+
+/* Styles for the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Styles for the form inside the modal */
+input[type=text], input[type=email], input[type=password] {
+    width: 482px;
+    padding: 12px 30px;
+    margin: 8px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 48px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.header-title {
+    position: absolute;
+    top: 15px;
+}
+
+.clear-both {
+    clear: both;
+}
+
+.search-add-user-container {
+    z-index: 9999999999;
+    position: absolute;
+    top: 85px;
+    color: black;
+    right: 10px;
+}
+
+.float-right {
+    float: right;
+}
+
+.user-list-section {
+    height: 740px;
+    z-index: 9999999;
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    color: black;
+    padding: 7px;
+    overflow-y: auto;
+}
+
+.user-table {
+    background-color: #0c5460 !important;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.table-header {
+    height: 50px;
+}
+
+/* CSS for the modal */
+#userModal,
+#userModalUpdate,
+#userModalDelete {
+    z-index: 9999999;
+}
+
+.modal-content {
+    /* Add relevant styles here */
+}
+
+.close {
+    /* Add relevant styles here */
+}
+
+/* Styles for the forms */
+.user-form,
+.user-form-update {
+    color: black;
+}
+
+.user-name,
+.user-email,
+.user-password,
+.user-name-update,
+.user-email-update,
+.user-password-update {
+    margin: 10px 0;
+    width: 100% !important;
+    padding-left: 12px;
+}
+
+#setPassEditInput,
+#setPassEditInput-update {
+    display: none;
+}
+
+#new-user-role,
+#update-user-role {
+    margin: 10px 0;
+    width: 100%;
+    height: 47px;
+    padding-left: 10px;
+}
+
+button {
+    height: 50px;
+}
+
+button[type="button"] {
+    /* Specify other styles for buttons here */
+}
+
+button.confirm-button {
+    background-color: lightslategrey;
+}
+
+button.delete-button {
+    background-color: lightcoral;
+}
+
+/* Other general styles */
+.clear-both {
+    clear: both;
+}
+
+.float-right {
+    float: right;
+}
+
+.open-modal-btn {
+    /* Add relevant styles here */
+}
+
+.modal-title {
+    color: black;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.modal-warning {
+    color: #cccccc;
+    font-size: 15px;
+    margin-bottom: 10px;
+}

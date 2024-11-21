@@ -202,7 +202,7 @@ echo "$formatted_config" > redis/redis-local.conf
 ############## redis/redis.conf env vars set END
 
 # Check if one of this services is up
-SERVICES=("mysql" "phpmyadmin" "rabbitmq" "redis" "redis-commander")
+SERVICES=("mysql" "phpmyadmin" "rabbitmq" "redis" "redis-commander" "elasticsearch")
 
 sudo chown jgomes:docker /var/run/docker.sock
 
